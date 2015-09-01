@@ -2,7 +2,7 @@
   
 <dom-module id="type-selection">
   <template>
-      <select selected-index="{{value::index}}">
+      <select id="select" value="{{value::index}}">
         <template is="dom-repeat" items="[[options]]">
           <option value="[[item]]">[[item]]</option>
         </template>
@@ -14,7 +14,7 @@
     Polymer({
       is: 'type-selection',
       properties:{
-        item: String,
+        item:String,
         path:String,
         value:String,
         options: {
