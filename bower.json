@@ -1,0 +1,22 @@
+{
+  "name": "pair-production,
+  "version": "0.0.1",
+  "homepage": "https://github.com/marcus7777/pair-production",
+  "authors": [
+    "Marcus Hitchins <marcus7777@gmail.com>"
+  ],
+  "description": "pair-production",
+  "main": "pair-production.html",
+  "keywords": [
+    "polymer",
+    "pair-production"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
