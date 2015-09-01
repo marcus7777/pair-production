@@ -1,0 +1,40 @@
+<link rel="import" href="../paper-input/paper-input.html">
+<!--
+`<input-save>`  
+-->
+<dom-module id="input-save">
+  <template>
+    <paper-input label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
+  </template>
+</dom-module>
+<script>
+  
+  var element_kvp = {};
+  
+  Polymer({
+    is: 'input-save',
+    properties: {
+      path: String,
+      label: String,
+      pattern: String,
+      autoValidate: Boolean,
+      errorMessage: String,
+      value: {
+        type:String,
+        notify:true
+      },
+      element: {
+        computed:'saveThis(path,value)',
+        notify:true
+      }
+    },
+    saveThis (path,value) {
+      element_kvp[path] = value;
+      console.log(element_kvp)
+      return element_kvp;
+    },
+    ready(){
+      this.value = element_kvp[this.path];
+    }
+  });
+</script>
