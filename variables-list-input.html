@@ -1,0 +1,33 @@
+<dom-module id="variables-list-input">
+  <template>
+    <paper-input label="{{cat('Give me list of inputs/output/variables for ',name,'')}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></paper-input>
+     <template is="dom-repeat" items="{{variableList}}" >
+      <input-save path="{{cat(path,'.variable.',name)}}" label="{{cat('Tell me about ',item,'')}}" ></input-save>
+      <type-selection item="{{item}}"></type-selection>
+    </template>
+  </template>
+</dom-module> 
+<script>
+  (function () {
+    Polymer({
+      is: 'variables-list-input',
+      properties:{
+        name:  String,
+        description: String,
+        variables: {
+          type:String,
+          notify:true
+        },
+        variableList: {
+          computed:"getArray(variables)"
+        }
+      },
+      cat (a,b,c) {
+        return a+b+c;
+      },
+      getArray (s) {
+        if (s !== "") return s.split(',');
+      }
+    });
+  })();  
+</script>
