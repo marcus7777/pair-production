@@ -4,10 +4,10 @@
   
 <dom-module is="type-selection">
   <template>
-    <paper-dropdown-menu value="{{value}}" label="{{cat('so ',item, ' is a ...')}}">
-      <paper-menu class="dropdown-content">
+    <paper-dropdown-menu label="{{cat('so ',item, ' is a ...')}}">
+      <paper-menu class="dropdown-content" selected="{{value}}" attr-for-selected="data-value">
         <template is="dom-repeat" items="[[options]]">
-          <paper-item>[[item]]</paper-item>
+          <paper-item data-value="[[item]]">[[item]]</paper-item>
         </template>
       </paper-menu>
     </paper-dropdown-menu>
