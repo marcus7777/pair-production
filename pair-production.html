@@ -1,0 +1,182 @@
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="input-save.html">
+<link rel="import" href="variables-list-input.html">
+<link rel="import" href="function-list-input.html">
+
+<dom-module id="pair-production">
+  <template>
+    <div class="vertical center-justified layout">
+      <h4>Let me help you conjure a new element:</h4>
+        <input-save path="name" label="Name the new element" value="{{name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+        <template is="dom-if" if="{{name}}">
+          <paper-textarea value="{{description}}" label="{{cat('Tell me about <', name,'/> element')}}"></paper-textarea>
+          
+          <variables-list-input path="" name="{{name}}" variables="{{variables}}" ></variables-list-input>    
+          <input-save label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\-]*[a-zA-Z\,]*[a-zA-Z\-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+          <paper-input label="Give me list of functions it will need" value="{{functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></paper-input>
+          <template is="dom-repeat" items="{{functionList}}" >
+            <function-list-input name="{{item}}"></function-list-input>   
+          </template>
+      </template>
+    </div>
+    <template is="dom-if" if="{{output.length}}"><h4>demo.html</h4></template>
+    <pre><template is="dom-repeat" items="{{output}}">{{item}}</template></pre>
+    <template is="dom-if" if="{{element.length}}"><h4><span>{{name}}</span>.html</h4></template>
+    <pre><template is="dom-repeat" items="{{element}}">{{item}}</template></pre>
+  </template>
+</dom-module>
+<script>
+
+(function () {
+  var at = 0;
+  var tabs = function(n) {
+    var output = "";
+   
+    if (+n < 0) { at += n; }
+    for (var i = 0; i < at; ++i) {
+      output += "  ";
+    }
+    if (+n > 0) { at += n; }
+    return output;
+  };
+  
+  var addLine = function(nl){
+    output = [];
+    for (var i = 0; i < nl.length; ++i) {
+      output.push('\n'+nl[i]);
+    }
+    return output;
+  };
+  
+  Polymer({
+      is: 'pair-production',
+      properties:{
+        name : {
+          type: String,
+          value: ""
+        },
+        description :{
+          type: String,
+          value: ""
+        },
+        functions : String,
+        functionList : {
+          computed:"getArray(functions)"
+        },
+        variables : {
+          type:String,
+          value:""
+        },
+        variableList : {
+          type: Array,
+          computed:"getArray(variables)"
+        },
+        dependencies:{
+          type:String,
+          value:"polymer"
+        },
+        dependencylist: {
+          computed:"getArray(dependencies)"
+        },
+        output :{
+          computed:"getCode(head,body)"
+        },
+        head :{
+          computed:"getHead(name)"
+        },
+        body :{
+          computed:"getBody(name)"
+        },
+        element :{
+          computed:"getElementCode(name, description, dependencylist, variableList, functionList)"
+        }
+      },
+      cat (a,b,c) {
+        return a+b+c;
+      },
+      getArray (s) {
+        return s.split(',');
+      },
+      getCode(head,body) {
+        at = 0;
+        var output = [
+          tabs() + '<!doctype html>',
+          tabs(1) + '<html>'
+        ];        
+        for (var i = 0; i < head.length; ++i) {
+          output.push(tabs() +head[i]);
+        }
+        for (var i = 0; i < body.length; ++i) {
+          output.push(tabs() +body[i]);
+        }
+        output.push(tabs(-1) + '</html>');
+        return addLine(output);
+      },
+      getHead(name) {
+        var output = [
+          tabs(1) + '<head>',
+          tabs()+ '<base href="http://open-elements.org/bower_components/new/">',
+          tabs()+'<title>'+name+' demo</title>',
+          tabs()+'<sc'+'ript src="../webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
+          tabs()+'<sc'+'ript src="'+name+'.html"></sc'+'ript>'
+        ];
+        output.push(tabs(-1) + '</head>');
+        if (name !== "") return output ;
+      },
+      getBody(name) {
+        var output = [
+          tabs(1)+ '<body>',
+          tabs()+ '<h1>' + name + ' Demo</h1>',
+          tabs()+ '<' + name + '></' + name + '>',
+          tabs(-1)+ '</body>'
+        ];
+        
+        if (name !== "") return output;
+      },
+      getElementCode(name, description, dependencylist, variableList, functionList) {
+        var output = [
+          tabs()+ '<!--',
+          tabs()+ '`<'+name+'>` ' + description,
+          tabs()+ '@demo demo.html',
+          tabs()+ '-->','',
+          tabs(1)+ '<dom-module id="'+name+'">',
+          tabs(1)+ '<template>',     
+          tabs()+ '<style></style>',
+          tabs()+ '<h2>Hello from '+name+'</h2>',
+          tabs(-1)+ '</template>',
+          tabs(-1)+ '</dom-module>',
+          tabs(1)+ '<sc'+'ript>',
+          tabs(1)+ 'Polymer({'
+        ];
+        if (variableList.length > 0 && variableList[0] !== "") {
+          output.push(tabs()+ 'is: "'+name+'",');
+          output.push(tabs(1) + 'properties: {');
+          var comma = ","
+          for (var i = 0; i < variableList.length; ++i) {
+            if (variableList.length -1 === i) comma = "";
+            
+                output.push(tabs(0)+'/** '+element_kvp[variableList[i]]+ '*/' );
+
+            if (element_kvp[variableList[i]] !== undefined){
+              output.push(tabs(0) +''+ variableList[i]+':'+element_kvp[variableList[i]]+comma);
+            } else {
+              output.push(tabs(0) +''+ variableList[i]+comma);
+            }
+          }
+          output.push(tabs(-1) + '},');
+        } else {
+          output.push(tabs()+ 'is: "'+name+'"')
+        }
+        
+        output.push(tabs(-1) + '});');
+        output.push(tabs(-1) + '</sc'+'ript>');
+       
+        for (var i = 0; i < dependencylist.length; ++i) {
+          output.unshift(tabs(0) + '<link rel="import" href="../'+dependencylist[i]+'/'+dependencylist[i]+'.html">');
+        }
+        return addLine(output); 
+      }
+    });
+  })();
+</script>
