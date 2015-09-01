@@ -1,0 +1,38 @@
+<dom-module is="type-selection">
+  <template>
+    <paper-dropdown-menu value="{{value}}" label="{{cat('so ',item, ' is a ...')}}">
+      <paper-menu class="dropdown-content">
+        <template is="dom-repeat" items="[[options]]">
+          <paper-item>[[item]]</paper-item>
+        </template>
+      </paper-menu>
+    </paper-dropdown-menu>
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'type-selection',
+      properties:{
+        item: String,
+        path:String,
+        value:String,
+        options: {
+          type: Array,
+          value : ["Array", "Boolean", "Number", "Object", "String", "Symbol"]
+        },
+        _type:{
+          computed:"saveThis(path,value)"
+        }
+      },
+      cat(a,b,c){
+        return a+b+c
+      },
+      saveThis (path,value) {
+        element_kvp[path] = value;
+        console.log(element_kvp)
+        return element_kvp;
+      },
+    });
+  })();  
+</script>
