@@ -2,7 +2,7 @@
   <template>
     <label>{{cat('Give me list of variables for ',name,'')}}</label>
     <select multiple value="{{value::index}}">
-      <template is="dom-repeat" items="[[options]]">
+      <template is="dom-repeat" items="[[variableList]]">
         <option value="[[item]]">[[item]]</option>
       </template>
     </select>
