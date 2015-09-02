@@ -17,16 +17,10 @@
       properties:{
         name: String,
         description : String,
-        variables : String,
-        variableList : {
-          computed:"getArray(variables)"
-        }
+        variableList : Array
       },
       cat (a,b,c) {
         return a+b+c;
-      },
-      getArray (s) {
-        if (s !== "") return s.split(',');
       }
     });
   })();  
