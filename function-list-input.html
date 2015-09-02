@@ -1,13 +1,13 @@
 <dom-module is="function-list-input">
   <template>
-    <paper-input label="{{cat('Give me list of variables for ',name,'')}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list please :)"></paper-input>
-    <template is="dom-repeat" items="{{variableList}}" >
-      <input-save label="{{cat('Tell me about ',item,'')}}" path="{{cat('function.',name,'.param.type.',item)}}" >
-      </input-save>  
-      <type-selection  path="{{cat('function.',name,'.param.type.',item)}}" item="{{item}}"></type-selection>
-    </template>
-    <input-save label="{{cat('What does ',name,' return?')}}" value="{{returns}}"></input-save>
-    <type-selection path="{{cat('function.',name,'.returns')}}" item="{{name}}"></type-selection>
+    <label>{{cat('Give me list of variables for ',name,'')}}</label>
+    <select multiple value="{{value::index}}">
+      <template is="dom-repeat" items="[[options]]">
+        <option value="[[item]]">[[item]]</option>
+      </template>
+    </select>
+    <input-save path="{{cat('function.',name,'.returns.about')}}" label="{{cat('What does ',name,' return?')}}" value="{{returns}}"></input-save>
+    <type-selection path="{{cat('function.',name,'.returns.type')}}" item="{{name}}"></type-selection>
   </template>
 </dom-module>
 <script>
