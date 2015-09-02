@@ -1,9 +1,9 @@
 <dom-module id="variables-list-input">
   <template>
-    <paper-input label="{{cat('Give me list of inputs/output/variables for ',name,'')}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></paper-input>
+    <paper-input label="{{cat('Give me list of inputs/output/variables for ',name,'','')}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></paper-input>
      <template is="dom-repeat" items="{{variableList}}" >
-      <input-save path="{{cat(path,'.variable.',name)}}" label="{{cat('Tell me about ',item,'')}}" ></input-save>
-      <type-selection item="{{item}}"></type-selection>
+      <input-save path="{{cat(path,'.variable.',name,'.about')}}" label="{{cat('Tell me about ',item,'','')}}" ></input-save>
+      <type-selection path="{{cat(path,'.variable.',name,'.type')}}" item="{{item}}"></type-selection>
     </template>
   </template>
 </dom-module> 
