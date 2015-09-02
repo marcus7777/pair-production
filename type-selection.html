@@ -2,11 +2,11 @@
   
 <dom-module id="type-selection">
   <template>
-      <select id="select" value="{{value::index}}">
-        <template is="dom-repeat" items="[[options]]">
-          <option value="[[item]]">[[item]]</option>
-        </template>
-      </select>
+    <select value="{{value::index}}">
+      <template is="dom-repeat" items="[[options]]">
+        <option value="[[item]]">[[item]]</option>
+      </template>
+    </select>
   </template>
 </dom-module>
 <script>
@@ -19,7 +19,7 @@
         value:String,
         options: {
           type: Array,
-          value : ["Array", "Boolean", "Number", "Object", "String", "Symbol"]
+          value : ["Null", "Array", "Boolean", "Number", "Object", "String", "Symbol"]
         },
         _type:{
           computed:"saveThis(path,value)"
