@@ -20,7 +20,7 @@
           <input-save label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\-]*[a-zA-Z\,]*[a-zA-Z\-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <paper-input label="Give me list of functions it will need" value="{{functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></paper-input>
           <template is="dom-repeat" items="{{functionList}}" >
-            <function-list-input name="{{item}}"></function-list-input>   
+            <function-list-input variableList="{{variableList}}" name="{{item}}"></function-list-input>   
           </template>
       </template>
     </div>
