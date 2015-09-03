@@ -4,9 +4,15 @@
 @demo demo-type.html
 -->
   
+<link rel="import" href="../polymer/polymer.html">
+<!--
+`<type-selection path="the_type">` 
+@demo demo-type.html
+-->
+  
 <dom-module id="type-selection">
   <template>
-    <select value="{{value::index}}">
+    <select value="{{value::input}}">
       <template is="dom-repeat" items="[[options]]">
         <option value="[[item]]">[[item]]</option>
       </template>
@@ -20,20 +26,17 @@
       properties:{
         item:String,
         path:String,
-        value:String,
+        value:{
+          type:String,
+          observer :"save"
+        },
         options: {
           type: Array,
           value : ["Null", "Array", "Boolean", "Number", "Object", "String", "Symbol"]
-        },
-        _type:{
-          computed:"saveThis(path,value)"
         }
       },
-      cat(a,b,c){
-        return a+b+c
-      },
-      saveThis (path,value) {
-        element_kvp[path] = value;
+      save (value) {
+        element_kvp[this.path] = value; // this. smell
         console.log(element_kvp);
         return element_kvp;
       },
