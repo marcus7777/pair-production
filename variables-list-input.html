@@ -4,7 +4,7 @@
       <paper-input label="{{cat('Give me list of '+item+' variables for '+name)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></paper-input>
       <template is="dom-repeat" items="{{variableList}}" >
         <input-save path="{{cat('variable.'+label+'.'+item+'.about')}}" label="{{cat('Tell me about '+item)}}" ></input-save>
-        <type-selection path="{{cat('variable.',item,'.type')}}" item="{{item}}"></type-selection>
+        <type-selection path="{{cat('variable.'+item+'.type')}}" item="{{item}}"></type-selection>
       </template>
     </template>
   </template>
@@ -28,8 +28,8 @@
           computed:"getArray(variables)"
         }
       },
-      cat (a,b,c,d) {
-        return a+b+c+d;
+      cat (a) {
+        return a;
       },
       getArray (s) {
         if (s !== "") return s.split(',');
