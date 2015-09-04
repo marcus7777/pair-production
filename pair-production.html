@@ -16,8 +16,8 @@
         <input-save path="name" label="Name the new element" value="{{name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
         <template is="dom-if" if="{{name}}">
           <paper-textarea value="{{description}}" label="{{cat('Tell me about <', name,'/> element')}}"></paper-textarea>
-          
-          <variables-list-input path="" name="{{name}}" variables="{{variables}}" ></variables-list-input>    
+
+          <variables-list-input label="Inputs,Outputs,Internal" path="" name="{{name}}" variables="{{variables}}" ></variables-list-input>   
           <input-save label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\-]*[a-zA-Z\,]*[a-zA-Z\-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <paper-input label="Give me list of functions it will need" value="{{functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></paper-input>
           <template is="dom-repeat" items="{{functionList}}" >
