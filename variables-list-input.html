@@ -1,6 +1,6 @@
 <dom-module id="variables-list-input">
   <template>
-    <paper-input label="{{cat('Give me list of inputs/output/variables for ',name,'','')}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></paper-input>
+    <paper-input label="{{cat('Give me list of ',label,'variables for ',name,'')}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></paper-input>
      <template is="dom-repeat" items="{{variableList}}" >
       <input-save path="{{cat(name,'.variable.',item,'.about')}}" label="{{cat('Tell me about ',item,'','')}}" ></input-save>
       <type-selection path="{{cat(name,'.variable.',item,'.type')}}" item="{{item}}"></type-selection>
@@ -14,6 +14,10 @@
       properties:{
         name:  String,
         description: String,
+        label:String,
+        labelList:{
+          computed:"getArray(label)"
+        },
         variables: {
           type:String,
           notify:true
