@@ -1,6 +1,5 @@
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="input-save.html">
 <link rel="import" href="variables-list-input.html">
 <link rel="import" href="type-selection.html">
 <link rel="import" href="function-list-input.html">
@@ -18,8 +17,8 @@
           <paper-textarea value="{{description}}" label="{{cat('Tell me about <', name,'/> element')}}"></paper-textarea>
 
           <variables-list-input label="Inputs,Outputs,Internal" path="" name="{{name}}" variables="{{variables}}" ></variables-list-input>   
-          <input-save label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\-]*[a-zA-Z\,]*[a-zA-Z\-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-          <paper-input label="Give me list of functions it will need" value="{{functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></paper-input>
+          <input-save path="dependencies" label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\-]*[a-zA-Z\,]*[a-zA-Z\-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+          <input-save path="functions" label="Give me list of functions it will need" value="{{functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <template is="dom-repeat" items="{{functionList}}" >
             <function-list-input variableList="{{variableList}}" name="{{item}}"></function-list-input>   
           </template>
