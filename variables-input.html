@@ -1,3 +1,5 @@
+<link rel="import" href="input-save.html">
+
 <dom-module id="variables-input">
   <template>
     <input-save path="{{cat('variables.',label)}}" label="{{cat('List the variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></input-save>
