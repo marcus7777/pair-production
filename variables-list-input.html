@@ -1,11 +1,8 @@
+<link rel="import" href="variables-input.html">
 <dom-module id="variables-list-input">
   <template>
-    <template is="dom-repeat" items="{{labelList}}">
-      <paper-input label="{{cat('Give me list of '+item+' variables for '+name)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></paper-input>
-      <template is="dom-repeat" items="{{variableList}}" >
-        <input-save path="{{cat('variable.'+label+'.'+item+'.about')}}" label="{{cat('Tell me about '+item)}}" ></input-save>
-        <type-selection path="{{cat('variable.'+item+'.type')}}" item="{{item}}"></type-selection>
-      </template>
+    <template is="dom-repeat" items="{{labelList}}" >
+      <variables-input label="{{item}}"></variables-input>
     </template>
   </template>
 </dom-module> 
@@ -19,17 +16,7 @@
         label:String,
         labelList:{
           computed:"getArray(label)"
-        },
-        variables: {
-          type:String,
-          notify:true
-        },
-        variableList: {
-          computed:"getArray(variables)"
         }
-      },
-      cat (a) {
-        return a;
       },
       getArray (s) {
         if (s !== "") return s.split(',');
