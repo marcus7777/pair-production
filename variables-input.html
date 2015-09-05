@@ -1,0 +1,42 @@
+<dom-module id="variables-input">
+  <template>
+    <input-save path="{{cat('variables.',label)}}" label="{{cat('List the variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></input-save>
+    <template is="dom-repeat" items="{{variableList}}" >
+      <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}" ></input-save>
+      <type-selection path="{{cat('variable.',label,'.',item,'.type')}}" item="{{item}}"></type-selection>
+    </template>
+  </template>
+</dom-module> 
+<script>
+  (function () {
+    Polymer({
+      is: 'variables-input',
+      properties:{
+        label:String,
+        variables: {
+          type:String,
+          notify:true
+        },
+        variableList: {
+          computed:"getArray(variables)"
+        }
+      },
+      cat (a,b,c,d,e,f) {
+        if (c === undefined) {
+          return a+b;
+        } else if (d === undefined) {
+          return a+b+c;
+        } else if (e === undefined) {
+          return a+b+c+d;
+        } else if (f === undefined) {
+          return a+b+c+d+e;
+        } else {
+          return a+b+c+d+e+f;
+        }
+      },
+      getArray (s) {
+        if (s !== "") return s.split(',');
+      }
+    });
+  })();  
+</script>
