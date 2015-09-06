@@ -12,7 +12,7 @@
   <template>
     <div class="vertical center-justified layout">
       <h4>Let me help you conjure a new element:</h4>
-        <input-save path="name" label="Name the new element" value="{{name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+        <input-save path="name" label="Name the new element - like pirate-ninja" value="{{name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
         <template is="dom-if" if="{{name}}">
           <paper-textarea value="{{description}}" label="{{cat('Tell me about <', name,'/> element')}}"></paper-textarea>
 
