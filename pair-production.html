@@ -16,11 +16,11 @@
         <template is="dom-if" if="{{name}}">
           <paper-textarea value="{{description}}" label="{{cat('Tell me about <', name,'/> element')}}"></paper-textarea>
 
-          <variables-list-input label="Inputs,Outputs,Internal" path="" name="{{name}}" variables="{{variables}}" ></variables-list-input>   
+          <variables-list-input functions="{{functions}}" label="Inputs,Outputs,Internal" path="" name="{{name}}" variables="{{variables}}" ></variables-list-input>   
           <input-save path="dependencies" label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\-]*[a-zA-Z\,]*[a-zA-Z\-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <input-save path="functions" label="Give me list of functions it will need" value="{{functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <template is="dom-repeat" items="{{functionList}}" >
-            <function-list-input variableList="{{variableList}}" name="{{item}}"></function-list-input>   
+            <function-list-input variable-list="{{variableList}}" name="{{item}}"></function-list-input>   
           </template>
       </template>
     </div>
@@ -31,7 +31,6 @@
   </template>
 </dom-module>
 <script>
-
 (function () {
   var at = 0;
   var tabs = function(n) {
@@ -161,7 +160,6 @@
             if (variableList.length -1 === i) comma = "";
             
                 output.push(tabs(0)+'/** '+element_kvp[variableList[i]]+ '*/' );
-
             if (element_kvp[variableList[i]] !== undefined){
               output.push(tabs(0) +''+ variableList[i]+':'+element_kvp[variableList[i]]+comma);
             } else {
