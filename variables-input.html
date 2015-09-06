@@ -1,15 +1,21 @@
 <link rel="import" href="input-save.html">
+<!--
+`<variables-input>` 
+-->
 
 <dom-module id="variables-input">
   <template>
     <input-save path="{{cat('variables.',label)}}" label="{{cat('List the variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></input-save>
     <template is="dom-repeat" items="{{variableList}}" >
+      
       <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}"></input-save>
       <type-selection path="{{cat('variable.',label,'.',item,'.type')}}" item="{{item}}" value="{{type}}"></type-selection>
       
-      <input-save path="{{cat('variable.',label,'.',item,'.default')}}" label="{{cat('default for ',item)}}" pattern="{{RepType}}"></input-save>
-      <input-save path="{{cat('variable.',label,'.',item,'.computed')}}" label="{{cat('computed by ',item)}}" pattern="{{cat('(','foo|bar',')')}}"></input-save>
-      <input-save path="{{cat('variable.',label,'.',item,'.observer')}}" label="{{cat('observer ',item)}}" pattern="{{cat('(','foo|bar',')')}}" ></input-save>
+      <input-save hidden="{{computed}}" auto-validate path="{{cat('variable.',label,'.',item,'.default')}}" label="{{cat('default for ',item)}}" pattern="{{repType}}" value="{{default}}" error-message="{{cat('needs to be a ',type,' so ', repType)}}" ></input-save>
+      
+      <input-save hidden="{{default}}" auto-validate value="{{computed}}" path="{{cat('variable.',label,'.',item,'.computed')}}" label="{{cat(item,' is computed by :')}}"  pattern="{{cat(reFunctions,'\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\)')}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}"></input-save>
+      
+      <input-save auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" label="{{cat('observer ',item)}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
       
     </template>
   </template>
@@ -28,8 +34,14 @@
         variableList: {
           computed:"getArray(variables)"
         },
-        RepType: {
+        repType: {
           computed:"getRepType(type)"
+        },
+        functions:{
+          type:String
+        },
+        reFunctions: {
+          computed:"getReFunctions(functions)"
         }
       },
       cat (a,b,c,d,e,f) {
@@ -49,13 +61,14 @@
         if (s !== "") return s.split(',');
       },
       getRepType(t) {
+        console.log("t",t);
         switch(t) {
            // TODO Symbol
           case 'Null':
             return 'Null';
           break;
           case 'Array':
-            return '^\[.*\]$';
+            return '^\\[.*\\]$';
           break;
           case 'Boolean':
             return '(true|false)';
@@ -72,6 +85,10 @@
           default:
             return '';
         }
+      },
+      getReFunctions(functions){
+        console.log("functions",functions);
+        return '(' + functions.replace(/,/g, '|') + ')';
       }
     });
   })();  
