@@ -4,8 +4,13 @@
   <template>
     <input-save path="{{cat('variables.',label)}}" label="{{cat('List the variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></input-save>
     <template is="dom-repeat" items="{{variableList}}" >
-      <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}" ></input-save>
-      <type-selection path="{{cat('variable.',label,'.',item,'.type')}}" item="{{item}}"></type-selection>
+      <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}"></input-save>
+      <type-selection path="{{cat('variable.',label,'.',item,'.type')}}" item="{{item}}" value="{{type}}"></type-selection>
+      
+      <input-save path="{{cat('variable.',label,'.',item,'.default')}}" label="{{cat('default for ',item)}}" pattern="{{RepType}}"></input-save>
+      <input-save path="{{cat('variable.',label,'.',item,'.computed')}}" label="{{cat('computed by ',item)}}" pattern="{{cat('(','foo|bar',')')}}"></input-save>
+      <input-save path="{{cat('variable.',label,'.',item,'.observer')}}" label="{{cat('observer ',item)}}" pattern="{{cat('(','foo|bar',')')}}" ></input-save>
+      
     </template>
   </template>
 </dom-module> 
@@ -19,8 +24,12 @@
           type:String,
           notify:true
         },
+        type:String,
         variableList: {
           computed:"getArray(variables)"
+        },
+        RepType: {
+          computed:"getRepType(type)"
         }
       },
       cat (a,b,c,d,e,f) {
@@ -38,6 +47,31 @@
       },
       getArray (s) {
         if (s !== "") return s.split(',');
+      },
+      getRepType(t) {
+        switch(t) {
+           // TODO Symbol
+          case 'Null':
+            return 'Null';
+          break;
+          case 'Array':
+            return '^\[*]$';
+          break;
+          case 'Boolean':
+            return '(true|false)';
+          break;
+          case 'Number':
+            return '^[0-9\.]*$';
+          break;
+          case 'Object':
+            return '^\{*}$';
+          break;
+          case 'String':
+            return '^\{*}$';
+          break;
+          default:
+            return '';
+        }
       }
     });
   })();  
