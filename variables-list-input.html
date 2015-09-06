@@ -1,25 +1,94 @@
-<link rel="import" href="variables-input.html">
-<dom-module id="variables-list-input">
+<link rel="import" href="input-save.html">
+<!--
+`<variables-input>` 
+-->
+
+<dom-module id="variables-input">
   <template>
-    <template is="dom-repeat" items="{{labelList}}" >
-      <variables-input label="{{item}}"></variables-input>
+    <input-save path="{{cat('variables.',label)}}" label="{{cat('List the variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></input-save>
+    <template is="dom-repeat" items="{{variableList}}" >
+      
+      <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}"></input-save>
+      <type-selection path="{{cat('variable.',label,'.',item,'.type')}}" item="{{item}}" value="{{type}}"></type-selection>
+      
+      <input-save hidden="{{computed}}" auto-validate path="{{cat('variable.',label,'.',item,'.default')}}" label="{{cat('default for ',item)}}" pattern="{{repType}}" value="{{default}}" error-message="{{cat('needs to be a ',type,' so ', repType)}}" ></input-save>
+      
+      <input-save hidden="{{default}}" auto-validate value="{{computed}}" path="{{cat('variable.',label,'.',item,'.computed')}}" label="{{cat(item,' is computed by :')}}"  pattern="{{cat(reFunctions,'\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\)')}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}"></input-save>
+      
+      <input-save auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" label="{{cat('observer ',item)}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
+      
     </template>
   </template>
 </dom-module> 
 <script>
   (function () {
     Polymer({
-      is: 'variables-list-input',
+      is: 'variables-input',
       properties:{
-        name:  String,
-        description: String,
         label:String,
-        labelList:{
-          computed:"getArray(label)"
+        variables: {
+          type:String,
+          notify:true
+        },
+        type:String,
+        variableList: {
+          computed:"getArray(variables)"
+        },
+        repType: {
+          computed:"getRepType(type)"
+        },
+        functions:{
+          type:String
+        },
+        reFunctions: {
+          computed:"getReFunctions(functions)"
+        }
+      },
+      cat (a,b,c,d,e,f) {
+        if (c === undefined) {
+          return a+b;
+        } else if (d === undefined) {
+          return a+b+c;
+        } else if (e === undefined) {
+          return a+b+c+d;
+        } else if (f === undefined) {
+          return a+b+c+d+e;
+        } else {
+          return a+b+c+d+e+f;
         }
       },
       getArray (s) {
         if (s !== "") return s.split(',');
+      },
+      getRepType(t) {
+        console.log("t",t);
+        switch(t) {
+           // TODO Symbol
+          case 'Null':
+            return 'Null';
+          break;
+          case 'Array':
+            return '^\\[.*\\]$';
+          break;
+          case 'Boolean':
+            return '(true|false)';
+          break;
+          case 'Number':
+            return '^[0-9\.]*$';
+          break;
+          case 'Object':
+            return '^\{.*\}$';
+          break;
+          case 'String':
+            return '^\".*\"$';
+          break;
+          default:
+            return '';
+        }
+      },
+      getReFunctions(functions){
+        console.log("functions",functions);
+        return '(' + functions.replace(/,/g, '|') + ')';
       }
     });
   })();  
