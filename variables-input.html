@@ -55,7 +55,7 @@
             return 'Null';
           break;
           case 'Array':
-            return '^\[*]$';
+            return '^\[.*\]';
           break;
           case 'Boolean':
             return '(true|false)';
@@ -64,10 +64,10 @@
             return '^[0-9\.]*$';
           break;
           case 'Object':
-            return '^\{*}$';
+            return '^\{.*\}$';
           break;
           case 'String':
-            return '^\{*}$';
+            return '^\".*\"$';
           break;
           default:
             return '';
