@@ -4,12 +4,6 @@
 @demo demo-type.html
 -->
   
-<link rel="import" href="../polymer/polymer.html">
-<!--
-`<type-selection path="the_type">` 
-@demo demo-type.html
--->
-  
 <dom-module id="type-selection">
   <template>
     <select value="{{value::input}}">
@@ -28,7 +22,8 @@
         path:String,
         value:{
           type:String,
-          observer :"save"
+          observer:"save",
+          notify:true
         },
         options: {
           type: Array,
