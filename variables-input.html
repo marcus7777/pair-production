@@ -4,6 +4,10 @@
 `<variables-input>` 
 -->
 
+<!--
+`<variables-input>` 
+-->
+
 <dom-module id="variables-input">
   <template>
     <paper-card heading="{{label}}">
@@ -13,11 +17,11 @@
           <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}"></input-save>
           <type-selection path="{{cat('variable.',label,'.',item,'.type')}}" item="{{item}}" value="{{type}}"></type-selection>
       
-          <input-save value="{{default}}" hidden="{{computed}}" auto-validate path="{{cat('variable.',label,'.',item,'.default')}}" label="{{cat('default for ',item)}}" pattern="{{repType}}" error-message="{{cat('needs to be a ',type,' so ', repType)}}" ></input-save>
+          <input-save label="{{cat('default for ',item)}}" pattern="{{repType}}" auto-validate path="{{cat('variable.',label,'.',item,'.default')}}" error-message="{{cat('needs to be a ',type,' so ', repType)}}" ></input-save>
       
-          <input-save hidden="{{default}}" auto-validate  path="{{cat('variable.',label,'.',item,'.computed')}}" label="{{cat(item,' is computed by :')}}"  pattern="{{reFunctionsAndVariables}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}"></input-save>
+          <input-save label="{{cat(item,' is computed by :')}}"  auto-validate path="{{cat('variable.',label,'.',item,'.computed')}}" pattern="{{reFunctionsAndVariables}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}"></input-save>
       
-          <input-save auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" label="{{cat('observer ',item)}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
+          <input-save label="{{cat('observer ',item)}}" auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
         </paper-card>
       </template>
     </paper-card>
