@@ -5,19 +5,21 @@
 
 <dom-module id="variables-input">
   <template>
-    <input-save path="{{cat('variables.',label)}}" label="{{cat('List the variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></input-save>
-    <template is="dom-repeat" items="{{variableList}}" >
-      <paper-card heading="{{item}}">
-        <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}"></input-save>
-        <type-selection path="{{cat('variable.',label,'.',item,'.type')}}" item="{{item}}" value="{{type}}"></type-selection>
+    <paper-card heading="{{label}}">
+      <input-save path="{{cat('variables.',label)}}" label="{{cat('List the variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></input-save>
+      <template is="dom-repeat" items="{{variableList}}" >
+        <paper-card heading="{{item}}">
+          <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}"></input-save>
+          <type-selection path="{{cat('variable.',label,'.',item,'.type')}}" item="{{item}}" value="{{type}}"></type-selection>
       
-        <input-save hidden="{{computed}}" auto-validate path="{{cat('variable.',label,'.',item,'.default')}}" label="{{cat('default for ',item)}}" pattern="{{repType}}" value="{{default}}" error-message="{{cat('needs to be a ',type,' so ', repType)}}" ></input-save>
+          <input-save hidden="{{computed}}" auto-validate path="{{cat('variable.',label,'.',item,'.default')}}" label="{{cat('default for ',item)}}" pattern="{{repType}}" value="{{default}}" error-message="{{cat('needs to be a ',type,' so ', repType)}}" ></input-save>
       
-        <input-save hidden="{{default}}" auto-validate value="{{computed}}" path="{{cat('variable.',label,'.',item,'.computed')}}" label="{{cat(item,' is computed by :')}}"  pattern="{{cat(reFunctions,'\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\)')}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}"></input-save>
+          <input-save hidden="{{default}}" auto-validate value="{{computed}}" path="{{cat('variable.',label,'.',item,'.computed')}}" label="{{cat(item,' is computed by :')}}"  pattern="{{cat(reFunctions,'\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\)')}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}"></input-save>
       
-        <input-save auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" label="{{cat('observer ',item)}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
-      </paper-card>
-    </template>
+          <input-save auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" label="{{cat('observer ',item)}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
+        </paper-card>
+      </template>
+    </paper-card>
   </template>
 </dom-module> 
 <script>
