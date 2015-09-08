@@ -91,17 +91,20 @@
         dependencylist: {
           computed:"getArray(dependencies)"
         },
-        output :{
+        demo: {
           computed:"getCode(head,body)"
         },
-        head :{
+        head: {
           computed:"getHead(name)"
         },
-        body :{
+        body: {
           computed:"getBody(name)"
         },
-        element :{
+        element: {
           computed:"getElementCode(name, description, dependencylist, variableList, functionList)"
+        },
+        markdown: {
+          computed:"getMarkdown(element,demo)"
         }
       },
       cat (a,b,c) {
@@ -189,6 +192,9 @@
           output.unshift(tabs(0) + '<link rel="import" href="../'+dependencylist[i]+'/'+dependencylist[i]+'.html">');
         }
         return addLine(output); 
+      }.
+      getMarkdown(element,demo) {
+        return "```html\n" + element + demo + '\n```'
       }
     });
   })();
