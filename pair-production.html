@@ -1,6 +1,7 @@
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../marked-element/marked-element.html">
 
 <link rel="import" href="variables-list-input.html">
 <link rel="import" href="type-selection.html">
@@ -29,9 +30,12 @@
       </template>
     </div>
     <template is="dom-if" if="{{output.length}}"><h4>demo.html</h4></template>
-    <pre><code><template is="dom-repeat" items="{{output}}">{{item}}</template></code></pre>
+    <marked-element>```html
+      <template is="dom-repeat" items="{{output}}">{{item}}</template>
+      ```
+      </marked-element>
     <template is="dom-if" if="{{element.length}}"><h4><span>{{name}}</span>.html</h4></template>
-    <pre><code><template is="dom-repeat" items="{{element}}">{{item}}</template></code></pre>
+    <marked-element>```<template is="dom-repeat" items="{{element}}">{{item}}</template>```</marked-element>
   </template>
 </dom-module>
 <script>
