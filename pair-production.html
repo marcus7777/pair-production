@@ -105,7 +105,10 @@
         }
       },
       cat (a,b,c) {
-        return a.join('')+b.join('')+c.join('');
+        if (Array.isArray(a)) {a = a.join('')};
+        if (Array.isArray(b)) {b = b.join('')};
+        if (Array.isArray(c)) {c = c.join('')};
+        return a+b+c;
       },
       getArray (s) {
         return s.split(',');
