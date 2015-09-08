@@ -36,11 +36,7 @@
       ```
     </marked-element>
     <template is="dom-if" if="{{element.length}}"><h4><span>{{name}}</span>.html</h4></template>
-    <marked-element>
-      ```html 
-        <template is="dom-repeat" items="{{element}}">{{item}}</template>
-      ```
-    </marked-element>
+    <marked-element markdown="{{cat('```html\n',element,'\n```'}}"></marked-element>
   </template>
 </dom-module>
 <script>
@@ -109,7 +105,7 @@
         }
       },
       cat (a,b,c) {
-        return a+b+c;
+        return a.join('')+b.join('')+c.join('');
       },
       getArray (s) {
         return s.split(',');
