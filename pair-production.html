@@ -29,9 +29,9 @@
       </template>
     </div>
     <template is="dom-if" if="{{output.length}}"><h4>demo.html</h4></template>
-    <pre><template is="dom-repeat" items="{{output}}">{{item}}</template></pre>
+    <pre><code><template is="dom-repeat" items="{{output}}">{{item}}</template></code></pre>
     <template is="dom-if" if="{{element.length}}"><h4><span>{{name}}</span>.html</h4></template>
-    <pre><template is="dom-repeat" items="{{element}}">{{item}}</template></pre>
+    <pre><code><template is="dom-repeat" items="{{element}}">{{item}}</template></code></pre>
   </template>
 </dom-module>
 <script>
