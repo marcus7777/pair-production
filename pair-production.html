@@ -29,13 +29,6 @@
           </template>
       </template>
     </div>
-    <template is="dom-if" if="{{output.length}}"><h4>demo.html</h4></template>
-    <marked-element>
-      ```html
-        <template is="dom-repeat" items="{{output}}">{{item}}</template>
-      ```
-    </marked-element>
-    <template is="dom-if" if="{{element.length}}"><h4><span>{{name}}</span>.html</h4></template>
     <marked-element markdown="{{markdown}}"></marked-element>
   </template>
 </dom-module>
@@ -108,9 +101,6 @@
         }
       },
       cat (a,b,c) {
-        if (Array.isArray(a)) {a = a.join('')};
-        if (Array.isArray(b)) {b = b.join('')};
-        if (Array.isArray(c)) {c = c.join('')};
         return a+b+c;
       },
       getArray (s) {
