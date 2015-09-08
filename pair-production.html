@@ -1,7 +1,7 @@
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-card/paper-card.html">
-<link rel="import" href="../marked-element/marked-element.html">
+<link rel="import" href="../iron-doc-viewer/iron-doc-viewer.html">
 
 <link rel="import" href="variables-list-input.html">
 <link rel="import" href="type-selection.html">
@@ -29,7 +29,7 @@
           </template>
       </template>
     </div>
-    <marked-element markdown="{{markdown}}"></marked-element>
+    <iron-doc-viewer descriptor="{{descriptor}}"></iron-doc-viewer>
   </template>
 </dom-module>
 <script>
@@ -96,8 +96,8 @@
         element: {
           computed:"getElementCode(name, description, dependencylist, variableList, functionList)"
         },
-        markdown: {
-          computed:"getMarkdown(element,demo)"
+        descriptor: {
+          computed:"getDescriptor(element,demo)"
         }
       },
       cat (a,b,c) {
@@ -183,8 +183,10 @@
         }
         return addLine(output); 
       },
-      getMarkdown(element,demo) {
-        return "```html\n" + element + demo + '\n```'
+      getDescriptor(element,demo) {
+        return {
+          "desc": "This is an example of how `iron-doc-viewer` will render various types of\ninformation. You can use it as a style guide to see how various data will be\nrepresented. Markdown is used to format descriptive text throughout.\n\n# Level 1 Heading\n\nThis is a level one heading. **Bold text** and *italic text* are represented\nappropriately. [Links](#) have black underlines.\n\n## Level 2 Heading\n\nThis is a level two heading. `inline code` can be represented.\n\n    <html>\n      <p>This is a code block. Its syntax is highlighted automatically.</p>\n    </html>\n\n### Level 3 Heading\n\nLists can also be used as you'd expect:\n\n* Unordered Lists\n  * With Nesting\n* Or without nesting\n\nYou can also use ordered lists:\n\n1. First item\n2. Second item\n\n#### Level 4 Heading\n\nHeadings can be used all the way down to level 5.\n\n##### Level 5 Heading\n\nThis concludes our quick rundown of the various styles that you can commonly use."
+        }
       }
     });
   })();
