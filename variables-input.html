@@ -14,7 +14,7 @@
           <type-selection path="{{cat('variable.',label,'.',item,'.type')}}" item="{{item}}" value="{{type}}"></type-selection>
       
           <input-save label="{{cat('default for ',item)}}" pattern="{{repType}}" auto-validate path="{{cat('variable.',label,'.',item,'.default')}}" error-message="{{cat('needs to be a ',type,' so ', repType)}}" ></input-save>
-          <template is="mod-if" if="{{computed}}">
+          <template is="dom-if" if="{{computed}}">
             <input-save label="{{cat(item,' is computed by :')}}"  auto-validate path="{{cat('variable.',label,'.',item,'.computed')}}" pattern="{{reFunctionsAndVariables}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}"></input-save>
           </template>
           <input-save label="{{cat('observer ',item)}}" auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
