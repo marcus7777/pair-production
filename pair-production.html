@@ -108,10 +108,20 @@
         markdown: {
           computed: "getMarkdown(demo,element,name,bower)"
         },
-        getBower :{
-          computed: "getBower(name,dependencylist)"
+        bower :{
+          computed: "getBower(name, dependencylist)"
         }
-        
+      },
+      getBower(name, dependencylist) { //TODO read and list dependencylist
+        return [tabs(1)+'{,
+        tabs()+'"name": "'+name+'",',
+        tabs()+'"version": "1.0.0",',
+        tabs()+'"description": "'+name+'",',
+        tabs()+'"main": "'+name+'.html",',
+        tabs(1)+'"keywords": [',
+        tabs()+'"polymer"',
+        tabs(-1)+']',
+        tabs(-1)+'}';
       },
       cat (a,b,c) {
         return a+b+c;
