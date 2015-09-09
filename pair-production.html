@@ -53,11 +53,7 @@
   };
   
   var addLine = function(nl){
-    output = [];
-    for (var i = 0; i < nl.length; ++i) {
-      output.push('\n'+nl[i]);
-    }
-    return output;
+    return nl.join('\n');
   };
   
   Polymer({
@@ -113,7 +109,7 @@
         }
       },
       getBower(name, dependencylist) { //TODO read and list dependencylist
-        return [tabs(1)+'{',
+        return addLine([tabs(1)+'{',
         tabs()+'"name": "'+name+'",',
         tabs()+'"version": "1.0.0",',
         tabs()+'"description": "'+name+'",',
@@ -121,7 +117,7 @@
         tabs(1)+'"keywords": [',
         tabs()+'"polymer"',
         tabs(-1)+']',
-        tabs(-1)+'}'];
+        tabs(-1)+'}']);
       },
       cat (a,b,c) {
         return a+b+c;
