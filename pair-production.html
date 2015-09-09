@@ -33,7 +33,7 @@
     </div>
     <prism-highlighter></prism-highlighter>
     your code:
-    <marked-element markdown="{{code}}"></marked-element>
+    <marked-element markdown="{{markdown}}"></marked-element>
     your docs:
     <!-- <iron-doc-viewer descriptor="{{descriptor}}"></iron-doc-viewer> -->
   </template>
@@ -201,7 +201,10 @@
         }
       },
       getCode(element,demo) {
-        return element.join('') + demo.join('')
+        return element.join('') + demo.join('');
+      },
+      getMarkdown(code) {
+        return '```html \n'+code+'\n```';
       }
     });
   })();
