@@ -3,6 +3,7 @@
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../iron-doc-viewer/iron-doc-viewer.html">
 <link rel="import" href="../prism-element/prism-highlighter.html">
+<link rel="import" href="../marked-element/marked-element.html">
 
 <link rel="import" href="variables-list-input.html">
 <link rel="import" href="type-selection.html">
@@ -32,7 +33,7 @@
     </div>
     <prism-highlighter></prism-highlighter>
     your code:
-    <pre>{{code}}</pre>
+    <marked-element markdown="{{code}}"></marked-element>
     your docs:
     <!-- <iron-doc-viewer descriptor="{{descriptor}}"></iron-doc-viewer> -->
   </template>
@@ -70,42 +71,45 @@
           type: String,
           value: ""
         },
-        functions : String,
-        functionList : {
-          computed:"getArray(functions)"
+        functions: String,
+        functionList: {
+          computed: "getArray(functions)"
         },
         variables : {
           type:String,
-          value:""
+          value: ""
         },
         variableList : {
           type: Array,
-          computed:"getArray(variables)"
+          computed: "getArray(variables)"
         },
         dependencies:{
           type:String,
-          value:"polymer"
+          value: "polymer"
         },
         dependencylist: {
-          computed:"getArray(dependencies)"
+          computed: "getArray(dependencies)"
         },
         demo: {
-          computed:"getCode(head,body)"
+          computed: "getCode(head,body)"
         },
         head: {
-          computed:"getHead(name)"
+          computed: "getHead(name)"
         },
         body: {
-          computed:"getBody(name)"
+          computed: "getBody(name)"
         },
         element: {
-          computed:"getElementCode(name, description, dependencylist, variableList, functionList)"
+          computed: "getElementCode(name, description, dependencylist, variableList, functionList)"
         },
         descriptor: {
-          computed:"getDescriptor(element,demo)"
+          computed: "getDescriptor(element,demo)"
         },
         code: {
-          computed:"getCode(element,demo)"
+          computed: "getCode(element,demo)"
+        },
+        markdown: {
+          computed: "getMarkdown(code)"
         }
       },
       cat (a,b,c) {
