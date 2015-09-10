@@ -28,7 +28,7 @@
         type:Object,
         observer:"dataChanged"
       },
-      element: {
+      element: { // move to observers
         computed:'saveThis(path,value)'
       }
     },
@@ -38,7 +38,9 @@
     },
     saveThis (path,value) {
       js_data[path] = value;
-      console.log(js_data);
+      if (!loading_data.hasOwnProperty(path) || this.data[path] !== value) {
+        this.data[path] = this.value;
+      }
       return js_data;
     },
     dataChanged(loading_data) {
