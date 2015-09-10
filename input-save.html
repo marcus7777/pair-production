@@ -1,19 +1,20 @@
 <link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-localstorage/iron-localstorage.html">
 <!--
 `<input-save>`  
 -->
 <dom-module id="input-save">
   <template>
     <paper-input label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
+    <iron-localstorage name="{{name}}" value="{{data}}"></iron-localstorage>
   </template>
 </dom-module>
 <script>
   
-  var element_kvp = {};
-  
   Polymer({
     is: 'input-save',
     properties: {
+      name: String,
       path: String,
       label: String,
       pattern: String,
@@ -23,18 +24,18 @@
         type:String,
         notify:true
       },
+      data: {
+        type:Object
+      },
       element: {
         computed:'saveThis(path,value)',
         notify:true
       }
     },
     saveThis (path,value) {
-      element_kvp[path] = value;
-      console.log(element_kvp)
-      return element_kvp;
-    },
-    ready(){
-      this.value = element_kvp[this.path];
+      this.data[path] = value;
+      console.log(this.data)
+      return this.data;
     }
   });
 </script>
