@@ -22,7 +22,7 @@
       <h4>Let me help you conjure a new element:</h4>
         <input-save path="name" label="Name the new element - like pirate-ninja" value="{{name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
         <template is="dom-if" if="{{name}}">
-          <paper-textarea value="{{description}}" label="{{cat('Tell me about <', name,'/> element')}}"></paper-textarea>
+          <input-save textarea value="{{description}}" label="{{cat('Tell me about <', name,'/> element')}}"></input-save>
 
           <variables-list-input functions="{{functions}}" label="Inputs,Outputs,Internal" path="" name="{{name}}" variables="{{variables}}" ></variables-list-input>   
           <input-save path="dependencies" label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\/]*[a-zA-Z\/\,]*[a-zA-Z\/]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
