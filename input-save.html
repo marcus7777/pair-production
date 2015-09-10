@@ -37,7 +37,8 @@
     },
     saveThis (path,value) {
       data[path] = value;
-      console.log(data)
+      console.log(data);
+      this.data = data;
       return data;
     },
     ready (){
