@@ -42,7 +42,7 @@
       return js_data;
     },
     dataChanged(loading_data) {
-      if (!loading_data.hasOwnProperty(this.path)) {
+      if (loading_data.hasOwnProperty(this.path)) {
         this.value = loading_data[this.path];
       }
     }
