@@ -38,8 +38,10 @@
     },
     saveThis (path,value) {
       js_data[path] = value;
-      if (!loading_data.hasOwnProperty(path) || this.data[path] !== value) {
-        this.data[path] = this.value;
+      if (!this.data.hasOwnProperty(path) || this.data[path] !== value) {
+        if (this.value !== "") {
+          this.data[path] = this.value;
+        }
       }
       return js_data;
     },
@@ -47,6 +49,7 @@
       if (loading_data.hasOwnProperty(this.path)) {
         this.value = loading_data[this.path];
       }
+      this.load
     }
   });
   var js_data = {};
