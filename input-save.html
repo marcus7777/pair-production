@@ -28,17 +28,16 @@
         type:Object
       },
       element: {
-        computed:'saveThis(path,value)',
+        computed:'saveThis(data,path,value)',
         notify:true
       }
     },
     initializeDefault(){
       return {};
     },
-    saveThis (path,value) {
-      this.data[path] = value;
-      console.log(this.data)
-      return this.data;
+    saveThis (data,path,value) {
+      data[path] = value;
+      return data;
     }
   });
 </script>
