@@ -31,8 +31,7 @@
         computed:'saveThis(path,value)'
       }
     },
-    initializeDefault(){
-      data = {};
+    initializeDefault(ev){
       data[this.path] = this.value; 
       return data;
     },
