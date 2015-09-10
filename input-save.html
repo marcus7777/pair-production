@@ -38,12 +38,10 @@
       return data;
     },
     saveThis (path,value) {
-      if (this.data === null) {
-        this.data = {};
-      }
-      this.data[path] = value;
-      console.log(this.data)
-      return this.data;
+      data[path] = value;
+      console.log(data)
+      return data;
     }
   });
+  var data = {};
 </script>
