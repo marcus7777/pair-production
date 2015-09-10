@@ -22,18 +22,15 @@
         path:String,
         value:{
           type:String,
-          observer:"save",
-          notify:true
+          observer:"save"
         },
         options: {
           type: Array,
-          value : ["Null", "Array", "Boolean", "Number", "Object", "String", "Symbol"]
+          value : ["Null", "Array", "Boolean", "Number", "Object", "String", "Symbol", "Function"]
         }
       },
       save (value) {
-        element_kvp[this.path] = value; // this. smell
-        console.log(element_kvp);
-        return element_kvp;
+        js_data[this.path] = value; // this. smell
       },
     });
   })();  
