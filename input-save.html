@@ -37,6 +37,7 @@
         this.data = {};
       }
       this.data[this.path] = ""; 
+      this.loaded = true;
       return data;
     },
     saveThis (path,value) {
@@ -45,19 +46,15 @@
         if (this.data === undefined || this.data === null) {
           this.data = {};
         }
-        if (!this.data.hasOwnProperty(path) || this.data[path] !== value) {
-          if (this.value !== "") {
-            this.data = js_data;
-          }
-        }
+        this.data = js_data;
       }
       return js_data;
     },
     dataChanged(loading_data) {
       if (loading_data !== undefined && loading_data !== null && loading_data.hasOwnProperty(this.path)) {
         this.value = loading_data[this.path];
+        this.loaded = true;
       }
-      this.loaded = true;
     }
   });
   var js_data = {};
