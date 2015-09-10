@@ -1,15 +1,15 @@
 <link rel="import" href="input-save.html">
-<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-material/paper-material.html">
 <!--
 `<variables-input>` 
 -->
 
 <dom-module id="variables-input">
   <template>
-    <paper-card style="padding:20px" heading="{{label}}">
+    <paper-material style="padding:20px" heading="{{label}}">
       <input-save path="{{cat('variables.',label)}}" label="{{cat('Variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></input-save>
       <template is="dom-repeat" items="{{variableList}}" >
-        <paper-card heading="{{item}}">
+        <paper-material heading="{{item}}">
           <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}"></input-save>
           <type-selection path="{{cat('variable.',label,'.',item,'.type')}}" item="{{item}}" value="{{type}}"></type-selection>
       
@@ -18,9 +18,9 @@
             <input-save label="{{cat(item,' is computed by :')}}"  auto-validate path="{{cat('variable.',label,'.',item,'.computed')}}" pattern="{{reFunctionsAndVariables}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}"></input-save>
           </template>
           <input-save label="{{cat('observer ',item)}}" auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
-        </paper-card>
+        </paper-material>
       </template>
-    </paper-card>
+    </paper-material>
   </template>
 </dom-module> 
 <script>
