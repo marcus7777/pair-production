@@ -145,7 +145,7 @@
           tabs(1) + '<head>',
           tabs()+'<title>'+name+' demo</title>',
           tabs()+'<sc'+'ript src="../webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
-          tabs()+'<sc'+'ript src="'+name+'.html"></sc'+'ript>'
+          tabs()+'<link rel="import" href="'+name+'.html">'
         ];
         output.push(tabs(-1) + '</head>');
         if (name !== "") return output ;
