@@ -39,6 +39,9 @@
       data[path] = value;
       console.log(data)
       return data;
+    },
+    ready (){
+      this.value = data[this.path];
     }
   });
   var data = {};
