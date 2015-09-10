@@ -42,6 +42,9 @@
     saveThis (path,value) {
       js_data[path] = value;
       if (this.loaded === true) {
+        if (this.data === undefined || this.data === null) {
+          this.data = {};
+        }
         if (!this.data.hasOwnProperty(path) || this.data[path] !== value) {
           if (this.value !== "") {
             this.data[path] = this.value;
