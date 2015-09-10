@@ -36,10 +36,11 @@
       return {};
     },
     saveThis (data,path,value) {
-      if (data !== null) {
-        data[path] = value;
-        return data;
+      if (data === null) {
+        data = {};
       }
+      data[path] = value;
+      return data;
     }
   });
 </script>
