@@ -6,7 +6,7 @@
 <dom-module id="input-save">
   <template>
     <paper-input label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
-    <iron-localstorage name="{{name}}" value="{{data}}"></iron-localstorage>
+    <iron-localstorage on-iron-localstorage-load-empty="initializeDefault" name="{{name}}" value="{{data}}"></iron-localstorage>
   </template>
 </dom-module>
 <script>
@@ -25,13 +25,16 @@
         notify:true
       },
       data: {
-        type:Object,value:{}
+        type:Object
       },
       element: {
         computed:'saveThis(path,value)',
         notify:true
       }
     },
+    initializeDefault(){
+      return {};
+    }
     saveThis (path,value) {
       this.data[path] = value;
       console.log(this.data)
