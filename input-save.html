@@ -37,12 +37,13 @@
       data[this.path] = this.value; 
       return data;
     },
-    saveThis (data,path,value) {
-      if (data === null) {
-        data = {};
+    saveThis (path,value) {
+      if (this.data === null) {
+        this.data = {};
       }
-      data[path] = value;
-      return data;
+      this.data[path] = value;
+      console.log(this.data)
+      return this.data;
     }
   });
 </script>
