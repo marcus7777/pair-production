@@ -5,7 +5,13 @@
 -->
 <dom-module id="input-save">
   <template>
-    <paper-input label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
+    <template is="dom-if" if="{{!textarea}}">
+      <paper-input label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
+    </template>
+    <template is="dom-if" if="{{textarea}}">
+      <paper-textarea label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-textarea>
+    </template>
+
     <iron-localstorage on-iron-localstorage-load-empty="initializeDefault" name="pair-production" value="{{data}}"></iron-localstorage>
   </template>
 </dom-module>
@@ -16,6 +22,7 @@
     properties: {
       name: String,
       path: String,
+      textarea:Boolean,
       label: String,
       pattern: String,
       autoValidate: Boolean,
