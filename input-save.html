@@ -47,7 +47,7 @@
         }
         if (!this.data.hasOwnProperty(path) || this.data[path] !== value) {
           if (this.value !== "") {
-            this.data[path] = this.value;
+            this.data = js_data;
           }
         }
       }
