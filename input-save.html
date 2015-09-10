@@ -26,6 +26,7 @@
       },
       data: {
         type:Object
+        observer:"dataChanged"
       },
       element: {
         computed:'saveThis(path,value)'
@@ -36,14 +37,18 @@
       return data;
     },
     saveThis (path,value) {
-      data[path] = value;
-      console.log(data);
-      this.data = data;
-      return data;
+      js_data[path] = value;
+      console.log(js_data);
+      return js_data;
     },
     ready (){
-      this.value = data[this.path];
+      this.value = js_data[this.path];
+    },
+    dataChanged(loading_data) {
+      if (!js_data.hasOwnProperty('name')) {
+        js_data = loading_data;
+      }
     }
   });
-  var data = {};
+  var js_data = {};
 </script>
