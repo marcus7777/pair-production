@@ -6,7 +6,7 @@
 
 <dom-module id="variables-input">
   <template>
-    <paper-card heading="{{label}}">
+    <paper-card style="padding:20px" heading="{{label}}">
       <input-save path="{{cat('variables.',label)}}" label="{{cat('Variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></input-save>
       <template is="dom-repeat" items="{{variableList}}" >
         <paper-card heading="{{item}}">
