@@ -38,18 +38,20 @@
     },
     saveThis (path,value) {
       js_data[path] = value;
-      if (!this.data.hasOwnProperty(path) || this.data[path] !== value) {
-        if (this.value !== "") {
-          this.data[path] = this.value;
+      if (this.loaded === true) {
+        if (!this.data.hasOwnProperty(path) || this.data[path] !== value) {
+          if (this.value !== "") {
+            this.data[path] = this.value;
+          }
         }
       }
       return js_data;
     },
     dataChanged(loading_data) {
-      if (loading_data.hasOwnProperty(this.path)) {
+      if (loading_data !== undefined && loading_data !== null && loading_data.hasOwnProperty(this.path)) {
         this.value = loading_data[this.path];
       }
-      this.load
+      this.loaded = true;
     }
   });
   var js_data = {};
