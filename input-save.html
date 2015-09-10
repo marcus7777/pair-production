@@ -33,7 +33,9 @@
       }
     },
     initializeDefault(){
-      return {};
+      data = {};
+      data[this.path] = this.value; 
+      return data;
     },
     saveThis (data,path,value) {
       if (data === null) {
