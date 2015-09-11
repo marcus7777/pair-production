@@ -5,13 +5,20 @@
 -->
 <dom-module id="input-save">
   <template>
-    <template is="dom-if" if="{{!textarea}}">
+    <template is="dom-if" if="{{text}}">
       <paper-input label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
     </template>
     <template is="dom-if" if="{{textarea}}">
       <paper-textarea label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-textarea>
+    </template> 
+    <template is="dom-if" if="{{type}}">
+      <select value="{{value::input}}">
+        <template is="dom-repeat" items="[[options]]">
+          <option value="[[item]]">[[item]]</option>
+        </template>
+      </select>
     </template>
-
+    
     <iron-localstorage on-iron-localstorage-load-empty="initializeDefault" name="pair-production" value="{{data}}"></iron-localstorage>
   </template>
 </dom-module>
@@ -22,7 +29,19 @@
     properties: {
       name: String,
       path: String,
+      options: {
+        type: Array,
+        value : ["Null", "Array", "Boolean", "Number", "Object", "String", "Symbol", "Function"]
+      },
+      text:{
+        type:Boolean,
+        value:true
+      },
       textarea:{
+        type:Boolean,
+        value:false
+      },
+      type:{
         type:Boolean,
         value:false
       },
