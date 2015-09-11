@@ -83,8 +83,8 @@
     dataChanged(loading_data) {
       if ((loading_data !== undefined || loading_data !== null) && loading_data.hasOwnProperty(this.path) && this.value !== loading_data[this.path]) {
         this.value = loading_data[this.path];
-        this.loaded = true;
       }
+      this.loaded = true;
     }
   });
  function clone(obj) {
