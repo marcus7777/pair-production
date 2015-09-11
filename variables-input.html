@@ -6,10 +6,10 @@
 
 <dom-module id="variables-input">
   <template>
-    <paper-material style="padding:20px" heading="{{label}}">
+    <div style="padding:20px"> <h3>{{label}}</h3>
       <input-save path="{{cat('variables.',label)}}" label="{{cat('Variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="a ',' separated list "></input-save>
       <template is="dom-repeat" items="{{variableList}}" >
-        <paper-material heading="{{item}}">
+        <div style="padding:20px"> <h4>{{item}}</h4>
           <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}"></input-save>
           <input-save path="{{cat('variable.',label,'.',item,'.type')}}" value="{{type}}" type ></input-save>
           <input-save label="{{cat('default for ',item)}}" pattern="{{repType}}" auto-validate path="{{cat('variable.',label,'.',item,'.default')}}" error-message="{{cat('needs to be a ',type,' so ', repType)}}" ></input-save>
