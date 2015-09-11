@@ -35,7 +35,7 @@
       },
       text:{
         type:Boolean,
-        value:true
+        computed:"isText(textarea,type)"
       },
       textarea:{
         type:Boolean,
@@ -60,6 +60,9 @@
       element: { // move to observers
         computed:'saveThis(path,value)'
       }
+    },
+    isText(textarea,type){
+      return !textarea && !type;
     },
     initializeDefault(ev){
       if (this.data === undefined) {
