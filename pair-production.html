@@ -36,7 +36,8 @@
     <marked-element markdown="{{markdown}}"></marked-element>
     your docs:
     <!-- <iron-doc-viewer descriptor="{{descriptor}}"></iron-doc-viewer> -->
-    Your demo: 
+    Your demo:
+      <iframe src="{{src}}"></iframe>
   </template>
 </dom-module>
 <script>
@@ -111,7 +112,7 @@
         bower: {
           computed: "getBower(name, dependencylist)"
         },
-        scr: {
+        src: {
           computed: "getSrc(codeiframe)"
         }
       },
