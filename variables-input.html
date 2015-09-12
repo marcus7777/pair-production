@@ -25,7 +25,7 @@
 <script>
   (function () {
     toCamelCase = function(str){
-      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}).split(' ').join('');
+      return str.replace(/ \S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}).split(' ').join('');
     }
     Polymer({
       is: 'variables-input',
