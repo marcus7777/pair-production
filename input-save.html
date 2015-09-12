@@ -5,6 +5,11 @@
 -->
 <dom-module id="input-save">
   <template>
+    <style>
+      :host([code]){
+        font-family: Inconsolata,monospace;
+      }
+    </style>
     <template is="dom-if" if="{{text}}">
       <paper-input label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
     </template>
