@@ -223,7 +223,7 @@
         return 'demo.html\n\n ```html \n'+demo +'\n```\n' + name + '.html\n\n```html \n'+element+'\n``` \nbower.json\n ```\n'+bower+'\n```';
       },
       getCodeiframe(base,demo,element) {
-        return '<base href="+base+">'+demo+element;
+        return '<base href="'+base+'">'+demo+element;
       },
       getSrc(codeiframe){
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
