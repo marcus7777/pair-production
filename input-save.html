@@ -60,14 +60,16 @@
     },
     saveThis (path,value) {
       js_data[path] = value;
-      if (this.loaded === true) {
-        if (this.data === undefined || this.data === null) {
-          this.data = {};
+      this.debounce('save', function() {
+        if (this.loaded === true) {
+          if (this.data === undefined || this.data === null) {
+            this.data = {};
+          }
+          if (this.data[path] !== js_data[path]) {
+            this.data = clone(js_data);
+          }
         }
-        if (this.data[path] !== js_data[path]) {
-          this.data = clone(js_data);
-        }
-      }
+      }, 1000);
       return js_data;
     },
     dataChanged(loading_data) {
