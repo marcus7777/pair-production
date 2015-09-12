@@ -19,27 +19,27 @@
   <template>
     <div class="vertical center-justified layout">
       <h4>Let me help you conjure a new element:</h4>
-        <input-save path="name" label="Name the new element - like pirate-ninja" value="{{name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
-        <template is="dom-if" if="{{name}}">
-          <input-save path="description" textarea value="{{description}}" label="{{cat('Tell me about <', name,'/> element')}}"></input-save>
-          <input-save path="template" code textarea value="{{template}}" label="{{cat('<html> of <', name,'/>')}}"></input-save>
+        <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+        <template is="dom-if" if="{{_name}}">
+          <input-save path="description" textarea value="{{_description}}" label="{{cat('Tell me about <', _name,'/> element')}}"></input-save>
+          <input-save path="template" code textarea value="{{_template}}" label="{{cat('<html> of <', _name,'/>')}}"></input-save>
 
-          <variables-list-input functions="{{functions}}" label="Inputs,Outputs,Internal" path="" name="{{name}}" variables="{{variables}}" ></variables-list-input>   
-          <input-save path="dependencies" code label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\/]*[a-zA-Z\/\,]*[a-zA-Z\/]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-          <input-save path="functions" code label="Give me list of functions it will need" value="{{functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-          <template is="dom-repeat" items="{{functionList}}" >
-            <function-list-input variable-list="{{variableList}}" name="{{item}}"></function-list-input>   
+          <variables-list-input functions="{{_functions}}" label="Inputs,Outputs,Internal" path="" name="{{_name}}" variables="{{variables}}" ></variables-list-input>   
+          <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/]*[a-zA-Z\/\,]*[a-zA-Z\/]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+          <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+          <template is="dom-repeat" items="{{_functionList}}" >
+            <function-list-input variable-list="{{_variableList}}" name="{{item}}"></function-list-input>   
           </template>
       </template>
     </div>
     Your demo:
-    <iframe style="width:100%;border:none" src="{{src}}"></iframe>
-    <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{base}}"></input-save>
+    <iframe style="width:100%;border:none" src="{{_src}}"></iframe>
+    <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
     <prism-highlighter></prism-highlighter>
     your code:
-    <marked-element markdown="{{markdown}}"></marked-element>
+    <marked-element markdown="{{_markdown}}"></marked-element>
     <!-- your docs:
-    <iron-doc-viewer descriptor="{{descriptor}}"></iron-doc-viewer> -->
+    <iron-doc-viewer descriptor="{{_descriptor}}"></iron-doc-viewer> -->
   </template>
 </dom-module>
 <script>
@@ -63,29 +63,29 @@
   Polymer({
       is: 'pair-production',
       properties:{
-        base: {type: String, value: "http://open-elements.org/bower_components/new/"},
-        name: {type: String, value: ""},
-        description: {type: String, value: ""},
-        template: {type:String, value:"<style></style>\n<h2>Demo</h2>"},
-        functions: String,
-        functionList: {computed: "getArray(functions)"},
-        variables : {type:String, value: ""},
-        variableList : {type: Array, computed: "getArray(variables)"},
-        dependencies:{type:String, value: "polymer"},
-        dependencylist: {computed: "getArray(dependencies)"},
-        demo: {computed: "getCode(head,body)"},
-        head: {computed: "getHead(name)"},
-        body: {computed: "getBody(name)"},
-        element: {
-          computed: "getElementCode(name, description, dependencylist, variableList, functionList, template)"
+        _base: {type: String, value: "http://open-elements.org/bower_components/new/"},
+        _name: {type: String, value: ""},
+        _description: {type: String, value: ""},
+        _template: {type:String, value:"<style></style>\n<h2>Demo</h2>"},
+        _functions: String,
+        _functionList: {computed: "_getArray(_functions)"},
+        _variables : {type:String, value: ""},
+        _variableList : {type: Array, computed: "_getArray(_variables)"},
+        _dependencies:{type:String, value: "polymer"},
+        _dependencylist: {computed: "getArray(_dependencies)"},
+        _demo: {computed: "_getCode(_head,_body)"},
+        _head: {computed: "_getHead(_name)"},
+        _body: {computed: "_getBody(_name)"},
+        _element: {
+          computed: "_getElementCode(_name, _description, _dependencylist, _variableList, _functionList, _template)"
         },
-        descriptor: {computed: "getDescriptor(element,demo)"},
-        markdown: {computed: "getMarkdown(demo,element,name,bower)"},
-        codeiframe: {computed: "getCodeiframe(base,demo,element)"},
-        bower: {computed: "getBower(name, dependencylist)"},
-        src: {computed: "getSrc(codeiframe)"}
+        _descriptor: {computed: "_getDescriptor(_element,_demo)"},
+        _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower)"},
+        _codeiframe: {computed: "_getCodeiframe(_base,_demo,_element)"},
+        _bower: {computed: "_getBower(_name, _dependencylist)"},
+        _src: {computed: "_getSrc(_codeiframe)"}
       },
-      getBower(name, dependencylist) { //TODO read and list dependencylist
+      _getBower(name, dependencylist) { //TODO read and list dependencylist
         return addLine([tabs(1)+'{',
         tabs()+'"name": "'+name+'",',
         tabs()+'"version": "1.0.0",',
@@ -96,13 +96,13 @@
         tabs(-1)+']',
         tabs(-1)+'}']);
       },
-      cat (a,b,c) {
+      _cat (a,b,c) {
         return a+b+c;
       },
-      getArray (s) {
+      _getArray (s) {
         return s.split(',');
       },
-      getCode(head,body) {
+      _getCode(head,body) {
         at = 0;
         var output = [
           tabs() + '<!doctype html>',
@@ -117,7 +117,7 @@
         output.push(tabs(-1) + '</html>');
         return addLine(output);
       },
-      getHead(name) {
+      _getHead(name) {
         var output = [
           tabs(1) + '<head>',
           tabs()+'<title>'+name+' demo</title>',
@@ -127,7 +127,7 @@
         output.push(tabs(-1) + '</head>');
         if (name !== "") return output ;
       },
-      getBody(name) {
+      _getBody(name) {
         var output = [
           tabs(1)+ '<body>',
           tabs()+ '<h1>' + name + ' Demo</h1>',
@@ -137,7 +137,7 @@
         
         if (name !== "") return output;
       },
-      getElementCode(name, description, dependencylist, variableList, functionList, template) {
+      _getElementCode(name, description, dependencylist, variableList, functionList, template) {
         var output = [];
         
         output.push(tabs()+ '<!--');
@@ -187,18 +187,18 @@
         }
         return addLine(output); 
       },
-      getDescriptor(element,demo) {
+      _getDescriptor(element,demo) {
         return {
           "desc": "This is an example of how `iron-doc-viewer` will render various types of\ninformation. You can use it as a style guide to see how various data will be\nrepresented. Markdown is used to format descriptive text throughout.\n\n# Level 1 Heading\n\nThis is a level one heading. **Bold text** and *italic text* are represented\nappropriately. [Links](#) have black underlines.\n\n## Level 2 Heading\n\nThis is a level two heading. `inline code` can be represented.\n\n    <html>\n      <p>This is a code block. Its syntax is highlighted automatically.</p>\n    </html>\n\n### Level 3 Heading\n\nLists can also be used as you'd expect:\n\n* Unordered Lists\n  * With Nesting\n* Or without nesting\n\nYou can also use ordered lists:\n\n1. First item\n2. Second item\n\n#### Level 4 Heading\n\nHeadings can be used all the way down to level 5.\n\n##### Level 5 Heading\n\nThis concludes our quick rundown of the various styles that you can commonly use."
         }
       },
-      getMarkdown(demo, element, name, bower) {
+      _getMarkdown(demo, element, name, bower) {
         return 'demo.html\n\n ```html \n'+demo +'\n```\n' + name + '.html\n\n```html \n'+element+'\n``` \nbower.json\n ```\n'+bower+'\n```';
       },
-      getCodeiframe(base,demo,element) {
+      _getCodeiframe(base,demo,element) {
         return '<base href="'+base+'">'+demo+element;
       },
-      getSrc(codeiframe){
+      _getSrc(codeiframe){
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
       }
     });
