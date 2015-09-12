@@ -61,11 +61,15 @@
   Polymer({
       is: 'pair-production',
       properties:{
-        name : {
+        base: {
+          type: String,
+          value: "http://polymer-magic-server.appspot.com/components/new/"
+        },
+        name: {
           type: String,
           value: ""
         },
-        description :{
+        description: {
           type: String,
           value: ""
         },
@@ -107,7 +111,7 @@
           computed: "getMarkdown(demo,element,name,bower)"
         },
         codeiframe: {
-          computed: "getCodeiframe(demo,element)"
+          computed: "getCodeiframe(base,demo,element)"
         },
         bower: {
           computed: "getBower(name, dependencylist)"
@@ -218,8 +222,8 @@
       getMarkdown(demo, element, name, bower) {
         return 'demo.html\n\n ```html \n'+demo +'\n```\n' + name + '.html\n\n```html \n'+element+'\n``` \nbower.json\n ```\n'+bower+'\n```';
       },
-      getCodeiframe(demo,element) {
-        return demo+element;
+      getCodeiframe(base,demo,element) {
+        return '<base href="+base+">'+demo+element;
       },
       getSrc(codeiframe){
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
