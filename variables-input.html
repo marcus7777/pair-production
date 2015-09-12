@@ -64,36 +64,17 @@
         console.log("t",t);
         switch(t) {
            // TODO Symbol
-          case 'Null':
-            return 'Null';
-          break;
-          case 'Array':
-            return '^\\[.*\\]$';
-          break;
-          case 'Boolean':
-            return '(true|false)';
-          break;
-          case 'Number':
-            return '^[0-9\.]*$';
-          break;
-          case 'Object':
-            return '^\{.*\}$';
-          break;
-          case 'String':
-            return '^\".*\"$';
-          break;
-          default:
-            return '';
+          case 'Null': return 'null'; break;
+          case 'Array': return '^\\[.*\\]$';break;
+          case 'Boolean': return '(true|false)';break;
+          case 'Number': return '^[0-9\.]*$';break;
+          case 'Object': return '^\{.*\}$';break;
+          case 'String': return '^\".*\"$';break;
+          default: return '';
         }
       },
-      getReFunctions(functions){
-        console.log("functions",functions);
-        return '(' + functions.replace(/,/g, '|') + ')';
-      },
-      getReFunctionsAndVariables(reFunctions) {
-        console.log("ReFunctionsAndVariables",reFunctions+'\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\)');
-        return reFunctions+'\\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\\)'
-      }
+      getReFunctions(functions){return '(' + functions.replace(/,/g, '|') + ')';},
+      getReFunctionsAndVariables(reFunctions) {return reFunctions+'\\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\\)'}
     });
   })();  
 </script>
