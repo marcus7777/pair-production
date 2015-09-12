@@ -31,29 +31,14 @@
       is: 'variables-input',
       properties:{
         label:String,
-        variables: {
-          type:String,
-          notify:true
-        },
+        variables: {type:String,notify:true},
         type:String,
-        variableList: {
-          computed:"getArray(variables)"
-        },
-        repType: {
-          computed:"getRepType(type)"
-        },
-        computed: {
-          computed:"notInput(label)"
-        },
-        functions:{
-          type:String
-        },
-        reFunctions: {
-          computed:"getReFunctions(functions)"
-        },
-        reFunctionsAndVariables: {
-          computed:"getReFunctionsAndVariables(reFunctions)"
-        }
+        variableList: {computed:"getArray(variables)"},
+        repType: {computed:"getRepType(type)"},
+        computed: {computed:"notInput(label)"},
+        functions:{type:String},
+        reFunctions: {computed:"getReFunctions(functions)"},
+        reFunctionsAndVariables: {computed:"getReFunctionsAndVariables(reFunctions)"}
       },
       notInput (label) {
         return label !== "Inputs"
