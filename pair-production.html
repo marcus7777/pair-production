@@ -97,33 +97,17 @@
         dependencylist: {
           computed: "getArray(dependencies)"
         },
-        demo: {
-          computed: "getCode(head,body)"
-        },
-        head: {
-          computed: "getHead(name)"
-        },
-        body: {
-          computed: "getBody(name)"
-        },
+        demo: {computed: "getCode(head,body)"},
+        head: {computed: "getHead(name)"},
+        body: {computed: "getBody(name)"},
         element: {
           computed: "getElementCode(name, description, dependencylist, variableList, functionList, template)"
         },
-        descriptor: {
-          computed: "getDescriptor(element,demo)"
-        },
-        markdown: {
-          computed: "getMarkdown(demo,element,name,bower)"
-        },
-        codeiframe: {
-          computed: "getCodeiframe(base,demo,element)"
-        },
-        bower: {
-          computed: "getBower(name, dependencylist)"
-        },
-        src: {
-          computed: "getSrc(codeiframe)"
-        }
+        descriptor: {computed: "getDescriptor(element,demo)"},
+        markdown: {computed: "getMarkdown(demo,element,name,bower)"},
+        codeiframe: {computed: "getCodeiframe(base,demo,element)"},
+        bower: {computed: "getBower(name, dependencylist)"},
+        src: {computed: "getSrc(codeiframe)"}
       },
       getBower(name, dependencylist) { //TODO read and list dependencylist
         return addLine([tabs(1)+'{',
@@ -187,7 +171,7 @@
         output.push(tabs(1)+ '<dom-module id="'+name+'">');
         output.push(tabs(1)+ '<template>');
         for (var i = 0; i < template.split('\n').length; ++i) {
-          output.push(tabs()+template.split('\n')[1] );
+          output.push(tabs()+template.split('\n')[i] );
         }
         output.push(tabs(-1)+ '</template>');
         output.push(tabs(-1)+ '</dom-module>');
@@ -199,8 +183,15 @@
           var comma = ","
           for (var i = 0; i < variableList.length; ++i) {
             if (variableList.length -1 === i) comma = "";
+            // do work here
+             
             
-                output.push(tabs(0)+'/** '+element_kvp[variableList[i]]+ '*/' );
+            
+            output.push(tabs(0)+'/** '+element_kvp[variableList[i]]+ '*/' );
+            
+            
+            
+            
             if (element_kvp[variableList[i]] !== undefined){
               output.push(tabs(0) +''+ variableList[i]+':'+element_kvp[variableList[i]]+comma);
             } else {
