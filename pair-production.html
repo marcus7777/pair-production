@@ -34,7 +34,7 @@
     </div>
     Your demo:
     <iframe style="width:100%;border:none" src="{{src}}"></iframe>
-    <input-save value="{{base}}"></input-save>
+    <input-save path="base" value="{{base}}"></input-save>
     <prism-highlighter></prism-highlighter>
     your code:
     <marked-element markdown="{{markdown}}"></marked-element>
@@ -63,41 +63,16 @@
   Polymer({
       is: 'pair-production',
       properties:{
-        base: {
-          type: String,
-          value: "http://polymer-magic-server.appspot.com/components/new/"
-        },
-        name: {
-          type: String,
-          value: ""
-        },
-        description: {
-          type: String,
-          value: ""
-        },
-        template: {
-          type:String,
-          value:"<style></style>\n<h2>Demo</h2>"
-        },
+        base: {type: String, value: "http://open-elements.org/bower_components/new/"},
+        name: {type: String, value: ""},
+        description: {type: String, value: ""},
+        template: {type:String, value:"<style></style>\n<h2>Demo</h2>"},
         functions: String,
-        functionList: {
-          computed: "getArray(functions)"
-        },
-        variables : {
-          type:String,
-          value: ""
-        },
-        variableList : {
-          type: Array,
-          computed: "getArray(variables)"
-        },
-        dependencies:{
-          type:String,
-          value: "polymer"
-        },
-        dependencylist: {
-          computed: "getArray(dependencies)"
-        },
+        functionList: {computed: "getArray(functions)"},
+        variables : {type:String, value: ""},
+        variableList : {type: Array, computed: "getArray(variables)"},
+        dependencies:{type:String, value: "polymer"},
+        dependencylist: {computed: "getArray(dependencies)"},
         demo: {computed: "getCode(head,body)"},
         head: {computed: "getHead(name)"},
         body: {computed: "getBody(name)"},
