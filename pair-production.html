@@ -24,7 +24,7 @@
           <input-save path="description" textarea value="{{_description}}" label="{{cat('Tell me about <', _name,'/> element')}}"></input-save>
           <input-save path="template" code textarea value="{{_domTemplate}}" label="{{cat('<html> of <', _name,'/>')}}"></input-save>
 
-          <variables-list-input functions="{{_functions}}" label="Inputs,Outputs,Internal" path="" name="{{_name}}" variables="{{variables}}" ></variables-list-input>   
+          <variables-list-input functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}" variables="{{variables}}" ></variables-list-input>   
           <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/]*[a-zA-Z\/\,]*[a-zA-Z\/]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <template is="dom-repeat" items="{{_functionList}}" >
@@ -63,21 +63,20 @@
   Polymer({
       is: 'pair-production',
       properties:{
+        _variablesSets: {type: String, value: "Inputs,Outputs,Internal"},
         _base: {type: String, value: "http://open-elements.org/bower_components/new/"},
         _name: {type: String, value: ""},
         _description: {type: String, value: ""},
         _domTemplate: {type:String, value:"<style></style>\n<h2>Demo</h2>"},
         _functions: String,
         _functionList: {computed: "_getArray(_functions)"},
-        _variables : {type:String, value: ""},
-        _variableList : {type: Array, computed: "_getArray(_variables)"},
         _dependencies:{type:String, value: "polymer"},
         _dependencylist: {computed: "getArray(_dependencies)"},
         _demo: {computed: "_getCode(_head,_body)"},
         _head: {computed: "_getHead(_name)"},
         _body: {computed: "_getBody(_name)"},
         _element: {
-          computed: "_getElementCode(_name, _description, _dependencylist, _variableList, _functionList, _domTemplate)"
+          computed: "_getElementCode(_name, _description, _dependencylist, _functionList, _domTemplate)"
         },
         _descriptor: {computed: "_getDescriptor(_element,_demo)"},
         _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower)"},
@@ -157,24 +156,27 @@
           output.push(tabs()+ 'is: "'+name+'",');
           output.push(tabs(1) + 'properties: {');
           var comma = ","
-          for (var i = 0; i < variableList.length; ++i) {
-            if (variableList.length -1 === i) comma = "";
-            // do work here
+          for (var i = 0; i < _variablesSets.split(',').length; ++i) {
+            //load variableList
+            for (var i = 0; i < variableList.length; ++i) {
+              if (variableList.length -1 === i) comma = "";
+              // do work here
              
             
             
-            output.push(tabs(0)+'/** '+element_kvp[variableList[i]]+ '*/' );
+              output.push(tabs(0)+'/** '+element_kvp[variableList[i]]+ '*/' );
             
             
             
             
-            if (element_kvp[variableList[i]] !== undefined){
-              output.push(tabs(0) +''+ variableList[i]+':'+element_kvp[variableList[i]]+comma);
-            } else {
-              output.push(tabs(0) +''+ variableList[i]+comma);
+              if (element_kvp[variableList[i]] !== undefined){
+                output.push(tabs(0) +''+ variableList[i]+':'+element_kvp[variableList[i]]+comma);
+              } else {
+                output.push(tabs(0) +''+ variableList[i]+comma);
+              }
             }
+            output.push(tabs(-1) + '},');
           }
-          output.push(tabs(-1) + '},');
         } else {
           output.push(tabs()+ 'is: "'+name+'"')
         }
