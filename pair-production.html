@@ -22,11 +22,11 @@
         <input-save path="name" label="Name the new element - like pirate-ninja" value="{{name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
         <template is="dom-if" if="{{name}}">
           <input-save path="description" textarea value="{{description}}" label="{{cat('Tell me about <', name,'/> element')}}"></input-save>
-          <input-save path="template" textarea value="{{template}}" label="{{cat('<html> of <', name,'/>')}}"></input-save>
+          <input-save path="template" code textarea value="{{template}}" label="{{cat('<html> of <', name,'/>')}}"></input-save>
 
           <variables-list-input functions="{{functions}}" label="Inputs,Outputs,Internal" path="" name="{{name}}" variables="{{variables}}" ></variables-list-input>   
-          <input-save path="dependencies" label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\/]*[a-zA-Z\/\,]*[a-zA-Z\/]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-          <input-save path="functions" label="Give me list of functions it will need" value="{{functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+          <input-save path="dependencies" code label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\/]*[a-zA-Z\/\,]*[a-zA-Z\/]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+          <input-save path="functions" code label="Give me list of functions it will need" value="{{functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <template is="dom-repeat" items="{{functionList}}" >
             <function-list-input variable-list="{{variableList}}" name="{{item}}"></function-list-input>   
           </template>
