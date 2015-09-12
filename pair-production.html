@@ -22,6 +22,7 @@
         <input-save path="name" label="Name the new element - like pirate-ninja" value="{{name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
         <template is="dom-if" if="{{name}}">
           <input-save path="description" textarea value="{{description}}" label="{{cat('Tell me about <', name,'/> element')}}"></input-save>
+          <input-save path="template" textarea value="{{template}}" label="{{cat('<html> of <', name,'/>')}}"></input-save>
 
           <variables-list-input functions="{{functions}}" label="Inputs,Outputs,Internal" path="" name="{{name}}" variables="{{variables}}" ></variables-list-input>   
           <input-save path="dependencies" label="what are the elements will your element need" value="{{dependencies}}" pattern="[a-zA-Z\/]*[a-zA-Z\/\,]*[a-zA-Z\/]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
@@ -72,6 +73,10 @@
         description: {
           type: String,
           value: ""
+        },
+        template: {
+          type:String,
+          value:"<style></style>\n<h2>Demo</h2>"
         },
         functions: String,
         functionList: {
@@ -173,20 +178,21 @@
         if (name !== "") return output;
       },
       getElementCode(name, description, dependencylist, variableList, functionList) {
-        var output = [
-          tabs()+ '<!--',
-          tabs()+ '`<'+name+'>` ' + description,
-          tabs()+ '@demo demo.html',
-          tabs()+ '-->','',
-          tabs(1)+ '<dom-module id="'+name+'">',
-          tabs(1)+ '<template>',     
-          tabs()+ '<style></style>',
-          tabs()+ '<h2>Hello from '+name+'</h2>',
-          tabs(-1)+ '</template>',
-          tabs(-1)+ '</dom-module>',
-          tabs(1)+ '<sc'+'ript>',
-          tabs(1)+ 'Polymer({'
-        ];
+        var output = [];
+        
+        output.push(tabs()+ '<!--');
+        output.push(tabs()+ '`<'+name+'>` ' + description);
+        output.push(tabs()+ '@demo demo.html');
+        output.push(tabs()+ '-->','');
+        output.push(tabs(1)+ '<dom-module id="'+name+'">');
+        output.push(tabs(1)+ '<template>');
+        for (var i = 0; i < template.split('\n').length; ++i) {
+          output.push(tabs()+template.split('\n')[1] );
+        }
+        output.push(tabs(-1)+ '</template>');
+        output.push(tabs(-1)+ '</dom-module>');
+        output.push(tabs(1)+ '<sc'+'ript>');
+        output.push(tabs(1)+ 'Polymer({');
         if (variableList.length > 0 && variableList[0] !== "") {
           output.push(tabs()+ 'is: "'+name+'",');
           output.push(tabs(1) + 'properties: {');
