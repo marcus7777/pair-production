@@ -106,7 +106,7 @@
           computed: "getMarkdown(demo,element,name,bower)"
         },
         codeiframe: {
-          computed: "getCodeiframe(demo,element,name,bower)"
+          computed: "getCodeiframe(demo,element)"
         },
         bower: {
           computed: "getBower(name, dependencylist)"
@@ -217,7 +217,7 @@
       getMarkdown(demo, element, name, bower) {
         return 'demo.html\n\n ```html \n'+demo +'\n```\n' + name + '.html\n\n```html \n'+element+'\n``` \nbower.json\n ```\n'+bower+'\n```';
       },
-      getCodeiframe(demo,element,name,bower) {
+      getCodeiframe(demo,element) {
         return demo+element;
       },
       getSrc(codeiframe){
