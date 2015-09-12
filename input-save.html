@@ -1,4 +1,5 @@
 <link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
 <!--
 `<input-save>`  
@@ -6,9 +7,7 @@
 <dom-module id="input-save">
   <template>
     <style>
-      :host([code]){
-        font-family: Inconsolata,monospace;
-      }
+      :host([code]){font-family: monospace;}
     </style>
     <template is="dom-if" if="{{text}}">
       <paper-input label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
@@ -38,34 +37,16 @@
         type: Array,
         value : ["Null", "Array", "Boolean", "Number", "Object", "String", "Symbol", "Function"]
       },
-      text: {
-        type:Boolean,
-        computed:"isText(textarea,type)"
-      },
-      code: {
-        type:Boolean,
-        computed:"isText(textarea,type)"
-      },
-      textarea: {
-        type:Boolean,
-        value:false
-      },
-      type: {
-        type:Boolean,
-        value:false
-      },
+      text: {type:Boolean,computed:"isText(textarea,type)"},
+      code: {type:Boolean,computed:"isText(textarea,type)"},
+      textarea: {type:Boolean,value:false},
+      type: {type:Boolean,value:false},
       label: String,
       pattern: String,
       autoValidate: Boolean,
       errorMessage: String,
-      value: {
-        type:String,
-        notify:true
-      },
-      data: {
-        type:Object,
-        observer:"dataChanged"
-      },
+      value: {type:String,notify:true},
+      data: {type:Object,observer:"dataChanged"},
       element: { // move to observers
         computed:'saveThis(path,value)'
       }
