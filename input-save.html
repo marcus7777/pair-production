@@ -38,15 +38,19 @@
         type: Array,
         value : ["Null", "Array", "Boolean", "Number", "Object", "String", "Symbol", "Function"]
       },
-      text:{
+      text: {
         type:Boolean,
         computed:"isText(textarea,type)"
       },
-      textarea:{
+      code: {
+        type:Boolean,
+        computed:"isText(textarea,type)"
+      },
+      textarea: {
         type:Boolean,
         value:false
       },
-      type:{
+      type: {
         type:Boolean,
         value:false
       },
