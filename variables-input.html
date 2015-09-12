@@ -24,6 +24,9 @@
 </dom-module> 
 <script>
   (function () {
+    toCamelCase = function(str){
+      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}).split(' ').join('');
+    }
     Polymer({
       is: 'variables-input',
       properties:{
@@ -70,7 +73,7 @@
         }
       },
       getArray (s) {
-        if (s !== "") return s.split(',');
+        if (s !== "") return toCamelCase(s).split(',');
       },
       getRepType(t) {
         console.log("t",t);
