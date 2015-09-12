@@ -226,7 +226,9 @@
         return '<base href="'+base+'">'+demo+element;
       },
       getSrc(codeiframe){
-        return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
+        var page = 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
+        var source = 'view-source:' + page;
+        return source;
       }
     });
   })();
