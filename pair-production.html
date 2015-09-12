@@ -36,6 +36,7 @@
     <marked-element markdown="{{markdown}}"></marked-element>
     your docs:
     <!-- <iron-doc-viewer descriptor="{{descriptor}}"></iron-doc-viewer> -->
+    Your demo: 
   </template>
 </dom-module>
 <script>
@@ -209,7 +210,15 @@
       },
       getMarkdown(demo, element, name, bower) {
         return 'demo.html\n\n ```html \n'+demo +'\n```\n' + name + '.html\n\n```html \n'+element+'\n``` \nbower.json\n ```\n'+bower+'\n```';
-      }
+      },
+      getSrc(codeiframe){
+         return 'data:text/html;charset=utf-8,' +
+    encodeURIComponent( // Escape for URL formatting
+        '<!DOCTYPE html>'+
+        '<html lang="en">'+
+        '<head><title>Embedded Window</title></head>'+
+        '<body><h1>42</h1></body>'+
+        '</html>')
     });
   })();
 </script>
