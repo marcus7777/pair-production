@@ -107,7 +107,7 @@
           computed: "getBody(name)"
         },
         element: {
-          computed: "getElementCode(name, description, dependencylist, variableList, functionList)"
+          computed: "getElementCode(name, description, dependencylist, variableList, functionList, template)"
         },
         descriptor: {
           computed: "getDescriptor(element,demo)"
@@ -177,7 +177,7 @@
         
         if (name !== "") return output;
       },
-      getElementCode(name, description, dependencylist, variableList, functionList) {
+      getElementCode(name, description, dependencylist, variableList, functionList, template) {
         var output = [];
         
         output.push(tabs()+ '<!--');
