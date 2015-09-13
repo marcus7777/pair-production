@@ -1,5 +1,4 @@
 <link rel="import" href="input-save.html">
-<link rel="import" href="../paper-material/paper-material.html">
 <!--
 `<variables-input>` 
 -->
@@ -17,9 +16,9 @@
             <input-save label="{{cat(item,' is computed by :')}}"  auto-validate path="{{cat('variable.',label,'.',item,'.computed')}}" pattern="{{reFunctionsAndVariables}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}" changed="{{changed}}"></input-save>
           </template>
           <input-save label="{{cat('observer ',item)}}" auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}" changed="{{changed}}"></input-save>
-        </paper-material>
+        </div>
       </template>
-    </paper-material>
+    </div>
   </template>
 </dom-module> 
 <script>
