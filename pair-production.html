@@ -71,7 +71,7 @@
         _functions: String,
         _functionList: {computed: "_getArray(_functions)"},
         _dependencies:{type:String, value: "polymer"},
-        _dependencylist: {computed: "getArray(_dependencies)"},
+        _dependencylist: {computed: "_getArray(_dependencies)"},
         _demo: {computed: "_getCode(_head,_body)"},
         _head: {computed: "_getHead(_name)"},
         _body: {computed: "_getBody(_name)"},
