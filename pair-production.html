@@ -26,6 +26,7 @@
           <input-save path="template" code textarea value="{{_domTemplate}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
           <variables-list-input functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
           <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/]*[a-zA-Z\/\,]*[a-zA-Z\/]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+          <p>Have you included <span>{{_domTemplateDependencies}}</span> ?</p>
           <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <template is="dom-repeat" items="{{_functionList}}" >
             <function-list-input variable-list="{{_variableList}}" name="{{item}}"></function-list-input>   
@@ -71,6 +72,7 @@
         _functions: String,
         _functionList: {computed: "_getArray(_functions)"},
         _dependencies:{type:String, value: "polymer"},
+        _domTemplateDependencies:{computed:"_getDomTemplateDependencies(_domTemplate)"},
         _dependencylist: {computed: "_getArray(_dependencies)"},
         _demo: {computed: "_getCode(_head,_body)"},
         _head: {computed: "_getHead(_name)"},
@@ -214,7 +216,8 @@
       _getSrc(codeiframe){
         console.log("_getSrc(",codeiframe)
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
-      }
+      },
+      _getDomTemplateDependencies(domTemplate) {return '('+domTemplate.match(/<([a-z]*[-].*)>/).join('|')+')'}
     });
   })();
 </script>
