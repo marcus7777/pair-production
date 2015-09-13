@@ -77,19 +77,20 @@
         _domTemplateDependencies:{computed:"_getDomTemplateDependencies(_domTemplate)"},
         _dependencylist: {computed: "_getArray(_dependencies)"},
         _demo: {computed: "_getCode(_head,_body)"},
+        _iframeDemo: {computed: "_getCode(_iframeHead,_body)"},
         _head: {computed: "_getHead(_name)"},
+        _iframeHead: {computed: "_getIframeHead(_base,name)"},
         _body: {computed: "_getBody(_name)"},
         _element: {
           computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets)"
         },
         _descriptor: {computed: "_getDescriptor(_element,_demo)"},
         _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower)"},
-        _codeiframe: {computed: "_getCodeiframe(_base,_demo,_element)"},
+        _codeiframe: {computed: "_getCodeiframe(_iframeDemo,_element)"},
         _bower: {computed: "_getBower(_name, _dependencylist)"},
         _src: {computed: "_getSrc(_codeiframe)"}
       },
       _getBower(name, dependencylist) { //TODO read and list dependencylist
-        console.log("_getBower(",name, dependencylist);
         return addLine([tabs(1)+'{',
         tabs()+'"name": "'+name+'",',
         tabs()+'"version": "1.0.0",',
@@ -101,15 +102,12 @@
         tabs(-1)+'}']);
       },
       _cat (a,b,c) {
-        console.log("_cat(",a,b,c);
         return a+b+c;
       },
       _getArray (s) {
-        console.log("_getArray (",s)
         return s.split(',');
       },
       _getCode(head,body) {
-        console.log("_getCode(",head,body)
         at = 0;
         var output = [
           tabs() + '<!doctype html>',
@@ -125,18 +123,26 @@
         return addLine(output);
       },
       _getHead(name) {
-        console.log("_getHead(",name)
         var output = [
           tabs(1) + '<head>',
           tabs()+'<title>'+name+' demo</title>',
           tabs()+'<sc'+'ript src="../webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
-          tabs()+'<link rel="import" href="'+name+'.html">'
+          tabs()+'<link rel="import" href="'+name+'.html">',
+          tabs(-1) + '</head>'
         ];
-        output.push(tabs(-1) + '</head>');
+        if (name !== "") return output ;
+      },
+      _getIframeHead(_base,name) {
+        var output = [
+          tabs(1) + '<head>',
+          '<base href="'+base+'">',
+          tabs()+'<title>'+name+' demo</title>',
+          tabs()+'<sc'+'ript src="../webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
+          tabs(-1) + '</head>'
+        ];
         if (name !== "") return output ;
       },
       _getBody(name) {
-        console.log("_getBody(",name)
         var output = [
           tabs(1)+ '<body>',
           tabs()+ '<h1>' + name + ' Demo</h1>',
@@ -208,15 +214,12 @@
         }
       },
       _getMarkdown(demo, element, name, bower) {
-        console.log("_getMarkdown(",demo, element, name, bower)
         return 'demo.html\n\n ```html \n'+demo +'\n```\n' + name + '.html\n\n```html \n'+element+'\n``` \nbower.json\n ```\n'+bower+'\n```';
       },
-      _getCodeiframe(base,demo,element) {
-        console.log("_getCodeiframe(",base,demo,element)
-        return '<base href="'+base+'">'+demo+element;
+      _getCodeiframe(iframeDemo,element) {
+        return iframeDemo+element;
       },
       _getSrc(codeiframe){
-        console.log("_getSrc(",codeiframe)
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
       },
       _getDomTemplateDependencies(domTemplate) {
