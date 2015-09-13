@@ -39,6 +39,7 @@
       },
       text: {type:Boolean,computed:"isText(textarea,type)"},
       code: {type:Boolean,computed:"isText(textarea,type)"},
+      changed: {type:Boolean,notify:true,value:false},
       textarea: {type:Boolean,value:false},
       type: {type:Boolean,value:false},
       label: String,
@@ -67,6 +68,7 @@
           }
           if (this.data[path] !== js_data[path]) {
             this.data = clone(js_data);
+            this.changed = true
           }
         }
       }, 3000);
