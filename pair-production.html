@@ -228,6 +228,9 @@
         var m;
  
         while ((m = re.exec(domTemplate)) !== null) {
+          if (m.index === re.lastIndex) {
+            re.lastIndex++;
+          }
           if (dependencies.indexOf(m[1]) === -1) {
             output.push(m[1]);
           }
