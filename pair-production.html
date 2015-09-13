@@ -24,7 +24,7 @@
         <template is="dom-if" if="{{_name}}">
           <input-save path="description" textarea value="{{_description}}" label="{{_cat('Tell me about <', _name,'/> element')}}"></input-save>
           <input-save path="template" code textarea value="{{_domTemplate}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
-          <variables-list-input functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
+          <variables-list-input changed={{changed}} functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
           <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/-]*[a-zA-Z\/\,-]*[a-zA-Z\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <template is="dom-if" if="{{_domTemplateDependencies.length}}">
             <p>Have you included <span>{{_domTemplateDependencies}}</span> ?</p>
@@ -82,13 +82,14 @@
         _iframeHead: {computed: "_getIframeHead(_base,_name)"},
         _body: {computed: "_getBody(_name)"},
         _element: {
-          computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets)"
+          computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed)"
         },
         _descriptor: {computed: "_getDescriptor(_element,_demo)"},
         _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower)"},
         _codeiframe: {computed: "_getCodeiframe(_iframeDemo,_element)"},
         _bower: {computed: "_getBower(_name, _dependencylist)"},
         _src: {computed: "_getSrc(_codeiframe)"}
+        changed: {type:Boolean,notify:true,value:false},
       },
       _getBower(name, dependencylist) { //TODO read and list dependencylist
         return addLine([tabs(1)+'{',
@@ -152,7 +153,7 @@
         
         if (name !== "") return output;
       },
-      _getElementCode(name, description, dependencylist, template, variablesSets) {
+      _getElementCode(name, description, dependencylist, template, variablesSets, changed) {
         var output = [];
         
         output.push(tabs()+ '<!--');
