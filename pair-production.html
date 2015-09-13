@@ -76,7 +76,7 @@
         _head: {computed: "_getHead(_name)"},
         _body: {computed: "_getBody(_name)"},
         _element: {
-          computed: "_getElementCode(_name, _description, _dependencylist, _functionList, _domTemplate, variablesSets)"
+          computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets)"
         },
         _descriptor: {computed: "_getDescriptor(_element,_demo)"},
         _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower)"},
@@ -142,7 +142,7 @@
         
         if (name !== "") return output;
       },
-      _getElementCode(name, description, dependencylist, functionList, template, variablesSets) {
+      _getElementCode(_name, description, dependencylist, domTemplate, variablesSets) {
         console.log("_getElementCode(",name, description, dependencylist, functionList, template, variablesSets)
         var output = [];
         
