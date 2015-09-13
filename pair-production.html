@@ -26,7 +26,7 @@
           <input-save path="template" code textarea value="{{_domTemplate}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
           <variables-list-input functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
           <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/-]*[a-zA-Z\/\,-]*[a-zA-Z\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-          <template is="dom-if" if="{{_domTemplateDependencies}}">
+          <template is="dom-if" if="{{_domTemplateDependencies.length}}">
             <p>Have you included <span>{{_domTemplateDependencies}}</span> ?</p>
           </template>
           <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
