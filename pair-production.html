@@ -158,10 +158,10 @@
         output.push(tabs(-1)+ '</dom-module>');
         output.push(tabs(1)+ '<sc'+'ript>');
         output.push(tabs(1)+ 'Polymer({');
-        if (variableList.length > 0 && variableList[0] !== "") {
-          output.push(tabs()+ 'is: "'+name+'",');
-          output.push(tabs(1) + 'properties: {');
-          var comma = ","
+        //if (variableList.length > 0 && variableList[0] !== "") {
+        //  output.push(tabs()+ 'is: "'+name+'",');
+        //  output.push(tabs(1) + 'properties: {');
+        //  var comma = ","
           for (var i = 0; i < variablesSets.split(',').length; ++i) {
             
             console.log("_getElementCode 168 ",variablesSets[i])
@@ -183,11 +183,11 @@
               //  output.push(tabs(0) +''+ variableList[i]+comma);
               //}
             //}
-            output.push(tabs(-1) + '},');
+        //    output.push(tabs(-1) + '},');
           }
-        } else {
+        //} else {
           output.push(tabs()+ 'is: "'+name+'"')
-        }
+        //}
         
         output.push(tabs(-1) + '});');
         output.push(tabs(-1) + '</sc'+'ript>');
