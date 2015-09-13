@@ -68,7 +68,7 @@
           }
           if (this.data[path] !== js_data[path]) {
             this.data = clone(js_data);
-            this.changed = true
+            this.changed = !this.changed ;
           }
         }
       }, 3000);
