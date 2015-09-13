@@ -1,9 +1,10 @@
-<link rel="import" href="../paper-input/paper-textarea.html">
-<link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../iron-doc-viewer/iron-doc-viewer.html">
 <link rel="import" href="../prism-element/prism-highlighter.html">
 <link rel="import" href="../marked-element/marked-element.html">
+
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-card/paper-card.html">
 
 <link rel="import" href="variables-list-input.html">
 <link rel="import" href="function-list-input.html">
@@ -84,6 +85,7 @@
         _src: {computed: "_getSrc(_codeiframe)"}
       },
       _getBower(name, dependencylist) { //TODO read and list dependencylist
+        console.log("_getBower(",name, dependencylist);
         return addLine([tabs(1)+'{',
         tabs()+'"name": "'+name+'",',
         tabs()+'"version": "1.0.0",',
@@ -95,12 +97,15 @@
         tabs(-1)+'}']);
       },
       _cat (a,b,c) {
+        console.log("_cat(",a,b,c);
         return a+b+c;
       },
       _getArray (s) {
+        console.log("_getArray (",s)
         return s.split(',');
       },
       _getCode(head,body) {
+        console.log("_getCode(",head,body)
         at = 0;
         var output = [
           tabs() + '<!doctype html>',
@@ -116,6 +121,7 @@
         return addLine(output);
       },
       _getHead(name) {
+        console.log("_getHead(",name)
         var output = [
           tabs(1) + '<head>',
           tabs()+'<title>'+name+' demo</title>',
@@ -126,6 +132,7 @@
         if (name !== "") return output ;
       },
       _getBody(name) {
+        console.log("_getBody(",name)
         var output = [
           tabs(1)+ '<body>',
           tabs()+ '<h1>' + name + ' Demo</h1>',
@@ -136,6 +143,7 @@
         if (name !== "") return output;
       },
       _getElementCode(name, description, dependencylist, variableList, functionList, template) {
+        console.log("_getElementCode(",name, description, dependencylist, variableList, functionList, template)
         var output = [];
         
         output.push(tabs()+ '<!--');
@@ -189,17 +197,21 @@
         return addLine(output); 
       },
       _getDescriptor(element,demo) {
+        console.log("_getDescriptor(",element,demo)
         return {
           "desc": "This is an example of how `iron-doc-viewer` will render various types of\ninformation. You can use it as a style guide to see how various data will be\nrepresented. Markdown is used to format descriptive text throughout.\n\n# Level 1 Heading\n\nThis is a level one heading. **Bold text** and *italic text* are represented\nappropriately. [Links](#) have black underlines.\n\n## Level 2 Heading\n\nThis is a level two heading. `inline code` can be represented.\n\n    <html>\n      <p>This is a code block. Its syntax is highlighted automatically.</p>\n    </html>\n\n### Level 3 Heading\n\nLists can also be used as you'd expect:\n\n* Unordered Lists\n  * With Nesting\n* Or without nesting\n\nYou can also use ordered lists:\n\n1. First item\n2. Second item\n\n#### Level 4 Heading\n\nHeadings can be used all the way down to level 5.\n\n##### Level 5 Heading\n\nThis concludes our quick rundown of the various styles that you can commonly use."
         }
       },
       _getMarkdown(demo, element, name, bower) {
+        console.log("_getMarkdown("demo, element, name, bower)
         return 'demo.html\n\n ```html \n'+demo +'\n```\n' + name + '.html\n\n```html \n'+element+'\n``` \nbower.json\n ```\n'+bower+'\n```';
       },
       _getCodeiframe(base,demo,element) {
+        console.log("_getCodeiframe(",base,demo,element)
         return '<base href="'+base+'">'+demo+element;
       },
       _getSrc(codeiframe){
+        console.log("_getSrc(",codeiframe)
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
       }
     });
