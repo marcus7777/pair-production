@@ -223,24 +223,17 @@
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
       },
       _getDomTemplateDependencies(domTemplate) {
-        var list = domTemplate.match(/(?:<)([a-z]*[-][a-z]*)(?:>)/gi);
-        if (list) {
-          return '('+list.getUnique().join('|')+')';
-        } else {
-          return false;
+        var re = /(?:<\/)([a-z]*-[a-z]*)(?:>)/gi; 
+        var output = []
+        var m;
+ 
+        while ((m = re.exec(domTemplate)) !== null) {
+          if (domTemplate.indexOf(m[1]) === -1) {
+            output.push(m[1]);
+          }
         }
+        return output;
       }
     });
   })();
-  Array.prototype.getUnique = function(){
-   var u = {}, a = [];
-   for(var i = 0, l = this.length; i < l; ++i){
-      if(u.hasOwnProperty(this[i])) {
-         continue;
-      }
-      a.push(this[i]);
-      u[this[i]] = 1;
-   }
-   return a;
-}
 </script>
