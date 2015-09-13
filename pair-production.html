@@ -76,7 +76,7 @@
         _head: {computed: "_getHead(_name)"},
         _body: {computed: "_getBody(_name)"},
         _element: {
-          computed: "_getElementCode(_name, _description, _dependencylist, _functionList, _domTemplate)"
+          computed: "_getElementCode(_name, _description, _dependencylist, _functionList, _domTemplate, variablesSets)"
         },
         _descriptor: {computed: "_getDescriptor(_element,_demo)"},
         _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower)"},
@@ -142,8 +142,8 @@
         
         if (name !== "") return output;
       },
-      _getElementCode(name, description, dependencylist, functionList, template) {
-        console.log("_getElementCode(",name, description, dependencylist, functionList, template)
+      _getElementCode(name, description, dependencylist, functionList, template, variablesSets) {
+        console.log("_getElementCode(",name, description, dependencylist, functionList, template, variablesSets)
         var output = [];
         
         output.push(tabs()+ '<!--');
@@ -163,25 +163,27 @@
           output.push(tabs()+ 'is: "'+name+'",');
           output.push(tabs(1) + 'properties: {');
           var comma = ","
-          for (var i = 0; i < _variablesSets.split(',').length; ++i) {
+          for (var i = 0; i < variablesSets.split(',').length; ++i) {
+            
+            console.log("_getElementCode 168 ",variablesSets[i])
             //load variableList
-            for (var i = 0; i < variableList.length; ++i) {
-              if (variableList.length -1 === i) comma = "";
+            //for (var i = 0; i < variableList.length; ++i) {
+              //if (variableList.length -1 === i) comma = "";
               // do work here
              
             
             
-              output.push(tabs(0)+'/** '+element_kvp[variableList[i]]+ '*/' );
+              //output.push(tabs(0)+'/** '+element_kvp[variableList[i]]+ '*/' );
             
             
             
             
-              if (element_kvp[variableList[i]] !== undefined){
-                output.push(tabs(0) +''+ variableList[i]+':'+element_kvp[variableList[i]]+comma);
-              } else {
-                output.push(tabs(0) +''+ variableList[i]+comma);
-              }
-            }
+              //if (element_kvp[variableList[i]] !== undefined){
+              //  output.push(tabs(0) +''+ variableList[i]+':'+element_kvp[variableList[i]]+comma);
+              //} else {
+              //  output.push(tabs(0) +''+ variableList[i]+comma);
+              //}
+            //}
             output.push(tabs(-1) + '},');
           }
         } else {
