@@ -222,7 +222,7 @@
       _getDomTemplateDependencies(domTemplate) {
         var list = domTemplate.match(/<([a-z]*[-].*)>/);
         if (list) {
-          return '('+domTemplate.match(/<([a-z]*[-].*)>/).getUnique().join('|')+')';
+          return '('+domTemplate.match(/<([a-z]*[-][a-z]*)>/).getUnique().join('|')+')';
         } else {
           return false;
         }
