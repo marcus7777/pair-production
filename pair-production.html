@@ -88,8 +88,8 @@
         _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower)"},
         _codeiframe: {computed: "_getCodeiframe(_iframeDemo,_element)"},
         _bower: {computed: "_getBower(_name, _dependencylist)"},
-        _src: {computed: "_getSrc(_codeiframe)"}
-        changed: {type:Boolean,notify:true,value:false},
+        _src: {computed: "_getSrc(_codeiframe)"},
+        changed: {type:Boolean,notify:true,value:false}
       },
       _getBower(name, dependencylist) { //TODO read and list dependencylist
         return addLine([tabs(1)+'{',
