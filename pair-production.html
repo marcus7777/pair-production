@@ -36,7 +36,7 @@
       </template>
     </div>
     Your demo:
-    <iframe style="width:100%;border:none" src="{{_src}}"></iframe>
+    <iframe sandbox="allow-scripts" style="width:100%;border:none" src="{{_src}}"></iframe>
     <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
     <prism-highlighter></prism-highlighter>
     your code:
