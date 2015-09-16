@@ -6,9 +6,6 @@
 -->
 <dom-module id="input-save">
   <template>
-    <style>
-      :host([code]){font-family: monospace;}
-    </style>
     <template is="dom-if" if="{{text}}">
       <paper-input label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
     </template>
@@ -22,7 +19,9 @@
         </template>
       </select>
     </template>
-    
+    <template if="{{code}}>">
+      <juicy-ace-editor theme="ace/theme/monokai" mode="ace/mode/html">{{value}}</juicy-ace-editor>
+    </template> 
     <iron-localstorage on-iron-localstorage-load-empty="initializeDefault" name="pair-production" value="{{data}}"></iron-localstorage>
   </template>
 </dom-module>
@@ -52,14 +51,14 @@
         computed:'saveThis(path,value)'
       }
     },
-    isText(textarea,type){
+    isText: function(textarea,type){
       return !textarea && !type;
     },
-    initializeDefault(ev){
+    initializeDefault: function(ev){
       this.loaded = true;
       this.data = js_data;
     },
-    saveThis (path,value) {
+    saveThis:  function(path,value) {
       js_data[path] = value;
       this.debounce('save', function() {
         if (this.loaded === true) {
@@ -74,9 +73,11 @@
       }, 3000);
       return js_data;
     },
-    dataChanged(loading_data) {
-      if ((loading_data !== undefined || loading_data !== null) && loading_data.hasOwnProperty(this.path) && this.value !== loading_data[this.path]) {
-        this.value = loading_data[this.path];
+    dataChanged: function(loading_data) {
+      if (loading_data !== undefined || loading_data !== null){ 
+        if (loading_data.hasOwnProperty(this.path) && this.value !== loading_data[this.path]) {
+          this.value = loading_data[this.path];
+        }
       }
       this.loaded = true;
     }

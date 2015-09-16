@@ -23,12 +23,12 @@
 </dom-module> 
 <script>
   toCamelCase = function(str){
-    return str.replace(/  /g,' ').replace(/, /g,',').replace(/ \S/g, function(txt){return txt.toUpperCase()[1]});
-  }
-  (function () {
-    toCamelCase = function(str){
+    if (str.hasOwnProperty("replace")) {
       return str.replace(/  /g,' ').replace(/, /g,',').replace(/ \S/g, function(txt){return txt.toUpperCase()[1]});
+    } else {
+      return "";
     }
+  }
     Polymer({
       is: 'variables-input',
       properties:{
@@ -43,10 +43,10 @@
         reFunctions: {computed:"getReFunctions(functions)"},
         reFunctionsAndVariables: {computed:"getReFunctionsAndVariables(reFunctions)"}
       },
-      notInput (label) {
+      notInput: function(label) {
         return label !== "Inputs"
       },
-      cat (a,b,c,d,e,f) {
+      cat : function(a,b,c,d,e,f) {
         console.log(a,b,c,d,e,f);
         if (c === undefined) {
           return a+b;
@@ -60,24 +60,23 @@
           return a+b+c+d+e+f;
         }
       },
-      getArray (s) {
+      getArray:  function(s) {
         if (s !== "") return toCamelCase(s).split(',');
       },
-      getRepType(t) {
+      getRepType: function(t) {
         console.log("t",t);
         switch(t) {
            // TODO Symbol Functions
-          case 'Null': return 'null'; break;
-          case 'Array': return '^\\[.*\\]$';break;
-          case 'Boolean': return '(true|false)';break;
-          case 'Number': return '^[0-9\.]*$';break;
-          case 'Object': return '^\{.*\}$';break;
-          case 'String': return '^\".*\"$';break;
-          default: return '';
+          case 'Null': return 'null';
+          case 'Array': return '^\\[.*\\]$';
+          case 'Boolean': return '(true|false)';
+          case 'Number': return '^[0-9\.]*$';
+          case 'Object': return '^\{.*\}$';
+          case 'String': return '^\".*\"$';
+          default: return '';break;
         }
       },
-      getReFunctions(functions){return '(' + functions.replace(/,/g, '|') + ')';},
-      getReFunctionsAndVariables(reFunctions) {return reFunctions+'\\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\\)'}
+      getReFunctions: function(functions){return '(' + functions.replace(/,/g, '|') + ')';},
+      getReFunctionsAndVariables: function(reFunctions) {return reFunctions+'\\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\\)'}
     });
-  })();  
 </script>
