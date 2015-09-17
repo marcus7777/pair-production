@@ -21,7 +21,7 @@
   </template>
 </dom-module> 
 <script>
-  toCamelCase = function(str){
+  var toCamelCase = function(str){
     if (str.hasOwnProperty("replace")) {
       return str.replace(/  /g,' ').replace(/, /g,',').replace(/ \S/g, function(txt){return txt.toUpperCase()[1]});
     } else {
