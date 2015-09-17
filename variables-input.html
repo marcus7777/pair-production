@@ -28,6 +28,8 @@
       return false;
     }
   }
+  (function() {
+  'use strict';
     Polymer({
       is: 'variables-input',
       properties:{
@@ -78,4 +80,5 @@
       getReFunctions: function(functions){return '(' + functions.replace(/,/g, '|') + ')';},
       getReFunctionsAndVariables: function(reFunctions) {return reFunctions+'\\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\\)'}
     });
+  });
 </script>
