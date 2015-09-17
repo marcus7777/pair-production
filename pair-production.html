@@ -5,6 +5,7 @@
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../qr-code/qr-code.html">
 
 <link rel="import" href="variables-list-input.html">
 <link rel="import" href="function-list-input.html">
@@ -37,6 +38,7 @@
     </div>
     Your demo:
     <iframe sandbox="allow-scripts" style="width:100%;border:none" src="{{_src}}"></iframe>
+    <!-- <qr-code type-number="34" title="Demo" id="tip" value="{{_src}}" error-correct-level="H"></qr-code> --> 
     <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
     <prism-highlighter></prism-highlighter>
     your code:
@@ -62,7 +64,7 @@
   var addLine = function(nl){
     return nl.join('\n');
   };
-  
+
   Polymer({
       is: 'pair-production',
       properties:{
@@ -178,7 +180,10 @@
             var set = variablesSets.split(',')[i];
             if (js_data !== undefined || js_data !== null){
               if (js_data.hasOwnProperty("variables."+set)){
-                var varsList = toCamelCase(js_data["variables."+set]).split(',');
+                var varsList = toCamelCase(js_data["variables."+set])
+                if (varsList) {
+                  varsList = varsList.split(',');
+                }
                 console.log("_getElementCode 182 ",varsList);
                 
                 //  make variableList
