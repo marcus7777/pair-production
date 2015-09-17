@@ -1,4 +1,3 @@
-<link rel="import" href="../juicy-ace-editor/juicy-ace-editor.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
@@ -20,9 +19,6 @@
         </template>
       </select>
     </template>
-    <template if="{{code}}>">
-      <juicy-ace-editor theme="ace/theme/monokai" mode="ace/mode/html">{{value}}</juicy-ace-editor>
-    </template> 
     <iron-localstorage on-iron-localstorage-load-empty="initializeDefault" name="pair-production" value="{{data}}"></iron-localstorage>
   </template>
 </dom-module>
