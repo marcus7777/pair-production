@@ -1,9 +1,6 @@
 <dom-module id="variables-list-input">
   <template>
     <template is="dom-repeat" items="{{labelList}}" >
-      <h3>{{item}}</h3>
-      <input-save path="{{cat('variables.',item)}}" label="{{cat('Variables for ',item)}}" value="{{variables}}" pattern="[a-zA-Z ]*[a-zA-Z \,]*[a-zA-Z ]+" auto-validate  error-message="a ',' separated list " changed="{{changed}}"></input-save>
-      
       <variables-input changed="{{changed}}" functions="{{functions}}" label="{{item}}"></variables-input>
     </template>
   </template>
