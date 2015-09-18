@@ -6,7 +6,7 @@
   <template>
     <div style="padding:20px"> <h3>{{label}}</h3>
       <input-save path="{{cat('variables.',label)}}" label="{{cat('Variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z ]*[a-zA-Z \,]*[a-zA-Z ]+" auto-validate  error-message="a ',' separated list " changed="{{changed}}"></input-save>
-<!--      <template is="dom-repeat" items="{{variableList}}" >
+      <template is="dom-repeat" items="{{variableList}}">
         <div style="padding:20px"> <h4>{{item}}</h4>
           <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}" changed="{{changed}}"></input-save>
           <input-save path="{{cat('variable.',label,'.',item,'.type')}}" value="{{type}}" type changed="{{changed}}"></input-save>
@@ -16,7 +16,7 @@
           </template>
           <input-save label="{{cat('observer ',item)}}" auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}" changed="{{changed}}"></input-save>
         </div>
-      </template> -->
+      </template>
     </div>
   </template>
 </dom-module> 
