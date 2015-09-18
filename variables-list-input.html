@@ -2,6 +2,8 @@
   <template>
     <template is="dom-repeat" items="{{labelList}}" >
       <h3>{{item}}</h3>
+      <input-save path="{{cat('variables.',item)}}" label="{{cat('Variables for ',item)}}" value="{{variables}}" pattern="[a-zA-Z ]*[a-zA-Z \,]*[a-zA-Z ]+" auto-validate  error-message="a ',' separated list " changed="{{changed}}"></input-save>
+      
       <variables-input changed="{{changed}}" functions="{{functions}}" label="{{item}}"></variables-input>
     </template>
   </template>
@@ -25,6 +27,20 @@
         functions : String,
         labelList:{
           computed:"getArray(label)"
+        }
+      },      
+      cat : function(a,b,c,d,e,f) {
+        console.log(a,b,c,d,e,f);
+        if (c === undefined) {
+          return a+b;
+        } else if (d === undefined) {
+          return a+b+c;
+        } else if (e === undefined) {
+          return a+b+c+d;
+        } else if (f === undefined) {
+          return a+b+c+d+e;
+        } else {
+          return a+b+c+d+e+f;
         }
       },
       getArray: function(s) {
