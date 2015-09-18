@@ -7,7 +7,7 @@
 </dom-module> 
 <script>
   var toCamelCase = function(str){
-    if (str.hasOwnProperty("replace")) {
+    if (typeof str === "string") {
       return str.replace(/  /g,' ').replace(/, /g,',').replace(/ \S/g, function(txt){return txt.toUpperCase()[1]});
     } else {
       return false;
