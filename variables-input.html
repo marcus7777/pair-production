@@ -67,12 +67,12 @@
         console.log("t",t);
         switch(t) {
            // TODO Symbol Functions
-          case 'Null': return 'null';
-          case 'Array': return '^\\[.*\\]$';
-          case 'Boolean': return '(true|false)';
-          case 'Number': return '^[0-9\.]*$';
-          case 'Object': return '^\{.*\}$';
-          case 'String': return '^\".*\"$';
+          case 'Null': return 'null';break;
+          case 'Array': return '^\\[.*\\]$';break;
+          case 'Boolean': return '(true|false)';break;
+          case 'Number': return '^[0-9\.]*$';break;
+          case 'Object': return '^\{.*\}$';break;
+          case 'String': return '^\".*\"$';break;
           default: return '';break;
         }
       },
