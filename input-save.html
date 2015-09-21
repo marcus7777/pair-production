@@ -12,8 +12,8 @@
     <template is="dom-if" if="{{textarea}}">
       <paper-textarea label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-textarea>
     </template> 
-    <template is="dom-if" if="{{type}}">
-    <select name="{{path}}" on-change="saveOptions">
+    <template is="dom-if" if="{{optionsInput}}">
+      <select name="{{path}}" on-change="saveOptions">
         <template is="dom-repeat" items="[[options]]">
           <option value="[[item]]">[[item]]</option>
         </template>
@@ -33,11 +33,12 @@
         type: Array,
         value : ["Null", "Array", "Boolean", "Number", "Object", "String", "Symbol", "Function"]
       },
-      text: {type:Boolean,computed:"isText(textarea,type)"},
-      code: {type:Boolean,computed:"isText(textarea,type)"},
+      text: {type:Boolean,computed:"isText(textarea,optionsInput)"},
+      code: {type:Boolean,computed:"isText(textarea,optionsInput)"},
       changed: {type:Boolean,notify:true,value:false},
       textarea: {type:Boolean,value:false},
-      type: {type:Boolean,value:false},
+      optionsInput: {type:Boolean,value:false},
+      selectedOption:{type:Array},
       label: String,
       pattern: String,
       autoValidate: Boolean,
@@ -46,10 +47,14 @@
       data: {type:Object,observer:"dataChanged"},
       element: { // move to observers
         computed:'saveThis(path,value)'
+      },
+      asdf: {
+        computed: 'setOptions(optionsInput,selectedOption,path)'
       }
+    
     },
-    isText: function(textarea,type){
-      return !textarea && !type;
+    isText: function(textarea,optionsInput){
+      return !textarea && !optionsInput;
     },
     initializeDefault: function(ev){
       this.loaded = true;
@@ -73,7 +78,11 @@
     dataChanged: function(loading_data) {
       if (loading_data !== undefined || loading_data !== null){ 
         if (loading_data.hasOwnProperty(this.path) && this.value !== loading_data[this.path]) {
-          this.value = loading_data[this.path];
+          if (this.optionsInput) {
+            this.selectedOption = loading_data[this.path].split(',');
+          } else {
+            this.value = loading_data[this.path];
+          }
         }
       }
       this.loaded = true;
@@ -87,6 +96,22 @@
       }
       if (js_data[e.currentTarget.name] !== values.join(',')) {
         this.saveThis(e.currentTarget.name,values.join(',')); 
+      }
+    },
+    setOptions: function(optionsInput,selectedOption,path) {
+      if (optionsInput) {
+        var e = document.querySelector('select[name="'+path+'"]');
+        if (e) {
+          for (x=0;x<e.length;x++) {
+            if (selectedOption !== "") {
+              for (y=0;y<selectedOption.length;y++) {
+                if (e[x].text === selectedOption[y]) {
+                  e[x].selected = true;
+                }
+              }
+            }
+          }
+        }
       }
     }
   });
