@@ -169,7 +169,7 @@ All help is very much appreciated. I hope this project helps people get started 
           tabs(1) + '<head>',
           '<base href="'+base+'">',
           tabs()+'<title>'+name+' demo</title>',
-   //       tabs()+'<sc'+'ript src="../webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
+          //tabs()+'<sc'+'ript src="../webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
           tabs(-1) + '</head>'
         ];
         if (name !== "") return output ;
@@ -257,7 +257,7 @@ All help is very much appreciated. I hope this project helps people get started 
       },
       _getDomTemplateDependencies: function(domTemplate,dependencies) {
         var re = /(?:<\/)([a-z]*-[a-z]*)(?:>)/gi; 
-        var output = []
+        var output = [];
         var m;
  
         while ((m = re.exec(domTemplate)) !== null) {
@@ -265,6 +265,7 @@ All help is very much appreciated. I hope this project helps people get started 
             output.push(m[1]);
           }
         }
+        
         return output;
       }
     });
