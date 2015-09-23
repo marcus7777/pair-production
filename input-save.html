@@ -1,4 +1,5 @@
 <link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../app-globals/app-globals.html">
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
 <!--
@@ -20,6 +21,7 @@
       </select>
     </template>
     <iron-localstorage on-iron-localstorage-load-empty="initializeDefault" name="pair-production" value="{{data}}"></iron-localstorage>
+    <app-globals value="{{data}}"></app-globals>
   </template>
 </dom-module>
 <script>
