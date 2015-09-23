@@ -88,7 +88,7 @@ All help is very much appreciated. I hope this project helps people get started 
     var re = /bower_components/gi;
     var elements = listOfElements.toLowerCase().split('\n');
     for (var i = 0; i < elements.length; ++i) {
-      if (elements[i].indexOf(dependency.toLowerCase())) {
+      if (elements[i].indexOf(dependency.toLowerCase()) !== -1) {
         return listOfElements.split('\n')[i].replace(re, '..');
       }
     }
