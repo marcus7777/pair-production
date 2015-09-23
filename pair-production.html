@@ -18,6 +18,9 @@
         <template is="dom-if" if="{{_name}}">
           <input-save path="description" textarea value="{{_description}}" label="{{_cat('Tell me about <', _name,'/> element')}}"></input-save>
           <input-save path="template" code textarea value="{{_domTemplate}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
+    Your demo:
+    <iframe sandbox="allow-scripts" style="height:320px;width:100%;border:none" src="{{_src}}"></iframe>
+    <!-- <qr-code type-number="34" title="Demo" value="{{_src}}" error-correct-level="H"></qr-code> --> 
           <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
           <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/-]*[a-zA-Z\/\,-]*[a-zA-Z\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <template is="dom-if" if="{{_domTemplateDependencies.length}}">
@@ -29,9 +32,6 @@
           </template>
       </template>
     </div>
-    Your demo:
-    <iframe sandbox="allow-scripts" style="width:100%;border:none" src="{{_src}}"></iframe>
-    <!-- <qr-code type-number="34" title="Demo" id="tip" value="{{_src}}" error-correct-level="H"></qr-code> --> 
     <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
     <prism-highlighter></prism-highlighter>
     your code:
@@ -148,7 +148,7 @@
       _getBody: function(name) {
         var output = [
           tabs(1)+ '<body>',
-          tabs()+ '<h1>' + name + ' Demo</h1>',
+          tabs()+ '<h3>' + name + ' Demo</h3>',
           tabs()+ '<' + name + '></' + name + '>',
           tabs(-1)+ '</body>'
         ];
