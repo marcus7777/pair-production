@@ -47,7 +47,7 @@ All help is very much appreciated. I hope this project helps people get started 
           </template>
       </template>
     </div>
-    <iron-ajax auto url="http://open-elements.org/list-of-elements" handle-as="text" last-response="{{listOfElements}}"></iron-ajax>
+    <iron-ajax auto url="http://open-elements.org/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
 
       <span>{{listOfElements}}</span>
     <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
@@ -110,8 +110,9 @@ All help is very much appreciated. I hope this project helps people get started 
         _head: {computed: "_getHead(_name)"},
         _iframeHead: {computed: "_getIframeHead(_base,_name)"},
         _body: {computed: "_getBody(_name)"},
+        _listOfElements:String,
         _element: {
-          computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, listOfElements)"
+          computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, _listOfElements)"
         },
         _descriptor: {computed: "_getDescriptor(_element)"},
         _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower)"},
