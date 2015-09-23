@@ -47,6 +47,9 @@ All help is very much appreciated. I hope this project helps people get started 
           </template>
       </template>
     </div>
+    <iron-ajax auto url="http://open-elements.org/list-of-elements" handle-as="text" last-response="{{listOfElements}}"></iron-ajax>
+
+      <span>{{listOfElements}}</span>
     <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
     <prism-highlighter></prism-highlighter>
     your code:
@@ -80,6 +83,15 @@ All help is very much appreciated. I hope this project helps people get started 
       return false;
     }
   };
+  var getfile = function(dependency,listOfElements) {
+    var re = /bower_components/gi;
+    var elements = listOfElements.toLowerCase().split('\n');
+    for (var i = 0; i < elements.length; ++i) {
+      if (elements[i].indexOf(dependency.toLowerCase()) {
+        return listOfElements.split('\n')[i].replace(re, '..');
+      }
+    }
+  };
   Polymer({
       is: 'pair-production',
       properties:{
@@ -99,7 +111,7 @@ All help is very much appreciated. I hope this project helps people get started 
         _iframeHead: {computed: "_getIframeHead(_base,_name)"},
         _body: {computed: "_getBody(_name)"},
         _element: {
-          computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed)"
+          computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, listOfElements)"
         },
         _descriptor: {computed: "_getDescriptor(_element)"},
         _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower)"},
@@ -170,7 +182,7 @@ All help is very much appreciated. I hope this project helps people get started 
         
         if (name !== "") return output;
       },
-      _getElementCode: function(name, description, dependencylist, template, variablesSets, changed) {
+      _getElementCode: function(name, description, dependencylist, template, variablesSets, changed, listOfElements) {
         var output = [];
         
         output.push(tabs()+ '<!--');
@@ -223,7 +235,7 @@ All help is very much appreciated. I hope this project helps people get started 
         output.push(tabs(-1) + '</sc'+'ript>');
        
         for (var i = 0; i < dependencylist.length; ++i) {
-          output.unshift(tabs(0) + '<link rel="import" href="../'+dependencylist[i]+'/'+dependencylist[i]+'.html">');
+          output.unshift(tabs(0) + '<link rel="import" href="'+getfile(dependencylist[i],listOfElements)+'">');
         }
         return addLine(output); 
       },
