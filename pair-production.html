@@ -183,7 +183,7 @@ All help is very much appreciated. I hope this project helps people get started 
         
         if (name !== "") return output;
       },
-      _getElementCode: function(name, description, dependencylist, template, variablesSets, changed, listOfElements) {
+      _getElementCode: function(name, description, dependencylist, domTemplate, variablesSets, changed, listOfElements) {
         var output = [];
         
         output.push(tabs()+ '<!--');
@@ -192,8 +192,8 @@ All help is very much appreciated. I hope this project helps people get started 
         output.push(tabs()+ '-->','');
         output.push(tabs(1)+ '<dom-module id="'+name+'">');
         output.push(tabs(1)+ '<template>');
-        for (var i = 0; i < template.split('\n').length; ++i) {
-          output.push(tabs()+template.split('\n')[i] );
+        for (var i = 0; i < domTemplate.split('\n').length; ++i) {
+          output.push(tabs()+domTemplate.split('\n')[i] );
         }
         output.push(tabs(-1)+ '</template>');
         output.push(tabs(-1)+ '</dom-module>');
