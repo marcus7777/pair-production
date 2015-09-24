@@ -49,7 +49,7 @@ All help is very much appreciated. I hope this project helps people get started 
             <p>Have you included <span>{{_domTemplateDependencies}}</span> ?</p>
             <p>add:</p>
             <template is="dom-repeat" items="{{_domTemplateDependencies}}" >
-              <button on-tap="{{_addDependency}}">{{item}}</button>
+              <button on-tap="{{_addDependency()}}">{{item}}</button>
             </template>
           </template>
           <iframe sandbox="allow-scripts allow-same-origin" style="margin:0; width:100%; height:150px; border:none;" src="{{_src}}"></iframe>
