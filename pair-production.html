@@ -101,6 +101,7 @@ All help is very much appreciated. I hope this project helps people get started 
         return listOfElements.split('\n')[i].replace(re, '..');
       }
     }
+    return false;
   };
   
   Polymer({
@@ -271,10 +272,12 @@ All help is very much appreciated. I hope this project helps people get started 
         var m;
  
         while ((m = re.exec(domTemplate)) !== null) {
-          if (this.dependencies.indexOf(m[1]) === -1) {
-            output.push(m[1]);
+          if (dependencies.indexOf(m[1]) === -1) {
             if (getfile(m[1],listOfElements)) {
-              this.dependencies = this.dependencies + "," + m[1]
+              dependencies = dependencies + "," + m[1]
+              this.dependencies = dependencies;
+            } else {
+              output.push(m[1]);
             }
           }
         }
