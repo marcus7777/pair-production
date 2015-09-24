@@ -275,7 +275,7 @@ All help is very much appreciated. I hope this project helps people get started 
           if (dependencies.indexOf(m[1]) === -1) {
             if (getfile(m[1],listOfElements)) {
               dependencies = dependencies + "," + m[1]
-              this.dependencies = dependencies;
+              this._dependencies = dependencies;
             } else {
               output.push(m[1]);
             }
