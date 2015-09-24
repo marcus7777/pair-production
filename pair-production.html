@@ -20,15 +20,12 @@
 * a test for each input and output
 
   * test ```location```
-
     * input ```location```: london
-
     * output ```hash``` = gcpvj0dup40s
 
   * test ```hash```
-
+  
     * input ```location```: tr18
-
     * output ```hash``` = gbuj1g4pw5b4
 
 * a bower.json file ✏ / bower command
@@ -117,7 +114,7 @@ All help is very much appreciated. I hope this project helps people get started 
         _functions: String,
         _functionList: {computed: "_getArray(_functions)"},
         _dependencies:{type:String, value: "polymer"},
-        _domTemplateDependencies:{computed:"_getDomTemplateDependencies(_domTemplate,_dependencies)"},
+        _domTemplateDependencies:{computed:"_getDomTemplateDependencies(_domTemplate,_dependencies,listOfElements)"},
         _dependencylist: {computed: "_getArray(_dependencies)"},
         _demo: {computed: "_getCode(_head,_body)"},
         _iframeDemo: {computed: "_getCode(_iframeHead,_body)"},
@@ -268,14 +265,17 @@ All help is very much appreciated. I hope this project helps people get started 
       _getSrc: function(codeiframe){
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
       },
-      _getDomTemplateDependencies: function(domTemplate,dependencies) {
+      _getDomTemplateDependencies: function(domTemplate,dependencies,listOfElements) {
         var re = /(?:<\/)([a-z]*-[a-z]*)(?:>)/gi; 
         var output = [];
         var m;
  
         while ((m = re.exec(domTemplate)) !== null) {
-          if (dependencies.indexOf(m[1]) === -1) {
+          if (this.dependencies.indexOf(m[1]) === -1) {
             output.push(m[1]);
+            if (getfile(m[1],listOfElements)) {
+              this.dependencies = this.dependencies + "," + m[1]
+            }
           }
         }
         
