@@ -285,11 +285,10 @@ All help is very much appreciated. I hope this project helps people get started 
         return output;
       },
       _addDependency: function(e) {
-       debugger;
        if (this._dependencies !== "") {
-         this._dependencies = this._dependencies +","+ item;
+         this._dependencies = this._dependencies +","+ e.target.textContent;
        } else {
-         this._dependencies = item;
+         this._dependencies = e.target.textContent;
        }
       }
     });
