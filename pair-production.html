@@ -114,7 +114,7 @@ All help is very much appreciated. I hope this project helps people get started 
         _functions: String,
         _functionList: {computed: "_getArray(_functions)"},
         _dependencies:{type:String, value: "polymer"},
-        _domTemplateDependencies:{computed:"_getDomTemplateDependencies(_domTemplate,_dependencies,listOfElements)"},
+        _domTemplateDependencies:{computed:"_getDomTemplateDependencies(_domTemplate,_dependencies,_listOfElements)"},
         _dependencylist: {computed: "_getArray(_dependencies)"},
         _demo: {computed: "_getCode(_head,_body)"},
         _iframeDemo: {computed: "_getCode(_iframeHead,_body)"},
