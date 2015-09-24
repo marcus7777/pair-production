@@ -115,7 +115,7 @@ All help is very much appreciated. I hope this project helps people get started 
         _functions: String,
         _functionList: {computed: "_getArray(_functions)"},
         _dependencies:{type:String, value: "polymer"},
-        _domTemplateDependencies:{computed:"_getDomTemplateDependencies(_domTemplate,_dependencies,_listOfElements)"},
+        _domTemplateDependencies:{computed:"_getDomTemplateDependencies(_domTemplate,_dependencies)"},
         _dependencylist: {computed: "_getArray(_dependencies)"},
         _demo: {computed: "_getCode(_head,_body)"},
         _iframeDemo: {computed: "_getCode(_iframeHead,_body)"},
@@ -266,19 +266,15 @@ All help is very much appreciated. I hope this project helps people get started 
       _getSrc: function(codeiframe){
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
       },
-      _getDomTemplateDependencies: function(domTemplate,dependencies,listOfElements) {
+      _getDomTemplateDependencies: function(domTemplate,dependencies) {
         var re = /(?:<\/)([a-z]*-[a-z]*)(?:>)/gi; 
         var output = [];
         var m;
  
         while ((m = re.exec(domTemplate)) !== null) {
           if (dependencies.indexOf(m[1]) === -1) {
-            if (getfile(m[1],listOfElements)) {
-              dependencies = dependencies + "," + m[1]
-              this._dependencies = dependencies;
-            } else {
-              output.push(m[1]);
-            }
+            dependencies = dependencies + "," + m[1]
+            output.push(m[1]);
           }
         }
         
