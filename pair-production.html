@@ -91,7 +91,7 @@ All help is very much appreciated. I hope this project helps people get started 
   };
   
   var toCamelCase = function(str){
-    if (str.hasOwnProperty("replace")) {
+    if (typeof str === 'string') {
       return str.replace(/  /g,' ').replace(/, /g,',').replace(/ \S/g, function(txt){return txt.toUpperCase()[1]});
     } else {
       return false;
@@ -219,31 +219,33 @@ All help is very much appreciated. I hope this project helps people get started 
         //  output.push(tabs()+ 'is: "'+name+'",');
         //  output.push(tabs(1) + 'properties: {');
         var variableList = []; 
-          for (var i = 0; i < variablesSets.split(',').length; ++i) {
-            
-            var set = variablesSets.split(',')[i];
-            console.log("_getElementCode 183 ",js_data );
-            if (js_data !== undefined || js_data !== null){
-              if (js_data.hasOwnProperty("variables."+set)){
-                var varsList = toCamelCase(js_data["variables."+set])
-                if (varsList) {
-                  varsList = varsList.split(',');
-                  console.log("_getElementCode 187 ",varsList);
-                
-                  //  make variableList
-                  //  
-                  // 
-                  //
-                
-                  if (varsList.length > 0){
-                    for (var i = 0; i < varsList.length; ++i) {
-                      variableList.push(varsList[i]);
-                    }
+          //  make variableList
+        for (var i = 0; i < variablesSets.split(',').length; ++i) {
+          var set = variablesSets.split(',')[i];
+          if (js_data !== undefined || js_data !== null){
+            if (js_data.hasOwnProperty("variables."+set)){
+              var varsList = toCamelCase(js_data["variables."+set])
+              if (varsList) {
+                varsList = varsList.split(',');
+                console.log("_getElementCode 187 ",varsList);
+                if (varsList.length > 0){
+                  for (var n = 0; n < varsList.length; ++n) {
+
+                    variableList.push({
+                      name:varsList[n],
+                      type: "",
+                      notify: "",
+                      readOnly: "",
+                      observer: "",
+                      computed: "",
+                      value:""
+                    });
                   }
                 }
               }
-            }       
-          } 
+            }
+          }       
+        } 
             
           console.log("_getElementCode 198 ",variableList);
 
