@@ -52,7 +52,7 @@ All help is very much appreciated. I hope this project helps people get started 
               <button on-tap="_addDependency">{{item}}</button>
             </template>
           </template>
-          <iframe sandbox="allow-scripts allow-same-origin" style="margin:0; width:100%; height:150px; border:none;" src="{{_src}}"></iframe>
+          <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0; width:100%; border:none;" src="{{_src}}"></iframe>
           <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/-]*[a-zA-Z\/\,-]*[a-zA-Z\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
           <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
@@ -135,6 +135,7 @@ All help is very much appreciated. I hope this project helps people get started 
         _codeiframe: {computed: "_getCodeiframe(_iframeDemo,_element)"},
         _bower: {computed: "_getBower(_name, _dependencylist)"},
         _src: {computed: "_getSrc(_codeiframe)"},
+        demoHeight: {value:"400px"},
         changed: {type:Boolean,notify:true,value:false}
       },
       _getBower: function(name, dependencylist) { //TODO read and list dependencylist
