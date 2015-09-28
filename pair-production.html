@@ -55,6 +55,12 @@ All help is very much appreciated. I hope this project helps people get started 
           <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0; width:100%; border:none;" src="{{_src}}"></iframe>
           <input-save path="demoHeight" value="{{demoHeight}}" label="Height of demo" ></input-save>
           <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/-]*[a-zA-Z\/\,-]*[a-zA-Z\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+          <template is="dom-repeat" items="{{_dependencylist}}" >
+            <input type="checkbox" checked="{{showDocs::change}}">
+            <template is="dom-if" if="{{showDocs}}" >
+              <iron-component-page src="getfile(item)"></iron-component-page>
+            </template>
+          </template>
           <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
           <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <template is="dom-repeat" items="{{_functionList}}" >
