@@ -56,7 +56,7 @@ All help is very much appreciated. I hope this project helps people get started 
           <input-save path="demoHeight" value="{{demoHeight}}" label="Height of demo" ></input-save>
           <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/-]*[a-zA-Z\/\,-]*[a-zA-Z\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <select value="{{docsFor::input}}">
-            <option value="0">show documentation</option>
+            <option value="false">show documentation</option>
             <template is="dom-repeat" items="{{_dependencylist}}" >
               <option>{{item}}</option>
             </template>
