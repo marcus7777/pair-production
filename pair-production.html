@@ -324,7 +324,7 @@ All help is very much appreciated. I hope this project helps people get started 
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
       },
       _docsSrc: function(docsFor) {
-         return 'data:text/html;charset=utf-8,' + encodeURIComponent('<base href="http://open-elements.org/bower_components/new/"><link rel="import" href="../iron-localstorage/iron-localstorage.html"><iron-component-page src="/bower_components/pair-production/pair-production.html"></iron-component-page>');
+         return 'data:text/html;charset=utf-8,' + encodeURIComponent('<base href="http://open-elements.org/bower_components/new/"><link rel="import" href="../iron-localstorage/iron-localstorage.html"><iron-component-page src="'+getfile(docsFor)'"></iron-component-page>');
       },
       _getDomTemplateDependencies: function(domTemplate,dependencies) {
         var re = /(?:<\/)([a-z]*[\-a-z]*-[a-z]*)(?:>)/gi; 
