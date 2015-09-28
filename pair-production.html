@@ -62,7 +62,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </template>
           </select>
           <template is="dom-if" if="{{docsFor}}" >
-            <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor)}}"></iframe>
+            <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor,_listOfElements)}}"></iframe>
           </template>
           <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
           <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
@@ -324,8 +324,8 @@ All help is very much appreciated. I hope this project helps people get started 
       _getSrc: function(codeiframe){
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
       },
-      _docsSrc: function(docsFor) {
-         return 'data:text/html;charset=utf-8,' + encodeURIComponent('<base href="http://open-elements.org/bower_components/new/"><link rel="import" href="../iron-localstorage/iron-localstorage.html"><iron-component-page src="'+getfile(docsFor)+'"></iron-component-page>');
+      _docsSrc: function(docsFor,listOfElements) {
+         return 'data:text/html;charset=utf-8,' + encodeURIComponent('<base href="http://open-elements.org/bower_components/new/"><link rel="import" href="../iron-localstorage/iron-localstorage.html"><iron-component-page src="'+getfile(docsFor,listOfElements)+'"></iron-component-page>');
       },
       _getDomTemplateDependencies: function(domTemplate,dependencies) {
         var re = /(?:<\/)([a-z]*[\-a-z]*-[a-z]*)(?:>)/gi; 
