@@ -58,7 +58,7 @@ All help is very much appreciated. I hope this project helps people get started 
           <template is="dom-repeat" items="{{_dependencylist}}" >
             <input type="checkbox" checked="{{showDocs::change}}">
             <template is="dom-if" if="{{showDocs}}" >
-              <iron-component-page src="getfile(item)"></iron-component-page>
+              <iron-component-page src="{{getfile(item)}}"></iron-component-page>
             </template>
           </template>
           <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
