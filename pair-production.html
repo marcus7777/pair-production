@@ -243,33 +243,40 @@ All help is very much appreciated. I hope this project helps people get started 
      *
      * * `type` - used to determine how to deserialize attribute value strings
      *    to JS properties.  By convention, this field takes a JS constructor
-     *    for the type, such as `String` or `Boolean`. */
+     *    for the type, such as `String` or `Boolean`. 
+     */
      type:"",
     /* * `value` - default value for the property.  The value may either be a
      *    primitive value, or a function that returns a value (which should be
      *    used for initializing Objects and Arrays to avoid shared objects on
-     *    instances). */
+     *    instances). 
+     */
      value:"",
     /* * `notify` - when `true`, configures the property to fire a non-bubbling
      *    event called `<property>-changed` for each change to the property.
      *    Elements that have enabled two-way binding to the property use this
-     *    event to observe changes. */
+     *    event to observe changes. 
+     */
      notify:"",
     /* * `readOnly` - when `true` configures the property to have a getter, but
      *    no setter. To set a read-only property, use the private setter method
-     *    `_set_<property>(value)`. */
+     *    `_set_<property>(value)`. 
+     */
      readOnly:"",
     /* * `reflectToAttribute` - when `true` configures the property value to
      *    be serialized to a string and reflected to the attribute each time
      *    it changes.  This can impact performance, so it should be used
-     *    only when reflecting the attribute value is important. */
+     *    only when reflecting the attribute value is important. 
+     */
      reflectToAttribute:"",
     /* * `observer` - indicates the name of a function that should be called
-     *    each time the property changes. `e.g.: `observer: 'valueChanged' */
+     *    each time the property changes. `e.g.: `observer: 'valueChanged' 
+     */
      observer:"",
     /* * `readOnly` - configures the property to be computed by a computing
      *    function each time one or more dependent properties change.
-     *    `e.g.: `computed: 'computeValue(prop1, prop2)' */
+     *    `e.g.: `computed: 'computeValue(prop1, prop2)' 
+     */
      readOnly:""
     /*
      * Note: a shorthand may be used for the object descriptor when only the
@@ -309,7 +316,7 @@ All help is very much appreciated. I hope this project helps people get started 
         return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe);
       },
       _getDomTemplateDependencies: function(domTemplate,dependencies) {
-        var re = /(?:<\/)([a-z]*-[a-z]*)(?:>)/gi; 
+        var re = /(?:<\/)([a-z]*[\-a-z]*-[a-z]*)(?:>)/gi; 
         var output = [];
         var m;
  
