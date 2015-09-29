@@ -11,7 +11,7 @@
       <paper-input type="{{type}}" label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
     </template>
     <template is="dom-if" if="{{textarea}}">
-      <paper-textarea label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-textarea>
+      <paper-textarea onfocus="setCaretPosition(this, this.value.length)" label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-textarea>
     </template> 
     <template is="dom-if" if="{{optionsInput}}">
       <select name="{{path}}" on-change="saveOptions">
@@ -26,6 +26,23 @@
 </dom-module>
 <script>
   var js_data = {};
+  function setCaretPosition(elem, caretPos) {
+    if(elem != null) {
+      if(elem.createTextRange) {
+        var range = elem.createTextRange();
+        range.move('character', caretPos);
+        range.select();
+      } else {
+        if (elem.selectionStart) {
+          elem.focus();
+          elem.setSelectionRange(caretPos, caretPos);
+        } else {
+          elem.focus();
+        }
+      }
+    }
+  }
+  
   Polymer({
     is: 'input-save',
     properties: {
