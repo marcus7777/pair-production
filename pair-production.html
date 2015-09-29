@@ -53,7 +53,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </template>
           </template>
           <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0; width:100%; border:none;" src="{{_src}}"></iframe>
-          <input-save path="demoHeight" value="{{demoHeight}}" label="Height of demo" ></input-save>
+          <input-save path="demoHeight" type="number" value="{{demoHeight}}" label="Height of demo" ></input-save>
           <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/-]*[a-zA-Z\/\,-]*[a-zA-Z\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
           <template is="dom-if" if="{{_dependencylist.length}}">
             <select value="{{docsFor::input}}">
@@ -78,9 +78,9 @@ All help is very much appreciated. I hope this project helps people get started 
     <prism-highlighter></prism-highlighter>
     your code:
     <marked-element markdown="{{_markdown}}"></marked-element>
-    your Docs are going here:
-    your Tests are going here:
-    your Links are going here:
+    your Docs are going here:<br />
+    your Tests are going here:<br />
+    your Links are going here:<br />
     your other localy save elements are going to be available for your demo and listed here:
   </template>
 </dom-module>
@@ -147,7 +147,7 @@ All help is very much appreciated. I hope this project helps people get started 
         _codeiframe: {computed: "_getCodeiframe(_iframeDemo,_element)"},
         _bower: {computed: "_getBower(_name, _dependencylist)"},
         _src: {computed: "_getSrc(_codeiframe)"},
-        demoHeight: {value:"400px"},
+        demoHeight: {value:400},
         changed: {type:Boolean,notify:true,value:false}
       },
       _getBower: function(name, dependencylist) { //TODO read and list dependencylist
