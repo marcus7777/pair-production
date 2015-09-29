@@ -13,7 +13,8 @@
     <template is="dom-if" if="{{textarea}}">
       <template is="dom-if" if="{{code}}">
         <div>
-          <textarea onblur="updateFilter(this)" onfocus="textareaOnfocus(this)" onkeyup="this.parentNode.getElementsByTagName('input')[0].value=doGetCaretPosition(this)" label="{{label}}" value="{{value}}"></textarea>
+          <h3>{{label}}</h3>
+          <textarea onblur="updateFilter(this)" onfocus="textareaOnfocus(this)" onkeyup="this.parentNode.getElementsByTagName('input')[0].value=doGetCaretPosition(this)">{{value}}</textarea>
           <button onclick="closeTag(this)" >close tag</button>
           <select onblur="addTag(this);">
             <option>add tag</option>
