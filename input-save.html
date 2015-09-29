@@ -8,7 +8,7 @@
 <dom-module id="input-save">
   <template>
     <template is="dom-if" if="{{text}}">
-      <paper-input label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
+      <paper-input type="{{type}}" label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
     </template>
     <template is="dom-if" if="{{textarea}}">
       <paper-textarea label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-textarea>
@@ -41,6 +41,7 @@
       textarea: {type:Boolean,value:false},
       optionsInput: {type:Boolean,value:false},
       selectedOption:{type:Array},
+      type: String,
       label: String,
       pattern: String,
       autoValidate: Boolean,
