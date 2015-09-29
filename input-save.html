@@ -17,7 +17,9 @@
           <button onclick="closeTag(this)" >close tag</button>
           <select onblur="addTag(this);">
             <option>add tag</option>
-            <option value="<paper-input label='label' value='{{}}'></paper-input>" data-move="36">paper-input</option>
+            <template is="dom-repeat" items="[[tags]]">
+              <option value="{{item.code}}" data-move="{{item.move}}">{{item.tag}}</option>
+            </template>
           </select>
           <input style="width:50px" min="0" type="number" onchange="process(this)" />
         </div>
@@ -132,6 +134,7 @@
         type: Array,
         value : ["Null", "Array", "Boolean", "Number", "Object", "String", "Symbol", "Function"]
       },
+      tags:{value:[{code:"<paper-input label='label' value='{{}}'></paper-input>",tag:"paper-input",move:36}]
       text: {type:Boolean,computed:"isText(textarea,optionsInput)"},
       code: {type:Boolean},
       changed: {type:Boolean,notify:true,value:false},
