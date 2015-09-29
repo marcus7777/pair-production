@@ -19,6 +19,7 @@
             <option>add tag</option>
             <option value="<paper-input label='label' value='{{}}'></paper-input>" data-move="36">paper-input</option>
           </select>
+          <input style="width:50px" min="0" type="number" onchange="process(this)" />
         </div>
       </template>
       <template is="dom-if" if="{{!code}}">
