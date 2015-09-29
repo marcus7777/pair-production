@@ -13,7 +13,7 @@
     <template is="dom-if" if="{{textarea}}">
       <template is="dom-if" if="{{code}}">
         <div>
-          <paper-textarea onblur="updateFilter(this)" onfocus="textareaOnfocus(this)" onkeyup="this.parentNode.getElementsByTagName('input')[0].value=doGetCaretPosition(this)" label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-textarea>
+          <textarea onblur="updateFilter(this)" onfocus="textareaOnfocus(this)" onkeyup="this.parentNode.getElementsByTagName('input')[0].value=doGetCaretPosition(this)" label="{{label}}" value="{{value}}"></textarea>
           <button onclick="closeTag(this)" >close tag</button>
           <select onblur="addTag(this);">
             <option>add tag</option>
@@ -39,89 +39,88 @@
 <script>
   var js_data = {};
   var filter = "";
-function doGetCaretPosition (ctrl) {
-  var CaretPos = 0;
-  if (ctrl.selectionStart || ctrl.selectionStart == '0') {
-    CaretPos = ctrl.selectionStart;
+  function doGetCaretPosition (ctrl) {
+    var CaretPos = 0;
+    if (ctrl.selectionStart || ctrl.selectionStart == '0') {
+      CaretPos = ctrl.selectionStart;
+    }
+    return (CaretPos);
   }
-  return (CaretPos);
-}
-function setCaretPosition(ctrl, pos) {
-  no = pos
-  if(ctrl.setSelectionRange){
-    ctrl.focus();
-    ctrl.setSelectionRange(pos,pos);
-  } else if (ctrl.createTextRange) {
-	var range = ctrl.createTextRange();
-	range.collapse(true);
-	range.moveEnd('character', pos);
-    range.moveStart('character', pos);
-	range.select();
-  }
-}
-function process(e) {
-  var t = e.parentNode.getElementsByTagName('textarea');
-  var v = e.parentNode.getElementsByTagName('input');
-  setCaretPosition(t[0],v[0].value);
-  updateFilter(t[0]);
-}
-function textareaOnfocus(e) {
-  var that=e;
-  var pos=e.parentNode.getElementsByTagName('input')[0].value;
-  setTimeout(function(){if (doGetCaretPosition(that) === 0) setCaretPosition(that, pos)}, 100);
-}
-function closeTag(e) {
-  var closeRe = /<([\w-]*) *(?:[^>]*)\w?>[^<]*$/g;
-  
-  var t = e.parentNode.getElementsByTagName('textarea')[0];
-  var v = e.parentNode.getElementsByTagName('input')[0];
-  
-  var textBefore = t.value.substring(0, v.value);
-  var textAfter = t.value.substring(v.value);
-  
-  if ((m = closeRe.exec(textBefore)) !== null) {
-    console.log("textBefore match", m[1]);
-    if (m[1] !== "") {
-      var add = "</" + m[1] + ">"
-      t.value = textBefore + add + textAfter;
-      v.value = +(v.value) + add.length;
+  function setCaretPosition(ctrl, pos) {
+    no = pos
+    if(ctrl.setSelectionRange){
+      ctrl.focus();
+      ctrl.setSelectionRange(pos,pos);
+    } else if (ctrl.createTextRange) {
+      var range = ctrl.createTextRange();
+      range.collapse(true);
+      range.moveEnd('character', pos);
+      range.moveStart('character', pos);
+      range.select();
     }
   }
-  process(e);
-}          
-function addTag(e) {
-  var tag = e.options[e.selectedIndex].value;
-  if (tag !== "add tag") {
+  function process(e) {
+    var t = e.parentNode.getElementsByTagName('textarea');
+    var v = e.parentNode.getElementsByTagName('input');
+    setCaretPosition(t[0],v[0].value);
+    updateFilter(t[0]);
+  }
+  function textareaOnfocus(e) {
+    var that=e;
+    var pos=e.parentNode.getElementsByTagName('input')[0].value;
+    setTimeout(function(){if (doGetCaretPosition(that) === 0) setCaretPosition(that, pos)}, 100);
+  }
+  function closeTag(e) {
+    var closeRe = /<([\w-]*) *(?:[^>]*)\w?>[^<]*$/g;
     var t = e.parentNode.getElementsByTagName('textarea')[0];
     var v = e.parentNode.getElementsByTagName('input')[0];
   
     var textBefore = t.value.substring(0, v.value);
-    //clear <pap
     var textAfter = t.value.substring(v.value);
   
-    t.value = textBefore + tag + textAfter;
-    v.value = (v.value*1)+(e.options[e.selectedIndex].dataset.move*1);
-    process(e);
-    e.selectedIndex = 0;
-  }
-}  
-function updateFilter(e) {
-  var v = e.parentNode.getElementsByTagName('input')[0];
-  if (+(v.value) !== 0) {
-    var re = /<([-\w]*)$/g; 
-    var t = e.parentNode.getElementsByTagName('textarea')[0];
-    var textBefore = t.value.substring(0, v.value);
-    var m;
-    if ((m = re.exec(textBefore)) !== null) {
-      if (m.index === re.lastIndex) {
-        re.lastIndex++;
-      }
+    if ((m = closeRe.exec(textBefore)) !== null) {
+      console.log("textBefore match", m[1]);
       if (m[1] !== "") {
-        filter = m[1];
+        var add = "</" + m[1] + ">"
+        t.value = textBefore + add + textAfter;
+        v.value = +(v.value) + add.length;
+      }
+    }
+    process(e);
+  }          
+  function addTag(e) {
+    var tag = e.options[e.selectedIndex].value;
+    if (tag !== "add tag") {
+      var t = e.parentNode.getElementsByTagName('textarea')[0];
+      var v = e.parentNode.getElementsByTagName('input')[0];
+  
+      var textBefore = t.value.substring(0, v.value);
+      //clear <pap
+      var textAfter = t.value.substring(v.value);
+  
+      t.value = textBefore + tag + textAfter;
+      v.value = (v.value*1)+(e.options[e.selectedIndex].dataset.move*1);
+      process(e);
+      e.selectedIndex = 0;
+    }
+  }  
+  function updateFilter(e) {
+    var v = e.parentNode.getElementsByTagName('input')[0];
+    if (+(v.value) !== 0) {
+      var re = /<([-\w]*)$/g; 
+      var t = e.parentNode.getElementsByTagName('textarea')[0];
+      var textBefore = t.value.substring(0, v.value);
+      var m;
+      if ((m = re.exec(textBefore)) !== null) {
+        if (m.index === re.lastIndex) {
+          re.lastIndex++;
+        }
+        if (m[1] !== "") {
+          filter = m[1];
+        }
       }
     }
   }
-}
   
   Polymer({
     is: 'input-save',
