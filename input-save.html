@@ -14,7 +14,7 @@
       <template is="dom-if" if="{{code}}">
         <div>
           <h3>{{label}}</h3>
-          <textarea onblur="updateFilter(this)" onfocus="textareaOnfocus(this)" onkeyup="this.parentNode.getElementsByTagName('input')[0].value=doGetCaretPosition(this)">{{value}}</textarea>
+          <paper-textarea onblur="updateFilter(this)" onfocus="textareaOnfocus(this)" onkeyup="this.parentNode.getElementsByTagName('input')[0].value=doGetCaretPosition(this)" label="{{label}}" value="{{value}}"></paper-textarea>
           <button onclick="closeTag(this)" >close tag</button>
           <select onblur="addTag(this);">
             <option>add tag</option>
@@ -64,7 +64,7 @@
     }
   }
   function process(e) {
-    var t = e.parentNode.getElementsByTagName('textarea');
+    var t = e.parentNode.getElementsByTagName('paper-textarea');
     var v = e.parentNode.getElementsByTagName('input');
     setCaretPosition(t[0],v[0].value);
     updateFilter(t[0]);
@@ -76,7 +76,7 @@
   }
   function closeTag(e) {
     var closeRe = /<([\w-]*) *(?:[^>]*)\w?>[^<]*$/g;
-    var t = e.parentNode.getElementsByTagName('textarea')[0];
+    var t = e.parentNode.getElementsByTagName('paper-textarea')[0];
     var v = e.parentNode.getElementsByTagName('input')[0];
   
     var textBefore = t.value.substring(0, v.value);
@@ -95,7 +95,7 @@
   function addTag(e) {
     var tag = e.options[e.selectedIndex].value;
     if (tag !== "add tag") {
-      var t = e.parentNode.getElementsByTagName('textarea')[0];
+      var t = e.parentNode.getElementsByTagName('paper-textarea')[0];
       var v = e.parentNode.getElementsByTagName('input')[0];
   
       var textBefore = t.value.substring(0, v.value);
@@ -112,7 +112,7 @@
     var v = e.parentNode.getElementsByTagName('input')[0];
     if (+(v.value) !== 0) {
       var re = /<([-\w]*)$/g; 
-      var t = e.parentNode.getElementsByTagName('textarea')[0];
+      var t = e.parentNode.getElementsByTagName('paper-textarea')[0];
       var textBefore = t.value.substring(0, v.value);
       var m;
       if ((m = re.exec(textBefore)) !== null) {
