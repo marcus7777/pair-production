@@ -13,7 +13,7 @@ Takes text and keeps a history
       <button onclick="closeTag(this)" >close tag</button>
       <select onblur="addTag(this);">
         <option>add tag</option>
-        <template is="dom-repeat" items="[[tags]]" filter="filterElements">
+        <template is="dom-repeat" items="{{tags}}">
           <option value="{{item.code}}" data-move="{{item.move}}">{{item.tag}}</option>
         </template>
       </select>
