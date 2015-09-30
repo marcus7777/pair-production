@@ -32,28 +32,29 @@
   <link rel="import" href="../{{name}}.html">
 </head>
 <body>
-  <test-fixture id="TrivialRequest">
+  <test-fixture id="{{toCamelCase(name)}}">
     <template>
       <{{name}}></{{name}}>
     </template>
   </test-fixture>
   <script>
     suite('<{{name}}>', function () {
+      var {{toCamelCase(name)}};
       setup(function () {
-        //...
+        {{toCamelCase(name)}} = fixture('{{toCamelCase(name)}}');
       });
       teardown(function () {
         //...
       });
       suite('basic usage', function () {
         test('can be triggered with space', function(done) {
-          button.addEventListener('keydown', function() {
+          {{toCamelCase(name)}}.addEventListener('keydown', function() {
             done();
           });
           MockInteractions.pressSpace(button);
         });
         test('can be clicked', function(done) {
-          button.addEventListener('click', function() {
+          {{toCamelCase(name)}}.addEventListener('click', function() {
             done();
           });
           MockInteractions.tap(button);
