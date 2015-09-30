@@ -1,0 +1,66 @@
+
+## /test/index.html
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+  </head>
+  <body>
+    <script>
+      WCT.loadSuites([
+        '{{name}}.html'
+      ]);
+    </script>
+  </body>
+</html>
+
+## /test/{{name}}.html
+<!doctype html>
+<html>
+<head>
+  <title>{{name}}</title>
+
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
+
+  <link rel="import" href="../../polymer/polymer.html">
+  <link rel="import" href="../../test-fixture/test-fixture.html">
+  <link rel="import" href="../{{name}}.html">
+</head>
+<body>
+  <test-fixture id="TrivialRequest">
+    <template>
+      <{{name}}></{{name}}>
+    </template>
+  </test-fixture>
+  <script>
+    suite('<{{name}}>', function () {
+      setup(function () {
+        //...
+      });
+      teardown(function () {
+        //...
+      });
+      suite('basic usage', function () {
+        test('can be triggered with space', function(done) {
+          button.addEventListener('keydown', function() {
+            done();
+          });
+          MockInteractions.pressSpace(button);
+        });
+        test('can be clicked', function(done) {
+          button.addEventListener('click', function() {
+            done();
+          });
+          MockInteractions.tap(button);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
