@@ -363,7 +363,7 @@ tab(-1)+'</html>']);
         var m;
  
         while ((m = re.exec(domTemplate)) !== null) {
-          if (dependencies.indexOf(m[1]) === -1) {
+          if (dependencies.spilt(',').indexOf(m[1]) === -1) {
             dependencies = dependencies + "," + m[1]
             output.push(m[1]);
           }
