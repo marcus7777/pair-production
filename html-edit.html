@@ -92,31 +92,29 @@ Takes text and keeps a history
     editor.setSelectionRange(moveTo, moveTo);
   }
   function takekeyup (e) {
-    if (!this.lastValue) {
-      if (!this.value) {
-        this.lastValue = "";
+    if (!e.lastValue) {
+      if (!e.value) {
+        e.lastValue = "";
       } else {
-        this.lastValue = this.value;
+        e.lastValue = e.value;
       }
     }
-    var last = this.lastValue,
-        current = this.value;
-
-    var ta = this;
+    var last = e.lastValue,
+        current = e.value;
 
     // Added chars
     if (current.length > last.length) {
-      var start = this.selectionStart, added = current.substr(start - 1, 1);
+      var start = e.selectionStart, added = current.substr(start - 1, 1);
       if (added == "<") {
-        TextEvent(ta, start - 1, start, '<>', 1);
+        TextEvent(e, start - 1, start, '<>', 1);
       } else if (added == '"') {
-        TextEvent(ta, start - 1, start, '""', 1);
+        TextEvent(e, start - 1, start, '""', 1);
       } else if (added == '{') {
-        TextEvent(ta, start - 1, start, '{}', 1);
+        TextEvent(e, start - 1, start, '{}', 1);
       }
     }
     process(e);
-    this.lastValue = this.value;
+    e.lastValue = e.value;
   };
   function updateFilter(e) {
     var v = e.parentNode.getElementsByTagName('input')[0];
