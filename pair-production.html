@@ -10,24 +10,18 @@
 `<pair-production>` I'm hoping this will be a good way to think about the way your code a element and then give you:
 
 * Template editor ✔
-
 * auto add dependencies (if in open-elements.org or in 'localstorage'). ✏
-
 * [Markdown editor](https://github.com/duongphuhiep/commonmark-editor) for documentation
-
 * a working demo ✔
-
 * a test for each input and output
-
   * test ```location```
     * input ```location```: london
     * output ```hash``` = gcpvj0dup40s
-
+    
   * test ```hash```
-  
     * input ```location```: tr18
     * output ```hash``` = gbuj1g4pw5b4
-
+    
 * a bower.json file ✏ / bower command
 
 
@@ -79,8 +73,7 @@ All help is very much appreciated. I hope this project helps people get started 
     your code:
     <marked-element markdown="{{_markdown}}"></marked-element>
     your Docs are going here:<br />
-    your Tests are going here:<br />
-    your Links are going here:<br />
+    your Link to Share are going here:<br />
     your other localy save elements are going to be available for your demo and listed here:
   </template>
 </dom-module>
@@ -143,7 +136,8 @@ All help is very much appreciated. I hope this project helps people get started 
           computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, _listOfElements)"
         },
         _descriptor: {computed: "_getDescriptor(_element)"},
-        _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower)"},
+        _tests :{computed: "_getTests(name)"},
+        _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower,_tests)"},
         _codeiframe: {computed: "_getCodeiframe(_iframeDemo,_element)"},
         _bower: {computed: "_getBower(_name, _dependencylist)"},
         _src: {computed: "_getSrc(_codeiframe)"},
@@ -205,7 +199,7 @@ All help is very much appreciated. I hope this project helps people get started 
         if (name !== "") return output ;
       },      
       _getTests: function(name) {
-var testStub = [
+var testStub = addLine([
 tab()+'## /test/index.html',
 tab()+'<!doctype html>',
 tab(1)+'<html>',
@@ -266,9 +260,9 @@ tab(1)+'<html>',
       tab(-1)+'});',
     tab(-1)+'</script>',
   tab(-1)+'</body>',
-tab(-1)+'</html>'];
+tab(-1)+'</html>']);
         
-        if (name !== "") return output;
+        if (name !== "") return testStub;
       },
       _getBody: function(name) {
         var output = [
@@ -344,8 +338,8 @@ tab(-1)+'</html>'];
         return {
         }
       },
-      _getMarkdown: function(demo, element, name, bower) {
-        return 'demo.html\n\n ```html \n'+demo +'\n```\n' + name + '.html\n\n```html \n'+element+'\n``` \nbower.json\n ```\n'+bower+'\n```';
+      _getMarkdown: function(demo, element, name, bower, tests) {
+        return 'demo.html\n\n ```html \n'+demo+'\n```\n' + name + '.html\n\n```html \n'+element+'\n``` \nbower.json\n ```\n'+bower+'\n``` \ntest/index.html\n ```\n'+tests+'\n```';
       },
       _getCodeiframe: function(iframeDemo,element) {
         return iframeDemo+element;
