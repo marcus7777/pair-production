@@ -9,7 +9,7 @@ Takes text and keeps a history
   <template>
     <div>
       <h3>{{label}}</h3>
-      <textarea style="width:100%" onblur="updateFilter(this)" onfocus="textareaOnfocus(this)" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
+      <textarea style="width:100%" onblur="updateFilter(this)" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
       <button onclick="closeTag(this)" >close tag</button>
       <select onblur="addTag(this);">
         <option>add tag</option>
@@ -22,11 +22,6 @@ Takes text and keeps a history
 </dom-module>
 <script>
   var filter = "";
-  function textareaOnfocus(e) {
-    var that=e;
-    var pos=e.parentNode.getElementsByTagName('textarea')[0].selectionStart;
-    setTimeout(function(){if (doGetCaretPosition(that) === 0) setCaretPosition(that, pos)}, 100);
-  }
   function closeTag(e) {
     var closeRe = /<([\w-]*) *(?:[^>]*)\w?>[^<]*$/g;
     var t = e.parentNode.getElementsByTagName('textarea')[0];
@@ -84,7 +79,6 @@ Takes text and keeps a history
         TextEvent(e, start - 1, start, '{}', 1);
       }
     }
-    process(e);
     e.lastValue = e.value;
   };
   function updateFilter(e) {
