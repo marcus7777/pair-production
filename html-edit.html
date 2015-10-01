@@ -13,7 +13,7 @@ Takes text and keeps a history
       <button onclick="closeTag(this)" >close tag</button>
       <select onblur="addTag(this);">
         <option>add tag</option>
-        <template is="dom-repeat" items="{{tags}}">
+        <template is="dom-repeat" items="{{tags}}" filter="_computeFilter">
           <option value="{{item.code}}" title="{{item.move}}">{{item.tag}}</option>
         </template>
       </select>
@@ -77,13 +77,7 @@ Takes text and keeps a history
     if (tag !== "add tag") {
       var t = e.parentNode.getElementsByTagName('textarea')[0];
       var v = e.parentNode.getElementsByTagName('input')[0];
-
-      //var textBefore = t.value.substring(0, v.value);
-      //clear <pap
-      //var textAfter = t.value.substring(v.value);
-
-      // t.value = textBefore + tag + textAfter;
-      // v.value = (v.value*1)+(e.options[e.selectedIndex].dataset.move*1);
+      
       TextEvent(t, v.value, v.value, tag, e.options[e.selectedIndex].title*1)
       process(e);
     }
@@ -139,6 +133,17 @@ Takes text and keeps a history
       },
       filterElements: function() {
         debugger;
+      }
+    },
+    _computeFilter: function(partOfTag) {
+      if (partOfTag && partOfTag ==! "") {
+        return function(item) {
+          return item.tag.indexOf(partOfTag) !== -1;
+        };
+      } else {        
+        return function(item) {
+          return true;
+        };
       }
     }
   });
