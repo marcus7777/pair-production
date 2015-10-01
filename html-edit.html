@@ -87,7 +87,16 @@ Takes text and keeps a history
       process(e);
       e.selectedIndex = 0;
     }
-  }  
+  }
+  var TextEvent = function (editor, start, end, text, move) {
+    var e = document.createEvent('TextEvent');
+    e.initTextEvent('textInput', true, true, null, text, 9, "en-US");
+    editor.focus();
+    editor.setSelectionRange(start, end);
+    editor.dispatchEvent(e);
+    var moveTo = start + move
+    editor.setSelectionRange(moveTo, moveTo);
+  }
   function updateFilter(e) {
     var v = e.parentNode.getElementsByTagName('input')[0];
     if (+(v.value) !== 0) {
