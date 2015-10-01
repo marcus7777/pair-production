@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <!--
 `<html-edit>` Adds helpful buttons to help you edit text.
-Takes text and keeps a history 
+Takes text and keeps a history
 @demo demo.html
 -->
 
@@ -58,10 +58,10 @@ Takes text and keeps a history
     var closeRe = /<([\w-]*) *(?:[^>]*)\w?>[^<]*$/g;
     var t = e.parentNode.getElementsByTagName('textarea')[0];
     var v = e.parentNode.getElementsByTagName('input')[0];
-  
+
     var textBefore = t.value.substring(0, v.value);
     var textAfter = t.value.substring(v.value);
-  
+
     if ((m = closeRe.exec(textBefore)) !== null) {
       console.log("textBefore match", m[1]);
       if (m[1] !== "") {
@@ -71,24 +71,24 @@ Takes text and keeps a history
       }
     }
     process(e);
-  }          
+  }
   function addTag(e) {
     var tag = e.options[e.selectedIndex].value;
     if (tag !== "add tag") {
       var t = e.parentNode.getElementsByTagName('textarea')[0];
       var v = e.parentNode.getElementsByTagName('input')[0];
-  
-      var textBefore = t.value.substring(0, v.value);
+
+      //var textBefore = t.value.substring(0, v.value);
       //clear <pap
-      var textAfter = t.value.substring(v.value);
-  
-      t.value = textBefore + tag + textAfter;
-      v.value = (v.value*1)+(e.options[e.selectedIndex].dataset.move*1);
+      //var textAfter = t.value.substring(v.value);
+
+      // t.value = textBefore + tag + textAfter;
+      // v.value = (v.value*1)+(e.options[e.selectedIndex].dataset.move*1);
+      TextEvent(t, v.value, v.value, tag, e.options[e.selectedIndex].dataset.move*1)
       process(e);
-      e.selectedIndex = 0;
     }
   }
-  var TextEvent = function (editor, start, end, text, move) {
+  function TextEvent(editor, start, end, text, move) {
     var e = document.createEvent('TextEvent');
     e.initTextEvent('textInput', true, true, null, text, 9, "en-US");
     editor.focus();
@@ -100,7 +100,7 @@ Takes text and keeps a history
   function updateFilter(e) {
     var v = e.parentNode.getElementsByTagName('input')[0];
     if (+(v.value) !== 0) {
-      var re = /<([-\w]*)$/g; 
+      var re = /<([-\w]*)$/g;
       var t = e.parentNode.getElementsByTagName('textarea')[0];
       var textBefore = t.value.substring(0, v.value);
       var m;
