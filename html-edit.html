@@ -83,6 +83,10 @@ Takes text and keeps a history
     }
   }
   function TextEvent(editor, start, end, text, move) {
+    if (start === end) {
+      start = editor.selectionStart;
+      end = editor.selectionEnd;
+    }
     var e = document.createEvent('TextEvent');
     e.initTextEvent('textInput', true, true, null, text, 9, "en-US");
     editor.focus();
