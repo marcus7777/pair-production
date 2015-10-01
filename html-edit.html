@@ -9,7 +9,7 @@ Takes text and keeps a history
   <template>
     <div>
       <h3>{{label}}</h3>
-      <textarea style="width:100%" onblur="updateFilter(this)" onfocus="textareaOnfocus(this)" onkeyup="this.parentNode.getElementsByTagName('input')[0].value=doGetCaretPosition(this)" label="{{label}}" value="{{value::change}}"></textarea>
+      <textarea style="width:100%" onblur="updateFilter(this)" onfocus="textareaOnfocus(this)" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
       <button onclick="closeTag(this)" >close tag</button>
       <select onblur="addTag(this);">
         <option>add tag</option>
@@ -91,6 +91,30 @@ Takes text and keeps a history
     var moveTo = (start*1) + move
     editor.setSelectionRange(moveTo, moveTo);
   }
+  function takekeyup (e) {
+    if (this.lastValue == null) {
+        this.lastValue = this.defaultValue;
+    }
+    var last = this.lastValue,
+        current = this.value;
+
+    var ta = this;
+
+    // Added chars
+    if (current.length > last.length) {
+        var start = this.selectionStart,
+            added = current.substr(start - 1, 1);
+        if (added == "<") {
+            TextEvent(ta, start - 1, start, '<>', 1);
+        } else if (added == '"') {
+            TextEvent(ta, start - 1, start, '""', 1);
+        } else if (added == '{') {
+            TextEvent(ta, start - 1, start, '{}', 1);
+        }
+    }
+
+    this.lastValue = this.value;
+  });
   function updateFilter(e) {
     var v = e.parentNode.getElementsByTagName('input')[0];
     if (+(v.value) !== 0) {
