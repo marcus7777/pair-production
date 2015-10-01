@@ -88,7 +88,7 @@ Takes text and keeps a history
     editor.focus();
     editor.setSelectionRange(start, end);
     editor.dispatchEvent(e);
-    var moveTo = start + move
+    var moveTo = (start*1) + move
     editor.setSelectionRange(moveTo, moveTo);
   }
   function updateFilter(e) {
