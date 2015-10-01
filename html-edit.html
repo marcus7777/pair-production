@@ -78,7 +78,7 @@ Takes text and keeps a history
       var t = e.parentNode.getElementsByTagName('textarea')[0];
       var v = e.parentNode.getElementsByTagName('input')[0];
       
-      TextEvent(t, v.value, v.value, tag, e.options[e.selectedIndex].title*1)
+      TextEvent(t, 0, 0, tag, e.options[e.selectedIndex].title*1)
       process(e);
     }
   }
@@ -93,7 +93,11 @@ Takes text and keeps a history
   }
   function takekeyup (e) {
     if (!this.lastValue) {
+      if (!this.value) {
+        this.lastValue = "";
+      } else {
         this.lastValue = this.value;
+      }
     }
     var last = this.lastValue,
         current = this.value;
