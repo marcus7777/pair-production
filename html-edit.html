@@ -92,8 +92,8 @@ Takes text and keeps a history
     editor.setSelectionRange(moveTo, moveTo);
   }
   function takekeyup (e) {
-    if (this.lastValue == null) {
-        this.lastValue = this.defaultValue;
+    if (!this.lastValue) {
+        this.lastValue = this.value;
     }
     var last = this.lastValue,
         current = this.value;
