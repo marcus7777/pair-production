@@ -14,7 +14,7 @@ Takes text and keeps a history
       <select onblur="addTag(this);">
         <option>add tag</option>
         <template is="dom-repeat" items="{{tags}}">
-          <option value="{{item.code}}" data-move="{{item.move}}">{{item.tag}}</option>
+          <option value="{{item.code}}" title="{{item.move}}">{{item.tag}}</option>
         </template>
       </select>
       <input style="width:50px" min="0" type="number" onchange="process(this)" />
