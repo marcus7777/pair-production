@@ -11,7 +11,7 @@ Takes text and keeps a history
       <h3>{{label}}</h3>
       <textarea style="width:100%" on-blur="updateFilter" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
       <button onclick="closeTag(this)" >close tag</button>
-      <select onblur="addTag(this);">
+      <select on-blur="addTag">
         <option>add tag</option>
         <template is="dom-repeat" items="{{suggestedTags}}">
           <option value="{{item.code}}" title="{{item.move}}">{{item.tag}}</option>
@@ -36,13 +36,6 @@ Takes text and keeps a history
       }
     }
     TextEvent(t, 0, 0, add, add.length);
-  }
-  function addTag(e) {
-    var tag = e.options[e.selectedIndex].value;
-    if (tag !== "add tag") {
-      var t = e.parentNode.getElementsByTagName('textarea')[0];
-      TextEvent(t, 0, 0, tag, e.options[e.selectedIndex].title*1);
-    }
   }
   function TextEvent(editor, start, end, text, move) {
     if (start === end) {
@@ -133,7 +126,6 @@ Takes text and keeps a history
       }
     },
     _getSuggestedTags: function(tags,filter) {
-      output = [];
       if (filter != "") {
         return tags.filter(function(item) {
           return item.tag.indexOf(filter) !== -1;
@@ -141,6 +133,14 @@ Takes text and keeps a history
       } else {        
         return tags;
       }
-    }
+    },
+    addTag: function(e) {
+      var tag = e.options[e.selectedIndex].value;
+      if (tag !== "add tag") {
+        var t = e.parentNode.getElementsByTagName('textarea')[0];
+        TextEvent(t, 0, 0, tag, e.options[e.selectedIndex].title*1);
+        e.selectedIndex = 9;
+      }
+  }
   });
 </script>
