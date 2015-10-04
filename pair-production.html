@@ -35,7 +35,7 @@ All help is very much appreciated. I hope this project helps people get started 
       <h4>Let me help you conjure a new element:</h4>
         <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
         <template is="dom-if" if="{{_name}}">
-          <input-save path="description" textarea value="{{_description}}" label="{{_cat('Tell me about <', _name,'/> element')}}"></input-save>
+          <input-save path="description" markdown textarea value="{{_description}}" label="{{_cat('Tell me about <', _name,'/> element')}}"></input-save>
           <input-save path="template" code textarea value="{{_domTemplate}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
           Your demo:
           <!-- <qr-code type-number="34" title="Demo" value="{{_src}}" error-correct-level="H"></qr-code> --> 
