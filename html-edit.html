@@ -28,14 +28,15 @@ Takes text and keeps a history
 
     var textBefore = t.value.substring(0, t.selectionStart);
     var textAfter = t.value.substring(t.selectionStart);
-
+    
+    var add;
     if ((m = closeRe.exec(textBefore)) !== null) {
       console.log("textBefore match", m[1]);
       if (m[1] !== "") {
-        var add = "</" + m[1] + ">";
-        TextEvent(t, 0, 0, add, add.length);
+        add = "</" + m[1] + ">";
       }
     }
+    TextEvent(t, 0, 0, add, add.length);
   }
   function addTag(e) {
     var tag = e.options[e.selectedIndex].value;
