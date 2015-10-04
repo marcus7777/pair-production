@@ -82,11 +82,13 @@ Takes text and keeps a history
     e.lastValue = e.value;
   };
   function updateFilter(e) {
-    var v = e.parentNode.getElementsByTagName('input')[0];
-    if (+(v.value) !== 0) {
-      var re = /<([-\w]*)$/g;
-      var t = e.parentNode.getElementsByTagName('textarea')[0];
-      var textBefore = t.value.substring(0, v.value);
+    var re = /<([-\w]*)$/g;
+    var t = e.parentNode.getElementsByTagName('textarea')[0];
+    var start = editor.selectionStart;
+    var end = editor.selectionEnd;
+    if (start === end) {
+      var textBefore = t.value.substring(0, start);
+    
       var m;
       if ((m = re.exec(textBefore)) !== null) {
         if (m.index === re.lastIndex) {
