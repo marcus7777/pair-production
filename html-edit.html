@@ -88,8 +88,8 @@ Takes text and keeps a history
   function updateFilter(e) {
     var re = /<([-\w]*)$/g;
     var t = e.parentNode.getElementsByTagName('textarea')[0];
-    var start = editor.selectionStart;
-    var end = editor.selectionEnd;
+    var start = t.selectionStart;
+    var end = t.selectionEnd;
     if (start === end) {
       var textBefore = t.value.substring(0, start);
     
