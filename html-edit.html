@@ -139,9 +139,7 @@ Takes text and keeps a history
           return item.tag.indexOf(filter) !== -1;
         });
       } else {        
-        return function(item) {
-          return tags;
-        };
+        return tags;
       }
     }
   });
