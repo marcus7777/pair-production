@@ -9,7 +9,7 @@ Takes text and keeps a history
   <template>
     <div>
       <h3>{{label}}</h3>
-      <textarea style="width:100%" onblur="{{updateFilter()}}" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
+      <textarea style="width:100%" onblur="{{updateFilter(this)}}" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
       <button onclick="closeTag(this)" >close tag</button>
       <select onblur="addTag(this);">
         <option>add tag</option>
