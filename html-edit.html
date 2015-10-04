@@ -134,7 +134,7 @@ Takes text and keeps a history
     },
     _getSuggestedTags: function(tags,filter) {
       output = [];
-      if (filter ==! "") {
+      if (filter != "") {
         return tags.filter(function(item) {
           return item.tag.indexOf(filter) !== -1;
         });
