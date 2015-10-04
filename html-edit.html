@@ -115,7 +115,7 @@ Takes text and keeps a history
     updateFilter : function () {
       debugger; // fix me
       var re = /<([-\w]*)$/g;
-      var t = $$('textarea');
+      var t = this.$$('textarea');
       var start = t.selectionStart;
       var end = t.selectionEnd;
       if (start === end) {
