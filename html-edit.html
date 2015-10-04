@@ -13,7 +13,7 @@ Takes text and keeps a history
       <button onclick="closeTag(this)" >close tag</button>
       <select onblur="addTag(this);">
         <option>add tag</option>
-        <template is="dom-repeat" items="{{tags}}" filter="_computeFilter(filter)">
+        <template is="dom-repeat" items="{{tags}}" filter="_computeFilter">
           <option value="{{item.code}}" title="{{item.move}}">{{item.tag}}</option>
         </template>
       </select>
@@ -21,7 +21,6 @@ Takes text and keeps a history
   </template>
 </dom-module>
 <script>
-  var filter = "";
   function closeTag(e) {
     var closeRe = /<([\w-]*) *(?:[^>]*)\w?>[^<]*$/g;
     var t = e.parentNode.getElementsByTagName('textarea')[0];
