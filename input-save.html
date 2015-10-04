@@ -15,6 +15,9 @@
       <template is="dom-if" if="{{code}}">
         <html-edit label="{{label}}" value="{{value}}"></html-edit>
       </template>
+      <template is="dom-if" if="{{code}}">
+        <markdown-edit label="{{label}}" value="{{value}}"></markdown-edit>
+      </template>
       <template is="dom-if" if="{{!code}}">
         <paper-textarea label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-textarea>
       </template>
@@ -43,6 +46,7 @@
         value : ["Null", "Array", "Boolean", "Number", "Object", "String", "Symbol", "Function"]
       },
       text: {type:Boolean,computed:"isText(textarea,optionsInput)"},
+      markdown: {type:Boolean,value:false},
       code: {type:Boolean,value:false},
       changed: {type:Boolean,notify:true,value:false},
       textarea: {type:Boolean,value:false},
