@@ -90,6 +90,8 @@ Takes text and keeps a history
     properties: {
       value: {type:String,notify:true},
       label: String,
+      suggestedTags: {computed:"_getSuggestedTags(tags,filter)"},
+      filter:{value:""},
       tags: {
         value:[
           {code:"<paper-input label='label' value='{{}}'></paper-input>",tag:"paper-input",move:36},
@@ -110,10 +112,10 @@ Takes text and keeps a history
         ]
       }
     },
-    updateFilter : function (e) {
+    updateFilter : function (tags,filter) {
       debugger; // fix me
       var re = /<([-\w]*)$/g;
-      var t = e.parentNode.getElementsByTagName('textarea')[0];
+      var t = $$('textarea');
       var start = t.selectionStart;
       var end = t.selectionEnd;
       if (start === end) {
@@ -130,14 +132,15 @@ Takes text and keeps a history
         }
       }
     },
-    _computeFilter: function(partOfTag) {
-      if (partOfTag && partOfTag ==! "") {
-        return function(item) {
-          return item.tag.indexOf(partOfTag) !== -1;
-        };
+    _getSuggestedTags: function(tags,filter) {
+      output = [];
+      if (filter ==! "") {
+        return tags.filter(function(item) {
+          return item.tag.indexOf(filter) !== -1;
+        });
       } else {        
         return function(item) {
-          return true;
+          return tags;
         };
       }
     }
