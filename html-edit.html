@@ -86,47 +86,49 @@ Takes text and keeps a history
     }
     e.lastValue = e.value;
   };
-  function updateFilter(e) {
-    var re = /<([-\w]*)$/g;
-    var t = e.parentNode.getElementsByTagName('textarea')[0];
-    var start = t.selectionStart;
-    var end = t.selectionEnd;
-    if (start === end) {
-      var textBefore = t.value.substring(0, start);
-    
-      var m;
-      if ((m = re.exec(textBefore)) !== null) {
-        if (m.index === re.lastIndex) {
-          re.lastIndex++;
-        }
-        if (m[1] !== "") {
-          filter = m[1];
-        }
-      }
-    }
-  }
   Polymer({
     is: "html-edit",
     properties: {
       value: {type:String,notify:true},
       label: String,
-      tags: {value:[
-        {code:"<paper-input label='label' value='{{}}'></paper-input>",tag:"paper-input",move:36},
-        {code:"<h1></h1>",tag:"h1",move:4},
-        {code:"<h2></h2>",tag:"h2",move:4},
-        {code:"<h3></h3>",tag:"h3",move:4},
-        {code:"<h4></h4>",tag:"h4",move:4},
-        {code:"<h5></h5>",tag:"h5",move:4},
-        {code:"<h6></h6>",tag:"h6",move:4},
-        {code:"<p></p>",tag:"p",move:3},
-        {code:"<i></i>",tag:"i",move:3},
-        {code:'<a href=""></a>',tag:"a",move:9},
-        {code:"<ul>\n<li></li>\n</ul>",tag:"ul",move:9},
-        {code:"<blockquote></blockquote>",tag:"blockquote",move:12},
-        {code:"<hr />\n",tag:"hr",move:7},
-        {code:'<img src="" />\n',tag:"img",move:10},
-        {code:"<div>\n</div>",tag:"div",move:7}
+      tags: {
+        value:[
+          {code:"<paper-input label='label' value='{{}}'></paper-input>",tag:"paper-input",move:36},
+          {code:"<h1></h1>",tag:"h1",move:4},
+          {code:"<h2></h2>",tag:"h2",move:4},
+          {code:"<h3></h3>",tag:"h3",move:4},
+          {code:"<h4></h4>",tag:"h4",move:4},
+          {code:"<h5></h5>",tag:"h5",move:4},
+          {code:"<h6></h6>",tag:"h6",move:4},
+          {code:"<p></p>",tag:"p",move:3},
+          {code:"<i></i>",tag:"i",move:3},
+          {code:'<a href=""></a>',tag:"a",move:9},
+          {code:"<ul>\n<li></li>\n</ul>",tag:"ul",move:9},
+          {code:"<blockquote></blockquote>",tag:"blockquote",move:12},
+          {code:"<hr />\n",tag:"hr",move:7},
+          {code:'<img src="" />\n',tag:"img",move:10},
+          {code:"<div>\n</div>",tag:"div",move:7}
         ]
+      }
+    },
+    updateFilter : function (e) {
+      debugger; // fix me
+      var re = /<([-\w]*)$/g;
+      var t = e.parentNode.getElementsByTagName('textarea')[0];
+      var start = t.selectionStart;
+      var end = t.selectionEnd;
+      if (start === end) {
+        var textBefore = t.value.substring(0, start);
+    
+        var m;
+        if ((m = re.exec(textBefore)) !== null) {
+          if (m.index === re.lastIndex) {
+            re.lastIndex++;
+          }
+          if (m[1] !== "") {
+            filter = m[1];
+          }
+        }
       }
     },
     _computeFilter: function(partOfTag) {
