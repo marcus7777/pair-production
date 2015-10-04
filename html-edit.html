@@ -9,11 +9,11 @@ Takes text and keeps a history
   <template>
     <div>
       <h3>{{label}}</h3>
-      <textarea style="width:100%" on-blur="{{updateFilter(this)}}" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
+      <textarea style="width:100%" on-blur="{{updateFilter()}}" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
       <button onclick="closeTag(this)" >close tag</button>
       <select onblur="addTag(this);">
         <option>add tag</option>
-        <template is="dom-repeat" items="{{tags}}" filter="_computeFilter">
+        <template is="dom-repeat" items="{{suggestedTags}}">
           <option value="{{item.code}}" title="{{item.move}}">{{item.tag}}</option>
         </template>
       </select>
@@ -112,7 +112,7 @@ Takes text and keeps a history
         ]
       }
     },
-    updateFilter : function (tags,filter) {
+    updateFilter : function () {
       debugger; // fix me
       var re = /<([-\w]*)$/g;
       var t = $$('textarea');
