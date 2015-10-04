@@ -13,7 +13,7 @@ Takes text and keeps a history
       <button onclick="closeTag(this)" >close tag</button>
       <select onblur="addTag(this);">
         <option>add tag</option>
-        <template is="dom-repeat" items="{{tags}}" filter="_computeFilter">
+        <template is="dom-repeat" items="{{tags}}" filter="_computeFilter(filter)">
           <option value="{{item.code}}" title="{{item.move}}">{{item.tag}}</option>
         </template>
       </select>
@@ -126,7 +126,7 @@ Takes text and keeps a history
             re.lastIndex++;
           }
           if (m[1] !== "") {
-            filter = m[1];
+            this.filter = m[1];
           }
         }
       }
