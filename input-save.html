@@ -20,8 +20,10 @@
       <template is="dom-if" if="{{markdown}}">
         <markdown-edit label="{{label}}" value="{{value}}"></markdown-edit>
       </template>
-      <template is="dom-if" if="{{!code}}">
-        <paper-textarea label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-textarea>
+      <template is="dom-if" if="{{!markdown}}">
+        <template is="dom-if" if="{{!code}}">
+          <paper-textarea label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-textarea>
+        </template>
       </template>
     </template> 
     <template is="dom-if" if="{{optionsInput}}">
