@@ -239,8 +239,8 @@ tabs(1)+'<html>',
     tabs(1)+'<scr'+'ipt>',
       tabs(1)+'suite(\'<'+name+'>\', function () {',
         tabs()+'var '+toCamelCase(name)+';',
+        tabs()+''+toCamelCase(name)+' = fixture(\''+toCamelCase(name)+'\');',
         tabs(1)+'setup(function () {',
-          tabs()+''+toCamelCase(name)+' = fixture(\''+toCamelCase(name)+'\');',
         tabs(-1)+'});',
         tabs(1)+'teardown(function () {',
           tabs()+'//...',
@@ -324,7 +324,7 @@ tabs(-1)+'</html>']);
           }       
         } 
             
-          console.log("_getElementCode 198 ",variableList);
+        console.log("_getElementCode 198 ",variableList);
 
         output.push(tabs()+ 'is: "'+name+'"')
         output.push(tabs(-1) + '});');
