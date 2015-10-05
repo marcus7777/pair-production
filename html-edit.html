@@ -136,6 +136,10 @@ Takes text and keeps a history
       var tag = e.options[e.selectedIndex].value;
       if (tag !== "add tag") {
         var t = this.$$('textarea');
+        var goBach = 0;
+        if (this.filter.length > 0){
+          goBack = (this.filter.length +1);
+        }
         TextEvent(t, t.selectionStart-(this.filter.length +1), t.selectionStart, tag, e.options[e.selectedIndex].title*1);
         e.selectedIndex = 0;
       }
