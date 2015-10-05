@@ -11,7 +11,6 @@ Takes text and keeps a history
       <h3>{{label}}</h3>
       <textarea style="width:100%" on-blur="updateFilter" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
       <select on-blur="addTag" multiple>
-        <option>add tag</option>
         <template is="dom-repeat" items="{{suggestedTags}}">
           <option value="{{item.code}}" title="{{item.move}}">{{item.tag}}</option>
         </template>
@@ -80,9 +79,9 @@ Takes text and keeps a history
           {code:"<p></p>\n",tag:"p",move:3},
           {code:"<i></i>",tag:"i",move:3},
           {code:'<a href=""></a>',tag:"a",move:9},
-          {code:"<ul>\n  <li></li>\n</ul>",tag:"ul",move:9},
+          {code:"\n<ul>\n  <li></li>\n</ul>\n",tag:"ul",move:11},
           {code:"<blockquote></blockquote>",tag:"blockquote",move:12},
-          {code:"<hr />\n",tag:"hr",move:7},
+          {code:"\n<hr />\n",tag:"hr",move:8},
           {code:'<img src="" />\n',tag:"img",move:10},
           {code:"<div>\n</div>\n",tag:"div",move:7}
         ]
@@ -95,7 +94,6 @@ Takes text and keeps a history
       var end = t.selectionEnd;
       if (start === end) {
         var textBefore = t.value.substring(0, start);
-    
         var m;
         if ((m = re.exec(textBefore)) !== null) {
           if (m.index === re.lastIndex) {
@@ -120,7 +118,7 @@ Takes text and keeps a history
       if (tag !== "add tag") {
         var t = this.$$('textarea');
         var goBack = 0;
-        var reach =0;
+        var reach = 0;
         if (this.filter.length > 0){
           goBack = (this.filter.length +1);
         }
@@ -128,7 +126,7 @@ Takes text and keeps a history
           reach = 1;
         }
         TextEvent(t, t.selectionStart-goBack, t.selectionStart+reach, tag, e.options[e.selectedIndex].title*1);
-        e.selectedIndex = 0;
+        e.selectedOptions[0].selected = false;
       }
     }
   });
