@@ -115,7 +115,8 @@ Takes text and keeps a history
     addTag: function() {
       var e = this.$$('select');
       var tag = e.options[e.selectedIndex].value;
-      if (tag !== "add tag") {
+      e.selectedOptions[0].selected = false;
+      if (tag) {
         var t = this.$$('textarea');
         var goBack = 0;
         var reach = 0;
@@ -126,7 +127,6 @@ Takes text and keeps a history
           reach = 1;
         }
         TextEvent(t, t.selectionStart-goBack, t.selectionStart+reach, tag, e.options[e.selectedIndex].title*1);
-        e.selectedOptions[0].selected = false;
       }
     }
   });
