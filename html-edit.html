@@ -11,7 +11,7 @@ Takes text and keeps a history
       <h3>{{label}}</h3>
       <textarea style="width:100%" on-blur="updateFilter" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
       <button onclick="closeTag(this)" >close tag</button>
-      <select on-blur="addTag">
+      <select on-select="addTag">
         <option>add tag</option>
         <template is="dom-repeat" items="{{suggestedTags}}">
           <option value="{{item.code}}" title="{{item.move}}">{{item.tag}}</option>
