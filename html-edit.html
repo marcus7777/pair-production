@@ -1,7 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <!--
-`<html-edit>` Adds helpful buttons to help you edit text.
-Takes text and keeps a history
+`<html-edit>` help you edit html.
 @demo demo.html
 -->
 
@@ -40,8 +39,7 @@ Takes text and keeps a history
         e.lastValue = e.value;
       }
     }
-    var last = e.lastValue,
-        current = e.value;
+    var last = e.lastValue, current = e.value;
 
     // Added chars
     if (current.length > last.length) {
