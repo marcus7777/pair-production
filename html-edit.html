@@ -140,7 +140,7 @@ Takes text and keeps a history
         if (this.filter.length > 0){
           goBack = (this.filter.length +1);
         }
-        TextEvent(t, t.selectionStart-(this.filter.length +1), t.selectionStart, tag, e.options[e.selectedIndex].title*1);
+        TextEvent(t, t.selectionStart-goBack, t.selectionStart, tag, e.options[e.selectedIndex].title*1);
         e.selectedIndex = 0;
       }
     }
