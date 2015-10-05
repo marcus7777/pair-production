@@ -131,7 +131,8 @@ Takes text and keeps a history
         return tags;
       }
     },
-    addTag: function(e) {
+    addTag: function() {
+      var e = this.$$('select');
       var tag = e.options[e.selectedIndex].value;
       if (tag !== "add tag") {
         var t = this.$$('textarea');
