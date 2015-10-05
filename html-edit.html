@@ -106,7 +106,6 @@ Takes text and keeps a history
       }
     },
     updateFilter : function () {
-      debugger; // fix me
       var re = /<([-\w]*)$/g;
       var t = this.$$('textarea');
       var start = t.selectionStart;
@@ -119,9 +118,7 @@ Takes text and keeps a history
           if (m.index === re.lastIndex) {
             re.lastIndex++;
           }
-          if (m[1] !== "") {
-            this.filter = m[1];
-          }
+          this.filter = m[1];
         }
       }
     },
