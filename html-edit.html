@@ -141,7 +141,7 @@ Takes text and keeps a history
         if (this.filter.length > 0){
           goBack = (this.filter.length +1);
         }
-        if ( t.value.substring(t.selectionStart,1 == ">"){
+        if ( t.value.substring(t.selectionStart,1) == ">"){
           reach = 1;
         }
         TextEvent(t, t.selectionStart-goBack, t.selectionStart+reach, tag, e.options[e.selectedIndex].title*1);
