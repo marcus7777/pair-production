@@ -10,7 +10,6 @@ Takes text and keeps a history
     <div>
       <h3>{{label}}</h3>
       <textarea style="width:100%" on-blur="updateFilter" onkeyup="takekeyup(this)" label="{{label}}" value="{{value::change}}"></textarea>
-      <button onclick="closeTag(this)" >close tag</button>
       <select on-blur="addTag">
         <option>add tag</option>
         <template is="dom-repeat" items="{{suggestedTags}}">
@@ -21,22 +20,6 @@ Takes text and keeps a history
   </template>
 </dom-module>
 <script>
-  function closeTag(e) {
-    var closeRe = /<([\w-]*) *(?:[^>]*)\w?>[^<]*$/g;
-    var t = e.parentNode.getElementsByTagName('textarea')[0];
-
-    var textBefore = t.value.substring(0, t.selectionStart);
-    var textAfter = t.value.substring(t.selectionStart);
-    
-    var add;
-    if ((m = closeRe.exec(textBefore)) !== null) {
-      console.log("textBefore match", m[1]);
-      if (m[1] !== "") {
-        add = "</" + m[1] + ">";
-      }
-    }
-    TextEvent(t, 0, 0, add, add.length);
-  }
   function TextEvent(editor, start, end, text, move) {
     if (start === end) {
       start = editor.selectionStart;
