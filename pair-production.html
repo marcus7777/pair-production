@@ -152,6 +152,7 @@ All help is very much appreciated. I hope this project helps people get started 
         changed: {type:Boolean,notify:true,value:false}
       },
       _getBower: function(name, dependencylist) { //TODO read and list dependencylist
+        
         return addLine([tabs(1)+'{',
         tabs()+'"name": "'+name+'",',
         tabs()+'"version": "1.0.0",',
@@ -159,7 +160,7 @@ All help is very much appreciated. I hope this project helps people get started 
         tabs()+'"main": "'+name+'.html",',
         tabs(1)+'"keywords": [',
         tabs()+'"polymer","web-components"',
-        tabs(-1)+']',
+        tabs(-1)+'],',
         tabs(1)+'"dependencies": {',
         tabs()+'"polymer/polymer": "*"',
         tabs(-1)+'}',
