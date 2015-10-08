@@ -39,38 +39,38 @@ All help is very much appreciated. I hope this project helps people get started 
   <template>
     <div class="vertical center-justified layout">
       <h4>Let me help you conjure a new element:</h4>
-        <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
-        <template is="dom-if" if="{{_name}}">
-          <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
-          <input-save path="template" code textarea value="{{_domTemplate}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
-          Your demo:
-          <!-- <qr-code type-number="34" title="Demo" value="{{_src}}" error-correct-level="H"></qr-code> --> 
-          <template is="dom-if" if="{{_domTemplateDependencies.length}}">
-            <p>Have you included <span>{{_domTemplateDependencies}}</span> ?</p>
-            <p>add:</p>
-            <template is="dom-repeat" items="{{_domTemplateDependencies}}" >
-              <button on-tap="_addDependency">{{item}}</button>
+      <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+      <template is="dom-if" if="{{_name}}">
+        <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
+        <input-save path="template" code textarea value="{{_domTemplate}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
+        Your demo:
+        <!-- <qr-code type-number="34" title="Demo" value="{{_src}}" error-correct-level="H"></qr-code> --> 
+        <template is="dom-if" if="{{_domTemplateDependencies.length}}">
+          <p>Have you included <span>{{_domTemplateDependencies}}</span> ?</p>
+          <p>add:</p>
+          <template is="dom-repeat" items="{{_domTemplateDependencies}}" >
+            <button on-tap="_addDependency">{{item}}</button>
+          </template>
+        </template>
+        <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0; width:100%; border:none;" src="{{_src}}"></iframe>
+        <input-save path="demoHeight" type="number" value="{{demoHeight}}" label="Height of demo" ></input-save>
+        <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/-]*[a-zA-Z\/\,-]*[a-zA-Z\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+        <template is="dom-if" if="{{_dependencylist.length}}">
+          <select value="{{docsFor::input}}">
+            <option value="false">show documentation</option>
+            <template is="dom-repeat" items="{{_dependencylist}}" >
+              <option>{{item}}</option>
             </template>
+          </select>
+          <template is="dom-if" if="{{docsFor}}" >
+            <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor,_listOfElements)}}"></iframe>
           </template>
-          <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0; width:100%; border:none;" src="{{_src}}"></iframe>
-          <input-save path="demoHeight" type="number" value="{{demoHeight}}" label="Height of demo" ></input-save>
-          <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/-]*[a-zA-Z\/\,-]*[a-zA-Z\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-          <template is="dom-if" if="{{_dependencylist.length}}">
-            <select value="{{docsFor::input}}">
-              <option value="false">show documentation</option>
-              <template is="dom-repeat" items="{{_dependencylist}}" >
-                <option>{{item}}</option>
-              </template>
-            </select>
-            <template is="dom-if" if="{{docsFor}}" >
-              <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor,_listOfElements)}}"></iframe>
-            </template>
-          </template>
-          <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
-          <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-          <template is="dom-repeat" items="{{_functionList}}" >
-            <function-list-input variable-list="{{_variableList}}" name="{{item}}"></function-list-input>   
-          </template>
+        </template>
+        <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
+        <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+        <template is="dom-repeat" items="{{_functionList}}" >
+          <function-list-input variable-list="{{_variableList}}" name="{{item}}"></function-list-input>   
+        </template>
       </template>
     </div>
     <iron-ajax auto url="http://open-elements.org/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
@@ -121,39 +121,38 @@ All help is very much appreciated. I hope this project helps people get started 
   };
   
   Polymer({
-      is: 'pair-production',
-      properties:{
-        _variablesSets: {type: String, value: "Inputs,Outputs,Internal"},
-        _base: {type: String, value: "http://open-elements.org/bower_components/new/"},
-        _name: {type: String, value: ""},
-        _description: {type: String, value: ""},
-        _domTemplate: {type:String, value:"<style>:host {display:inline-block;}</style>\n<h2>Demo</h2>"},
-        _functions: String,
-        _functionList: {computed: "_getArray(_functions)"},
-        _dependencies:{type:String, value: "polymer"},
-        _domTemplateDependencies:{computed:"_getDomTemplateDependencies(_domTemplate,_dependencies)"},
-        _dependencylist: {computed: "_getArray(_dependencies)"},
-        _demo: {computed: "_getCode(_head,_body)"},
-        _iframeDemo: {computed: "_getCode(_iframeHead,_body)"},
-        _head: {computed: "_getHead(_name)"},
-        _iframeHead: {computed: "_getIframeHead(_base,_name)"},
-        _body: {computed: "_getBody(_name)"},
-        _listOfElements:{type:String, value: "../polymer/polymer.html"},
-        _element: {
-          computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, _listOfElements)"
-        },
-        _descriptor: {computed: "_getDescriptor(_element)"},
-        _tests :{computed: "_getTests(_name)"},
-        _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower,_tests)"},
-        _codeiframe: {computed: "_getCodeiframe(_iframeDemo,_element)"},
-        _bower: {computed: "_getBower(_name, _dependencylist)"},
-        _src: {computed: "_getSrc(_codeiframe)"},
-        demoHeight: {value:400},
-        changed: {type:Boolean,notify:true,value:false}
+    is: 'pair-production',
+    properties:{
+      _variablesSets: {type: String, value: "Inputs,Outputs,Internal"},
+      _base: {type: String, value: "http://open-elements.org/bower_components/new/"},
+      _name: {type: String, value: ""},
+      _description: {type: String, value: ""},
+      _domTemplate: {type:String, value:"<style>:host {display:inline-block;}</style>\n<h2>Demo</h2>"},
+      _functions: String,
+      _functionList: {computed: "_getArray(_functions)"},
+      _dependencies:{type:String, value: "polymer"},
+      _domTemplateDependencies:{computed:"_getDomTemplateDependencies(_domTemplate,_dependencies)"},
+      _dependencylist: {computed: "_getArray(_dependencies)"},
+      _demo: {computed: "_getCode(_head,_body)"},
+      _iframeDemo: {computed: "_getCode(_iframeHead,_body)"},
+      _head: {computed: "_getHead(_name)"},
+      _iframeHead: {computed: "_getIframeHead(_base,_name)"},
+      _body: {computed: "_getBody(_name)"},
+      _listOfElements:{type:String, value: "../polymer/polymer.html"},
+      _element: {
+        computed: "_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, _listOfElements)"
       },
-      _getBower: function(name, dependencylist) { //TODO read and list dependencylist
-        
-        return addLine([tabs(1)+'{',
+      _descriptor: {computed: "_getDescriptor(_element)"},
+      _tests :{computed: "_getTests(_name)"},
+      _markdown: {computed: "_getMarkdown(_demo,_element,_name,_bower,_tests)"},
+      _codeiframe: {computed: "_getCodeiframe(_iframeDemo,_element)"},
+      _bower: {computed: "_getBower(_name, _dependencylist)"},
+       _src: {computed: "_getSrc(_codeiframe)"},
+      demoHeight: {value:400},
+      changed: {type:Boolean,notify:true,value:false}
+    },
+    _getBower: function(name, dependencylist) { //TODO read and list dependencylist
+      return addLine([tabs(1)+'{',
         tabs()+'"name": "'+name+'",',
         tabs()+'"version": "1.0.0",',
         tabs()+'"description": "'+name+'",',
@@ -258,13 +257,11 @@ tabs(1)+'<html>',
             tabs(1)+''+toCamelCase(name)+'.addEventListener(\'keydown\', function() {',
               tabs()+'done();',
             tabs(-1)+'});',
-            tabs()+'MockInteractions.pressSpace('+toCamelCase(name)+');',
           tabs(-1)+'});',
           tabs(1)+'test(\'can be clicked\', function(done) {',
             tabs(1)+''+toCamelCase(name)+'.addEventListener(\'click\', function() {',
               tabs()+'done();',
             tabs(-1)+'});',
-            tabs()+'MockInteractions.tap('+toCamelCase(name)+');',
           tabs(-1)+'});',
         tabs(-1)+'});',
       tabs(-1)+'});',
@@ -379,11 +376,11 @@ tabs(-1)+'</html>']);
         return output;
       },
       _addDependency: function(e) {
-       if (this._dependencies !== "") {
-         this._dependencies = this._dependencies +","+ e.target.textContent;
-       } else {
-         this._dependencies = e.target.textContent;
-       }
+        if (this._dependencies !== "") {
+          this._dependencies = this._dependencies +","+ e.target.textContent;
+        } else {
+          this._dependencies = e.target.textContent;
+        }
       }
     });
   })();
