@@ -5,10 +5,11 @@
   "authors": [
     "Marcus Hitchins <marcus7777@gmail.com>"
   ],
-  "description": "pair-production",
+  "description": "a good way to think about the way your code a element",
   "main": "pair-production.html",
   "keywords": [
     "polymer",
+    "web-components",
     "pair-production"
   ],
   "license": "MIT",
