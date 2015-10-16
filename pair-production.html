@@ -64,6 +64,10 @@ All help is very much appreciated. I hope this project helps people get started 
           </select>
           <template is="dom-if" if="{{docsFor}}" >
             <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor,_listOfElements)}}"></iframe>
+            <form target="_blank" action="http://jsbin.com/" method="post">
+              <input type="hidden" name="html" value="{{_codeiframe}}" />
+              <input type="image" alt="Edit in JSbin" src="../edit-in-jsbin/jsbin.svg" />
+            </form>
           </template>
         </template>
         <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
