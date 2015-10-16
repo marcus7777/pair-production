@@ -77,7 +77,7 @@ All help is very much appreciated. I hope this project helps people get started 
         </template>
       </template>
     </div>
-    <iron-ajax auto url="http://open-elements.org/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
+    <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
     <prism-highlighter></prism-highlighter>
     your code:
