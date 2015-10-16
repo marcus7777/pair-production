@@ -64,7 +64,7 @@ All help is very much appreciated. I hope this project helps people get started 
           </select>
           <template is="dom-if" if="{{docsFor}}" >
             <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor,_listOfElements)}}"></iframe>
-            <form target="_blank" action="http://jsbin.com/" method="post">
+            <form target="_blank" action="https://jsbin.com/" method="post">
               <input type="hidden" name="html" value="{{_codeiframe}}" />
               <input type="image" alt="Edit in JSbin" src="../edit-in-jsbin/jsbin.svg" />
             </form>
@@ -128,7 +128,7 @@ All help is very much appreciated. I hope this project helps people get started 
     is: 'pair-production',
     properties:{
       _variablesSets: {type: String, value: "Inputs,Outputs,Internal"},
-      _base: {type: String, value: "http://open-elements.org/bower_components/new/"},
+      _base: {type: String, value: "https://open-elements.org/bower_components/new/"},
       _name: {type: String, value: ""},
       _description: {type: String, value: ""},
       _domTemplate: {type:String, value:"<style>:host {display:inline-block;}</style>\n<h2>Demo</h2>"},
@@ -361,9 +361,9 @@ tabs(-1)+'</html>']);
       },
       _docsSrc: function(docsFor,listOfElements) {
          return 'data:text/html;charset=utf-8,' + encodeURIComponent(
-          '<base href="http://open-elements.org/bower_components/new/">'+
+          '<base href="https://open-elements.org/bower_components/new/">'+
           '<link rel="import" href="../iron-component-page/iron-component-page.html">'+
-          '<iron-component-page base="http://open-elements.org/bower_components/'+docsFor+'/" src="'+getfile(docsFor,listOfElements)+'"></iron-component-page>">'
+          '<iron-component-page base="https://open-elements.org/bower_components/'+docsFor+'/" src="'+getfile(docsFor,listOfElements)+'"></iron-component-page>">'
          );
       },
       _getDomTemplateDependencies: function(domTemplate,dependencies) {
