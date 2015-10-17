@@ -363,7 +363,7 @@ tabs(-1)+'</html>']);
          return 'data:text/html;charset=utf-8,' + encodeURIComponent(
           '<base href="http://dev.open-elements.org/bower_components/new/">'+
           '<link rel="import" href="../iron-component-page/iron-component-page.html">'+
-          '<iron-component-page base="http://open-elements.org/bower_components/'+docsFor+'/" src="'+getfile(docsFor,listOfElements)+'"></iron-component-page>">'
+          '<iron-component-page base="../'+docsFor+'/" src="'+getfile(docsFor,listOfElements)+'"></iron-component-page>">'
          );
       },
       _getDomTemplateDependencies: function(domTemplate,dependencies) {
