@@ -12,7 +12,7 @@
           <input-save path="{{cat('variable.',label,'.',item,'.type')}}" value="{{type}}" options-input changed="{{changed}}"></input-save>
           <input-save label="{{cat('default for ',item)}}" pattern$="{{getRepType('variable.',label,'.',item,'.type',data)}}" auto-validate path="{{cat('variable.',label,'.',item,'.default')}}" error-message="{{cat('needs to be a ',type,' so ', repType)}}" changed="{{changed}}"></input-save>
           <template is="dom-if" if="{{computed}}">
-            <input-save id="computedInput" on-focus="setDefaultComputed" label="{{cat(item,' is computed by :')}}" auto-validate path="{{cat('variable.',label,'.',item,'.computed')}}" pattern="{{reFunctionsAndVariables}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}" changed="{{changed}}"></input-save>
+            <input-save label="{{cat(item,' is computed by :')}}" auto-validate path="{{cat('variable.',label,'.',item,'.computed')}}" pattern="{{reFunctionsAndVariables}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}" changed="{{changed}}"></input-save>
           </template>
           <input-save label="{{cat('observer ',item)}}" auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}" changed="{{changed}}"></input-save>
         </div>
@@ -71,9 +71,6 @@
           default: return '';break;
         }
 
-      },
-      setDefaultComputed:function(e){
-        this.$.computedInput.value = "get" // getValue
       },
       getReFunctions: function(functions){return '(' + functions.replace(/,/g, '|') + ')';},
       getReFunctionsAndVariables: function(reFunctions) {return reFunctions+'\\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\\)'}
