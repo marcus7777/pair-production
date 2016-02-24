@@ -89,6 +89,7 @@ All help is very much appreciated. I hope this project helps people get started 
       </template>
     </div>
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
+    <iron-ajax auto url="/bowerList" handle-as="text" last-response="{{_bowerList}}"></iron-ajax>
   </template>
 </dom-module>
 <script>
@@ -155,24 +156,21 @@ All help is very much appreciated. I hope this project helps people get started 
       _tests: {computed: '_getTests(_name)'},
       _markdown: {computed: '_getMarkdown(_demo,_element,_name,_bower,_tests)'},
       _codeiframe: {computed: '_getCodeiframe(_iframeDemo,_element)'},
-      _bower: {computed: '_getBower(_name, _dependencylist)'},
+      _bower: {computed: '_getBower(_name, _description, _dependencylist, _bowerList)'},
       _src: {computed: '_getSrc(_codeiframe)'},
       demoHeight: {value: 400},
       changed: {type: Boolean, notify: true, value: false}
     },
-    _getBower: function (name, dependencylist) { // TODO read and list dependencylist
-      return addLine([tabs(1) + '{',
-        tabs() + '"name": "' + name + '",',
-        tabs() + '"version": "1.0.0",',
-        tabs() + '"description": "' + name + '",',
-        tabs() + '"main": "' + name + '.html",',
-        tabs(1) + '"keywords": [',
-        tabs() + '"polymer","web-components"',
-        tabs(-1) + '],',
-        tabs(1) + '"dependencies": {',
-        tabs() + '"polymer": "*"',
-        tabs(-1) + '}',
-        tabs(-1) + '}'])
+    _getBower: function (name, description, dependencylist, bowerList) { // TODO read and list dependencylist match in bowerList and add to output
+      var output = {
+        name:  name,
+        version: "1.0.0",
+        description: description,
+        main: name + '.html",
+        keywords: ["polymer","web-components"],
+        dependencies: {polymer: "*"}
+      }
+      return JSON.stringify(output, null, ' ')
     },
     _cat: function (a, b, c) {
       return a + b + c
