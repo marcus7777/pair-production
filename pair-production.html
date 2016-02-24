@@ -174,7 +174,7 @@ All help is very much appreciated. I hope this project helps people get started 
       for (var n = 0; n < dependencylist.length; ++n) {
         var re = new RegExp('(?:\\"'+dependencylist[n]+'\\"): "([^"]*)',"gi")
         var found = re.exec(bowerList)
-        if (found[1]) {
+        if (found) {
           output.dependencies[dependencylist[n]] = found[1]
         } else {
           output.dependencies[dependencylist[n]] = "*"
