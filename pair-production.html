@@ -161,7 +161,7 @@ All help is very much appreciated. I hope this project helps people get started 
       demoHeight: {value: 400},
       changed: {type: Boolean, notify: true, value: false}
     },
-    _getBower: function (name, description, dependencylist, bowerList) { // TODO read and list dependencylist match in bowerList and add to output
+    _getBower: function (name, description, dependencylist, bowerList) { // TODO fix for paper-textarea ...
       var output = {
         name:  name,
         version: "1.0.0",
@@ -174,8 +174,8 @@ All help is very much appreciated. I hope this project helps people get started 
       for (var n = 0; n < dependencylist.length; ++n) {
         var re = new RegExp('(?:\\"'+dependencylist[n]+'\\"): "([^"]*)',"gi")
         var found = re.exec(bowerList)
-        if (found) {
-          output.dependencies[dependencylist[n]] = found[0]
+        if (found[1]) {
+          output.dependencies[dependencylist[n]] = found[1]
         } else {
           output.dependencies[dependencylist[n]] = "*"
         }
