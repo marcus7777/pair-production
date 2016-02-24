@@ -172,7 +172,7 @@ All help is very much appreciated. I hope this project helps people get started 
       }
       
       for (var n = 0; n < dependencylist.length; ++n) {
-        var re = new RegExp('(?:\\"'+dependencylist[n]+'\\"): ("[^"]*)',"gi")
+        var re = new RegExp('(?:\\"'+dependencylist[n]+'\\"): "([^"]*)',"gi")
         var found = bowerList.match(re)
         if (found) {
           output.dependencies[dependencylist[n]] = found[0]
