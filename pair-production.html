@@ -365,9 +365,9 @@ All help is very much appreciated. I hope this project helps people get started 
       return codeiframe
     },
     _docsSrc: function (docsFor, listOfElements) {
-      return '<base href="http://dev.open-elements.org/bower_components/' + docsFor + '/">\n' +
+      return '<base href="/bower_components/' + docsFor + '/">\n' +
         '<link rel="import" href="../iron-component-page/iron-component-page.html">\n' +
-        '<iron-component-page base="http://dev.open-elements.org/bower_components/' + docsFor + '/" src="' + getfile(docsFor, listOfElements) + '"></iron-component-page>'
+        '<iron-component-page base="/bower_components/' + docsFor + '/" src="' + getfile(docsFor, listOfElements) + '"></iron-component-page>'
     },
     _getDomTemplateDependencies: function (domTemplate, dependencies) {
       var re = /(?:<\/)([a-z]*[\-a-z]*-[a-z]*)(?:>)/gi
