@@ -296,7 +296,7 @@ All help is very much appreciated. I hope this project helps people get started 
       var output = []
 
       output.push(tabs() + '<!--')
-      output.push(tabs() + '`<' + name + '>` ' + description)
+      output.push(tabs() + '`<' + name + '></'+name+'>` ' + description)
       output.push(tabs() + '@demo demo.html')
       output.push(tabs() + '-->', '')
       output.push(tabs(1) + '<dom-module id="' + name + '">')
