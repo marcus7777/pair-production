@@ -174,7 +174,7 @@ All help is very much appreciated. I hope this project helps people get started 
       for (var n = 0; n < dependencylist.length; ++n) {
         var path = getfile(dependencylist[n], listOfElements)
         var bowerName = path.split("/")[1]
-        var re = new RegExp('(?:\\"'+bowerName+'\\"): "([^"]*)',"gi")
+        var re = new RegExp('(?:\\"'+bowerName+'\\"): ?"([^"]*)',"gi")
         var found = re.exec(bowerList)
         if (found) {
           output.dependencies[bowerName] = found[1]
