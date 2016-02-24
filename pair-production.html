@@ -170,6 +170,9 @@ All help is very much appreciated. I hope this project helps people get started 
         keywords: ["polymer","web-components"],
         dependencies: {polymer: "*"}
       }
+      for (var n = 0; n < dependencylist.length; ++n) {
+        output.dependencies[dependencylist[n]] = "*"
+      }
       return JSON.stringify(output, null, '  ')
     },
     _cat: function (a, b, c) {
