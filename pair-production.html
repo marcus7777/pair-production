@@ -54,7 +54,7 @@ All help is very much appreciated. I hope this project helps people get started 
             <button on-tap="_addDependency">{{item}}</button>
           </template>
         </template>
-        <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0; width:100%; border:none;" src="{{_src}}"></iframe>
+        <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0; width:100%; border:none;" srcdoc="{{_src}}"></iframe>
         <form target="_blank" action="http://jsbin.com/" method="post">
           <input type="hidden" name="html" value="{{_codeiframe}}" />
           <input type="image" alt="Edit in JSbin" src="../edit-in-jsbin/jsbin.svg" />
@@ -69,7 +69,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </template>
           </select>
           <template is="dom-if" if="{{docsFor}}" >
-            <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor,_listOfElements)}}"></iframe>
+            <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" srcdoc="{{_docsSrc(docsFor,_listOfElements)}}"></iframe>
           </template>
         </template>
         <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
@@ -362,14 +362,12 @@ All help is very much appreciated. I hope this project helps people get started 
       return iframeDemo + element
     },
     _getSrc: function (codeiframe) {
-      return 'data:text/html;charset=utf-8,' + encodeURIComponent(codeiframe)
+      return codeiframe
     },
     _docsSrc: function (docsFor, listOfElements) {
-      return 'data:text/html;charset=utf-8,' + encodeURIComponent(
-        '<base href="http://dev.open-elements.org/bower_components/' + docsFor + '/">\n' +
+      return '<base href="http://dev.open-elements.org/bower_components/' + docsFor + '/">\n' +
         '<link rel="import" href="../iron-component-page/iron-component-page.html">\n' +
         '<iron-component-page base="http://dev.open-elements.org/bower_components/' + docsFor + '/" src="' + getfile(docsFor, listOfElements) + '"></iron-component-page>'
-      )
     },
     _getDomTemplateDependencies: function (domTemplate, dependencies) {
       var re = /(?:<\/)([a-z]*[\-a-z]*-[a-z]*)(?:>)/gi
