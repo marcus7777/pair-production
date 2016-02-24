@@ -173,12 +173,13 @@ All help is very much appreciated. I hope this project helps people get started 
       
       for (var n = 0; n < dependencylist.length; ++n) {
         var path = getfile(dependencylist[n], listOfElements)
-        var re = new RegExp('(?:\\"'+path.split("/")[1]+'\\"): "([^"]*)',"gi")
+        var bowerName = path.split("/")[1]
+        var re = new RegExp('(?:\\"'+bowerName+'\\"): "([^"]*)',"gi")
         var found = re.exec(bowerList)
         if (found) {
-          output.dependencies[dependencylist[n]] = found[1]
+          output.dependencies[bowerName] = found[1]
         } else {
-          output.dependencies[dependencylist[n]] = "*"
+          output.dependencies[bowerName] = "*"
         }
       }
       return JSON.stringify(output, null, '  ')
