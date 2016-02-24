@@ -69,7 +69,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </template>
           </select>
           <template is="dom-if" if="{{docsFor}}" >
-            <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" srcdoc="{{_docsSrc(docsFor,_listOfElements)}}"></iframe>
+            <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor)}}"></iframe>
           </template>
         </template>
         <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
@@ -365,9 +365,7 @@ All help is very much appreciated. I hope this project helps people get started 
       return codeiframe
     },
     _docsSrc: function (docsFor, listOfElements) {
-      return '<base href="/bower_components/' + docsFor + '/">\n' +
-        '<link rel="import" href="../iron-component-page/iron-component-page.html">\n' +
-        '<iron-component-page base="/bower_components/' + docsFor + '/" src="' + getfile(docsFor, listOfElements) + '"></iron-component-page>'
+      return '/bower_components/' + docsFor
     },
     _getDomTemplateDependencies: function (domTemplate, dependencies) {
       var re = /(?:<\/)([a-z]*[\-a-z]*-[a-z]*)(?:>)/gi
