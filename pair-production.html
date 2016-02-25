@@ -170,7 +170,6 @@ All help is very much appreciated. I hope this project helps people get started 
         keywords: ["polymer","web-components"],
         dependencies: {polymer: "*"}
       }
-      
       for (var n = 0; n < dependencylist.length; ++n) {
         var path = getfile(dependencylist[n], listOfElements)
         var bowerName = path.split("/")[1]
@@ -285,6 +284,7 @@ All help is very much appreciated. I hope this project helps people get started 
         tabs(1) + toCamelCase(name) + ".addEventListener('click', function() {",
         tabs() + 'done()',
         tabs(-1) + '})',
+        tabs() + 'MockInteractions.tap('+toCamelCase(name)+')',
         tabs(-1) + '})',
         tabs(-1) + '})',
         tabs(-1) + '})',
