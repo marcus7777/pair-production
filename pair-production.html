@@ -177,8 +177,8 @@ All help is very much appreciated. I hope this project helps people get started 
           var bowerName = path.split("/")[1]
           var re_repo = new RegExp('([^/]*/'+bowerName+')(?:\.git)','gi')
           var re_ver =  new RegExp('(?:'+bowerName+'/\.bower\.json:"_release": ")([^"]*)','gi'); 
-          var found_repo = re_repo.exec(bowerList)
-          var found_ver = re_ver.exec(bowerList)
+          var found_repo = re_repo.exec(gitList)
+          var found_ver = re_ver.exec(gitList)
           
           if (found_repo && found_ver) {
             output.dependencies[bowerName] = found_repo[1] + "#" +found_ver[1]
