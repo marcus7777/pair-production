@@ -90,6 +90,7 @@ All help is very much appreciated. I hope this project helps people get started 
     </div>
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/bowerList" handle-as="text" last-response="{{_bowerList}}"></iron-ajax>
+    <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
   </template>
 </dom-module>
 <script>
@@ -156,19 +157,19 @@ All help is very much appreciated. I hope this project helps people get started 
       _tests: {computed: '_getTests(_name)'},
       _markdown: {computed: '_getMarkdown(_demo,_element,_name,_bower,_tests)'},
       _codeiframe: {computed: '_getCodeiframe(_iframeDemo,_element)'},
-      _bower: {computed: '_getBower(_name, _description, _dependencylist, _bowerList, _listOfElements)'},
+      _bower: {computed: '_getBower(_name, _description, _dependencylist, _bowerList, _listOfElements, gitList)'},
       _src: {computed: '_getSrc(_codeiframe)'},
       demoHeight: {value: 400},
       changed: {type: Boolean, notify: true, value: false}
     },
-    _getBower: function (name, description, dependencylist, bowerList, listOfElements) { // TODO fix for paper-textarea ...
+    _getBower: function (name, description, dependencylist, bowerList, listOfElements, gitList) { // TODO fix for paper-textarea ...
       var output = {
         name:  name,
         version: "1.0.0",
         description: description,
         main: name + '.html',
         keywords: ["polymer","web-components"],
-        dependencies: {polymer: "*"}
+        dependencies: {}
       }
       for (var n = 0; n < dependencylist.length; ++n) {
         var path = getfile(dependencylist[n], listOfElements)
