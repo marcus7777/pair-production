@@ -157,12 +157,12 @@ All help is very much appreciated. I hope this project helps people get started 
       _tests: {computed: '_getTests(_name)'},
       _markdown: {computed: '_getMarkdown(_demo,_element,_name,_bower,_tests)'},
       _codeiframe: {computed: '_getCodeiframe(_iframeDemo,_element)'},
-      _bower: {computed: '_getBower(_name, _description, _dependencylist, _bowerList, _listOfElements, gitList)'},
+      _bower: {computed: '_getBower(_name, _description, _dependencylist, _listOfElements, _gitList)'},
       _src: {computed: '_getSrc(_codeiframe)'},
       demoHeight: {value: 400},
       changed: {type: Boolean, notify: true, value: false}
     },
-    _getBower: function (name, description, dependencylist, bowerList, listOfElements, gitList) { // TODO fix for paper-textarea ...
+    _getBower: function (name, description, dependencylist, listOfElements, gitList) { // TODO fix for paper-textarea ...
       var output = {
         name:  name,
         version: "1.0.0",
@@ -175,10 +175,13 @@ All help is very much appreciated. I hope this project helps people get started 
         var path = getfile(dependencylist[n], listOfElements)
         if (path.length > 1) {
           var bowerName = path.split("/")[1]
-          var re = new RegExp('(?:'+bowerName+')[^"]*"([^"]*)',"gi")
-          var found = re.exec(bowerList)
-          if (found) {
-            output.dependencies[bowerName] = found[1]
+          var re_repo = new RegExp('([^/]*/'+bowerName+')(?:\.git)','gi')
+          var re_ver =  new RegExp('(?:'+bowerName+'/\.bower\.json:"_release": ")([^"]*)','gi'); 
+          var found_repo = re_repo.exec(bowerList)
+          var found_ver = re_ver.exec(bowerList)
+          
+          if (found_repo && found_ver) {
+            output.dependencies[bowerName] = found_repo[1] + "#" +found_ver[1]
           } else {
             output.dependencies[bowerName] = "*"
           }
