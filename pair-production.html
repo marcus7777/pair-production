@@ -387,7 +387,11 @@ All help is very much appreciated. I hope this project helps people get started 
       return codeiframe
     },
     _docsSrc: function (docsFor, listOfElements) {
-      return '/bower_components/' + docsFor
+      var path = getfile(docsFor, listOfElements)
+      if (path.length > 1) {
+        var bowerName = path.split("/")[1]
+        return '/bower_components/' + bowerName + '/#' + docsFor;
+      }
     },
     _getDomTemplateDependencies: function (domTemplate, dependencies) {
       var re = /(?:<\/)([a-z]*[\-a-z]*-[a-z]*)(?:>)/gi
