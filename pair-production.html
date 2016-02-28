@@ -69,7 +69,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </template>
           </select>
           <template is="dom-if" if="{{docsFor}}" >
-            <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor)}}"></iframe>
+            <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
           </template>
         </template>
         <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
