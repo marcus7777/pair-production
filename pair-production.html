@@ -180,7 +180,7 @@ All help is very much appreciated. I hope this project helps people get started 
           var found_ver = re_ver.exec(gitList)
           
           if (found_repo && found_ver) {
-            output.dependencies[bowerName] = found_repo[1] + "#" +found_ver[1]
+            output.dependencies[bowerName] = found_repo[1] + "#~" +found_ver[1]
           } else {
             output.dependencies[bowerName] = "*"
           }
