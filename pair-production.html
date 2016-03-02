@@ -215,17 +215,16 @@ All help is very much appreciated. I hope this project helps people get started 
       return addLine(output)
     },
     _getHead: function (name) {
-      var output = [
+      if (name !== '') return [
         tabs(1) + '<head>',
         tabs() + '<title>' + name + ' demo</title>',
         tabs() + '<sc' + 'ript src="../webcomponentsjs/webcomponents-lite.js"></sc' + 'ript>',
         tabs() + '<link rel="import" href="' + name + '.html">',
         tabs(-1) + '</head>'
       ]
-      if (name !== '') return output
     },
     _getIframeHead: function (base, name) {
-      var output = [
+      if (name !== '') return [
         tabs(1) + '<head>',
         tabs() + '<base href="' + base + '">',
         tabs() + '<title>' + name + ' demo</title>',
@@ -233,7 +232,6 @@ All help is very much appreciated. I hope this project helps people get started 
         // tabs() + '<sc' + "ript>window.onerror = function (errorMsg, url, line) {document.write('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + line)}</sc" + 'ript>',
         tabs(-1) + '</head>'
       ]
-      if (name !== '') return output
     },
     _getTests: function (name) {
       if (name !== '') {
