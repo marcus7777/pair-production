@@ -319,7 +319,8 @@ All help is very much appreciated. I hope this project helps people get started 
           tabs() + '- bower install',
           tabs() + 'script:',
           tabs() + '- xvfb-run wct --skip-plugin sauce',
-          tabs() + '## wct.conf.json'
+          tabs() + '## wct.conf.json',
+          ''
         ])
         return testStub + JSON.stringify({verbose: true, plugins: {local: { browsers: ["chrome"]}}}, null, '  ')
       }
