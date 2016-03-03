@@ -226,37 +226,37 @@ All help is very much appreciated. I hope this project helps people get started 
     },
     _getIframeHead: function (base, name) {
       if (name !== '') return [
-        tabs(1) + '<head>',
+        tabs(1) +'<head>',
         tabs() + '<base href="' + base + '">',
         tabs() + '<title>' + name + ' demo</title>',
-        // tabs()+'<sc'+'ript src="../webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
-        // tabs() + '<sc' + "ript>window.onerror = function (errorMsg, url, line) {document.write('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + line)}</sc" + 'ript>',
-        tabs(-1) + '</head>'
+        tabs() + '<sc'+'ript src="../webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
+        tabs() + '<sc' + "ript>window.onerror = function (errorMsg, url, line) {document.write('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + line)}</sc" + 'ript>',
+        tabs(-1)+'</head>'
       ]
     },
     _getTests: function (name) {
       if (name !== '') {
         var testStub = addLine([
           tabs() + '<!doctype html>',
-          tabs(1) + '<html>',
-          tabs(1) + '<head>',
+          tabs(1) +'<html>',
+          tabs(1) +'<head>',
           tabs() + '<meta charset="utf-8">',
           tabs() + '<scr' + 'ipt src="../../webcomponentsjs/webcomponents-lite.js"></scr' + 'ipt>',
           tabs() + '<scri' + 'pt src="../../web-component-tester/browser.js"></scr' + 'ipt>',
-          tabs(-1) + '</head>',
-          tabs(1) + '<body>',
-          tabs(1) + '<scr' + 'ipt>',
-          tabs(1) + 'WCT.loadSuites([',
+          tabs(-1)+'</head>',
+          tabs(1) +'<body>',
+          tabs(1) +'<scr' + 'ipt>',
+          tabs(1) +'WCT.loadSuites([',
           tabs() + "'" + name + ".html'",
           tabs() + "'" + name + ".html?dom=shadow'",
-          tabs(-1) + ']);',
-          tabs(-1) + '</scr' + 'ipt>',
-          tabs(-1) + '</body>',
-          tabs(-1) + '</html>',
+          tabs(-1)+']);',
+          tabs(-1)+'</scr' + 'ipt>',
+          tabs(-1)+'</body>',
+          tabs(-1)+'</html>',
           tabs() + '## /test/' + name + '.html',
           tabs() + '<!doctype html>',
-          tabs(1) + '<html>',
-          tabs(1) + '<head>',
+          tabs(1) +'<html>',
+          tabs(1) +'<head>',
           tabs() + '<title>' + name + '</title>',
           tabs() + '<sc' + 'ript src="../../webcomponentsjs/webcomponents.js"></scr' + 'ipt>',
           tabs() + '<scr' + 'ipt src="../../web-component-tester/browser.js"></sc' + 'ript>',
@@ -265,52 +265,52 @@ All help is very much appreciated. I hope this project helps people get started 
           tabs() + '<link rel="import" href="../../polymer/polymer.html">',
           tabs() + '<link rel="import" href="../../test-fixture/test-fixture.html">',
           tabs() + '<link rel="import" href="../' + name + '.html">',
-          tabs(-1) + '</head>',
-          tabs(1) + '<body>',
-          tabs(1) + '<test-fixture id="' + toCamelCase(name) + '">',
-          tabs(1) + '<template>',
+          tabs(-1)+'</head>',
+          tabs(1) +'<body>',
+          tabs(1) +'<test-fixture id="' + toCamelCase(name) + '">',
+          tabs(1) +'<template>',
           tabs() + '<' + name + '></' + name + '> //add attributes',
-          tabs(-1) + '</template>',
-          tabs(-1) + '</test-fixture>',
-          tabs(1) + '<scr' + 'ipt>',
-          tabs(1) + "suite('<" + name + ">', function () {",
+          tabs(-1)+'</template>',
+          tabs(-1)+'</test-fixture>',
+          tabs(1) +'<scr' + 'ipt>',
+          tabs(1) +"suite('<" + name + ">', function () {",
           tabs() + 'var ' + toCamelCase(name) + ';',
-          tabs(1) + 'setup(function () {',
+          tabs(1) +'setup(function () {',
           tabs() + toCamelCase(name) + " = fixture('" + toCamelCase(name) + "');",
-          tabs(-1) + '});',
-          tabs(1) + 'teardown(function () {',
+          tabs(-1)+'});',
+          tabs(1)+'teardown(function () {',
           tabs() + '//...',
-          tabs(-1) + '});',
-          tabs(1) + "suite('basic usage', function () {",
-          tabs(1) + "test('can be triggered with space', function(done) {",
-          tabs(1) + '' + toCamelCase(name) + ".addEventListener('keydown', function() {",
+          tabs(-1)+'});',
+          tabs(1) +"suite('basic usage', function () {",
+          tabs(1) +"test('can be triggered with space', function(done) {",
+          tabs(1) +toCamelCase(name) + ".addEventListener('keydown', function() {",
           tabs() + 'done()',
-          tabs(-1) + '})',
+          tabs(-1)+'})',
           tabs() + 'MockInteractions.pressSpace('+toCamelCase(name)+')',
-          tabs(-1) + '})',
-          tabs(1) + "test('can be clicked', function(done) {",
-          tabs(1) + toCamelCase(name) + ".addEventListener('click', function() {",
+          tabs(-1)+'})',
+          tabs(1) +"test('can be clicked', function(done) {",
+          tabs(1) +toCamelCase(name) + ".addEventListener('click', function() {",
           tabs() + 'done()',
-          tabs(-1) + '})',
+          tabs(-1)+'})',
           tabs() + 'MockInteractions.tap('+toCamelCase(name)+')',
-          tabs(-1) + '})',
-          tabs(-1) + '})',
-          tabs(-1) + '})',
-          tabs(-1) + '</scr' + 'ipt>',
-          tabs(-1) + '</body>',
-          tabs(-1) + '</html>',
+          tabs(-1)+'})',
+          tabs(-1)+'})',
+          tabs(-1)+'})',
+          tabs(-1)+'</scr' + 'ipt>',
+          tabs(-1)+'</body>',
+          tabs(-1)+'</html>',
           tabs() + '## .travis.yml',
           tabs() + 'language: node_js',
           tabs() + 'sudo: false',
           tabs() + 'node_js: stable',
-          tabs(1) + 'addons:',
+          tabs(1) +'addons:',
           tabs() + 'chrome: latest',
-          tabs(-1) + 'apt:',
-          tabs(1) + 'sources:',
+          tabs(-1)+'apt:',
+          tabs(1) +'sources:',
           tabs() + '- google-chrome',
           tabs() + 'packages:',
           tabs() + '- google-chrome-stable',
-          tabs(-1) + 'before_script:',
+          tabs(-1)+'before_script:',
           tabs() + '- npm install web-component-tester',
           tabs() + '- npm install bower',
           tabs() + '- export PATH=$PWD/node_modules/.bin:$PATH',
@@ -325,10 +325,10 @@ All help is very much appreciated. I hope this project helps people get started 
     },
     _getBody: function (name) {
       var output = [
-        tabs(1) + '<body>',
+        tabs(1) +'<body>',
         tabs() + '<h3>' + name + ' Demo</h3>',
         tabs() + '<' + name + '></' + name + '>',
-        tabs(-1) + '</body>'
+        tabs(-1)+'</body>'
       ]
 
       if (name !== '') return output
@@ -340,15 +340,14 @@ All help is very much appreciated. I hope this project helps people get started 
       output.push(tabs() + '`<' + name + '></'+name+'>` ' + description)
       output.push(tabs() + '@demo demo.html')
       output.push(tabs() + '-->', '')
-      output.push(tabs(1) + '<dom-module id="' + name + '">')
-      output.push(tabs(1) + '<template>')
+      output.push(tabs(1) +'<dom-module id="' + name + '">')
+      output.push(tabs(1) +'<template>')
       for (var a = 0; a < domTemplate.split('\n').length; ++a) {
         output.push(tabs() + domTemplate.split('\n')[a])
       }
-      output.push(tabs(-1) + '</template>')
-      output.push(tabs(-1) + '</dom-module>')
-      output.push(tabs(1) + '<sc' + 'ript>')
-      output.push(tabs(1) + 'Polymer({')
+      output.push(tabs(-1)+'</template>')
+      output.push(tabs(-1)+'</dom-module>')
+      output.push(tabs(1) +'<sc' + 'ript>')
       // if (variableList.length > 0 && variableList[0] !== "") {
       //  output.push(tabs()+ 'is: "'+name+'",')
       //  output.push(tabs(1) + 'properties: {')
@@ -380,11 +379,14 @@ All help is very much appreciated. I hope this project helps people get started 
         }
       }
 
+      output.push(tabs(1) +'Polymer(' + JSON.stringify({
+        is: name,
+        properties: variableList
+      }) + ')'))
+      
       console.log('_getElementCode 198 ', variableList)
 
-      output.push(tabs() + 'is: "' + name + '"')
-      output.push(tabs(-1) + '});')
-      output.push(tabs(-1) + '</sc' + 'ript>')
+      output.push(tabs(-1)+'</sc' + 'ript>')
 
       for (var x = 0; x < dependencylist.length; ++x) {
         output.unshift(tabs(0) + '<link rel="import" href="' + getfile(dependencylist[x], listOfElements) + '">')
