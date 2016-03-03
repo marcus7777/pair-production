@@ -336,21 +336,18 @@ All help is very much appreciated. I hope this project helps people get started 
     _getElementCode: function (name, description, dependencylist, domTemplate, variablesSets, changed, listOfElements) {
       var output = []
 
-      output.push(tabs() + '<!--')
-      output.push(tabs() + '`<' + name + '></'+name+'>` ' + description)
-      output.push(tabs() + '@demo demo.html')
-      output.push(tabs() + '-->', '')
-      output.push(tabs(1) +'<dom-module id="' + name + '">')
-      output.push(tabs(1) +'<template>')
+      output.push('<!--')
+      output.push('`<' + name + '></'+name+'>` ' + description)
+      output.push('@demo demo.html')
+      output.push('-->', '')
+      output.push('<dom-module id="' + name + '">')
+      output.push('<template>')
       for (var a = 0; a < domTemplate.split('\n').length; ++a) {
         output.push(tabs() + domTemplate.split('\n')[a])
       }
-      output.push(tabs(-1)+'</template>')
-      output.push(tabs(-1)+'</dom-module>')
-      output.push(tabs(1) +'<sc' + 'ript>')
-      // if (variableList.length > 0 && variableList[0] !== "") {
-      //  output.push(tabs()+ 'is: "'+name+'",')
-      //  output.push(tabs(1) + 'properties: {')
+      output.push('</template>')
+      output.push('</dom-module>')
+      output.push('<sc' + 'ript>')
       var variableList = []
       //  make variableList
       for (var i = 0; i < variablesSets.split(',').length; ++i) {
@@ -379,17 +376,20 @@ All help is very much appreciated. I hope this project helps people get started 
         }
       }
 
-      output.push(tabs(1) +'Polymer(' + JSON.stringify({
+      output.push('Polymer(' + JSON.stringify({
         is: name,
         properties: variableList
-      }) + ')'))
+      },tojs,'  ') + ')')
       
+      function tojs (key, value) {
+        return value 
+      }
       console.log('_getElementCode 198 ', variableList)
 
-      output.push(tabs(-1)+'</sc' + 'ript>')
+      output.push('</sc' + 'ript>')
 
       for (var x = 0; x < dependencylist.length; ++x) {
-        output.unshift(tabs(0) + '<link rel="import" href="' + getfile(dependencylist[x], listOfElements) + '">')
+        output.unshift('<link rel="import" href="' + getfile(dependencylist[x], listOfElements) + '">')
       }
       return addLine(output)
     },
