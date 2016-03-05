@@ -128,7 +128,7 @@ All help is very much appreciated. I hope this project helps people get started 
   Polymer({
     is: 'pair-production',
     properties: {
-      name:{computed: 'getName(_name)'},
+      _name:{computed: 'getName(name)'},
       _variablesSets: {type: String, value: 'Inputs,Outputs,Internal'},
       _base: {type: String, value: '/bower_components/new/'},
       _name: {type: String},
