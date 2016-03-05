@@ -42,7 +42,8 @@ All help is very much appreciated. I hope this project helps people get started 
     <div class="vertical center-justified layout">
       <h4>Let me help you conjure a new element:</h4>
       <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
-      <template is="dom-if" if="{{gotName(_name,_listOfElements)}}">
+      <template is="dom-if" if="{{_gotName}}">
+        <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
       </template>
       
       <template is="dom-if" if="{{_name}}">
@@ -128,7 +129,7 @@ All help is very much appreciated. I hope this project helps people get started 
   Polymer({
     is: 'pair-production',
     properties: {
-      _name:{computed: 'getName(name)'},
+      _gotName:{computed: 'getGotName(_name, _listOfElements)'},
       _variablesSets: {type: String, value: 'Inputs,Outputs,Internal'},
       _base: {type: String, value: '/bower_components/new/'},
       _name: {type: String},
@@ -145,6 +146,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _iframeHead: {computed: '_getIframeHead(_base,_name)'},
       _body: {computed: '_getBody(_name)'},
       _listOfElements:String,
+      _listOfElementsList:{computed: '_getArray()'},
       _element: {
         computed: '_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, _listOfElements)'
       },
@@ -157,11 +159,8 @@ All help is very much appreciated. I hope this project helps people get started 
       demoHeight: {value: 400},
       changed: {type: Boolean, notify: true, value: false}
     },
-    gotName: function (name, list) {
-      return -1 === list.indexOf(name)
-    },
-    getName: function (name) {
-      return name // TODO rewrite name 'Netcast alert' to 'netcast-alert'
+    getGotName: function (name, list) {
+      return -1 !== list.indexOf('bower_components/'+name+'/'+name+'.html')
     },
     _getBower: function (name, description, dependencylist, listOfElements, gitList) { // TODO fix for paper-textarea ...
       var output = {
