@@ -41,8 +41,8 @@ All help is very much appreciated. I hope this project helps people get started 
   <template>
     <div class="vertical center-justified layout">
       <h4>Let me help you conjure a new element:</h4>
-      <input-save path="name" label="Name the new element - like pirate-ninja" value="{{name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
-      <template is="dom-if" if="{{gotName(_listOfElements,_name)}}">
+      <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+      <template is="dom-if" if="{{gotName(_name,_listOfElements)}}">
       </template>
       
       <template is="dom-if" if="{{_name}}">
