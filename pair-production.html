@@ -41,19 +41,14 @@ All help is very much appreciated. I hope this project helps people get started 
   <template>
     <div class="vertical center-justified layout">
       <h4>Let me help you conjure a new element:</h4>
-      <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+      <input-save path="name" label="Name the new element - like pirate-ninja" value="{{name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+      <template is="dom-if" if="{{gotName(_listOfElements,_name)}}">
+      </template>
+      
       <template is="dom-if" if="{{_name}}">
         <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
         <input-save path="template" code textarea value="{{_domTemplate}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
         Your demo:
-        <!-- <qr-code type-number="34" title="Demo" value="{{_src}}" error-correct-level="H"></qr-code> --> 
-        <template is="dom-if" if="{{_domTemplateDependencies.length}}">
-          <p>Have you included <span>{{_domTemplateDependencies}}</span> ?</p>
-          <p>add:</p>
-          <template is="dom-repeat" items="{{_domTemplateDependencies}}" >
-            <button on-tap="_addDependency">{{item}}</button>
-          </template>
-        </template>
         <template is="dom-if" if="{{_dependencylist.length}}">
           <select style="float:right" value="{{docsFor::input}}">
             <option value="false">show documentation</option>
@@ -133,6 +128,7 @@ All help is very much appreciated. I hope this project helps people get started 
   Polymer({
     is: 'pair-production',
     properties: {
+      name:{computed: 'getName(_name)'},
       _variablesSets: {type: String, value: 'Inputs,Outputs,Internal'},
       _base: {type: String, value: '/bower_components/new/'},
       _name: {type: String},
@@ -142,7 +138,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _functionList: {computed: '_getArray(_functions)'},
       _dependencies: {type: String, value: 'polymer'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(_domTemplate,_dependencies)'},
-      _dependencylist: {computed: '_getArray(_dependencies)'},
+      _dependencylist: {computed: '_getArray(_dependencies, _domTemplateDependencies)'},
       _demo: {computed: '_getCode(_head,_body)'},
       _iframeDemo: {computed: '_getCode(_iframeHead,_body)'},
       _head: {computed: '_getHead(_name)'},
@@ -160,6 +156,12 @@ All help is very much appreciated. I hope this project helps people get started 
       _src: {computed: '_getSrc(_codeiframe)'},
       demoHeight: {value: 400},
       changed: {type: Boolean, notify: true, value: false}
+    },
+    gotName: function (name, list) {
+      return -1 === list.indexOf(name)
+    },
+    getName: function (name) {
+      return name // TODO rewrite name 'Netcast alert' to 'netcast-alert'
     },
     _getBower: function (name, description, dependencylist, listOfElements, gitList) { // TODO fix for paper-textarea ...
       var output = {
@@ -195,9 +197,13 @@ All help is very much appreciated. I hope this project helps people get started 
     _cat: function (a, b, c) {
       return a + b + c
     },
-    _getArray: function (s) {
-      if (s !== '') {
-        return s.split(',')
+    _getArray: function (s, a) {
+      if (s !== '' && a === undefined) {
+        return s.split(',')  
+      } else if (s !== '' && Array.isArray(a)){
+        return s.split(',').concat(a)
+      } else if (Array.isArray(a)) {
+        return a
       }
     },
     _getCode: function (head, body) {
@@ -348,42 +354,51 @@ All help is very much appreciated. I hope this project helps people get started 
       output.push('</template>')
       output.push('</dom-module>')
       output.push('<sc' + 'ript>')
-      var variableList = []
+      var variableList = {}
       //  make variableList
       for (var i = 0; i < variablesSets.split(',').length; ++i) {
         var set = variablesSets.split(',')[i]
+        var perfix = "" 
+        if (set === "Internal") {
+          var perfix = "_" 
+        }
+
         if (js_data !== undefined || js_data !== null) {
           if (js_data.hasOwnProperty('variables.' + set)) {
             var varsList = toCamelCase(js_data['variables.' + set])
             if (varsList) {
               varsList = varsList.split(',')
-              console.log('_getElementCode 187 ', varsList)
+              console.log('_getElementCode', varsList)
               if (varsList.length > 0) {
                 for (var n = 0; n < varsList.length; ++n) {
-                  variableList.push({
-                    name: varsList[n],
-                    type: '',
-                    value: '',
-                    notify: '',
-                    readOnly: '',
-                    reflectToAttribute: '',
-                    observer: ''
-                  })
+
+                  variableList[perfix + varsList[n]] = {}
+                    // type: '',
+                    // readOnly: '',
+                    // reflectToAttribute: '',
+                    // observer: ''
+                  if (set === "Outputs") {                  
+                    variableList[perfix + varsList[n]].notify = true
+                  }
+
+                  if (js_data['variable.' + set + '.' + varsList[n] + '.default']) {                  
+                    variableList[perfix + varsList[n]].value = js_data['variable.' + set + '.' + varsList[n] + '.default']
+                  }
+
                 }
               }
             }
           }
         }
       }
-
+      var re = /"([^"]*)":/gm; 
+      var subst = '$1:'; 
+ 
       output.push('Polymer(' + JSON.stringify({
         is: name,
         properties: variableList
-      },tojs,'  ') + ')')
+      },null,'  ').replace(re, subst) + ')')
       
-      function tojs (key, value) {
-        return value 
-      }
       console.log('_getElementCode 198 ', variableList)
 
       output.push('</sc' + 'ript>')
@@ -427,13 +442,6 @@ All help is very much appreciated. I hope this project helps people get started 
       }
 
       return output
-    },
-    _addDependency: function (e) {
-      if (this._dependencies !== '') {
-        this._dependencies = this._dependencies + ',' + e.target.textContent
-      } else {
-        this._dependencies = e.target.textContent
-      }
     }
   })
 })()
