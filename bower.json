@@ -1,23 +1,21 @@
 {
   "name": "pair-production",
-  "version": "0.0.1",
-  "homepage": "https://github.com/marcus7777/pair-production",
-  "authors": [
-    "Marcus Hitchins <marcus7777@gmail.com>"
-  ],
-  "description": "a good way to think about the way your code a element",
+  "version": "1.0.0",
+  "description": "# Open Elements\na list of polyer elements",
   "main": "pair-production.html",
   "keywords": [
     "polymer",
-    "web-components",
-    "pair-production"
+    "web-components"
   ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+  "dependencies": {
+    "iron-ajax": "PolymerElements/iron-ajax",
+    "paper-input": "PolymerElements/paper-input",
+    "html-edit": "marcus7777/html-edit",
+    "markdown-edit": "marcus7777/markdown-edit",
+    "iron-localstorage": "PolymerElements/iron-localstorage#~1.0.5",
+    "app-globals": "marcus7777/app-globals",
+    "prism-element": "PolymerElements/prism-element#~1.0.3",
+    "marked-element": "PolymerElements/marked-element#~1.1.3",
+    "edit-in-jsbin": "marcus7777/edit-in-jsbin"
+  }
 }
