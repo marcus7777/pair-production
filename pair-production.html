@@ -125,7 +125,16 @@ All help is very much appreciated. I hope this project helps people get started 
     }
     return '../polymer/polymer.html'
   }
-
+  var getfileForIframe = function (dependency, listOfElements) {
+    var re = /bower_components/gi
+    var elements = listOfElements.split('\n')
+    for (var i = 0; i < elements.length; ++i) {
+      if (elements[i].indexOf('/' + dependency + '.html') !== -1) {
+        return '/'.listOfElements.split('\n')[i]
+      }
+    }
+    return '/bower_components/polymer/polymer.html'
+  }
   Polymer({
     is: 'pair-production',
     properties: {
@@ -172,7 +181,7 @@ All help is very much appreciated. I hope this project helps people get started 
         dependencies: {}
       }
       for (var n = 0; n < dependencylist.length; ++n) {
-        var path = getfile(dependencylist[n], listOfElements)
+        var path = getfileForIframe(dependencylist[n], listOfElements)
         if (path.length > 1) {
           var bowerName = path.split("/")[1]
           var re_repo = new RegExp('([^/]*/'+bowerName+')(?:\.git)','gi')
@@ -403,7 +412,7 @@ All help is very much appreciated. I hope this project helps people get started 
       output.push('</sc' + 'ript>')
 
       for (var x = 0; x < dependencylist.length; ++x) {
-        output.unshift('<link rel="import" href="' + getfile(dependencylist[x], listOfElements) + '">')
+        output.unshift('<link rel="import" href="' + getfileForIframe(dependencylist[x], listOfElements) + '">')
       }
       return addLine(output)
     },
