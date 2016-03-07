@@ -224,7 +224,7 @@ All help is very much appreciated. I hope this project helps people get started 
       if (name !== '') return [
         tabs(1) + '<head>',
         tabs() + '<title>' + name + ' demo</title>',
-        tabs() + '<sc' + 'ript src="../webcomponentsjs/webcomponents-lite.js"></sc' + 'ript>',
+        tabs() + '<sc' + 'ript src="/bower_components/webcomponentsjs/webcomponents-lite.js"></sc' + 'ript>',
         tabs() + '<link rel="import" href="' + name + '.html">',
         tabs(-1) + '</head>'
       ]
@@ -234,7 +234,7 @@ All help is very much appreciated. I hope this project helps people get started 
         tabs(1) +'<head>',
         tabs() + '<base href="' + base + '">',
         tabs() + '<title>' + name + ' demo</title>',
-        tabs() + '<sc'+'ript src="../webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
+        tabs() + '<sc'+'ript src="/bower_components/webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
         tabs() + '<sc' + "ript>window.onerror = function (errorMsg, url, line) {document.write('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + line)}</sc" + 'ript>',
         tabs(-1)+'</head>'
       ]
