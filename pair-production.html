@@ -180,7 +180,7 @@ All help is very much appreciated. I hope this project helps people get started 
         dependencies: {}
       }
       for (var n = 0; n < dependencylist.length; ++n) {
-        var path = getfileForIframe(dependencylist[n], listOfElements)
+        var path = getfile(dependencylist[n], listOfElements)
         if (path.length > 1) {
           var bowerName = path.split("/")[1]
           var re_repo = new RegExp('([^/]*/'+bowerName+')(?:\.git)','gi')
