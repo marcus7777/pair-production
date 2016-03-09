@@ -48,11 +48,9 @@ All help is very much appreciated. I hope this project helps people get started 
       
       <template is="dom-if" if="{{_name}}">
         <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
-        <input-save path="template" code textarea value="{{_domTemplate}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
-        Your demo:
         <template is="dom-if" if="{{_dependencylist.length}}">
           <select style="float:right" value="{{docsFor::input}}">
-            <option value="false">show documentation</option>
+            <option value="">show documentation</option>
             <template is="dom-repeat" items="{{_dependencylist}}" >
               <option>{{item}}</option>
             </template>
@@ -61,6 +59,7 @@ All help is very much appreciated. I hope this project helps people get started 
             <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
           </template>
         </template>
+        <input-save path="template" code textarea value="{{_domTemplate}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
         <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0; width:100%; border:none;" srcdoc="{{_src}}"></iframe>
         <form target="_blank" action="http://jsbin.com/" method="post">
           <input type="hidden" name="html" value="{{_codeiframe}}" />
@@ -130,7 +129,7 @@ All help is very much appreciated. I hope this project helps people get started 
     var elements = listOfElements.split('\n')
     for (var i = 0; i < elements.length; ++i) {
       if (elements[i].indexOf('/' + dependency + '.html') !== -1) {
-        return '/'.listOfElements.split('\n')[i]
+        return '/'+listOfElements.split('\n')[i]
       }
     }
     return '/bower_components/polymer/polymer.html'
