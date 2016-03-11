@@ -41,7 +41,7 @@ All help is very much appreciated. I hope this project helps people get started 
   <template>
     <div class="vertical center-justified layout">
       <h4>Let me help you conjure a new element:</h4>
-      <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z]+-[a-z\-]*[a-z]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+      <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
       <template is="dom-if" if="{{_gotName}}">
         <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
       </template>
@@ -66,9 +66,9 @@ All help is very much appreciated. I hope this project helps people get started 
           <input type="image" alt="Edit in JSbin" src="../edit-in-jsbin/jsbin.svg" />
         </form>
         <input-save path="demoHeight" type="number" value="{{demoHeight}}" label="Height of demo" ></input-save>
-        <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-zA-Z\/-]*[a-zA-Z\/\,-]*[a-zA-Z\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+        <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
         <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
-        <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+        <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
         <template is="dom-repeat" items="{{_functionList}}" >
           <function-list-input variable-list="{{_variableList}}" name="{{item}}"></function-list-input>   
         </template>
@@ -437,7 +437,7 @@ All help is very much appreciated. I hope this project helps people get started 
       }
     },
     _getDomTemplateDependencies: function (domTemplate, dependencies) {
-      var re = /(?:<\/)([a-z]*[\-a-z]*-[a-z]*)(?:>)/gi
+      var re = /(?:<\/)([a-z0-9]*[\-a-z0-9]*-[a-z0-9]*)(?:>)/gi
       var output = []
       var m
 
