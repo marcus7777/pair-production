@@ -93,7 +93,7 @@
       }, 3000);
       return js_data;
     },
-    dataChanged: function(loading_data) {
+    dataChanged: function(loading_data) { if (loading_data) {
       if (loading_data !== undefined || loading_data !== null){ 
         if (loading_data.hasOwnProperty(this.path) && this.value !== loading_data[this.path]) {
           if (this.optionsInput) {
@@ -104,7 +104,7 @@
         }
       }
       this.loaded = true;
-    },
+    }},
     saveOptions: function(e) {
       values = [];
       for (x=0;x<e.currentTarget.length;x++) {
