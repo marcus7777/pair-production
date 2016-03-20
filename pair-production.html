@@ -43,61 +43,61 @@ All help is very much appreciated. I hope this project helps people get started 
     <div class="vertical center-justified layout">
       
       <h4>Let me help you conjure a new element:</h4>
-      <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
-      <template is="dom-if" if="{{_gotName}}">
-        <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
-      </template>
-      
-      <template is="dom-if" if="{{_name}}">
-        <iron-accordions>
-          <iron-accordion>
-            <h3 header>What problem does it solve?</h3>
-            <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
-          </iron-accordion>
-          <iron-accordion>
-            <h3 header>The HTML</h3>
-            <template is="dom-if" if="{{_dependencylist.length}}">
-              <select style="float:right" value="{{docsFor::input}}">
-                <option value="">show documentation</option>
-                <template is="dom-repeat" items="{{_dependencylist}}" >
-                  <option>{{item}}</option>
-                </template>
-              </select>
-              <template is="dom-if" if="{{docsFor}}" >
-                <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
-              </template>
-            </template>
-            <input-save path="template" code textarea value="{{_domTemplate}}" list-of-elements="{{_listOfElements}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
-            <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0; width:100%; border:none;" srcdoc="{{_src}}"></iframe>
-            <form target="_blank" action="http://jsbin.com/" method="post">
-              <input type="hidden" name="html" value="{{_codeiframe}}" />
-              <input type="image" alt="Edit in JSbin" src="../edit-in-jsbin/jsbin.svg" />
-            </form>
-          </iron-accordion>
-          <iron-accordion>
-            <h3 header>Settings</h3>
-            <input-save path="demoHeight" type="number" value="{{demoHeight}}" label="Height of demo" ></input-save>
-            <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-            <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
-          </iron-accordion>
-          <iron-accordion>
-            <h3 header>Variables</h3>
-            <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
-            <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-            <template is="dom-repeat" items="{{_functionList}}" >
-              <function-list-input variable-list="{{_variableList}}" name="{{item}}"></function-list-input>   
-            </template>
-          </iron-accordion>
-          <iron-accordion>
-            <h3 header>Your Code</h3>
-            <prism-highlighter></prism-highlighter>
-            <marked-element markdown="{{_markdown}}"></marked-element>
-            your Docs are going here:<br />
-            your Link to Share are going here:<br />
-            <a href="https://github.com/new">new</a>
-            your other localy save elements are going to be available for your demo and listed here:
-            <input-save textarea path="moreHTML" value="{{_moreHTML}}"></input-save>
+      <iron-accordions>
+        <iron-accordion>
+          <h3 header>What problem does it solve?</h3>
+          <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+          <template is="dom-if" if="{{_gotName}}">
+            <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
           </template>
+        </iron-accordion>
+        <iron-accordion>
+          <h3 header>What problem does it solve?</h3>
+          <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
+        </iron-accordion>
+        <iron-accordion>
+          <h3 header>The HTML</h3>
+          <template is="dom-if" if="{{_dependencylist.length}}">
+            <select style="float:right" value="{{docsFor::input}}">
+              <option value="">show documentation</option>
+              <template is="dom-repeat" items="{{_dependencylist}}" >
+                <option>{{item}}</option>
+              </template>
+            </select>
+            <template is="dom-if" if="{{docsFor}}" >
+              <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+            </template>
+          </template>
+          <input-save path="template" code textarea value="{{_domTemplate}}" list-of-elements="{{_listOfElements}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
+          <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0; width:100%; border:none;" srcdoc="{{_src}}"></iframe>
+          <form target="_blank" action="http://jsbin.com/" method="post">
+            <input type="hidden" name="html" value="{{_codeiframe}}" />
+            <input type="image" alt="Edit in JSbin" src="../edit-in-jsbin/jsbin.svg" />
+          </form>
+        </iron-accordion>
+        <iron-accordion>
+          <h3 header>Settings</h3>
+        <input-save path="demoHeight" type="number" value="{{demoHeight}}" label="Height of demo" ></input-save>
+          <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+          <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
+        </iron-accordion>
+        <iron-accordion>
+          <h3 header>Variables</h3>
+          <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
+          <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+          <template is="dom-repeat" items="{{_functionList}}" >
+            <function-list-input variable-list="{{_variableList}}" name="{{item}}"></function-list-input>   
+          </template>
+        </iron-accordion>
+        <iron-accordion>
+          <h3 header>Your Code</h3>
+          <prism-highlighter></prism-highlighter>
+          <marked-element markdown="{{_markdown}}"></marked-element>
+          your Docs are going here:<br />
+          your Link to Share are going here:<br />
+          <a href="https://github.com/new">new</a>
+          your other localy save elements are going to be available for your demo and listed here:
+          <input-save textarea path="moreHTML" value="{{_moreHTML}}"></input-save>
         </iron-accordion>
       </iron-accordions>
     </div>
