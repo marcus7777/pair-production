@@ -31,8 +31,7 @@
     
  * a bower.json file ✏/ bower command
  
- demo at [data](https://open-elements.org/bower_components/pair-production/demo.html) need to fixed
-
+demo at [data](https://open-elements.org/bower_components/pair-production/demo.html) need to fixed
 
 All help is very much appreciated. I hope this project helps people get started with polymer. And it is also a big thank you to the polymer team for all the help.
 @demo demo.html run it 
@@ -109,7 +108,6 @@ All help is very much appreciated. I hope this project helps people get started 
   var at = 0
   var tabs = function (n) {
     var output = ''
-
     if (+n < 0) { at += n }
     for (var i = 0; i < at; ++i) {
       output += '  '
@@ -117,11 +115,9 @@ All help is very much appreciated. I hope this project helps people get started 
     if (+n > 0) { at += n }
     return output
   }
-
   var addLine = function (nl) {
     return nl.join('\n')
   }
-
   var toCamelCase = function (str) {
     if (typeof str === 'string') {
       return str.replace(/ {2}|-|_/g, ' ').replace(/, /g, ',').replace(/ \S/g, function (txt) {
