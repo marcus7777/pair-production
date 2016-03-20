@@ -41,19 +41,18 @@ All help is very much appreciated. I hope this project helps people get started 
 <dom-module id="pair-production">
   <template>
     <div class="vertical center-justified layout">
-      
       <h4>Let me help you conjure a new element:</h4>
       <iron-accordions>
         <iron-accordion>
           <h3 header>What problem does it solve?</h3>
+          <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
+        </iron-accordion>
+        <iron-accordion>
+          <h3 header>Name</h3>
           <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
           <template is="dom-if" if="{{_gotName}}">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
           </template>
-        </iron-accordion>
-        <iron-accordion>
-          <h3 header>What problem does it solve?</h3>
-          <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
         </iron-accordion>
         <iron-accordion>
           <h3 header>The HTML</h3>
