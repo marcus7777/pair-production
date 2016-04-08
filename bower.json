@@ -16,6 +16,7 @@
     "app-globals": "marcus7777/app-globals",
     "prism-element": "PolymerElements/prism-element#~1.0.3",
     "marked-element": "PolymerElements/marked-element#~1.1.3",
+    "iron-accordions": "alijaya/iron-accordions#~1.0.0",
     "edit-in-jsbin": "marcus7777/edit-in-jsbin"
   }
 }
