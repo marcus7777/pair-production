@@ -78,15 +78,13 @@
     saveThis:  function(path,value) {
       js_data[path] = value
       this.debounce('save', function() {
-        if (this.loaded === true) {
-          if (this.data === undefined || this.data === null) {
-            this.data = {};
-          }
-          if (this.data[path] !== js_data[path]) {
-            this.data = clone(js_data)
-            this.stringifyData = JSON.stringify(this.data)
-            this.changed = !this.changed
-          }
+        if (this.data === undefined || this.data === null) {
+          this.data = {};
+        }
+        if (this.data[path] !== js_data[path]) {
+          this.data = clone(js_data)
+          this.stringifyData = JSON.stringify(this.data)
+          this.changed = !this.changed
         }
       }, 3000);
       return js_data;
