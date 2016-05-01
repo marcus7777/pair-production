@@ -3,7 +3,7 @@
 <link rel="import" href="../markdown-edit/markdown-edit.html">
 
 <link rel="import" href="../paper-input/paper-textarea.html">
-<link rel="import" href="../iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../iron-location/iron-location.html">
 <link rel="import" href="../html-edit/html-edit.html">
 <!--
 `<input-save>` saves you work as you type 
@@ -33,12 +33,13 @@
         </template>
       </select>
     </template>
-    <iron-localstorage on-iron-localstorage-load-empty="initializeDefault" name="pair-production" value="{{data}}"></iron-localstorage>
+    <iron-location hash="{{stringifyData}}"></iron-localstorage>
     <app-globals value="{{data}}"></app-globals>
   </template>
 </dom-module>
 <script>
-  var js_data = {};
+  
+  var js_data = {}
   
   Polymer({
     is: 'input-save',
@@ -74,20 +75,17 @@
     isText: function(textarea,optionsInput){
       return !textarea && !optionsInput;
     },
-    initializeDefault: function(ev){
-      this.loaded = true;
-      this.data = js_data;
-    },
     saveThis:  function(path,value) {
-      js_data[path] = value;
+      js_data[path] = value
       this.debounce('save', function() {
         if (this.loaded === true) {
           if (this.data === undefined || this.data === null) {
             this.data = {};
           }
           if (this.data[path] !== js_data[path]) {
-            this.data = clone(js_data);
-            this.changed = !this.changed ;
+            this.data = clone(js_data)
+            this.stringifyData = JSON.stringify(this.data)
+            this.changed = !this.changed
           }
         }
       }, 3000);
