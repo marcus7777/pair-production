@@ -79,12 +79,6 @@ All help is very much appreciated. I hope this project helps people get started 
           </form> -->
           </iron-accordion>
           <iron-accordion>
-            <h3 header>Settings <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
-            <input-save path="demoHeight" type="number" value="{{demoHeight}}" label="Height of demo" ></input-save>
-            <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-            <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
-          </iron-accordion>
-          <iron-accordion>
             <h3 header>Variables <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
             <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
             <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
@@ -101,6 +95,12 @@ All help is very much appreciated. I hope this project helps people get started 
             <a href="https://github.com/new">new</a>
             your other localy save elements are going to be available for your demo and listed here:
             <input-save textarea path="moreHTML" value="{{_moreHTML}}"></input-save>
+          </iron-accordion>
+          <iron-accordion>
+            <h3 header>Settings <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
+            <input-save path="demoHeight" type="number" value="{{demoHeight}}" label="Height of demo" ></input-save>
+            <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+            <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
           </iron-accordion>
         </template>
       </iron-accordions>
