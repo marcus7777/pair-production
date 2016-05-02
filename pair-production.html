@@ -187,7 +187,13 @@ All help is very much appreciated. I hope this project helps people get started 
       changed: {type: Boolean, notify: true, value: false}
     },
     getGotName: function (name, list) {
-      return -1 !== list.indexOf('bower_components/'+name+'/'+name+'.html')
+      if (-1 !== list.indexOf('bower_components/'+name+'/'+name+'.html')) {
+        document.title = "Rewriting " + name
+        return true
+      } else {
+        document.title = "Making " + name
+        return false
+      }
     },
     _getBower: function (name, description, dependencylist, listOfElements, gitList) { // TODO fix for paper-textarea ...
       var output = {
