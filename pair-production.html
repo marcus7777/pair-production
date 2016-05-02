@@ -175,7 +175,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _listOfElements:String,
       _listOfElementsList:{computed: '_getArray()'},
       _element: {
-        computed: '_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, _listOfElements)'
+        computed: '_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, _listOfElements, _functionList)'
       },
       _descriptor: {computed: '_getDescriptor(_element)'},
       _tests: {computed: '_getTests(_name)'},
@@ -371,7 +371,7 @@ All help is very much appreciated. I hope this project helps people get started 
 
       if (name !== '') return output
     },
-    _getElementCode: function (name, description, dependencylist, domTemplate, variablesSets, changed, listOfElements) {
+    _getElementCode: function (name, description, dependencylist, domTemplate, variablesSets, changed, listOfElements, functionList) {
       var output = []
 
       output.push('<!--')
@@ -426,11 +426,22 @@ All help is very much appreciated. I hope this project helps people get started 
       var re = /"([^"]*)":/gm; 
       var subst = '$1:'; 
  
-      output.push('Polymer(' + JSON.stringify({
+      output.push('Polymer(' + JSON.stringify(merge({
         is: name,
         properties: variableList
-      },null,'  ').replace(re, subst) + ')')
+      }, funcIt(functionList)),null,'  ').replace(re, subst) + ')')
       
+      function merge (obj1,obj2){
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+        return obj3;
+      }
+      funcIt(functs) {
+        var functObj = {akey:"aval"}
+        console.log(functs)
+        return functObj
+      }
       console.log('_getElementCode 198 ', variableList)
 
       output.push('</sc' + 'ript>')
