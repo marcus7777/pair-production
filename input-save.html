@@ -78,8 +78,8 @@
     ready: function(){
       this.async(function() {
         if (this.data === undefined || this.data === null) {
-          this.data = JSON.parse(this.stringifyData)
-          js_data = JSON.parse(this.stringifyData)
+          this.data = JSON.parse(decodeURIComponent(this.stringifyData))
+          js_data = JSON.parse(decodeURIComponent(this.stringifyData))
         }
       }, 1500)
     },
@@ -91,7 +91,7 @@
         }
         if (this.data[path] !== js_data[path]) {
           this.data = clone(js_data)
-          this.stringifyData = JSON.stringify(this.data)
+          this.stringifyData = encodeURIComponent(JSON.stringify(this.data))
           this.changed = !this.changed
         }
       }, 3000)
