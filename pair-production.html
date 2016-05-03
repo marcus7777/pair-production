@@ -186,7 +186,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _listOfElements:String,
       _listOfElementsList:{computed: '_getArray()'},
       _element: {
-        computed: '_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, _listOfElements, _functionList)'
+        computed: '_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, _listOfElements)'
       },
       _descriptor: {computed: '_getDescriptor(_element)'},
       _tests: {computed: '_getTests(_name)'},
@@ -382,7 +382,7 @@ All help is very much appreciated. I hope this project helps people get started 
 
       if (name !== '') return output
     },
-    _getElementCode: function (name, description, dependencylist, domTemplate, variablesSets, changed, listOfElements, functionList) {
+    _getElementCode: function (name, description, dependencylist, domTemplate, variablesSets, changed, listOfElements) {
       var output = []
 
       output.push('<!--')
@@ -437,10 +437,10 @@ All help is very much appreciated. I hope this project helps people get started 
       var re = /"([^"]*)":/gm; 
       var subst = '$1:'; 
  
-      output.push('Polymer(' + JSON.stringify(merge({
+      output.push('Polymer(' + JSON.stringify({
         is: name,
         properties: variableList
-      }, funcIt(functionList)),null,'  ').replace(re, subst) + ')')
+      },null,'  ').replace(re, subst) + ')')
      
       console.log('_getElementCode 198 ', variableList)
 
