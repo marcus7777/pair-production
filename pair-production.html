@@ -69,7 +69,7 @@ All help is very much appreciated. I hope this project helps people get started 
                 <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
               </template>
             </template>
-            <input-save path="template" code textarea value="{{_domTemplate}}" list-of-elements="{{_listOfElements}}" label="{{_cat('<html> of <', _name,'/>')}}"></input-save>
+            <input-save path="template" code textarea value="{{_domTemplate}}" list-of-elements="{{_listOfElements}}" label="{{_cat('html of <', _name,' />')}}"></input-save>
             <template is="dom-if" if="{{htmlEdit}}">
               <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </template>
