@@ -11,7 +11,7 @@
 <link rel="import" href="input-save.html">
 <!--
 `<pair-production>` I'm hoping this will be a good way to think about the way your code a element and then give you:
-
+ 
   * Template editor ✔
  
   * auto add dependencies (if in open-elements.org or in 'localstorage'). ✔
@@ -73,10 +73,6 @@ All help is very much appreciated. I hope this project helps people get started 
             <template is="dom-if" if="{{htmlEdit}}">
               <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </template>
-          <!-- <form target="_blank" action="http://jsbin.com/" method="post">
-            <input type="hidden" name="html" value="{{_codeiframe}}" />
-            <input type="image" alt="Edit in JSbin" src="../edit-in-jsbin/jsbin.svg" />
-          </form> -->
           </iron-accordion>
           <iron-accordion>
             <h3 header>Variables <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
