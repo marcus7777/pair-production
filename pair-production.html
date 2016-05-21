@@ -42,7 +42,9 @@ All help is very much appreciated. I hope this project helps people get started 
 <dom-module id="pair-production">
   <template>
     <div class="vertical center-justified layout">
-      <h2>Let me help you conjure a new element:</h2>
+      <template is="dom-if" if="{{!_name}}">
+        <h2>Let me help you conjure a new element:</h2>
+      </template>
       <iron-accordions>
         <iron-accordion opened="{{does}}">
           <h3 header>What does it do? <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
