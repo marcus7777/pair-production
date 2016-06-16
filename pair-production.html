@@ -46,7 +46,7 @@ All help is very much appreciated. I hope this project helps people get started 
       </template>
       <iron-accordions>
         <iron-accordion opened="{{does}}">
-          <h3 header>What does it do? <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
+          <h3 header>What does it do?</h3>
           <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
         </iron-accordion>
         <iron-accordion opened="{{unnamed}}">
@@ -58,7 +58,7 @@ All help is very much appreciated. I hope this project helps people get started 
         </iron-accordion>
         <template is="dom-if" if="{{_name}}">
           <iron-accordion opened="{{htmlEdit}}">
-            <h3 header>The HTML <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
+            <h3 header>The HTML</h3>
             <template is="dom-if" if="{{_dependencylist.length}}">
               <select style="float:right" value="{{docsFor::input}}">
                 <option value="">show documentation</option>
@@ -76,7 +76,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </template>
           </iron-accordion>
           <iron-accordion>
-            <h3 header>Variables <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
+            <h3 header>Variables</h3>
             <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
             <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
             <template is="dom-repeat" items="{{_functionList}}" >
@@ -94,7 +94,7 @@ All help is very much appreciated. I hope this project helps people get started 
             <input-save textarea path="moreHTML" value="{{_moreHTML}}"></input-save>
           </iron-accordion>
           <iron-accordion>
-            <h3 header>Settings <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
+            <h3 header>Settings</h3>
             <input-save path="demoHeight" type="number" value="{{demoHeight}}" label="Height of demo" ></input-save>
             <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
             <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
