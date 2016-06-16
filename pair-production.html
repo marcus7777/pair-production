@@ -50,7 +50,7 @@ All help is very much appreciated. I hope this project helps people get started 
           <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
         </iron-accordion>
         <iron-accordion opened="{{unnamed}}">
-          <h3 header>Name <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
+          <h3 header>Name</toggle-icon></h3>
           <input-save path="name" label="Name the new element - like pirate-ninja" value="{{_name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
           <template is="dom-if" if="{{_gotName}}">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
