@@ -8,10 +8,10 @@
 <!--
 `<input-save>` saves you work as you type 
 -->
-<style>.paper-input-container {width: 100%}</style>
 
 <dom-module id="input-save">
   <template>
+    <style>.paper-input-container {width: 100%}</style>
     <template is="dom-if" if="{{text}}">
       <paper-input type="{{type}}" label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
     </template>
