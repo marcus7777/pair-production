@@ -1,5 +1,4 @@
 <link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../app-globals/app-globals.html">
 <link rel="import" href="../markdown-edit/markdown-edit.html">
 <link rel="import" href="../url-data/url-data.html">
 
@@ -37,7 +36,6 @@
       </select>
     </template>
     <iron-location hash="{{stringifyData}}"></iron-localstorage>
-    <app-globals value="{{data}}"></app-globals>
     <url-data string="{{stringifyData}}" compress data='[[data]]' data-from-string="{{data}}"></url-data>
   </template>
 </dom-module>
