@@ -38,7 +38,7 @@
     </template>
     <iron-location hash="{{stringifyData}}"></iron-localstorage>
     <app-globals value="{{data}}"></app-globals>
-    <url-data string="{{stringifyData}}" compress data='{{data}}'></url-data>
+    <url-data string="{{stringifyData}}" compress data='[[data]]' data-from-string="{{data}}"></url-data>
   </template>
 </dom-module>
 <script>
