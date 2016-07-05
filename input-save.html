@@ -1,6 +1,7 @@
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../app-globals/app-globals.html">
 <link rel="import" href="../markdown-edit/markdown-edit.html">
+<link rel="import" href="../url-data/url-data.html">
 
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../iron-location/iron-location.html">
@@ -37,6 +38,7 @@
     </template>
     <iron-location hash="{{stringifyData}}"></iron-localstorage>
     <app-globals value="{{data}}"></app-globals>
+    <url-data string="{{stringifyData}}" compress data='{{data}}'></url-data>
   </template>
 </dom-module>
 <script>
@@ -77,14 +79,6 @@
     isText: function(textarea,optionsInput){
       return !textarea && !optionsInput;
     },
-    ready: function(){
-      this.async(function() {
-        if (this.data === undefined || this.data === null) {
-          this.data = JSON.parse(decodeURIComponent(this.stringifyData))
-          js_data = JSON.parse(decodeURIComponent(this.stringifyData))
-        }
-      }, 1500)
-    },
     saveThis: function(path,value) {
       js_data[path] = value
       this.debounce('save', function() {
@@ -93,7 +87,6 @@
         }
         if (this.data[path] !== js_data[path]) {
           this.data = clone(js_data)
-          this.stringifyData = encodeURIComponent(JSON.stringify(this.data))
           this.changed = !this.changed
         }
       }, 3000)
