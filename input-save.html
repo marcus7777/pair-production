@@ -36,7 +36,7 @@
       </select>
     </template>
     <iron-location hash="{{stringifyData}}"></iron-localstorage>
-    <url-data string="{{stringifyData}}" compress data='[[data]]' data-from-string="{{data}}"></url-data>
+    <url-data string="{{stringifyData}}" compress data-from-string="{{dataFromString}}" data="[[data]]"></url-data>
   </template>
 </dom-module>
 <script>
@@ -71,8 +71,8 @@
       },
       asdf: {
         computed: 'setOptions(optionsInput,selectedOption,path)'
-      }
-    
+      },
+      dataFromString: {type:Object, observer:"dataFromStringChanged"}
     },
     isText: function(textarea,optionsInput){
       return !textarea && !optionsInput;
@@ -102,6 +102,9 @@
       }
       this.loaded = true;
     }},
+    dataFromStringChanged:  function(data) {
+      console.log(data)
+    },
     saveOptions: function(e) {
       values = []
       for (x=0;x<e.currentTarget.length;x++) {
