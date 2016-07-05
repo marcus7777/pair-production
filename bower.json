@@ -11,6 +11,7 @@
     "iron-ajax": "PolymerElements/iron-ajax",
     "paper-input": "PolymerElements/paper-input",
     "html-edit": "marcus7777/html-edit",
+    "url-data":"marcus7777/url-data",
     "markdown-edit": "marcus7777/markdown-edit",
     "iron-localstorage": "PolymerElements/iron-localstorage#~1.0.5",
     "app-globals": "marcus7777/app-globals",
