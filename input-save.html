@@ -38,7 +38,7 @@
     </template>
     <iron-location hash="{{stringifyData}}"></iron-localstorage>
     <app-globals value="{{data}}"></app-globals>
-    <url-data string="{{stringifyData}}" compress data="{{data}}" data-from-string="{{dataFromString}}"></url-data>
+    <url-data string="{{stringifyData}}" compress data="{{urlData}}" data-from-string="{{dataFromString}}"></url-data>
   </template>
 </dom-module>
 <script>
@@ -74,7 +74,8 @@
       asdf: {
         computed: 'setOptions(optionsInput,selectedOption,path)'
       },
-      dataFromString: {type:Object, observer:"dataFromStringChanged"}
+      dataFromString: {type:Object, observer:"dataFromStringChanged"},
+      urlData: {type:Object, observer:"urlDataChanged"}
     },
     isText: function(textarea,optionsInput){
       return !textarea && !optionsInput;
@@ -104,7 +105,13 @@
       }
       this.loaded = true;
     }},
-    dataFromStringChanged:  function(data) {
+    dataFromStringChanged: function(data) {
+      console.log(data)
+      if (!this.data) {
+        this.data = this.dataFromString
+      }
+    },
+    urlDataChanged: function(data) {
       console.log(data)
       if (!this.data) {
         this.data = this.dataFromString
