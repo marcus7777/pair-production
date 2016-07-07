@@ -110,6 +110,9 @@
       if (!this.data) {
         this.data = data
         js_data = data
+        if (data.hasOwnProperty(this.path)) {
+          this.value = data[this.path]
+        }
       }
     },
     urlDataChanged: function(data) {
