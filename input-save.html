@@ -113,7 +113,8 @@
     },
     urlDataChanged: function(data) {
       console.log(data)
-      if (!this.data) {
+      if (!this.setdatafromurl) {
+        this.setdatafromurl = true
         this.data = data
       }
     },
