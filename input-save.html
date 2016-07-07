@@ -121,6 +121,9 @@
         this.setdatafromurl = true
         this.data = data
         js_data = data
+        if (data.hasOwnProperty(this.path)) {
+          this.value = data[this.path]
+        }
       }
     },
     saveOptions: function(e) {
