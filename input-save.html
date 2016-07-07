@@ -108,7 +108,8 @@
     dataFromStringChanged: function(data) {
       console.log(data)
       if (!this.data) {
-        this.data = this.dataFromString
+        this.data = data
+        js_data = data
       }
     },
     urlDataChanged: function(data) {
@@ -116,6 +117,7 @@
       if (!this.setdatafromurl) {
         this.setdatafromurl = true
         this.data = data
+        js_data = data
       }
     },
     saveOptions: function(e) {
