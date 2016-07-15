@@ -14,7 +14,7 @@
   <template>
     <style>.paper-input-container {width: 100%}</style>
     <template is="dom-if" if="{{text}}">
-      <paper-input type="{{type}}" label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
+      <paper-input invalid="{{invalid}}" type="{{type}}" label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
     </template>
     <template is="dom-if" if="{{textarea}}">
       <template is="dom-if" if="{{code}}">
@@ -44,7 +44,7 @@
 <script>
   
   var js_data = {}
-  
+;(function() { 
   Polymer({
     is: 'input-save',
     properties: {
@@ -67,6 +67,7 @@
       autoValidate: Boolean,
       errorMessage: String,
       value: {type:String,notify:true},
+      invalid: {notify:true},
       data: {type:Object,observer:"dataChanged"},
       element: { // move to observers
         computed:'saveThis(path,value)'
@@ -157,4 +158,5 @@
   function clone(obj) {
     return JSON.parse(JSON.stringify( obj ))
   }
+})()
 </script>
