@@ -107,9 +107,11 @@ All help is very much appreciated. I hope this project helps people get started 
     </div>
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
-
-    <iron-location hash="{{stringifyData}}"></iron-localstorage>    
-    <url-data string="{{stringifyData}}" data-from-string="{{dataFromLink}}"></url-data>
+    
+    <template is="dom-if" if="{{!elementData.name}}">
+      <iron-location hash="{{stringifyData}}"></iron-localstorage>    
+      <url-data string="{{stringifyData}}" data-from-string="{{elementData}}"></url-data>
+    </template>
 
     <iron-localstorage on-iron-localstorage-load-empty="initializeDefaultlocal" name="saved-elements" value="{{localData}}"></iron-localstorage>
     <url-data string-from-data="{{stringFromElementData}}" compress data="{{elementData}}"></url-data>
