@@ -4,6 +4,9 @@
 <link rel="import" href="../toggle-icon/toggle-icon.html">
 <link rel="import" href="../icon-icons/iron-icons.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../url-data/url-data.html">
+<link rel="import" href="../iron-location/iron-location.html">
+<link rel="import" href="../iron-localstorage/iron-localstorage.html">
 
 <link rel="import" href="variables-list-input.html">
 <link rel="import" href="function-list-input.html">
@@ -41,22 +44,22 @@ All help is very much appreciated. I hope this project helps people get started 
 <dom-module id="pair-production">
   <template>
     <div class="vertical center-justified layout">
-      <template is="dom-if" if="{{!_name}}">
+      <template is="dom-if" if="{{!elementData.name}}">
         <h2>Let me help you conjure a new element:</h2>
       </template>
       <iron-accordions>
         <iron-accordion opened="{{does}}">
           <h3 header>What does it do?</h3>
-          <input-save path="description" markdown textarea value="{{_description}}" label="About it (markdown)"></input-save>
+          <input-save path="description" markdown textarea value="{{elementData.description}}" label="About it (markdown)"></input-save>
         </iron-accordion>
         <iron-accordion opened="{{unnamed}}">
           <h3 header>Name</toggle-icon></h3>
-          <input-save path="name" label="Name the new element - like pirate-ninja" invalid="{{invalidName}}" value="{{_name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+          <input-save path="name" label="Name the new element - like pirate-ninja" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
           <template is="dom-if" if="{{_gotName}}">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
           </template>
         </iron-accordion>
-        <template is="dom-if" if="{{_name}}">
+        <template is="dom-if" if="{{elementData.name}}">
           <template is="dom-if" if="{{!invalidName}}">	
             <iron-accordion opened="{{htmlEdit}}">
               <h3 header>The HTML</h3>
@@ -71,12 +74,12 @@ All help is very much appreciated. I hope this project helps people get started 
                   <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
                 </template>
               </template>
-              <input-save path="template" code textarea value="{{_domTemplate}}" list-of-elements="{{_listOfElements}}" label="{{_cat('html of <', _name,' />')}}"></input-save>
+              <input-save path="template" code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label="{{_cat('html of <', elementData.name,' />')}}"></input-save>
               <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </iron-accordion>
             <iron-accordion>
               <h3 header>Variables</h3>
-              <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{_name}}"></variables-list-input>   
+              <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{elementData.name}}"></variables-list-input>   
               <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
               <template is="dom-repeat" items="{{_functionList}}" >
                 <function-list-input variable-list="{{_variableList}}" name="{{item}}"></function-list-input>   
@@ -87,7 +90,7 @@ All help is very much appreciated. I hope this project helps people get started 
               <prism-highlighter></prism-highlighter>
               <marked-element markdown="{{_markdown}}"></marked-element>
               your Docs are going here:<br />
-              your Link to Share are going here:<br />
+              your Link to Share are going here: <a href="{{link}}">link to {{elementData.name}}</a> <br />
               <a href="https://github.com/new">new</a>
               your other localy save elements are going to be available for your demo and listed here:
               <input-save textarea path="moreHTML" value="{{_moreHTML}}"></input-save>
@@ -104,10 +107,17 @@ All help is very much appreciated. I hope this project helps people get started 
     </div>
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
+<!--
+    <iron-location hash="{{stringifyData}}"></iron-localstorage>    
+    <url-data string="{{stringifyData}}" data-from-string="{{elementData}}"></url-data>
+-->
+    <iron-localstorage name="saved-elements" value="{{localData}}"></iron-localstorage>
+    <url-data string-from-data="{{stringFromElementData}}" compress data="{{elementData}}"></url-data>
   </template>
 </dom-module>
 <script>
 ;(function () {
+  var vector_clock = 0
   var at = 0
   var tabs = function (n) {
     var output = ''
@@ -164,35 +174,51 @@ All help is very much appreciated. I hope this project helps people get started 
   Polymer({
     is: 'pair-production',
     properties: {
-      _gotName:{computed: 'getGotName(_name, _listOfElements)'},
+      _gotName:{computed: 'getGotName(elementData.name, _listOfElements)'},
       _variablesSets: {type: String, value: 'Inputs,Outputs,Internal'},
       _base: {type: String, value: '/bower_components/new/'},
-      _name: {type: String},
-      _description: {type: String, value: ''},
-      _domTemplate: {type: String, value: '<style>:host {display:inline-block;}</style>\n<h2>Demo</h2>'},
       _functions: String,
       _functionList: {computed: '_getArray(_functions)'},
       _dependencies: {type: String, value: 'polymer'},
-      _domTemplateDependencies: {computed: '_getDomTemplateDependencies(_domTemplate,_dependencies)'},
+      _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,_dependencies)'},
       _dependencylist: {computed: '_getArray(_dependencies, _domTemplateDependencies)'},
       _demo: {computed: '_getCode(_head,_body)'},
       _iframeDemo: {computed: '_getCode(_iframeHead,_body)'},
-      _head: {computed: '_getHead(_name)'},
-      _iframeHead: {computed: '_getIframeHead(_base,_name)'},
-      _body: {computed: '_getBody(_name)'},
+      _head: {computed: '_getHead(elementData.name)'},
+      _iframeHead: {computed: '_getIframeHead(_base,elementData.name)'},
+      _body: {computed: '_getBody(elementData.name)'},
       _listOfElements:String,
       _listOfElementsList:{computed: '_getArray()'},
       _element: {
-        computed: '_getElementCode(_name, _description, _dependencylist, _domTemplate, _variablesSets, changed, _listOfElements)'
+        computed: '_getElementCode(elementData.name, elementData.description, _dependencylist, elementData.html, _variablesSets, changed, _listOfElements)'
       },
       _descriptor: {computed: '_getDescriptor(_element)'},
-      _tests: {computed: '_getTests(_name)'},
-      _markdown: {computed: '_getMarkdown(_demo,_element,_name,_bower,_tests)'},
+      _tests: {computed: '_getTests(elementData.name)'},
+      _markdown: {computed: '_getMarkdown(_demo,_element,elementData.name,_bower,_tests)'},
       _codeiframe: {computed: '_getCodeiframe(_iframeDemo,_element)'},
-      _bower: {computed: '_getBower(_name, _description, _dependencylist, _listOfElements, _gitList)'},
+      _bower: {computed: '_getBower(elementData.name, elementData.description, _dependencylist, _listOfElements, _gitList)'},
       _src: {computed: '_getSrc(_codeiframe)'},
       demoHeight: {value: 400},
-      changed: {type: Boolean, notify: true, value: false}
+      saveName: {computed:"getSaveName(elementData.name)"},
+      changed: {type: Boolean, notify: true, value: false},
+      link: {computed:"getLink(stringFromElementData)"},
+      elementData: {
+        value: {
+          html: '<style>:host {display:inline-block;}</style>\n<h2>Demo</h2>', 
+        }
+      },
+      settingsData: {value: {}}
+    },
+    getLink: function(link) {
+      return '#' + link
+    },
+    getElementData: function(name, description, html) {
+      return {
+        name: name, description: description, html: html
+      }
+    },
+    getSaveName: function (name) {
+      return name // TODO debounce and check for versions
     },
     getGotName: function (name, list) {
       if (-1 !== list.indexOf('bower_components/'+name+'/'+name+'.html')) {
@@ -293,7 +319,7 @@ All help is very much appreciated. I hope this project helps people get started 
           tabs(1) +'<body>',
           tabs(1) +'<scr' + 'ipt>',
           tabs(1) +'WCT.loadSuites([',
-          tabs() + "'" + name + ".html'",
+          tabs() + "'" + name + ".html',",
           tabs() + "'" + name + ".html?dom=shadow'",
           tabs(-1)+']);',
           tabs(-1)+'</scr' + 'ipt>',

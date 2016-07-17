@@ -1,10 +1,6 @@
 <link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../markdown-edit/markdown-edit.html">
-<link rel="import" href="../app-globals/app-globals.html">
-<link rel="import" href="../url-data/url-data.html">
-
 <link rel="import" href="../paper-input/paper-textarea.html">
-<link rel="import" href="../iron-location/iron-location.html">
+<link rel="import" href="../markdown-edit/markdown-edit.html">
 <link rel="import" href="../html-edit/html-edit.html">
 <!--
 `<input-save>` saves you work as you type 
@@ -31,19 +27,16 @@
     </template> 
     <template is="dom-if" if="{{optionsInput}}">
       <select name="{{path}}" on-change="saveOptions">
-        <template is="dom-repeat" items="[[options]]">
+        <template is="dom-repeat" items="{{options}}">
           <option value="[[item]]">[[item]]</option>
         </template>
       </select>
     </template>
-    <iron-location hash="{{stringifyData}}"></iron-localstorage>
-    <app-globals value="{{data}}"></app-globals>
-    <url-data string="{{stringifyData}}" compress data="{{urlData}}" data-from-string="{{dataFromString}}"></url-data>
   </template>
 </dom-module>
 <script>
   
-  var js_data = {}
+var js_data = {}
 ;(function() { 
   Polymer({
     is: 'input-save',
@@ -68,64 +61,36 @@
       errorMessage: String,
       value: {type:String,notify:true},
       invalid: {notify:true},
-      data: {type:Object,observer:"dataChanged"},
+      data: {type:Object,notify:true,observer:"dataChanged"},
       element: { // move to observers
         computed:'saveThis(path,value)'
       },
       asdf: {
         computed: 'setOptions(optionsInput,selectedOption,path)'
       },
-      dataFromString: {type:Object, observer:"dataFromStringChanged"},
-      urlData: {type:Object, observer:"urlDataChanged"}
+      dataFromString: {type:Object, observer:"dataFromStringChanged"}
     },
     isText: function(textarea,optionsInput){
       return !textarea && !optionsInput;
     },
     saveThis: function(path,value) {
       js_data[path] = value
-      this.debounce('save', function() {
-        if (this.data === undefined || this.data === null) {
-          this.data = {}
-        }
-        if (this.data[path] !== js_data[path]) {
-          this.data = clone(js_data)
-          this.changed = !this.changed
-        }
-      }, 3000)
       return js_data
     },
-    dataChanged: function(loading_data) { if (loading_data) {
-      if (loading_data !== undefined || loading_data !== null){ 
-        if (loading_data.hasOwnProperty(this.path) && this.value !== loading_data[this.path]) {
-          if (this.optionsInput) {
-            this.selectedOption = loading_data[this.path].split(',')
-          } else {
-            this.value = loading_data[this.path]
+    dataChanged: function(data) { 
+      console.log("testing all data ",data)
+      if (data) {
+        if (data !== undefined || data !== null){ 
+          if (data.hasOwnProperty(this.path) && this.value !== data[this.path]) {
+            if (this.optionsInput) {
+              this.selectedOption = data[this.path].split(',')
+            } else {
+              this.value = data[this.path]
+            }
           }
         }
-      }
-      this.loaded = true;
-    }},
-    dataFromStringChanged: function(data) {
-      console.log(data)
-      if (!this.data) {
-        this.data = data
-        js_data = data
-        if (data.hasOwnProperty(this.path)) {
-          this.value = data[this.path]
-        }
-      }
-    },
-    urlDataChanged: function(data) {
-      console.log(data)
-      if (!this.setdatafromurl) {
-        this.setdatafromurl = true
-        this.data = data
-        js_data = data
-        if (data.hasOwnProperty(this.path)) {
-          this.value = data[this.path]
-        }
-      }
+        this.loaded = true;
+      } 
     },
     saveOptions: function(e) {
       values = []
@@ -156,7 +121,7 @@
     }
   })
   function clone(obj) {
-    return JSON.parse(JSON.stringify( obj ))
+    return JSON.parse(JSON.stringify(obj))
   }
 })()
 </script>
