@@ -107,17 +107,18 @@ All help is very much appreciated. I hope this project helps people get started 
     </div>
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
-<!--
+
     <iron-location hash="{{stringifyData}}"></iron-localstorage>    
-    <url-data string="{{stringifyData}}" data-from-string="{{elementData}}"></url-data>
--->
-    <iron-localstorage name="saved-elements" value="{{localData}}"></iron-localstorage>
+    <url-data string="{{stringifyData}}" data-from-string="{{dataFromLink}}"></url-data>
+
+    <iron-localstorage on-iron-localstorage-load-empty="initializeDefaultlocal" name="saved-elements" value="{{localData}}"></iron-localstorage>
     <url-data string-from-data="{{stringFromElementData}}" compress data="{{elementData}}"></url-data>
   </template>
 </dom-module>
 <script>
 ;(function () {
-  var vector_clock = 0
+  // var dataVectors = ["url","localData","user"]
+  
   var at = 0
   var tabs = function (n) {
     var output = ''
@@ -199,7 +200,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _bower: {computed: '_getBower(elementData.name, elementData.description, _dependencylist, _listOfElements, _gitList)'},
       _src: {computed: '_getSrc(_codeiframe)'},
       demoHeight: {value: 400},
-      saveName: {computed:"getSaveName(elementData.name)"},
+      runMakeLocalData: {computed:"makeLocalData(elementData.name, elementData, localData)"},
       changed: {type: Boolean, notify: true, value: false},
       link: {computed:"getLink(stringFromElementData)"},
       elementData: {
@@ -217,9 +218,19 @@ All help is very much appreciated. I hope this project helps people get started 
         name: name, description: description, html: html
       }
     },
-    getSaveName: function (name) {
-      return name // TODO debounce and check for versions
+    makeLocalData: function (name, data, localData) {
+      if (localData && localData.hasOwnProperty(name)) {
+        if (JSON.stringify(localData[name]) !== JSON.stringify(data) ) {
+          this.set("localData." + name, data)
+        }       
+      } else if (localData) {
+        this.set("localData." + name, data)
+      }
+      return // TODO debounce and check for versions
     },
+    initializeDefaultlocal: function () {
+      this.set('localData', {})
+    }, 
     getGotName: function (name, list) {
       if (-1 !== list.indexOf('bower_components/'+name+'/'+name+'.html')) {
         document.title = "Rewriting " + name
