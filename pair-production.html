@@ -58,6 +58,7 @@ All help is very much appreciated. I hope this project helps people get started 
           <template is="dom-if" if="{{_gotName}}">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
           </template>
+          <load-elements-list data="{{localData}}" to="{{elementData}}"></load-elements-list>
         </iron-accordion>
         <template is="dom-if" if="{{elementData.name}}">
           <template is="dom-if" if="{{!invalidName}}">	
@@ -114,7 +115,10 @@ All help is very much appreciated. I hope this project helps people get started 
     </template>
 
     <iron-localstorage on-iron-localstorage-load-empty="initializeDefaultlocal" name="saved-elements" value="{{localData}}"></iron-localstorage>
-    <url-data string-from-data="{{stringFromElementData}}" compress data="{{elementData}}"></url-data>
+    
+    <template is="dom-if" if="{{elementData.name}}" restamp>
+      <url-data string-from-data="{{stringFromElementData}}" compress data="{{elementData}}"></url-data>
+    </template>
   </template>
 </dom-module>
 <script>
