@@ -1,4 +1,4 @@
-<!-- <link rel="import" href="../iron-accordions/iron-accordions.html"> not scrolling-->
+<link rel="import" href="../iron-accordions/iron-accordions.html"> 
 <link rel="import" href="../prism-element/prism-highlighter.html">
 <link rel="import" href="../marked-element/marked-element.html">
 <link rel="import" href="../toggle-icon/toggle-icon.html">
@@ -117,7 +117,7 @@ All help is very much appreciated. I hope this project helps people get started 
     <iron-localstorage on-iron-localstorage-load-empty="initializeDefaultlocal" name="saved-elements" value="{{localData}}"></iron-localstorage>
     
     <template is="dom-if" if="{{elementData.name}}" restamp>
-      <url-data string-from-data="{{stringFromElementData}}" compress debounce-data="{{updatedElement}}"></url-data>
+      <url-data string-from-data="{{stringFromElementData}}" compress debounce-data="{{elementData}}"></url-data>
     </template>
   </template>
 </dom-module>
