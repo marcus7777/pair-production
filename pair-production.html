@@ -12,6 +12,7 @@
 <link rel="import" href="function-list-input.html">
 <link rel="import" href="variables-input.html">
 <link rel="import" href="input-save.html">
+<link rel="import" href="load-element-list.html">
 <!--
  `<pair-production>` I'm hoping this will be a good way to think about the way your code a element and then give you:
  * Template editor ✔
@@ -62,7 +63,7 @@ All help is very much appreciated. I hope this project helps people get started 
         </iron-accordion>
         <template is="dom-if" if="{{elementData.name}}">
           <template is="dom-if" if="{{!invalidName}}">	
-            <iron-accordion opened="{{htmlEdit}}">
+            <iron-accordion opened>
               <h3 header>The HTML</h3>
               <template is="dom-if" if="{{_dependencylist.length}}">
                 <select style="float:right" value="{{docsFor::input}}">
