@@ -36,12 +36,10 @@
         value:{notify:true,observer: "checkValue"} 
       },
       add: function(){
-        this.value.push({ name: this.addMe })
-      },
-      checkValue: function(value) {
-        if (!value) {
-          this.value = [{}]
+        if (!this.value) {
+          this.value = []
         }
+        this.value.push({ name: this.addMe })
       },
       notInput: function(label) {
         return label !== "Inputs"
