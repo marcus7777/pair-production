@@ -24,10 +24,11 @@
         labelList:{
           computed:"getArray(label)"
         },
-        value:{notify:true,observer: "checkValue"} 
+        value:{notify:true,observer:"ready"},
+         
       },
-      checkValue: function(value) {
-        if (!value) {
+      ready: function() {
+        if (!this.value) {
           this.value = {}
         }
       },
