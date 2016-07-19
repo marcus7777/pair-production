@@ -9,13 +9,13 @@
       <paper-input value="{{addMe}}"></paper-input> <paper-button on-tap="add">Add</paper-button>
       <template is="dom-repeat" items="{{value}}">
         <div style="padding:20px"> <h4>{{item.name}}</h4>
-          <input-save value="{{item.about}}" label="{{cat('Tell me about ',item)}}"></input-save>
+          <input-save value="{{item.about}}" label="Tell me about {{item.name}}"></input-save>
           <input-save value="{{item.type}}" options-input></input-save>
-          <input-save value="{{item.value}}" label="{{cat('default for ',item)}}" pattern$="{{getRepType('variable.',label,'.',item,'.type',data)}}" auto-validate error-message="{{cat('needs to be a ',type,' so ', repType)}}"></input-save>
+          <input-save value="{{item.value}}" label$="default for {{item.name}}" pattern$="{{getRepType('variable.',label,'.',item,'.type',data)}}" auto-validate error-message="needs to be a {{type}} so {{repType}}"></input-save>
           <template is="dom-if" if="{{computed}}">
-            <input-save value="{{item.computed}}" label="{{cat(item,' is computed by :')}}" auto-validate pattern="{{reFunctionsAndVariables}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}"></input-save>
+            <input-save value="{{item.computed}}" label$="{{item.name}} is computed by :}}" auto-validate pattern="{{reFunctionsAndVariables}}" error-message="needs to a function ({{functions}}) with input(s)"></input-save>
           </template>
-          <input-save value="{{item.observer}}" label="{{cat('observer ',item)}}" auto-validate pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
+          <input-save value="{{item.observer}}" label$="observer {{item.name}}" auto-validate pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
         </div>
       </template>
     </div>
@@ -33,7 +33,7 @@
         functions:{type:String},
         reFunctions: {computed:"getReFunctions(functions)"},
         reFunctionsAndVariables: {computed:"getReFunctionsAndVariables(reFunctions)"},
-        value:{notify:true,observer: "checkValue"} 
+        value:{notify:true,value:[]} 
       },
       add: function(){
         if (!this.value) {
@@ -43,20 +43,6 @@
       },
       notInput: function(label) {
         return label !== "Inputs"
-      },
-      cat : function(a,b,c,d,e,f) {
-        console.log(a,b,c,d,e,f);
-        if (c === undefined) {
-          return a+b;
-        } else if (d === undefined) {
-          return a+b+c;
-        } else if (e === undefined) {
-          return a+b+c+d;
-        } else if (f === undefined) {
-          return a+b+c+d+e;
-        } else {
-          return a+b+c+d+e+f;
-        }
       },
       getArray:  function(s) {
         if (s !== "") return toCamelCase(s).split(',');

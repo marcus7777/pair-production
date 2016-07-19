@@ -1,8 +1,8 @@
 <dom-module id="variables-list-input">
   <template>
-    <variables-input changed="{{changed}}" functions="{{functions}}" value="{{value.input}}" label="Input"></variables-input>
-    <variables-input changed="{{changed}}" functions="{{functions}}" value="{{value.output}}" label="Output"></variables-input>
-    <variables-input changed="{{changed}}" functions="{{functions}}" value="{{value._}}" label="Internal"></variables-input>
+    <variables-input functions="{{functions}}" value="{{value.input}}" label="Input"></variables-input>
+    <variables-input functions="{{functions}}" value="{{value.output}}" label="Output"></variables-input>
+    <variables-input functions="{{functions}}" value="{{value._}}" label="Internal"></variables-input>
   </template>
 </dom-module> 
 <script>
@@ -24,8 +24,7 @@
         labelList:{
           computed:"getArray(label)"
         },
-        value:{notify:true,observer:"ready"},
-         
+        value:{notify:true,value:{}},
       },
       ready: function() {
         if (!this.value) {
