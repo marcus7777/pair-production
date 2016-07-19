@@ -79,7 +79,7 @@ All help is very much appreciated. I hope this project helps people get started 
               </template>
               <input-save path="template" code textarea with-attr-option value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
                 
-              <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{attrsForDemo}}">
+              <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
                 <div prefix>&lt{{elementData.name}} &nbsp </div>
                 <div suffix> > &lt/{{elementData.name}}&gt</div>
               </paper-input>
@@ -199,7 +199,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _iframeDemo: {computed: '_getCode(_iframeHead,_body)'},
       _head: {computed: '_getHead(elementData.name)'},
       _iframeHead: {computed: '_getIframeHead(_base,elementData.name)'},
-      _body: {computed: '_getBody(elementData.name)'},
+      _body: {computed: '_getBody(elementData.name, elementData.attrsForDemo)'},
       _listOfElements:String,
       _listOfElementsList:{computed: '_getArray()'},
       _element: {
@@ -420,11 +420,14 @@ All help is very much appreciated. I hope this project helps people get started 
         return testStub + JSON.stringify({verbose: true, plugins: {local: { browsers: ["chrome"]}}}, null, '  ')
       }
     },
-    _getBody: function (name) {
+    _getBody: function (name, attrs) {
+      if (!attrs) {
+        attrs = ""
+      }
       var output = [
         tabs(1) +'<body>',
         tabs() + '<h3>' + name + ' Demo</h3>',
-        tabs() + '<' + name + '></' + name + '>',
+        tabs() + '<' + name + attrs + '></' + name + '>',
         tabs(-1)+'</body>'
       ]
 
