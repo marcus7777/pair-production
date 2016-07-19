@@ -1,3 +1,4 @@
+<link rel="import" href="../paper-button/paper-button.html">
 <!--
 `<variables-input>` 
 -->
@@ -5,20 +6,19 @@
 <dom-module id="variables-input">
   <template>
     <div style="padding:20px"> <h3>{{label}}</h3>
-      <input-save path="{{cat('variables.',label)}}" label="{{cat('Variables for ',label)}}" value="{{variables}}" pattern="[a-zA-Z ]*[a-zA-Z \,]*[a-zA-Z ]+" auto-validate  error-message="a ',' separated list " changed="{{changed}}"></input-save>
-      <template is="dom-repeat" items="{{variableList}}">
-        <div style="padding:20px"> <h4>{{item}}</h4>
-          <input-save path="{{cat('variable.',label,'.',item,'.about')}}" label="{{cat('Tell me about ',item)}}" changed="{{changed}}"></input-save>
-          <input-save path="{{cat('variable.',label,'.',item,'.type')}}" value="{{type}}" options-input changed="{{changed}}"></input-save>
-          <input-save label="{{cat('default for ',item)}}" pattern$="{{getRepType('variable.',label,'.',item,'.type',data)}}" auto-validate path="{{cat('variable.',label,'.',item,'.default')}}" error-message="{{cat('needs to be a ',type,' so ', repType)}}" changed="{{changed}}"></input-save>
+      <paper-input value="{{addMe}}"></paper-input> <paper-button on-tap="add">Add</paper-button>
+      <template is="dom-repeat" items="{{value}}">
+        <div style="padding:20px"> <h4>{{item.name}}</h4>
+          <input-save value="{{item.about}}" label="{{cat('Tell me about ',item)}}"></input-save>
+          <input-save value="{{item.type}}" options-input></input-save>
+          <input-save value="{{item.value}}" label="{{cat('default for ',item)}}" pattern$="{{getRepType('variable.',label,'.',item,'.type',data)}}" auto-validate error-message="{{cat('needs to be a ',type,' so ', repType)}}"></input-save>
           <template is="dom-if" if="{{computed}}">
-            <input-save label="{{cat(item,' is computed by :')}}" auto-validate path="{{cat('variable.',label,'.',item,'.computed')}}" pattern="{{reFunctionsAndVariables}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}" changed="{{changed}}"></input-save>
+            <input-save value="{{item.computed}}" label="{{cat(item,' is computed by :')}}" auto-validate pattern="{{reFunctionsAndVariables}}" error-message="{{cat('needs to a function (', functions , ') with input(s)')}}"></input-save>
           </template>
-          <input-save label="{{cat('observer ',item)}}" auto-validate path="{{cat('variable.',label,'.',item,'.observer')}}" pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}" changed="{{changed}}"></input-save>
+          <input-save value="{{item.observer}}" label="{{cat('observer ',item)}}" auto-validate pattern="{{reFunctions}}" error-message="{{cat('needs to a function (', functions , ') add to \'functions'\' if needed)}}"></input-save>
         </div>
       </template>
     </div>
-    <iron-localstorage name="pair-production" value="{{data}}"></iron-localstorage>
   </template>
 </dom-module> 
 <script>
@@ -28,12 +28,20 @@
         label:String,
         changed: {type:Boolean,notify:true,value:false},
         variables: {type:String,notify:true},
-        type:String,
-        variableList: {computed:"getArray(variables)"},
+        type: String,
         computed: {computed:"notInput(label)"},
         functions:{type:String},
         reFunctions: {computed:"getReFunctions(functions)"},
-        reFunctionsAndVariables: {computed:"getReFunctionsAndVariables(reFunctions)"}
+        reFunctionsAndVariables: {computed:"getReFunctionsAndVariables(reFunctions)"},
+        value:{notify:true,observer: "checkValue"} 
+      },
+      add: function(){
+        this.value.push({ name: this.addMe })
+      },
+      checkValue: function(value) {
+        if (!value) {
+          this.value = [{}]
+        }
       },
       notInput: function(label) {
         return label !== "Inputs"

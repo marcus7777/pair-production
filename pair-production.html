@@ -11,8 +11,8 @@
 
 <link rel="import" href="variables-list-input.html">
 <link rel="import" href="function-list-input.html">
-<link rel="import" href="variables-input.html">
 <link rel="import" href="input-save.html">
+<link rel="import" href="variables-input.html">
 <link rel="import" href="load-element-list.html">
 <!--
  `<pair-production>` I'm hoping this will be a good way to think about the way your code a element and then give you:
@@ -225,11 +225,6 @@ All help is very much appreciated. I hope this project helps people get started 
     getLink: function(link) {
       return '#' + link
     },
-    getElementData: function(name, description, html) {
-      return {
-        name: name, description: description, html: html
-      }
-    },
     makeLocalData: function (name, data, localData) {
       if (localData && localData.hasOwnProperty(name)) {
         if (JSON.stringify(localData[name]) !== JSON.stringify(data) ) {
@@ -427,7 +422,7 @@ All help is very much appreciated. I hope this project helps people get started 
       var output = [
         tabs(1) +'<body>',
         tabs() + '<h3>' + name + ' Demo</h3>',
-        tabs() + '<' + name + attrs + '></' + name + '>',
+        tabs() + '<' + name + ' ' + attrs + '></' + name + '>',
         tabs(-1)+'</body>'
       ]
 

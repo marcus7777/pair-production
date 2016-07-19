@@ -26,7 +26,7 @@
       </template>
     </template> 
     <template is="dom-if" if="{{optionsInput}}">
-      <select name="{{path}}" on-change="saveOptions">
+      <select id="selecter" on-change="saveOptions">
         <template is="dom-repeat" items="{{options}}">
           <option value="[[item]]">[[item]]</option>
         </template>
@@ -42,7 +42,6 @@ var js_data = {}
     is: 'input-save',
     properties: {
       name: String,
-      path: String,
       options: {
         type: Array,
         value : ["Object", "Array", "Boolean", "Number", "String", "Symbol", "Function"]
@@ -62,9 +61,6 @@ var js_data = {}
       value: {type:String,notify:true},
       invalid: {notify:true},
       data: {type:Object,notify:true,observer:"dataChanged"},
-      element: { // move to observers
-        computed:'saveThis(path,value)'
-      },
       asdf: {
         computed: 'setOptions(optionsInput,selectedOption,path)'
       },
@@ -103,9 +99,9 @@ var js_data = {}
         this.saveThis(e.currentTarget.name,values.join(','))
       }
     },
-    setOptions: function(optionsInput,selectedOption,path) {
+    setOptions: function(optionsInput,selectedOption) {
       if (optionsInput) {
-        var e = document.querySelector('select[name="'+path+'"]')
+        var e = this.$$("selecter")
         if (e) {
           for (x=0;x<e.length;x++) {
             if (selectedOption !== "") {

@@ -1,8 +1,8 @@
 <dom-module id="variables-list-input">
   <template>
-    <template is="dom-repeat" items="{{labelList}}" >
-      <variables-input changed="{{changed}}" functions="{{functions}}" label="{{item}}"></variables-input>
-    </template>
+    <variables-input changed="{{changed}}" functions="{{functions}}" value="{{value.input}}" label="Input"></variables-input>
+    <variables-input changed="{{changed}}" functions="{{functions}}" value="{{value.output}}" label="Output"></variables-input>
+    <variables-input changed="{{changed}}" functions="{{functions}}" value="{{value._}}" label="Internal"></variables-input>
   </template>
 </dom-module> 
 <script>
@@ -23,20 +23,12 @@
         functions : String,
         labelList:{
           computed:"getArray(label)"
-        }
-      },      
-      cat : function(a,b,c,d,e,f) {
-        console.log(a,b,c,d,e,f);
-        if (c === undefined) {
-          return a+b;
-        } else if (d === undefined) {
-          return a+b+c;
-        } else if (e === undefined) {
-          return a+b+c+d;
-        } else if (f === undefined) {
-          return a+b+c+d+e;
-        } else {
-          return a+b+c+d+e+f;
+        },
+        value:{notify:true,observer: "checkValue"} 
+      },
+      checkValue: function(value) {
+        if (!value) {
+          this.value = {}
         }
       },
       getArray: function(s) {
