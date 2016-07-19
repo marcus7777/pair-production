@@ -7,6 +7,7 @@
 <link rel="import" href="../url-data/url-data.html">
 <link rel="import" href="../iron-location/iron-location.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../paper-input/paper-input.html">
 
 <link rel="import" href="variables-list-input.html">
 <link rel="import" href="function-list-input.html">
@@ -76,13 +77,18 @@ All help is very much appreciated. I hope this project helps people get started 
                   <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
                 </template>
               </template>
-              <input-save path="template" code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label="{{_cat('html of <', elementData.name,' />')}}"></input-save>
+              <input-save path="template" code textarea with-attr-option value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
+                
+              <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{attrsForDemo}}">
+                <div prefix>&lt{{elementData.name}} &nbsp </div>
+                <div suffix> > &lt/{{elementData.name}}&gt</div>
+              </paper-input>
               <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </iron-accordion>
             <iron-accordion>
               <h3 header>Variables</h3>
-              <variables-list-input changed="{{changed}}" functions="{{_functions}}" label="{{_variablesSets}}" path="" name="{{elementData.name}}"></variables-list-input>   
-              <input-save path="functions" code label="Give me list of functions it will need" value="{{_functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
+              <variables-list-input changed="{{changed}}" functions="{{elementData.functions}}" label="{{_variablesSets}}" path="" name="{{elementData.name}}"></variables-list-input>   
+              <input-save path="functions" code label="Give me list of functions it will need" value="{{elementData.functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
               <template is="dom-repeat" items="{{_functionList}}" >
                 <function-list-input variable-list="{{_variableList}}" name="{{item}}"></function-list-input>   
               </template>
@@ -185,8 +191,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _gotName:{computed: 'getGotName(elementData.name, _listOfElements)'},
       _variablesSets: {type: String, value: 'Inputs,Outputs,Internal'},
       _base: {type: String, value: '/bower_components/new/'},
-      _functions: String,
-      _functionList: {computed: '_getArray(_functions)'},
+      _functionList: {computed: '_getArray(elementData.functions)'},
       _dependencies: {type: String, value: 'polymer'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,_dependencies)'},
       _dependencylist: {computed: '_getArray(_dependencies, _domTemplateDependencies)'},
@@ -198,7 +203,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _listOfElements:String,
       _listOfElementsList:{computed: '_getArray()'},
       _element: {
-        computed: '_getElementCode(elementData.name, elementData.description, _dependencylist, elementData.html, _variablesSets, changed, _listOfElements)'
+        computed: '_getElementCode(elementData.name, elementData.description, _dependencylist, elementData.html,_functionList,_variablesSets, changed, _listOfElements)'
       },
       _descriptor: {computed: '_getDescriptor(_element)'},
       _tests: {computed: '_getTests(elementData.name)'},
@@ -282,12 +287,14 @@ All help is very much appreciated. I hope this project helps people get started 
       return a + b + c
     },
     _getArray: function (s, a) {
-      if (s !== '' && a === undefined) {
+      if (s && s !== '' && a === undefined) {
         return s.split(',')  
-      } else if (s !== '' && Array.isArray(a)){
+      } else if (s && s !== '' && Array.isArray(a)){
         return s.split(',').concat(a)
       } else if (Array.isArray(a)) {
         return a
+      } else {
+        return []
       }
     },
     _getCode: function (head, body) {
@@ -423,7 +430,7 @@ All help is very much appreciated. I hope this project helps people get started 
 
       if (name !== '') return output
     },
-    _getElementCode: function (name, description, dependencylist, domTemplate, variablesSets, changed, listOfElements) {
+    _getElementCode: function (name, description, dependencylist, domTemplate, functionList, variablesSets, changed, listOfElements) {
       var output = []
 
       output.push('<!--')
@@ -475,13 +482,25 @@ All help is very much appreciated. I hope this project helps people get started 
           }
         }
       }
-      var re = /"([^"]*)":/gm; 
-      var subst = '$1:'; 
- 
-      output.push('Polymer(' + JSON.stringify({
-        is: name,
-        properties: variableList
-      },null,'  ').replace(re, subst) + ')')
+       
+      output.push(tabs(1)+'Polymer({')
+
+      output.push(tabs()+'is: "' + name + '",')
+      if (variableList.length) {
+        output.push(tabs(1)+'properties:{')
+        for (index in variableList) {
+          // todo type / computed / ...
+          output.push(tabs() + variableList[index] + ":{},") 
+        }
+        output.push(tabs(-1)+'},')
+      }
+      for (index in functionList) {
+        // todo attr / body / ...
+        output.push(tabs() + functionList[index] + ": function(){ return 1},")
+      }
+      
+      
+      output.push(tabs(-1)+'})')
      
       console.log('_getElementCode 198 ', variableList)
 
