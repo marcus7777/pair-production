@@ -117,7 +117,7 @@ theValue " {{elementData.properties.g.value }} "
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
     
     <template is="dom-if" if="{{!elementData.name}}">
-      <iron-location hash="{{stringifyData}}"></iron-localstorage>    
+      <iron-location hash="{{stringifyData}}"></iron-location>    
       <url-data string="{{stringifyData}}" data-from-string="{{elementData}}"></url-data>
     </template>
 
@@ -212,7 +212,7 @@ theValue " {{elementData.properties.g.value }} "
       _bower: {computed: '_getBower(elementData.name, elementData.description, _dependencylist, _listOfElements, _gitList)'},
       _src: {computed: '_getSrc(_codeiframe)'},
       demoHeight: {value: 400},
-      runMakeLocalData: {computed:"makeLocalData(elementData.name, elementData, localData)"},
+      runMakeLocalData: {computed:"makeLocalData(elementData.name, elementData, localData, elementData.properties.*)"},
       changed: {type: Boolean, notify: true, value: false},
       link: {computed:"getLink(stringFromElementData)"},
       elementData: {
