@@ -6,7 +6,6 @@
 <dom-module id="variables-input">
   <template>
     <div style="padding:20px">
-      <paper-input value="{{addMe}}"></paper-input> <paper-button on-tap="add">Add</paper-button>
       <template is="dom-repeat" items="{{asArray}}">
         <div style="padding:20px"> <h4>{{getKey(index)}}</h4>
           <input-save value="{{item.type}}" options-input></input-save>
@@ -15,6 +14,7 @@
           <input-save value="{{item.observer}}" label$="observer {{getKey(index)}}" auto-validate pattern="{{reFunctions}}" error-message="needs to a function ( {{functions}} ) add to \'functions'\' if needed)"></input-save>
         </div>
       </template>
+      <paper-input value="{{addMe}}" style="max-width:200px"></paper-input> <paper-button on-tap="add">Add</paper-button>
     </div>
   </template>
 </dom-module> 
