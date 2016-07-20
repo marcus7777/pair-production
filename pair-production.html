@@ -9,7 +9,6 @@
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../paper-input/paper-input.html">
 
-<link rel="import" href="variables-list-input.html">
 <link rel="import" href="function-list-input.html">
 <link rel="import" href="input-save.html">
 <link rel="import" href="variables-input.html">
@@ -86,19 +85,19 @@ All help is very much appreciated. I hope this project helps people get started 
               <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </iron-accordion>
             <iron-accordion>
-              <h3 header>Variables</h3>
-              <variables-list-input changed="{{changed}}" functions="{{elementData.functions}}" label="{{_variablesSets}}" path="" name="{{elementData.name}}"></variables-list-input>   
+              <h3 header title="Variables/Attributes/Properties">Properties</h3>
+              <variables-input changed="{{changed}}" functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
               <input-save path="functions" code label="Give me list of functions it will need" value="{{elementData.functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
               <template is="dom-repeat" items="{{_functionList}}" >
-                <function-list-input variable-list="{{_variableList}}" name="{{item}}"></function-list-input>   
+                <function-list-input variable-list="{{_variableList}}" name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
               </template>
             </iron-accordion>
             <iron-accordion>
-              <h3 header>Your Code <toggle-icon icon="chevron-right" rotation="-270" animation="rotate"></toggle-icon></h3>
+              <h3 header>Share Your element</h3>
+              Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
               <prism-highlighter></prism-highlighter>
               <marked-element markdown="{{_markdown}}"></marked-element>
               your Docs are going here:<br />
-              your Link to Share are going here: <a href="{{link}}">link to {{elementData.name}}</a> <br />
               <a href="https://github.com/new">new</a>
               your other localy save elements are going to be available for your demo and listed here:
               <input-save textarea path="moreHTML" value="{{_moreHTML}}"></input-save>
@@ -155,10 +154,10 @@ All help is very much appreciated. I hope this project helps people get started 
     }
   }
   function merge (obj1,obj2){
-    var obj3 = {};
-    for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
-    for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
-    return obj3;
+    var obj3 = {}
+    for (var attrname in obj1) { obj3[attrname] = obj1[attrname] }
+    for (var attrname in obj2) { obj3[attrname] = obj2[attrname] }
+    return obj3
   }
   function funcIt (functs) {
     var functObj = {akey:"aval"}

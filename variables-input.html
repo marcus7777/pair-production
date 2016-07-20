@@ -7,15 +7,12 @@
   <template>
     <div style="padding:20px"> <h3>{{label}}</h3>
       <paper-input value="{{addMe}}"></paper-input> <paper-button on-tap="add">Add</paper-button>
-      <template is="dom-repeat" items="{{value}}">
-        <div style="padding:20px"> <h4>{{item.name}}</h4>
-          <input-save value="{{item.about}}" label="Tell me about {{item.name}}"></input-save>
+      <template is="dom-repeat" items="{{asArray}}">
+        <div style="padding:20px"> <h4>{{getKey(index)}}</h4>
           <input-save value="{{item.type}}" options-input></input-save>
-          <input-save value="{{item.value}}" label$="default for {{item.name}}" pattern$="{{getRepType('variable.',label,'.',item,'.type',data)}}" auto-validate error-message="needs to be a {{type}} so {{repType}}"></input-save>
-          <template is="dom-if" if="{{computed}}">
-            <input-save value="{{item.computed}}" label$="{{item.name}} is computed by" auto-validate pattern="{{reFunctionsAndVariables}}" error-message="needs to a function ({{functions}}) with input(s)"></input-save>
-          </template>
-          <input-save value="{{item.observer}}" label$="observer {{item.name}}" auto-validate pattern="{{reFunctions}}" error-message="needs to a function ( {{functions}} ) add to \'functions'\' if needed)"></input-save>
+          <input-save value="{{item.value}}" label$="default for {{getKey(index)}}" pattern$="{{getRepType(item.type)}}" auto-validate error-message="needs to be a {{type}} so {{repType}}"></input-save>
+          <input-save value="{{item.computed}}" label$="{{getKey(index)}} is computed by" auto-validate pattern="{{reFunctionsAndVariables}}" error-message="needs to a function ({{functions}}) with input(s)"></input-save>
+          <input-save value="{{item.observer}}" label$="observer {{getKey(index)}}" auto-validate pattern="{{reFunctions}}" error-message="needs to a function ( {{functions}} ) add to \'functions'\' if needed)"></input-save>
         </div>
       </template>
     </div>
@@ -33,25 +30,45 @@
         functions:{type:String},
         reFunctions: {computed:"getReFunctions(functions)"},
         reFunctionsAndVariables: {computed:"getReFunctionsAndVariables(reFunctions)"},
-        value:{notify:true,value:[]} 
+        value:{notify:true,value:{}},
+        asArray:{computed:"getAsArray(value.*)"},
+        ___:{computed:"updateValue(asArray.*)"}
+      },
+      getKey: function(i) {
+        return Object.keys(this.value)[i]
+      },
+      updateValue: function(e) {
+        var theKeys = Object.keys(this.value)
+        for (index in e.base) {
+          this.set("value." + theKeys[index], e.base[index])
+        }
       },
       add: function(){
-        if (!this.value) {
-          this.value = []
+        if (this.addMe) {
+          if (Polymer.Base.hasOwnProperty(this.addMe)) {
+            alert(this.addMe + " is taken (by Polymer.Base)")
+          } else {
+            if (!this.value || !((typeof this.value === "object") && (this.value !== null))) {
+              this.value = {}
+            }
+            this.set("value."+ this.addMe,{})
+          }
         }
-        this.value.push({ name: this.addMe })
       },
-      notInput: function(label) {
-        return label !== "Inputs"
+      getAsArray: function(Obj) {
+        if (Obj.base) {
+          debugger
+          theArray = []
+          for (key in Obj.base) {
+            theArray.push(Obj.base[key])
+          }
+          return theArray
+        }
       },
       getArray:  function(s) {
         if (s !== "") return toCamelCase(s).split(',');
       },
-      getRepType: function(a,b,c,d,e,data) {
-        var t = data[a+b+c+d+e];
-
-        console.log("t",t);
-        
+      getRepType: function(t) {
         switch(t) {
            // TODO Symbol Functions
           case 'Null': return 'null';break;
@@ -62,7 +79,6 @@
           case 'String': return '^\".*\"$';break;
           default: return '';break;
         }
-
       },
       getReFunctions: function(functions){return '(' + functions.replace(/,/g, '|') + ')';},
       getReFunctionsAndVariables: function(reFunctions) {return reFunctions+'\\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\\)'}
