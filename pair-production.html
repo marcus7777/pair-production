@@ -86,7 +86,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </iron-accordion>
             <iron-accordion>
               <h3 header title="Variables/Attributes/Properties">Properties</h3>
-              <variables-input changed="{{changed}}" functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
+              <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
               <input-save path="functions" code label="Give me list of functions it will need" value="{{elementData.functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
               <template is="dom-repeat" items="{{_functionList}}" >
                 <function-list-input variable-list="{{_variableList}}" name="{{item}}" value="{{elementData.functions}}"></function-list-input>   

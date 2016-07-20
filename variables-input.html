@@ -5,7 +5,7 @@
 
 <dom-module id="variables-input">
   <template>
-    <div style="padding:20px"> <h3>{{label}}</h3>
+    <div style="padding:20px">
       <paper-input value="{{addMe}}"></paper-input> <paper-button on-tap="add">Add</paper-button>
       <template is="dom-repeat" items="{{asArray}}">
         <div style="padding:20px"> <h4>{{getKey(index)}}</h4>
@@ -22,11 +22,6 @@
     Polymer({
       is: 'variables-input',
       properties:{
-        label:String,
-        changed: {type:Boolean,notify:true,value:false},
-        variables: {type:String,notify:true},
-        type: String,
-        computed: {computed:"notInput(label)"},
         functions:{type:String},
         reFunctions: {computed:"getReFunctions(functions)"},
         reFunctionsAndVariables: {computed:"getReFunctionsAndVariables(reFunctions)"},
