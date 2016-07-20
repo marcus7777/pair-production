@@ -8,7 +8,7 @@
   <template>
     <template is="dom-repeat" items="{{asArray}}">
       <vellum-chip elevation="1" title="Load {{getKey(index)}}" value="{{getKey(index)}}" on-tap="edit" index="[[index]]">{{getKey(index)}}</vellum-chip>
-    </template>
+    </template><br />
     <!--TODO rewrite as edit dialog
     <template is="dom-repeat" items="{{asArray}}">
       <div style="padding:20px"> <h4>{{getKey(index)}}</h4>
