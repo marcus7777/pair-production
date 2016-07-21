@@ -1,5 +1,8 @@
-<link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../vellum-chip/vellum-chip.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-dialog-scrollable/paper-dialog-scrollable.html">
+
 <!--
 `<variables-input>` 
 -->
@@ -9,15 +12,19 @@
     <template is="dom-repeat" items="{{asArray}}">
       <vellum-chip elevation="1" title="Load {{getKey(index)}}" value="{{getKey(index)}}" on-tap="edit" index="[[index]]">{{getKey(index)}}</vellum-chip>
     </template><br />
-    <!--TODO rewrite as edit dialog
-    <template is="dom-repeat" items="{{asArray}}">
-      <div style="padding:20px"> <h4>{{getKey(index)}}</h4>
-        <input-save value="{{item.type}}" options-input></input-save>
-        <input-save value="{{item.value}}" label$="default for {{getKey(index)}}" pattern$="{{getRepType(item.type)}}" auto-validate error-message="needs to be a {{type}} so {{repType}}"></input-save>
-        <input-save value="{{item.computed}}" label$="{{getKey(index)}} is computed by" auto-validate pattern="{{reFunctionsAndVariables}}" error-message="needs to a function ({{functions}}) with input(s)"></input-save>
-        <input-save value="{{item.observer}}" label$="observer {{getKey(index)}}" auto-validate pattern="{{reFunctions}}" error-message="needs to a function ( {{functions}} ) add to \'functions'\' if needed)"></input-save>
+    <paper-dialog id="edit">
+      <h2>Update {{_editing.name}}</h2>
+      <paper-dialog-scrollable>
+        <input-save value="{{_editing.type}}" options-input></input-save>
+        <input-save value="{{_editing.value}}" label$="default for {{_editing.name}}" pattern$="{{getRepType(_editing.type)}}" auto-validate error-message="needs to be a {{_editing.type}} so {{repType}}"></input-save>
+        <input-save value="{{_editing.computed}}" label$="{{_editing.name}} is computed by" auto-validate pattern="{{reFunctionsAndVariables}}" error-message="needs to a function ({{functions}}) with input(s)"></input-save>
+        <input-save value="{{_editing.observer}}" label="observer by" auto-validate pattern="{{reFunctions}}" error-message="needs to a function ( {{functions}} ) add to \'functions'\' if needed)"></input-save>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-confirm autofocus on-tap="save">Accept</paper-button>
       </div>
-    </template> -->
+    </paper-dialog>
     <paper-input value="{{addMe}}" style="width:200px;display:inline-block"></paper-input> <paper-button on-tap="add">Add</paper-button>
   </template>
 </dom-module> 
@@ -30,22 +37,29 @@
         reFunctionsAndVariables: {computed:"getReFunctionsAndVariables(reFunctions)"},
         value:{notify:true,value:{}},
         asArray:{computed:"getAsArray(value.*)"},
-        ___:{computed:"updateValue(asArray.*)"}
+        _editing:{value:{}},
+        _editingIndex:Number,
+        ___:{computed:"updateValue(asArray.*)"}:w
+
       },
       getKey: function(i) {
         return Object.keys(this.value)[i]
       },
       updateValue: function(e) {
-        var theKeys = Object.keys(this.value)
-        for (index in e.base) {
-          this.set("value." + theKeys[index], e.base[index])
-        }
+       // var theKeys = Object.keys(this.value)
+       // for (index in e.base) {
+       //   this.set("value." + theKeys[index], e.base[index])
+       // }
       },
       add: function(){
         if (this.addMe) {
           this.addMe = this.addMe.trim()
           if (Polymer.Base.hasOwnProperty(this.addMe)) {
             alert(this.addMe + " is taken (by Polymer.Base)")
+          } else if (this.functions.hasOwnProperty(this.addMe)) {
+            alert(this.addMe + " is taken (by a method/function)")
+          } else if (this.value.hasOwnProperty(this.addMe)) {
+            alert(this.addMe + " is taken")
           } else {
             if (!this.value || !((typeof this.value === "object") && (this.value !== null))) {
               this.value = {}
@@ -56,7 +70,6 @@
       },
       getAsArray: function(Obj) {
         if (Obj.base) {
-          debugger
           theArray = []
           for (key in Obj.base) {
             theArray.push(Obj.base[key])
@@ -68,8 +81,14 @@
         if (s !== "") return toCamelCase(s).split(',');
       },
       edit: function(e) {
-        //show dialog
-        debugger
+        this._editingIndex = +e.currentTarget.index
+        this.set("_editing", this.asArray[+e.currentTarget.index])
+        this.set("_editing.name", this.getKey(+e.currentTarget.index))
+        this.$.edit.open()
+      },
+      save: function() {
+          debugger
+        
       },
       getRepType: function(t) {
         switch(t) {

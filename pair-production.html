@@ -79,15 +79,14 @@ All help is very much appreciated. I hope this project helps people get started 
               <input-save path="template" code textarea with-attr-option value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
                 
               <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
-                <div prefix>&lt{{elementData.name}} &nbsp </div>
-                <div suffix> > &lt/{{elementData.name}}&gt</div>
+                <div prefix>&lt;{{elementData.name}} &nbsp; </div>
+                <div suffix> &gt;&lt;/{{elementData.name}}&gt;</div>
               </paper-input>
               <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </iron-accordion>
             <iron-accordion>
               <h3 header title="Variables/Attributes/Properties">Properties</h3>
               <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
-theValue " {{elementData.properties.g.value }} "
             </iron-accordion>
             <iron-accordion>
               <h3 header title="Functions/Methods">Methods</h3>
