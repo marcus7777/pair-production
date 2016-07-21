@@ -9,13 +9,14 @@
 
 <dom-module id="variables-input">
   <template>
-    <template is="dom-repeat" items="{{asArray}}">
-      <vellum-chip elevation="1" title="Load {{getKey(index)}}" value="{{getKey(index)}}" on-tap="edit" index="[[index]]">{{getKey(index)}}</vellum-chip>
+    <template is="dom-repeat" items="{{asArray}}" restamp id="list">
+      <vellum-chip elevation="1" title="Load [[item]]" value="[[item]]" on-tap="edit" name="[[item]]">[[item]]</vellum-chip>
     </template><br />
     <paper-dialog id="edit">
       <h2>Update {{_editing.name}}</h2>
       <paper-dialog-scrollable>
-        <input-save value="{{_editing.type}}" options-input></input-save>
+        <input-save value="{{_editing.rename}}" label="name" auto-validate pattern="[a-zA-Z_][0-9a-zA-Z_]*" error-message="is not a good name"></input-save>
+        <input-save value="{{_editing.type}}" options-input ></input-save>
         <input-save value="{{_editing.value}}" label$="default for {{_editing.name}}" pattern$="{{getRepType(_editing.type)}}" auto-validate error-message="needs to be a {{_editing.type}} so {{repType}}"></input-save>
         <input-save value="{{_editing.computed}}" label$="{{_editing.name}} is computed by" auto-validate pattern="{{reFunctionsAndVariables}}" error-message="needs to a function ({{functions}}) with input(s)"></input-save>
         <input-save value="{{_editing.observer}}" label="observer by" auto-validate pattern="{{reFunctions}}" error-message="needs to a function ( {{functions}} ) add to \'functions'\' if needed)"></input-save>
@@ -38,9 +39,7 @@
         value:{notify:true,value:{}},
         asArray:{computed:"getAsArray(value.*)"},
         _editing:{value:{}},
-        _editingIndex:Number,
-        ___:{computed:"updateValue(asArray.*)"}:w
-
+        ___:{computed:"updateValue(asArray.*)"}
       },
       getKey: function(i) {
         return Object.keys(this.value)[i]
@@ -54,8 +53,11 @@
       add: function(){
         if (this.addMe) {
           this.addMe = this.addMe.trim()
+          
           if (Polymer.Base.hasOwnProperty(this.addMe)) {
             alert(this.addMe + " is taken (by Polymer.Base)")
+          } else if (!/^[a-zA-Z_][0-9a-zA-Z_]*/.test(this.addMe)) {
+            alert(this.addMe + " is not a good name")
           } else if (this.functions.hasOwnProperty(this.addMe)) {
             alert(this.addMe + " is taken (by a method/function)")
           } else if (this.value.hasOwnProperty(this.addMe)) {
@@ -65,30 +67,40 @@
               this.value = {}
             }
             this.set("value."+ this.addMe,{})
+            this.set("_editing", {})
+            this.set("_editing.name", this.addMe)
+            this.set("_editing.rename", this.addMe)
+            this.$.edit.open()
           }
         }
       },
       getAsArray: function(Obj) {
         if (Obj.base) {
-          theArray = []
-          for (key in Obj.base) {
-            theArray.push(Obj.base[key])
-          }
-          return theArray
+          return Object.keys(Obj.base)
         }
       },
       getArray:  function(s) {
         if (s !== "") return toCamelCase(s).split(',');
       },
       edit: function(e) {
-        this._editingIndex = +e.currentTarget.index
-        this.set("_editing", this.asArray[+e.currentTarget.index])
-        this.set("_editing.name", this.getKey(+e.currentTarget.index))
+        this.set("_editing", this.value[e.currentTarget.name])
+        this.set("_editing.name", e.currentTarget.name)
+        this.set("_editing.rename", e.currentTarget.name)
         this.$.edit.open()
       },
       save: function() {
-          debugger
-        
+        var name = this._editing.name +""
+        var rename = this._editing.rename +""
+        delete(this._editing.name)
+        delete(this._editing.rename)
+        if (rename != name) {
+          delete(this.value[name])
+        }
+        if (rename) {
+          this.value[rename] = this._editing
+        }
+        this.set("value", JSON.parse(JSON.stringify(this.value)))
+        this.$.list.render()
       },
       getRepType: function(t) {
         switch(t) {
