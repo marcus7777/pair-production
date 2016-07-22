@@ -2,13 +2,17 @@
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../markdown-edit/markdown-edit.html">
 <link rel="import" href="../html-edit/html-edit.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
 <!--
 `<input-save>` saves you work as you type 
 -->
 
 <dom-module id="input-save">
   <template>
-    <style>.paper-input-container {width: 100%}</style>
+    <style>
+      .paper-input-container {width: 100%}
+      .iron-selected {color:#555}
+    </style>
     <template is="dom-if" if="{{text}}">
       <paper-input invalid="{{invalid}}" type="{{type}}" label="{{label}}" value="{{value}}" pattern="{{pattern}}" error-message="{{errorMessage}}" auto-validate="{{autoValidate}}"></paper-input>
     </template>
