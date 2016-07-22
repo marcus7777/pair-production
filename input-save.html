@@ -26,11 +26,14 @@
       </template>
     </template> 
     <template is="dom-if" if="{{optionsInput}}">
-      <select id="selecter" on-change="saveOptions">
-        <template is="dom-repeat" items="{{options}}">
-          <option value="[[item]]">[[item]]</option>
-        </template>
-      </select>
+      picked: {{value}} <br />
+      <iron-selector attr-for-selected="name" selected="{{value}}">
+        <div name="Object">Object</div>
+        <div name="Array">Array</div>
+        <div name="Boolean">Boolean</div>
+        <div name="Number">Number</div>
+        <div name="String">String</div>
+      </iron-selector>
     </template>
   </template>
 </dom-module>
@@ -42,10 +45,6 @@ var js_data = {}
     is: 'input-save',
     properties: {
       name: String,
-      options: {
-        type: Array,
-        value : ["Object", "Array", "Boolean", "Number", "String", "Symbol", "Function"]
-      },
       text: {type:Boolean,computed:"isText(textarea,optionsInput)"},
       markdown: {type:Boolean,value:false},
       code: {type:Boolean,value:false},
