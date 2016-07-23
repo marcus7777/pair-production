@@ -182,10 +182,10 @@ All help is very much appreciated. I hope this project helps people get started 
     var elements = listOfElements.split('\n')
     for (var i = 0; i < elements.length; ++i) {
       if (elements[i].indexOf('/' + dependency + '.html') !== -1) {
-        return '/'+listOfElements.split('\n')[i]
+        return '/'+listOfElements.split('\n')[i].replace(re, '..')
       }
     }
-    return '/bower_components/polymer/polymer.html'
+    return '../polymer/polymer.html'
   }
   Polymer({
     is: 'pair-production',
@@ -204,9 +204,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _body: {computed: '_getBody(elementData.name, elementData.attrsForDemo)'},
       _listOfElements:String,
       _listOfElementsList:{computed: '_getArray()'},
-      _element: {
-        computed: '_getElementCode(elementData.name, elementData.description, _dependencylist, elementData.html,_functionList,_variablesSets, changed, _listOfElements)'
-      },
+      _element:{computed:'_getElementCode(elementData,_dependencylist,_listOfElements,elementData.*)'},
       _descriptor: {computed: '_getDescriptor(_element)'},
       _tests: {computed: '_getTests(elementData.name)'},
       _markdown: {computed: '_getMarkdown(_demo,_element,elementData.name,_bower,_tests)'},
@@ -430,80 +428,50 @@ All help is very much appreciated. I hope this project helps people get started 
 
       if (name !== '') return output
     },
-    _getElementCode: function (name, description, dependencylist, domTemplate, functionList, variablesSets, changed, listOfElements) {
+    _getElementCode: function (elementData, dependencylist, listOfElements) {
       var output = []
 
       output.push('<!--')
-      output.push('`<' + name + '></'+name+'>` ' + description)
+      output.push('`<' + elementData.name + '></'+elementData.name+'>` ' + elementData.description)
       output.push('@demo demo.html')
       output.push('-->', '')
       output.push('<dom-module id="' + name + '">')
       output.push('<template>')
-      for (var a = 0; a < domTemplate.split('\n').length; ++a) {
-        output.push(tabs() + domTemplate.split('\n')[a])
+      for (var a = 0; a < elementData.html.split('\n').length; ++a) {
+        output.push(tabs() + elementData.html.split('\n')[a])
       }
       output.push('</template>')
       output.push('</dom-module>')
       output.push('<sc' + 'ript>')
-      var variableList = {}
-      //  make variableList
-      for (var i = 0; i < variablesSets.split(',').length; ++i) {
-        var set = variablesSets.split(',')[i]
-        var perfix = "" 
-        if (set === "Internal") {
-          var perfix = "_" 
-        }
-
-        if (js_data !== undefined || js_data !== null) {
-          if (js_data.hasOwnProperty('variables.' + set)) {
-            var varsList = toCamelCase(js_data['variables.' + set])
-            if (varsList) {
-              varsList = varsList.split(',')
-              console.log('_getElementCode', varsList)
-              if (varsList.length > 0) {
-                for (var n = 0; n < varsList.length; ++n) {
-
-                  variableList[perfix + varsList[n]] = {}
-                    // type: '',
-                    // readOnly: '',
-                    // reflectToAttribute: '',
-                    // observer: ''
-                  if (set === "Outputs") {                  
-                    variableList[perfix + varsList[n]].notify = true
-                  }
-
-                  if (js_data['variable.' + set + '.' + varsList[n] + '.default']) {                  
-                    variableList[perfix + varsList[n]].value = js_data['variable.' + set + '.' + varsList[n] + '.default']
-                  }
-
-                }
-              }
-            }
-          }
-        }
-      }
        
       output.push(tabs(1)+'Polymer({')
 
       output.push(tabs()+'is: "' + name + '",')
-      if (variableList.length) {
+      if (elementData.properties && Object.keys(elementData.properties).length) {
         output.push(tabs(1)+'properties:{')
-        for (index in variableList) {
+        for (index in elementData.properties) {
           // todo type / computed / ...
-          output.push(tabs() + variableList[index] + ":{},") 
+          console.log(elementData.properties[index])
+          if (elementData.properties[index].type && Object.keys(elementData.properties[index]).length == 1) {
+            output.push(tabs() + index + ":" + elementData.properties[index].type + ",") 
+          } else {
+            output.push(tabs() + index + ":" + "{") 
+            for (prop in elementData.properties[index]) {
+              output.push(tabs() + prop + ":" + elementData.properties[index][prop] + ",") 
+            }
+            output.push(tabs() + "},") 
+          }   
         }
         output.push(tabs(-1)+'},')
       }
-      for (index in functionList) {
+      for (index in elementData.functions) {
         // todo attr / body / ...
-        output.push(tabs() + functionList[index] + ": function(){ return 1},")
+        output.push(tabs() + elementData.functions[index] + ": function(){ return 1},")
       }
       
       
       output.push(tabs(-1)+'})')
      
-      console.log('_getElementCode 198 ', variableList)
-
       output.push('</sc' + 'ript>')
 
       for (var x = 0; x < dependencylist.length; ++x) {
