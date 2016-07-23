@@ -58,7 +58,7 @@
             alert(this.addMe + " is not a good name")
           } else if (this.functions.hasOwnProperty(this.addMe)) {
             alert(this.addMe + " is taken (by a method/function)")
-          } else if (this.value.hasOwnProperty(this.addMe)) {
+          } else if (this.value && this.value.hasOwnProperty(this.addMe)) {
             alert(this.addMe + " is taken")
           } else {
             if (!this.value || !((typeof this.value === "object") && (this.value !== null))) {
@@ -120,7 +120,7 @@
           default: return '';break;
         }
       },
-      getReFunctions: function(functions){return '(' + functions.replace(/,/g, '|') + ')';},
+      getReFunctions: function(functions){return '(' + Object.keys(functions).join('|') + ')';},
       getReFunctionsAndVariables: function(reFunctions) {return reFunctions+'\\([a-zA-Z]*[a-zA-Z\,]*[a-zA-Z]+\\)'}
     });
 </script>

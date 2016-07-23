@@ -459,7 +459,11 @@ All help is very much appreciated. I hope this project helps people get started 
             output.push(tabs(1) + index + ":" + "{") 
             for (prop in elementData.properties[index]) {
               if (elementData.properties[index][prop]) { 
-                output.push(tabs() + prop + ":" + elementData.properties[index][prop] + ",") 
+                if (prop == "computed") {
+                  output.push(tabs() + prop + ":\"" + elementData.properties[index][prop] + "\",")
+                } else { 
+                  output.push(tabs() + prop + ":" + elementData.properties[index][prop] + ",") 
+                }
               }
             }
             output.push(tabs(-1) + "},") 
@@ -469,7 +473,13 @@ All help is very much appreciated. I hope this project helps people get started 
       }
       for (index in elementData.functions) {
         // todo attr / body / ...
-        output.push(tabs() + elementData.functions[index] + ": function(){ return 1},")
+        output.push(tabs(1) + index + ": function(" + elementData.functions[index].attrs + "){")
+        if (elementData.functions[index].body) {
+          for (var f = 0; f < elementData.functions[index].body.split('\n').length; ++f) {
+            output.push(tabs() + elementData.functions[index].body.split('\n')[f])
+          }
+        }
+        output.push(tabs(-1) + "},")
       }
       output.push(tabs(-1)+'})')
       output.push(tabs(-1)+'</sc' + 'ript>')
