@@ -85,18 +85,15 @@ All help is very much appreciated. I hope this project helps people get started 
               <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </iron-accordion>
             <iron-accordion>
-              <h3 header title="Variables/Attributes/Properties">Properties</h3>
+              <h3 header title="Variables/Attributes/Properties">Variables/Attributes/Properties</h3>
               <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
             </iron-accordion>
             <iron-accordion>
-              <h3 header title="Functions/Methods">Methods</h3>
-              <input-save path="functions" code label="Give me list of functions it will need" value="{{elementData.functions}}" pattern="[a-z0-9A-Z0-9]*[a-z0-9A-Z0-9\,]*[a-z0-9A-Z0-9]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-              <template is="dom-repeat" items="{{_functionList}}" >
-                <function-list-input variable-list="{{_variableList}}" name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
-              </template>
+              <h3 header title="Functions/Methods">Functions/Methods</h3>
+              <function-list-input  name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
             </iron-accordion>
             <iron-accordion>
-              <h3 header>Share Your element <a href="{{link}}">by link</a>/code</h3>
+              <h3 header>Deploy/Share Your element <a href="{{link}}">by link</a>/code</h3>
               Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
               <prism-highlighter></prism-highlighter>
               <marked-element markdown="{{_markdown}}"></marked-element>
@@ -282,7 +279,11 @@ All help is very much appreciated. I hope this project helps people get started 
       return a + b + c
     },
     _getArray: function (s, a) {
-      if (s && s !== '' && a === undefined) {
+      if (s && typeof s == "object" && a === undefined) {
+        return Object.keys(s) 
+      } else if (s && typeof s == "object" && Array.isArray(a) ) {
+        return Object.keys(s).concat(a)
+      } else if (s && s !== '' && a === undefined) {
         return s.split(',')  
       } else if (s && s !== '' && Array.isArray(a)){
         return s.split(',').concat(a)

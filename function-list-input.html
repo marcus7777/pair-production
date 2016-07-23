@@ -4,7 +4,6 @@
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../vellum-chip/vellum-chip.html">
-<link rel="import" href="../polymer/polymer.html">
 
 <dom-module is="function-list-input">
   <template>
@@ -17,10 +16,11 @@
         <paper-input label="name" value="{{_editing.name}}"style="width:200px;display:inline-block"></paper-input>
         <paper-input label="attrs" value="{{_editing.attrs}}"style="width:200px;display:inline-block">
           <div prefix>(</div>
-          <div suffix>)</div>
+          <div suffix>) {</div>
         </paper-input>
         <paper-textarea value="{{_editing.function}}" >
-        </paper-textarea> 
+        </paper-textarea>
+        } 
       </paper-dialog-scrollable>
       <div class="buttons">
         <paper-button dialog-dismiss>Cancel</paper-button>
