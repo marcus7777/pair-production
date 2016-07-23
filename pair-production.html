@@ -96,7 +96,7 @@ All help is very much appreciated. I hope this project helps people get started 
               </template>
             </iron-accordion>
             <iron-accordion>
-              <h3 header>Share Your element</h3>
+              <h3 header>Share Your element <a href="{{link}}">by link</a>/code</h3>
               Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
               <prism-highlighter></prism-highlighter>
               <marked-element markdown="{{_markdown}}"></marked-element>
@@ -182,7 +182,7 @@ All help is very much appreciated. I hope this project helps people get started 
     var elements = listOfElements.split('\n')
     for (var i = 0; i < elements.length; ++i) {
       if (elements[i].indexOf('/' + dependency + '.html') !== -1) {
-        return '/'+listOfElements.split('\n')[i].replace(re, '..')
+        return '/'+listOfElements.split('\n')[i]
       }
     }
     return '../polymer/polymer.html'
@@ -395,14 +395,14 @@ All help is very much appreciated. I hope this project helps people get started 
           tabs() + 'language: node_js',
           tabs() + 'sudo: false',
           tabs() + 'node_js: stable',
-          tabs(1) +'addons:',
+          tabs() +'addons:',
           tabs() + 'chrome: latest',
-          tabs(-1)+'apt:',
-          tabs(1) +'sources:',
+          tabs()+'apt:',
+          tabs() +'sources:',
           tabs() + '- google-chrome',
           tabs() + 'packages:',
           tabs() + '- google-chrome-stable',
-          tabs(-1)+'before_script:',
+          tabs()+'before_script:',
           tabs() + '- npm install web-component-tester',
           tabs() + '- npm install bower',
           tabs() + '- export PATH=$PWD/node_modules/.bin:$PATH',
@@ -431,22 +431,22 @@ All help is very much appreciated. I hope this project helps people get started 
     _getElementCode: function (elementData, dependencylist, listOfElements) {
       var output = []
 
-      output.push('<!--')
-      output.push('`<' + elementData.name + '></'+elementData.name+'>` ' + elementData.description)
-      output.push('@demo demo.html')
-      output.push('-->', '')
-      output.push('<dom-module id="' + name + '">')
-      output.push('<template>')
+      output.push(tabs(1)+'<!--')
+      output.push(tabs()+'`<' + elementData.name + '></'+elementData.name+'>` ' + elementData.description)
+      output.push(tabs()+'@demo demo.html')
+      output.push(tabs(-1)+'-->')
+      output.push(tabs(1)+'<dom-module id="' + elementData.name + '">')
+      output.push(tabs(1)+'<template>')
       for (var a = 0; a < elementData.html.split('\n').length; ++a) {
         output.push(tabs() + elementData.html.split('\n')[a])
       }
-      output.push('</template>')
-      output.push('</dom-module>')
-      output.push('<sc' + 'ript>')
+      output.push(tabs(-1)+'</template>')
+      output.push(tabs(-1)+'</dom-module>')
+      output.push(tabs(1)+'<sc' + 'ript>')
        
       output.push(tabs(1)+'Polymer({')
 
-      output.push(tabs()+'is: "' + name + '",')
+      output.push(tabs()+'is: "' + elementData.name + '",')
       if (elementData.properties && Object.keys(elementData.properties).length) {
         output.push(tabs(1)+'properties:{')
         for (index in elementData.properties) {
@@ -455,11 +455,13 @@ All help is very much appreciated. I hope this project helps people get started 
           if (elementData.properties[index].type && Object.keys(elementData.properties[index]).length == 1) {
             output.push(tabs() + index + ":" + elementData.properties[index].type + ",") 
           } else {
-            output.push(tabs() + index + ":" + "{") 
+            output.push(tabs(1) + index + ":" + "{") 
             for (prop in elementData.properties[index]) {
-              output.push(tabs() + prop + ":" + elementData.properties[index][prop] + ",") 
+              if (elementData.properties[index][prop]) { 
+                output.push(tabs() + prop + ":" + elementData.properties[index][prop] + ",") 
+              }
             }
-            output.push(tabs() + "},") 
+            output.push(tabs(-1) + "},") 
           }   
         }
         output.push(tabs(-1)+'},')
@@ -468,12 +470,8 @@ All help is very much appreciated. I hope this project helps people get started 
         // todo attr / body / ...
         output.push(tabs() + elementData.functions[index] + ": function(){ return 1},")
       }
-      
-      
       output.push(tabs(-1)+'})')
-     
-      output.push('</sc' + 'ript>')
-
+      output.push(tabs(-1)+'</sc' + 'ript>')
       for (var x = 0; x < dependencylist.length; ++x) {
         output.unshift('<link rel="import" href="' + getfileForIframe(dependencylist[x], listOfElements) + '">')
       }

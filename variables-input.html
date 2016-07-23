@@ -2,6 +2,8 @@
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
+
 
 <!--
 `<variables-input>` 
@@ -20,6 +22,9 @@
         <input-save value="{{_editing.value}}" label$="default for {{_editing.name}}" pattern$="{{getRepType(_editing.type)}}" auto-validate error-message="needs to be a {{_editing.type}} so {{repType}}"></input-save>
         <input-save value="{{_editing.computed}}" label$="{{_editing.name}} is computed by" auto-validate pattern="{{reFunctionsAndVariables}}" error-message="needs to a function ({{functions}}) with input(s)"></input-save>
         <input-save value="{{_editing.observer}}" label="observer by" auto-validate pattern="{{reFunctions}}" error-message="needs to a function ( {{functions}} ) add to \'functions'\' if needed)"></input-save>
+        <paper-toggle-button checked="{{_editing.notify}}">notify</paper-toggle-button>
+        <paper-toggle-button checked="{{_editing.readOnly}}">readOnly</paper-toggle-button>
+        <paper-toggle-button checked="{{_editing.reflectToAttribute}}">reflectToAttribute</paper-toggle-button>
       </paper-dialog-scrollable>
       <div class="buttons">
         <paper-button dialog-dismiss>Cancel</paper-button>
@@ -96,9 +101,17 @@
         if (rename != name) {
           delete(this.value[name])
         }
+
+        for (prop in this._editing) {
+          if (!this._editing[prop]) {
+            delete(this._editing[prop])
+          }
+        }
+        
         if (rename) {
           this.value[rename] = this._editing
         }
+
         this.set("value", JSON.parse(JSON.stringify(this.value)))
         this.$.list.render()
       },
