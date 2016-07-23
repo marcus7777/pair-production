@@ -1,13 +1,33 @@
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../vellum-chip/vellum-chip.html">
+<link rel="import" href="../polymer/polymer.html">
+
 <dom-module is="function-list-input">
   <template>
-    <label>{{cat('Give me list of variables for ',name,'')}}</label>
-    <select multiple value="{{value::index}}">
-      <template is="dom-repeat" items="{{variableList}}">
-        <option value="[[item]]">[[item]]</option>
-      </template>
-    </select>
-    <input-save path="{{cat('function.',name,'.returns.about')}}" label="{{cat('What does ',name,' return?')}}" value="{{returns}}"></input-save>
-    <type-selection path="{{cat('function.',name,'.returns.type')}}" item="{{name}}"></type-selection>
+    <template is="dom-repeat" items="{{asArray}}" restamp id="list">
+      <vellum-chip elevation="1" title="Edit [[item]]" value="[[item]]" on-tap="edit" name="[[item]]">[[item]]</vellum-chip>
+    </template><br />
+    <paper-dialog id="edit">
+      <h2>Update {{_editing.name}}</h2>
+      <paper-dialog-scrollable>
+        <paper-input label="name" value="{{_editing.name}}"style="width:200px;display:inline-block"></paper-input>
+        <paper-input label="attrs" value="{{_editing.attrs}}"style="width:200px;display:inline-block">
+          <div prefix>(</div>
+          <div suffix>)</div>
+        </paper-input>
+        <paper-textarea value="{{_editing.function}}" >
+        </paper-textarea> 
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-confirm autofocus on-tap="save">Accept</paper-button>
+      </div>
+    </paper-dialog>
+    <paper-input value="{{addMe}}" pattern="[a-zA-Z_][0-9a-zA-Z_]*" auto-validate style="width:200px;display:inline-block"></paper-input> <paper-button on-tap="add">Add</paper-button>
   </template>
 </dom-module>
 <script>
@@ -15,13 +35,70 @@
     Polymer({
       is: 'function-list-input',
       properties:{
-        name: String,
-        description : String,
-        variableList : Array
+        value:{notify:true,value:{}},
+        asArray:{computed:"getAsArray(value.*)"},
+        _editing:{value:{}},
       },
-      cat: function(a,b,c) {
-        return a+b+c;
-      }
+      getKey: function(i) {
+        return Object.keys(this.value)[i]
+      },
+      add: function(){
+        if (this.addMe) {
+          this.addMe = this.addMe.trim()
+          
+          if (Polymer.Base.hasOwnProperty(this.addMe)) {
+            alert(this.addMe + " is taken (by Polymer.Base)")
+          } else if (!/^[a-zA-Z_][0-9a-zA-Z_]*/.test(this.addMe)) {
+            alert(this.addMe + " is not a good name")
+          } else if (this.variables && this.variables.hasOwnProperty(this.addMe)) {
+            alert(this.addMe + " is taken (by a method/function)")
+          } else if (this.value.hasOwnProperty(this.addMe)) {
+            alert(this.addMe + " is taken")
+          } else {
+            if (!this.value || !((typeof this.value === "object") && (this.value !== null))) {
+              this.value = {}
+            }
+            this.set("value."+ this.addMe,{})
+            this.set("_editing", {})
+            this.set("_editing.name", this.addMe)
+            this.set("_editing.rename", this.addMe)
+            this.$.edit.open()
+          }
+        }
+      },
+      getAsArray: function(Obj) {
+        if (Obj.base) {
+          return Object.keys(Obj.base)
+        }
+      },
+      edit: function(e) {
+        this.set("_editing", this.value[e.currentTarget.name])
+        this.set("_editing.name", e.currentTarget.name)
+        this.set("_editing.rename", e.currentTarget.name)
+        this.$.edit.open()
+      },
+      save: function() {
+        var name = this._editing.name +""
+        var rename = this._editing.rename +""
+        delete(this._editing.name)
+        delete(this._editing.rename)
+        if (rename != name) {
+          delete(this.value[name])
+        }
+
+        for (prop in this._editing) {
+          if (!this._editing[prop]) {
+            delete(this._editing[prop])
+          }
+        }
+        
+        if (rename) {
+          this.value[rename] = this._editing
+        }
+
+        this.set("value", JSON.parse(JSON.stringify(this.value)))
+        this.$.list.render()
+      },
     });
   })();  
 </script>

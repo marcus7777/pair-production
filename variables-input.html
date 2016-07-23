@@ -44,16 +44,9 @@
         value:{notify:true,value:{}},
         asArray:{computed:"getAsArray(value.*)"},
         _editing:{value:{}},
-        ___:{computed:"updateValue(asArray.*)"}
       },
       getKey: function(i) {
         return Object.keys(this.value)[i]
-      },
-      updateValue: function(e) {
-       // var theKeys = Object.keys(this.value)
-       // for (index in e.base) {
-       //   this.set("value." + theKeys[index], e.base[index])
-       // }
       },
       add: function(){
         if (this.addMe) {
