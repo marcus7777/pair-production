@@ -28,6 +28,7 @@
       </paper-dialog-scrollable>
       <div class="buttons">
         <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-dismiss style="color:red" on-tap="del">Delete</paper-button>
         <paper-button dialog-confirm autofocus on-tap="save">Accept</paper-button>
       </div>
     </paper-dialog>
@@ -71,6 +72,14 @@
             this.$.edit.open()
           }
         }
+      },
+      del: function() {
+        var name = this._editing.name +""
+
+        delete(this.value[name])
+
+        this.set("value", JSON.parse(JSON.stringify(this.value)))
+        this.$.list.render()
       },
       getAsArray: function(Obj) {
         if (Obj.base) {

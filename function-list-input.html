@@ -24,6 +24,7 @@
       </paper-dialog-scrollable>
       <div class="buttons">
         <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-dismiss style="color:red" on-tap="del">Delete</paper-button>
         <paper-button dialog-confirm autofocus on-tap="save">Accept</paper-button>
       </div>
     </paper-dialog>
@@ -59,9 +60,7 @@
               this.value = {}
             }
             this.set("value."+ this.addMe,{})
-            this.set("_editing", {})
-            this.set("_editing.name", this.addMe)
-            this.set("_editing.rename", this.addMe)
+            this.set("_editing", {body: "return ", name: this.addMe, rename: this.addMe})
             this.$.edit.open()
           }
         }
@@ -76,6 +75,14 @@
         this.set("_editing.name", e.currentTarget.name)
         this.set("_editing.rename", e.currentTarget.name)
         this.$.edit.open()
+      },
+      del: function() {
+        var name = this._editing.name +""
+
+        delete(this.value[name])
+
+        this.set("value", JSON.parse(JSON.stringify(this.value)))
+        this.$.list.render()
       },
       save: function() {
         var name = this._editing.name +""
