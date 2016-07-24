@@ -13,7 +13,7 @@
     <paper-dialog id="edit">
       <h2>Update {{_editing.name}}</h2>
       <paper-dialog-scrollable>
-        <paper-input label="name" value="{{_editing.name}}"style="width:200px;display:inline-block"></paper-input>
+        <paper-input label="name" value="{{_editing.rename}}"style="width:200px;display:inline-block"></paper-input>
         <paper-input label="attrs" value="{{_editing.attrs}}"style="width:200px;display:inline-block">
           <div prefix>(</div>
           <div suffix>) {</div>
@@ -99,6 +99,6 @@
         this.set("value", JSON.parse(JSON.stringify(this.value)))
         this.$.list.render()
       },
-    });
-  })();  
+    })
+  })()  
 </script>

@@ -80,7 +80,7 @@ All help is very much appreciated. I hope this project helps people get started 
               <template is="dom-if" if="{{_hasContent}}">
                 <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
                   <div prefix>&lt;{{elementData.name}} &nbsp; </div>
-                  <div suffix> &gt;</div>
+                  <div suffix>&gt;</div>
                 </paper-input>
                 <input-save path="template" code textarea value="{{elementData.content}}" list-of-elements="{{_listOfElements}}" label="inner HTML"></input-save>
                 <div>&lt;/{{elementData.name}}&gt;</div>
@@ -91,14 +91,14 @@ All help is very much appreciated. I hope this project helps people get started 
                   <div suffix> &gt;&lt;/{{elementData.name}}&gt;</div>
                 </paper-input>
               </template>
-              <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
+              <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </iron-accordion>
             <iron-accordion>
-              <h3 header title="Variables/Attributes/Properties">Variables/Attributes/Properties</h3>
+              <h3 header>Variables/Attributes/Properties</h3>
               <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
             </iron-accordion>
             <iron-accordion>
-              <h3 header title="Functions/Methods">Functions/Methods</h3>
+              <h3 header>Functions/Methods</h3>
               <function-list-input  name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
             </iron-accordion>
             <iron-accordion>
@@ -113,9 +113,9 @@ All help is very much appreciated. I hope this project helps people get started 
             </iron-accordion>
             <iron-accordion>
               <h3 header>Settings</h3>
-              <input-save path="demoHeight" type="number" value="{{demoHeight}}" label="Height of demo" ></input-save>
-              <input-save path="dependencies" code label="what are the elements will your element need" value="{{_dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate  error-message="sorry a ',' separated list "></input-save>
-              <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" path="base" value="{{_base}}"></input-save>
+              <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of demo" ></input-save>
+              <input-save path="dependencies" code label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
+              <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
             </iron-accordion>
           </template>
         </template>
@@ -196,38 +196,37 @@ All help is very much appreciated. I hope this project helps people get started 
   Polymer({
     is: 'pair-production',
     properties: {
+      _src: {computed: '_getSrc(_codeiframe)'},
       _gotName:{computed: 'getGotName(elementData.name, _listOfElements)'},
-      _variablesSets: {type: String, value: 'Inputs,Outputs,Internal'},
-      _base: {type: String, value: '/bower_components/new/'},
       _functionList: {computed: '_getArray(elementData.functions)'},
-      _dependencies: {type: String, value: 'polymer'},
-      _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,_dependencies)'},
-      _dependencylist: {computed: '_getArray(_dependencies, _domTemplateDependencies)'},
+      _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
+      _dependencylist: {computed: '_getArray(elementData.dependencies, _domTemplateDependencies)'},
       _demo: {computed: '_getCode(_head,_body)'},
       _iframeDemo: {computed: '_getCode(_iframeHead,_body)'},
       _head: {computed: '_getHead(elementData.name)'},
-      _iframeHead: {computed: '_getIframeHead(_base,elementData.name)'},
+      _iframeHead: {computed: '_getIframeHead(settingsData.base,elementData.name)'},
       _body: {computed: '_getBody(elementData, _hasContent, elementData.*)'},
-      _listOfElements:String,
-      _listOfElementsList:{computed: '_getArray()'},
+      _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _element:{computed:'_getElementCode(elementData,_dependencylist,_listOfElements,elementData.*)'},
       _descriptor: {computed: '_getDescriptor(_element)'},
       _tests: {computed: '_getTests(elementData.name)'},
       _markdown: {computed: '_getMarkdown(_demo,_element,elementData.name,_bower,_tests)'},
       _codeiframe: {computed: '_getCodeiframe(_iframeDemo,_element)'},
       _bower: {computed: '_getBower(elementData.name, elementData.description, _dependencylist, _listOfElements, _gitList)'},
-      _src: {computed: '_getSrc(_codeiframe)'},
       _hasContent: {computed:"getHasContent(elementData.html)"},
-      demoHeight: {value: 400},
       runMakeLocalData: {computed:"makeLocalData(elementData.name, elementData, localData, elementData.properties.*)"},
-      changed: {type: Boolean, notify: true, value: false},
       link: {computed:"getLink(stringFromElementData)"},
       elementData: {
         value: {
           html: '<style>:host {display:inline-block;}</style>\n<h2>Demo</h2>', 
+        },
+        dependencies:"polymer"
+      },
+      settingsData: {
+        value: {
+          base: '/bower_components/new/', demoHeight: 400,
         }
       },
-      settingsData: {value: {}},
       
     },
     getHasContent: function(html){
@@ -288,9 +287,6 @@ All help is very much appreciated. I hope this project helps people get started 
         }
       }
       return JSON.stringify(output, null, '  ')
-    },
-    _cat: function (a, b, c) {
-      return a + b + c
     },
     _getArray: function (s, a) {
       if (s && typeof s == "object" && a === undefined) {
@@ -448,7 +444,7 @@ All help is very much appreciated. I hope this project helps people get started 
       }
       output.push(tabs(-1)+'</body>')
 
-      if (name !== '') return output
+      if (elementData.name !== '') return output
     },
     _getElementCode: function (elementData, dependencylist, listOfElements) {
       var output = []
