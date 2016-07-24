@@ -76,12 +76,21 @@ All help is very much appreciated. I hope this project helps people get started 
                   <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
                 </template>
               </template>
-              <input-save path="template" code textarea with-attr-option value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
-                
-              <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
-                <div prefix>&lt;{{elementData.name}} &nbsp; </div>
-                <div suffix> &gt;&lt;/{{elementData.name}}&gt;</div>
-              </paper-input>
+              <input-save path="template" code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
+              <template is="dom-if" if="{{_hasContent}}">
+                <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
+                  <div prefix>&lt;{{elementData.name}} &nbsp; </div>
+                  <div suffix> &gt;</div>
+                </paper-input>
+                <input-save path="template" code textarea value="{{elementData.content}}" list-of-elements="{{_listOfElements}}" label="inner HTML"></input-save>
+                <div>&lt;/{{elementData.name}}&gt;</div>
+              </template>  
+              <template is="dom-if" if="{{!_hasContent}}">
+                <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
+                  <div prefix>&lt;{{elementData.name}} &nbsp; </div>
+                  <div suffix> &gt;&lt;/{{elementData.name}}&gt;</div>
+                </paper-input>
+              </template>
               <iframe sandbox="allow-scripts allow-same-origin" height="{{demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </iron-accordion>
             <iron-accordion>
@@ -198,7 +207,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _iframeDemo: {computed: '_getCode(_iframeHead,_body)'},
       _head: {computed: '_getHead(elementData.name)'},
       _iframeHead: {computed: '_getIframeHead(_base,elementData.name)'},
-      _body: {computed: '_getBody(elementData.name, elementData.attrsForDemo)'},
+      _body: {computed: '_getBody(elementData, _hasContent, elementData.*)'},
       _listOfElements:String,
       _listOfElementsList:{computed: '_getArray()'},
       _element:{computed:'_getElementCode(elementData,_dependencylist,_listOfElements,elementData.*)'},
@@ -208,6 +217,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _codeiframe: {computed: '_getCodeiframe(_iframeDemo,_element)'},
       _bower: {computed: '_getBower(elementData.name, elementData.description, _dependencylist, _listOfElements, _gitList)'},
       _src: {computed: '_getSrc(_codeiframe)'},
+      _hasContent: {computed:"getHasContent(elementData.html)"},
       demoHeight: {value: 400},
       runMakeLocalData: {computed:"makeLocalData(elementData.name, elementData, localData, elementData.properties.*)"},
       changed: {type: Boolean, notify: true, value: false},
@@ -217,7 +227,11 @@ All help is very much appreciated. I hope this project helps people get started 
           html: '<style>:host {display:inline-block;}</style>\n<h2>Demo</h2>', 
         }
       },
-      settingsData: {value: {}}
+      settingsData: {value: {}},
+      
+    },
+    getHasContent: function(html){
+      return html.indexOf("</content>") !== -1
     },
     getLink: function(link) {
       return '#' + link
@@ -416,16 +430,23 @@ All help is very much appreciated. I hope this project helps people get started 
         return testStub + JSON.stringify({verbose: true, plugins: {local: { browsers: ["chrome"]}}}, null, '  ')
       }
     },
-    _getBody: function (name, attrs) {
-      if (!attrs) {
-        attrs = ""
+    _getBody: function (elementData, hasContent) {
+      if (!elementData.attrsForDemo) {
+        elementData.attrsForDemo = ""
       }
       var output = [
         tabs(1) +'<body>',
-        tabs() + '<h3>' + name + ' Demo</h3>',
-        tabs() + '<' + name + ' ' + attrs + '></' + name + '>',
-        tabs(-1)+'</body>'
+        tabs() + '<h3>' + elementData.name + ' Demo</h3>'
       ]
+
+      if (elementData.content, hasContent) {
+        output.push(tabs(1) + '<' + elementData.name + ' ' + elementData.attrsForDemo + '></' + elementData.name + '>')
+        output = output.concat(elementData.content.split('\n').map(function(line) { return tabs() + line }))
+        output.push(tabs(-1) + '</' + elementData.name + '>')
+      } else {
+        output.push(tabs() + '<' + elementData.name + ' ' + elementData.attrsForDemo + '></' + elementData.name + '>')
+      }
+      output.push(tabs(-1)+'</body>')
 
       if (name !== '') return output
     },
