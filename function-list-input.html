@@ -47,7 +47,7 @@
         if (this.addMe) {
           this.addMe = this.addMe.trim()
           
-          if (Polymer.Base.hasOwnProperty(this.addMe)) {
+          if (Polymer.Base.hasOwnProperty(this.addMe) && this.addMe != "ready") {
             alert(this.addMe + " is taken (by Polymer.Base)")
           } else if (!/^[a-zA-Z_][0-9a-zA-Z_]*/.test(this.addMe)) {
             alert(this.addMe + " is not a good name")

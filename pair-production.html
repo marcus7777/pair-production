@@ -197,25 +197,25 @@ All help is very much appreciated. I hope this project helps people get started 
     is: 'pair-production',
     properties: {
       _src: {computed: '_getSrc(_codeiframe)'},
-      _gotName:{computed: 'getGotName(elementData.name, _listOfElements)'},
-      _functionList: {computed: '_getArray(elementData.functions)'},
-      _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
-      _dependencylist: {computed: '_getArray(elementData.dependencies, _domTemplateDependencies)'},
-      _demo: {computed: '_getCode(_head,_body)'},
-      _iframeDemo: {computed: '_getCode(_iframeHead,_body)'},
-      _head: {computed: '_getHead(elementData.name)'},
-      _iframeHead: {computed: '_getIframeHead(settingsData.base,elementData.name)'},
-      _body: {computed: '_getBody(elementData, _hasContent, elementData.*)'},
-      _listOfElementsList:{computed: '_getArray(_listOfElements)'},
-      _element:{computed:'_getElementCode(elementData,_dependencylist,_listOfElements,elementData.*)'},
-      _descriptor: {computed: '_getDescriptor(_element)'},
-      _tests: {computed: '_getTests(elementData.name)'},
-      _markdown: {computed: '_getMarkdown(_demo,_element,elementData.name,_bower,_tests)'},
-      _codeiframe: {computed: '_getCodeiframe(_iframeDemo,_element)'},
-      _bower: {computed: '_getBower(elementData.name, elementData.description, _dependencylist, _listOfElements, _gitList)'},
-      _hasContent: {computed:"getHasContent(elementData.html)"},
-      runMakeLocalData: {computed:"makeLocalData(elementData.name, elementData, localData, elementData.properties.*)"},
       link: {computed:"getLink(stringFromElementData)"},
+      _body: {computed: '_getBody(elementData, _hasContent, elementData.*)'},
+      _demo: {computed: '_getCode(_head,_body)'},
+      _head: {computed: '_getHead(elementData.name)'},
+      _tests: {computed: '_getTests(elementData.name)'},
+      _bower: {computed: '_getBower(elementData.name, elementData.description, _dependencylist, _listOfElements, _gitList)'},
+      _gotName:{computed: 'getGotName(elementData.name, _listOfElements)'},
+      _element:{computed:'_getElementCode(elementData,_dependencylist,_listOfElements,elementData.*)'},
+      _markdown: {computed: '_getMarkdown(_demo,_element,elementData.name,_bower,_tests)'},
+      _iframeDemo: {computed: '_getCode(_iframeHead,_body)'},
+      _iframeHead: {computed: '_getIframeHead(settingsData.base,elementData.name)'},
+      _descriptor: {computed: '_getDescriptor(_element)'},
+      _codeiframe: {computed: '_getCodeiframe(_iframeDemo,_element)'},
+      _hasContent: {computed: "_getHasContent(elementData.html)"},
+      _functionList: {computed: '_getArray(elementData.functions)'},
+      _dependencylist: {computed: '_getArray(elementData.dependencies, _domTemplateDependencies)'},
+      runMakeLocalData: {computed:"makeLocalData(elementData.name, elementData, localData, elementData.properties.*)"},
+      _listOfElementsList:{computed: '_getArray(_listOfElements)'},
+      _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
       elementData: {
         value: {
           html: '<style>:host {display:inline-block;}</style>\n<h2>Demo</h2>', 
@@ -229,7 +229,7 @@ All help is very much appreciated. I hope this project helps people get started 
       },
       
     },
-    getHasContent: function(html){
+    _getHasContent: function(html){
       return html.indexOf("</content>") !== -1
     },
     getLink: function(link) {
@@ -435,8 +435,8 @@ All help is very much appreciated. I hope this project helps people get started 
         tabs() + '<h3>' + elementData.name + ' Demo</h3>'
       ]
 
-      if (elementData.content, hasContent) {
-        output.push(tabs(1) + '<' + elementData.name + ' ' + elementData.attrsForDemo + '></' + elementData.name + '>')
+      if (elementData.content && hasContent) {
+        output.push(tabs(1) + '<' + elementData.name + ' ' + elementData.attrsForDemo + '>')
         output = output.concat(elementData.content.split('\n').map(function(line) { return tabs() + line }))
         output.push(tabs(-1) + '</' + elementData.name + '>')
       } else {
