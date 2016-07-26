@@ -341,6 +341,7 @@ All help is very much appreciated. I hope this project helps people get started 
       if (name !== '') {
         var testStub = addLine([
           tabs() + '<!doctype html>',
+          tabs() + "<meta charset='utf-8'>",
           tabs(1) +'<html>',
           tabs(1) +'<head>',
           tabs() + '<meta charset="utf-8">',
@@ -476,7 +477,7 @@ All help is very much appreciated. I hope this project helps people get started 
             output.push(tabs(1) + index + ":" + "{") 
             for (prop in elementData.properties[index]) {
               if (elementData.properties[index][prop]) { 
-                if (prop == "computed") {
+                if (prop == "computed" || prop == "observer") {
                   output.push(tabs() + prop + ":\"" + elementData.properties[index][prop] + "\",")
                 } else { 
                   output.push(tabs() + prop + ":" + elementData.properties[index][prop] + ",") 
