@@ -55,7 +55,7 @@ All help is very much appreciated. I hope this project helps people get started 
         </iron-accordion>
         <iron-accordion opened="{{unnamed}}">
           <h3 header>Name</toggle-icon></h3>
-          <input-save path="name" label="Name the new element - like pirate-ninja" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+          <input-save path="name" label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
           <template is="dom-if" if="{{_gotName}}">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
           </template>
@@ -196,6 +196,17 @@ All help is very much appreciated. I hope this project helps people get started 
   Polymer({
     is: 'pair-production',
     properties: {
+      elementData: {
+        value: {
+          html: '<style>:host {display:inline-block;}</style>\n<h2>Demo</h2>', 
+        },
+        dependencies:"polymer"
+      },
+      settingsData: {
+        value: {
+          base: '/bower_components/new/', demoHeight: 400,
+        }
+      },
       _src: {computed: '_getSrc(_codeiframe)'},
       link: {computed:"getLink(stringFromElementData)"},
       _body: {computed: '_getBody(elementData, _hasContent, elementData.*)'},
@@ -216,18 +227,6 @@ All help is very much appreciated. I hope this project helps people get started 
       runMakeLocalData: {computed:"makeLocalData(elementData.name, elementData, localData, elementData.properties.*)"},
       _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
-      elementData: {
-        value: {
-          html: '<style>:host {display:inline-block;}</style>\n<h2>Demo</h2>', 
-        },
-        dependencies:"polymer"
-      },
-      settingsData: {
-        value: {
-          base: '/bower_components/new/', demoHeight: 400,
-        }
-      },
-      
     },
     _getHasContent: function(html){
       return html.indexOf("</content>") !== -1
