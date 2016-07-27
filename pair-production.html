@@ -307,6 +307,7 @@ All help is very much appreciated. I hope this project helps people get started 
       at = 0
       var output = [
         tabs() + '<!doctype html>',
+        tabs() + "<meta charset='utf-8'>",
         tabs(1) + '<html>'
       ]
       for (var i = 0; i < head.length; ++i) {
@@ -341,7 +342,6 @@ All help is very much appreciated. I hope this project helps people get started 
       if (name !== '') {
         var testStub = addLine([
           tabs() + '<!doctype html>',
-          tabs() + "<meta charset='utf-8'>",
           tabs(1) +'<html>',
           tabs(1) +'<head>',
           tabs() + '<meta charset="utf-8">',
@@ -491,6 +491,8 @@ All help is very much appreciated. I hope this project helps people get started 
       }
       for (index in elementData.functions) {
         // todo attr / body / ...
+        var attrs = elementData.functions[index].attrs || ""
+        
         output.push(tabs(1) + index + ": function(" + elementData.functions[index].attrs + "){")
         if (elementData.functions[index].body) {
           for (var f = 0; f < elementData.functions[index].body.split('\n').length; ++f) {
