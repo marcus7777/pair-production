@@ -102,6 +102,12 @@ All help is very much appreciated. I hope this project helps people get started 
               <function-list-input  name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
             </iron-accordion>
             <iron-accordion>
+              <h3 header>Inports/Dependencies</h3>
+              <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
+              <h4>Auto</h4>
+              <p>{{_domTemplateDependencies}} </p>
+            </iron-accordion>
+            <iron-accordion>
               <h3 header>Deploy/Share Your element <a href="{{link}}">by link</a>/code</h3>
               Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
               <prism-highlighter></prism-highlighter>
@@ -114,7 +120,6 @@ All help is very much appreciated. I hope this project helps people get started 
             <iron-accordion>
               <h3 header>Settings</h3>
               <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of demo" ></input-save>
-              <input-save path="dependencies" code label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
               <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
             </iron-accordion>
           </template>
@@ -539,8 +544,11 @@ All help is very much appreciated. I hope this project helps people get started 
           output.push(m[1])
         }
       }
-
-      return output
+      if (output.length > 0) {
+        return output
+      } else {
+        return ["polymer"]
+      }
     }
   })
 })()
