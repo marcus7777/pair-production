@@ -1,7 +1,6 @@
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-dialog-scrollable/paper-dialog-scrollable.html">
-<link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../vellum-chip/vellum-chip.html">
 
@@ -18,8 +17,7 @@
           <div prefix>(</div>
           <div suffix>) {</div>
         </paper-input>
-        <paper-textarea value="{{_editing.body}}" >
-        </paper-textarea>
+        <textarea style="font-family: monospace;width:100%" value="{{_editing.body::input}}" ></textarea>
         } 
       </paper-dialog-scrollable>
       <div class="buttons">
