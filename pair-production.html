@@ -1,18 +1,19 @@
+<link rel="import" href="../iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../iron-accordions/iron-accordions.html"> 
 <link rel="import" href="../prism-element/prism-highlighter.html">
 <link rel="import" href="../marked-element/marked-element.html">
+<link rel="import" href="../iron-location/iron-location.html">
+<link rel="import" href="../zip-download/zip-download.html">
+<link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../toggle-icon/toggle-icon.html">
 <link rel="import" href="../icon-icons/iron-icons.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../url-data/url-data.html">
-<link rel="import" href="../iron-location/iron-location.html">
-<link rel="import" href="../iron-localstorage/iron-localstorage.html">
-<link rel="import" href="../paper-input/paper-input.html">
 
-<link rel="import" href="function-list-input.html">
 <link rel="import" href="input-save.html">
 <link rel="import" href="variables-input.html">
 <link rel="import" href="load-element-list.html">
+<link rel="import" href="function-list-input.html">
 <!--
  `<pair-production>` I'm hoping this will be a good way to think about the way your code a element and then give you:
  * Template editor ✔
@@ -110,6 +111,7 @@ All help is very much appreciated. I hope this project helps people get started 
             <iron-accordion>
               <h3 header>Deploy/Share Your element <a href="{{link}}">by link</a>/code</h3>
               Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
+	      <zip-download name="{{elementData.name}}" files="{{files}}"></zip-download>
               <prism-highlighter></prism-highlighter>
               <marked-element markdown="{{_markdown}}"></marked-element>
               your Docs are going here:<br />
@@ -214,6 +216,7 @@ All help is very much appreciated. I hope this project helps people get started 
       },
       _src: {computed: '_getSrc(_codeiframe)'},
       link: {computed:"getLink(stringFromElementData)"},
+      files: {computed:"getFiles(_demo, testFiles,_bower,_element, elementData.name)"},
       _body: {computed: '_getBody(elementData, _hasContent, invalidName, elementData.*)'},
       _demo: {computed: '_getCode(_head,_body)'},
       _head: {computed: '_getHead(elementData.name)'},
@@ -235,6 +238,13 @@ All help is very much appreciated. I hope this project helps people get started 
     },
     _getHasContent: function(html){
       return html.indexOf("</content>") !== -1
+    },
+    getFiles: function(demo, testFiles, bower ,element, name) {
+      var add = {}
+      add[name+"/"+name+".html"] = element 
+      add[name+"/bower.json"] = bower 
+      add[name+"/"+"demo.html"] = demo
+      return merge(testFiles, add)
     },
     getLink: function(link) {
       return '#' + link
@@ -344,7 +354,7 @@ All help is very much appreciated. I hope this project helps people get started 
     },
     _getTests: function (name) {
       if (name !== '') {
-        var testStub = addLine([
+        var testStubIndex = addLine([
           tabs() + '<!doctype html>',
           tabs(1) +'<html>',
           tabs(1) +'<head>',
@@ -360,8 +370,9 @@ All help is very much appreciated. I hope this project helps people get started 
           tabs(-1)+']);',
           tabs(-1)+'</scr' + 'ipt>',
           tabs(-1)+'</body>',
-          tabs(-1)+'</html>',
-          tabs() + '## /test/' + name + '.html',
+          tabs(-1)+'</html>'])
+
+        var testStubName = addLine([
           tabs() + '<!doctype html>',
           tabs(1) +'<html>',
           tabs(1) +'<head>',
@@ -406,8 +417,9 @@ All help is very much appreciated. I hope this project helps people get started 
           tabs(-1)+'})',
           tabs(-1)+'</scr' + 'ipt>',
           tabs(-1)+'</body>',
-          tabs(-1)+'</html>',
-          tabs() + '## .travis.yml',
+          tabs(-1)+'</html>'])
+          
+        var testStubTravisYml = addLine([
           tabs() + 'language: node_js',
           tabs() + 'sudo: false',
           tabs() + 'node_js: stable',
@@ -424,11 +436,16 @@ All help is very much appreciated. I hope this project helps people get started 
           tabs() + '- export PATH=$PWD/node_modules/.bin:$PATH',
           tabs() + '- bower install',
           tabs() + 'script:',
-          tabs() + '- xvfb-run wct --skip-plugin sauce',
-          tabs() + '## wct.conf.json',
-          ''
-        ])
-        return testStub + JSON.stringify({verbose: true, plugins: {local: { browsers: ["chrome"]}}}, null, '  ')
+          tabs() + '- xvfb-run wct --skip-plugin sauce'
+	])
+	var wctConfJson = JSON.stringify({verbose: true, plugins: {local: { browsers: ["chrome"]}}}, null, '  ')
+        this.testFiles = {}
+	this.testFiles[name + "/test/index.html"] = testStubIndex
+	this.testFiles[name + "/.travis.yml"] = testStubTravisYml,
+	this.testFiles[name + "/wct.conf.json"] = wctConfJson 
+	this.testFiles[name + "/test/" + name + ".html"] = testStubName 
+        var mdLS = "\n```\n"
+	return mdLS + "test/index.html" + mdLS + testStubIndex + mdLS + "test/" + name + ".html" + mdLS + testStubName + ".travis.yml" + mdLS + testStubTravisYml + mdLS + "wct.conf.json" + mdLS + wctConfJson
       }
     },
     _getBody: function (elementData, hasContent, invalidName) {
@@ -520,7 +537,7 @@ All help is very much appreciated. I hope this project helps people get started 
       }
     },
     _getMarkdown: function (demo, element, name, bower, tests) {
-      return 'demo.html\n\n ```html \n' + demo + '\n```\n' + name + '.html\n\n```html \n' + element + '\n``` \nbower.json\n ```\n' + bower + '\n``` \ntest/index.html\n ```\n' + tests + '\n```'
+      return 'demo.html\n\n ```html \n' + demo + '\n```\n' + name + '.html\n\n```html \n' + element + '\n``` \nbower.json\n ```\n' + bower + tests + '\n```'
     },
     _getCodeiframe: function (iframeDemo, element) {
       return iframeDemo + element
