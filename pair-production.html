@@ -111,7 +111,6 @@ All help is very much appreciated. I hope this project helps people get started 
 	    <iron-accordion opened="{{shareOpened}}">
 	      
 	      <h3 header>Download/Share Your element <a href="{{link}}">by link</a>/code</h3>
-	      <template is="dom-if" if="{{shareOpened}}">
                 Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
 	        <zip-download name="{{elementData.name}}" files="{{files}}"></zip-download>
                 <prism-highlighter></prism-highlighter>
@@ -120,7 +119,6 @@ All help is very much appreciated. I hope this project helps people get started 
                 <a href="https://github.com/new">new</a>
                 your other localy save elements are going to be available for your demo and listed here:
                 <input-save textarea value="{{elementData.moreHTML}}"></input-save>
-	      </template>
             </iron-accordion>
             <iron-accordion>
               <h3 header>Settings</h3>
