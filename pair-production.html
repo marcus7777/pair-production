@@ -53,7 +53,7 @@ All help is very much appreciated. I hope this project helps people get started 
       <iron-accordions>
         <iron-accordion opened="{{does}}">
           <h3 header>What does it do?</h3>
-          <input-save path="description" markdown textarea value="{{elementData.description}}" label="About it (markdown)"></input-save>
+          <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" label="About it (markdown)"></input-save>
         </iron-accordion>
         <iron-accordion opened="{{unnamed}}">
           <h3 header>Name</toggle-icon></h3>
