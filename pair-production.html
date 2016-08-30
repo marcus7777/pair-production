@@ -439,15 +439,15 @@ All help is very much appreciated. I hope this project helps people get started 
           tabs() + '- bower install',
           tabs() + 'script:',
           tabs() + '- xvfb-run wct --skip-plugin sauce'
-	])
-	var wctConfJson = JSON.stringify({verbose: true, plugins: {local: { browsers: ["chrome"]}}}, null, '  ')
+				])
+				var wctConfJson = JSON.stringify({verbose: true, plugins: {local: { browsers: ["chrome"]}}}, null, '  ')
         this.testFiles = {}
-	this.testFiles[name + "/test/index.html"] = testStubIndex
-	this.testFiles[name + "/.travis.yml"] = testStubTravisYml,
-	this.testFiles[name + "/wct.conf.json"] = wctConfJson 
-	this.testFiles[name + "/test/" + name + ".html"] = testStubName 
+				this.testFiles[name + "/test/index.html"] = testStubIndex
+				this.testFiles[name + "/.travis.yml"] = testStubTravisYml
+				this.testFiles[name + "/wct.conf.json"] = wctConfJson 
+				this.testFiles[name + "/test/" + name + ".html"] = testStubName 
         var mdLS = "\n```\n"
-	return mdLS + "test/index.html" + mdLS + testStubIndex + mdLS + "test/" + name + ".html" + mdLS + testStubName + mdLS + ".travis.yml" + mdLS + testStubTravisYml + mdLS + "wct.conf.json" + mdLS + wctConfJson
+				return mdLS + "test/index.html" + mdLS + testStubIndex + mdLS + "test/" + name + ".html" + mdLS + testStubName + mdLS + ".travis.yml" + mdLS + testStubTravisYml + mdLS + "wct.conf.json" + mdLS + wctConfJson
       }
     },
     _getBody: function (elementData, hasContent, invalidName) {
