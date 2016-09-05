@@ -110,7 +110,7 @@ All help is very much appreciated. I hope this project helps people get started 
               <p>{{_domTemplateDependencies}} </p>
             </iron-accordion>
 	    <iron-accordion opened="{{shareOpened}}">
-	      <h3 header>(debugging) Download/Share Your element <a href="{{link}}">by link</a>/code</h3>
+	      <h3 header>Download/Share Your element <a href="{{link}}">by link</a>/code</h3>
                 Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
 	        <zip-download name="{{elementData.name}}" files="{{files}}"></zip-download>
                 <prism-highlighter></prism-highlighter>
@@ -539,7 +539,6 @@ All help is very much appreciated. I hope this project helps people get started 
       }
     },
     _getMarkdown: function (demo, element, name, bower, tests) {
-      debugger
       return 'demo.html\n\n ```html \n' + demo + '\n```\n' + name + '.html\n\n```html \n' + element + '\n``` \nbower.json\n ```\n' + bower + tests + '\n```'
     },
     _getCodeiframe: function (iframeDemo, element) {
