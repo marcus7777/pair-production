@@ -2,6 +2,7 @@
 <link rel="import" href="../iron-accordions/iron-accordions.html"> 
 <link rel="import" href="../prism-element/prism-highlighter.html">
 <link rel="import" href="../marked-element/marked-element.html">
+<link rel="import" href="../paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../iron-location/iron-location.html">
 <link rel="import" href="../zip-download/zip-download.html">
 <link rel="import" href="../paper-input/paper-input.html">
@@ -16,15 +17,15 @@
 <link rel="import" href="function-list-input.html">
 <!--
  `<pair-production>` I'm hoping this will be a good way to think about the way your code a element and then give you:
- * Template editor ✔
+ * Template editor â
   
  * auto add dependencies (if in open-elements.org or in 'localstorage') needs work
   
- * Markdown editor for documentation ✔
+ * Markdown editor for documentation â
  
- * a working demo ✔
+ * a working demo â
  
- * a test ✏'for each input and output
+ * a test â'for each input and output
  * test ```location```
    * input ```location```: london
   
@@ -35,7 +36,7 @@
     
     * output ```hash``` = gbuj1g4pw5b4
     
- * download zip file of element ✔ maybe bug in bower.json
+ * download zip file of element â maybe bug in bower.json
  
 demo at [data](https://open-elements.org/bower_components/pair-production/demo.html) to the as
 [style-guide](http://polymerelements.github.io/style-guide/)
@@ -52,11 +53,11 @@ All help is very much appreciated. I hope this project helps people get started 
       </template>
       <iron-accordions>
         <iron-accordion opened="{{does}}">
-          <h3 header>What does it do?</h3>
+      <paper-toolbar header><div>What does it do?</div></paper-toolbar>
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" label="About it (markdown)"></input-save>
         </iron-accordion>
         <iron-accordion opened="{{unnamed}}">
-          <h3 header>Name</toggle-icon></h3>
+          <paper-toolbar header><div>Name</div></paper-toolbar>
           <input-save path="name" label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
           <template is="dom-if" if="{{_gotName}}">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
@@ -64,9 +65,9 @@ All help is very much appreciated. I hope this project helps people get started 
           <load-elements-list data="{{localData}}" to="{{elementData}}"></load-elements-list>
         </iron-accordion>
         <template is="dom-if" if="{{elementData.name}}">
-          <template is="dom-if" if="{{!invalidName}}">	
+          <template is="dom-if" if="{{!invalidName}}">  
             <iron-accordion opened>
-              <h3 header>The HTML</h3>
+              <paper-toolbar header><div>The HTML</div></paper-toolbar>
               <template is="dom-if" if="{{_dependencylist.length}}">
                 <select style="float:right" value="{{docsFor::input}}">
                   <option value="">show documentation</option>
@@ -96,23 +97,23 @@ All help is very much appreciated. I hope this project helps people get started 
               <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </iron-accordion>
             <iron-accordion>
-              <h3 header>Variables/Attributes/Properties</h3>
+              <paper-toolbar header><div>Variables/Attributes/Properties</div></paper-toolbar>
               <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
             </iron-accordion>
             <iron-accordion>
-              <h3 header>Functions/Methods</h3>
+              <h3 header><div>Functions/Methods</div></h3>
               <function-list-input  name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
             </iron-accordion>
             <iron-accordion>
-              <h3 header>Imports/Dependencies</h3>
+              <paper-toolbar header><div>Imports/Dependencies</div></paper-toolbar>
               <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
               <h4>Auto</h4>
               <p>{{_domTemplateDependencies}} </p>
             </iron-accordion>
-	    <iron-accordion opened="{{shareOpened}}">
-	      <h3 header>Download/Share Your element <a href="{{link}}">by link</a>/code</h3>
+        <iron-accordion opened="{{shareOpened}}">
+          <paper-toolbar header><div>Download/Share Your element </div><a href="{{link}}">by link</a>/code</paper-toolbar>
                 Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
-	        <zip-download name="{{elementData.name}}" files="{{files}}"></zip-download>
+                  <zip-download name="{{elementData.name}}" files="{{files}}"></zip-download> <br />
                 <prism-highlighter></prism-highlighter>
                 <marked-element markdown="{{_markdown}}"></marked-element>
                 your Docs are going here:<br />
@@ -121,7 +122,7 @@ All help is very much appreciated. I hope this project helps people get started 
                 <input-save textarea value="{{elementData.moreHTML}}"></input-save>
             </iron-accordion>
             <iron-accordion>
-              <h3 header>Settings</h3>
+              <paper-toolbar header><div>Settings</div></paper-toolbar>
               <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of demo" ></input-save>
               <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
             </iron-accordion>
@@ -439,15 +440,15 @@ All help is very much appreciated. I hope this project helps people get started 
           tabs() + '- bower install',
           tabs() + 'script:',
           tabs() + '- xvfb-run wct --skip-plugin sauce'
-				])
-				var wctConfJson = JSON.stringify({verbose: true, plugins: {local: { browsers: ["chrome"]}}}, null, '  ')
+                ])
+                var wctConfJson = JSON.stringify({verbose: true, plugins: {local: { browsers: ["chrome"]}}}, null, '  ')
         this.testFiles = {}
-				this.testFiles[name + "/test/index.html"] = testStubIndex
-				this.testFiles[name + "/.travis.yml"] = testStubTravisYml
-				this.testFiles[name + "/wct.conf.json"] = wctConfJson 
-				this.testFiles[name + "/test/" + name + ".html"] = testStubName 
+                this.testFiles[name + "/test/index.html"] = testStubIndex
+                this.testFiles[name + "/.travis.yml"] = testStubTravisYml
+                this.testFiles[name + "/wct.conf.json"] = wctConfJson 
+                this.testFiles[name + "/test/" + name + ".html"] = testStubName 
         var mdLS = "\n```\n"
-				return mdLS + "test/index.html" + mdLS + testStubIndex + mdLS + "test/" + name + ".html" + mdLS + testStubName + mdLS + ".travis.yml" + mdLS + testStubTravisYml + mdLS + "wct.conf.json" + mdLS + wctConfJson
+                return mdLS + "test/index.html" + mdLS + testStubIndex + mdLS + "test/" + name + ".html" + mdLS + testStubName + mdLS + ".travis.yml" + mdLS + testStubTravisYml + mdLS + "wct.conf.json" + mdLS + wctConfJson
       }
     },
     _getBody: function (elementData, hasContent, invalidName) {
@@ -574,3 +575,4 @@ All help is very much appreciated. I hope this project helps people get started 
   })
 })()
 </script>
+
