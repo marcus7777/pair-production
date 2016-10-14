@@ -47,15 +47,6 @@ All help is very much appreciated. I hope this project helps people get started 
 -->
 <dom-module id="pair-production">
   <template>
-    <style>
-      pre {
-        background: #171616;
-        color: #b4a891;
-        padding: 21px;
-        overflow: overlay;
-      }
-      
-    </style>
       <template is="dom-if" if="{{!elementData.name}}">
         <h2>Let me help you conjure a new element:</h2>
       </template>
@@ -70,7 +61,7 @@ All help is very much appreciated. I hope this project helps people get started 
           <template is="dom-if" if="{{_gotName}}">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
           </template>
-          <load-elements-list data="{{localData}}" to="{{elementData}}"></load-elements-list>
+          <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
         </iron-accordion>
         <template is="dom-if" if="{{elementData.name}}">
           <template is="dom-if" if="{{!invalidName}}">  
