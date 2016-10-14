@@ -47,6 +47,14 @@ All help is very much appreciated. I hope this project helps people get started 
 -->
 <dom-module id="pair-production">
   <template>
+    <style>
+      pre {
+        background: #171616;
+        color: #b4a891;
+        padding: 21px;
+        overflow: overlay;
+      }
+    </style>
     <div class="vertical center-justified layout">
       <template is="dom-if" if="{{!elementData.name}}">
         <h2>Let me help you conjure a new element:</h2>
