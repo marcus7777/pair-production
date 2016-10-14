@@ -54,18 +54,18 @@ All help is very much appreciated. I hope this project helps people get started 
         padding: 21px;
         overflow: overlay;
       }
+      
     </style>
-    <div class="vertical center-justified layout">
       <template is="dom-if" if="{{!elementData.name}}">
         <h2>Let me help you conjure a new element:</h2>
       </template>
       <iron-accordions>
         <iron-accordion opened="{{does}}">
-      <paper-toolbar header><div>What does it do?</div></paper-toolbar>
+      <paper-toolbar header><div class="title">What does it do?</div></paper-toolbar>
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" label="About it (markdown)"></input-save>
         </iron-accordion>
         <iron-accordion opened="{{unnamed}}">
-          <paper-toolbar header><div>Name</div></paper-toolbar>
+          <paper-toolbar header><div class="title">Name</div></paper-toolbar>
           <input-save path="name" label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
           <template is="dom-if" if="{{_gotName}}">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
@@ -75,7 +75,7 @@ All help is very much appreciated. I hope this project helps people get started 
         <template is="dom-if" if="{{elementData.name}}">
           <template is="dom-if" if="{{!invalidName}}">  
             <iron-accordion opened>
-              <paper-toolbar header><div>The HTML</div></paper-toolbar>
+              <paper-toolbar header><div class="title">The HTML</div></paper-toolbar>
               <template is="dom-if" if="{{_dependencylist.length}}">
                 <select style="float:right" value="{{docsFor::input}}">
                   <option value="">show documentation</option>
@@ -105,21 +105,21 @@ All help is very much appreciated. I hope this project helps people get started 
               <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
             </iron-accordion>
             <iron-accordion>
-              <paper-toolbar header><div>Variables/Attributes/Properties</div></paper-toolbar>
+              <paper-toolbar header><div class="title">Variables/Attributes/Properties</div></paper-toolbar>
               <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
             </iron-accordion>
             <iron-accordion>
-              <paper-toolbar header><div>Functions/Methods</div></paper-toolbar>
+              <paper-toolbar header><div class="title">Functions/Methods</div></paper-toolbar>
               <function-list-input  name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
             </iron-accordion>
             <iron-accordion>
-              <paper-toolbar header><div>Imports/Dependencies</div></paper-toolbar>
+              <paper-toolbar header><div class="title">Imports/Dependencies</div></paper-toolbar>
               <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
               <h4>Auto</h4>
               <p>{{_domTemplateDependencies}} </p>
             </iron-accordion>
         <iron-accordion opened="{{shareOpened}}">
-          <paper-toolbar header><div>Download/Share Your element </div><a href="{{link}}">by link</a>/code</paper-toolbar>
+          <paper-toolbar header><div class="title">Download/Share Your element </div><a href="{{link}}">by link</a>/code</paper-toolbar>
                 Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
                   <zip-download name="{{elementData.name}}" files="{{files}}"></zip-download> <br />
                 <prism-highlighter></prism-highlighter>
@@ -130,14 +130,13 @@ All help is very much appreciated. I hope this project helps people get started 
                 <input-save textarea value="{{elementData.moreHTML}}"></input-save>
             </iron-accordion>
             <iron-accordion>
-              <paper-toolbar header><div>Settings</div></paper-toolbar>
+              <paper-toolbar header><div class="title">Settings</div></paper-toolbar>
               <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of demo" ></input-save>
               <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
             </iron-accordion>
           </template>
         </template>
       </iron-accordions>
-    </div>
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
     
