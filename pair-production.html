@@ -8,6 +8,7 @@
 <link rel="import" href="../paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../iron-location/iron-location.html">
 <link rel="import" href="../zip-download/zip-download.html">
+<link rel="import" href="../icon-icons/social-icons.html"> 
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../toggle-icon/toggle-icon.html">
 <link rel="import" href="../icon-icons/iron-icons.html">
@@ -61,7 +62,7 @@ All help is very much appreciated. I hope this project helps people get started 
         </paper-material>
       </iron-accordion>
       <iron-accordion opened="{{unnamed}}">
-        <paper-toolbar header style="background:red"><div class="title">Name</div></paper-toolbar>
+        <paper-toolbar header style="background:#521B2F"><div class="title">Name</div></paper-toolbar>
         <paper-material>
           <input-save path="name" label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
           <template is="dom-if" if="{{_gotName}}">
@@ -131,7 +132,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion opened="{{shareOpened}}">
-          <paper-toolbar header style="background:black"><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template>/code</paper-toolbar>
+          <paper-toolbar header style="background:black"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template>/code</paper-toolbar>
             <paper-material>
               Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
                 <zip-download name="{{elementData.name}}" files="{{files}}"></zip-download> <br />
