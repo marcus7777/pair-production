@@ -71,6 +71,10 @@ All help is very much appreciated. I hope this project helps people get started 
       </iron-accordion>
       <template is="dom-if" if="{{elementData.name}}">
         <template is="dom-if" if="{{!invalidName}}">  
+          <iron-media-query query="(max-width: 600px)" query-matches="{{small}}"></iron-media-query>
+          <template is="dom-if" if="{{!small}}">
+            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:50%;float:right" srcdoc="{{_src}}"></iframe>
+          </template>
           <iron-accordion opened>
             <paper-toolbar header><div class="title">The HTML</div></paper-toolbar>
             <paper-material>
@@ -160,10 +164,6 @@ All help is very much appreciated. I hope this project helps people get started 
     
     <template is="dom-if" if="{{elementData.name}}" restamp>
       <url-data string-from-data="{{stringFromElementData}}" compress debounce-data="{{elementData}}"></url-data>
-    </template>
-    <iron-media-query query="(max-width: 600px)" query-matches="{{small}}"></iron-media-query>
-    <template is="dom-if" if="{{!small}}">
-      <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:50%;border:none;" srcdoc="{{_src}}"></iframe>
     </template>
   </template>
 </dom-module>
