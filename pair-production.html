@@ -133,7 +133,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion opened="{{shareOpened}}">
-          <paper-toolbar header style="background:orange><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template>/code</paper-toolbar>
+          <paper-toolbar header style="background:orange"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template>/code</paper-toolbar>
             <paper-material>
               Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
                 <zip-download name="{{elementData.name}}" files="{{files}}"></zip-download> <br />
