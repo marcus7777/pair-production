@@ -1,3 +1,4 @@
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
 <link rel="import" href="../iron-accordions/iron-accordions.html"> 
@@ -76,7 +77,7 @@ All help is very much appreciated. I hope this project helps people get started 
             <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:50%;float:right" srcdoc="{{_src}}"></iframe>
           </template>
           <iron-accordion opened>
-            <paper-toolbar header><div class="title">The HTML <template is="dom-if" if="{{small}}">/Demo</template> </div></paper-toolbar>
+            <paper-toolbar header><div class="title">The HTML <template is="dom-if" if="{{small}}">/ Demo</template></div></paper-toolbar>
             <paper-material>
               <template is="dom-if" if="{{_dependencylist.length}}">
                 <select style="float:right" value="{{docsFor::input}}">
@@ -130,7 +131,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion opened="{{shareOpened}}">
-            <paper-toolbar header><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}">by link</a></template>/code</paper-toolbar>
+          <paper-toolbar header><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template>/code</paper-toolbar>
             <paper-material>
               Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
                 <zip-download name="{{elementData.name}}" files="{{files}}"></zip-download> <br />
