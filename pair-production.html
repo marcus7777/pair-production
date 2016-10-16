@@ -76,10 +76,13 @@ All help is very much appreciated. I hope this project helps people get started 
         <template is="dom-if" if="{{!invalidName}}">  
           <iron-media-query query="(max-width: 600px)" query-matches="{{small}}"></iron-media-query>
           <template is="dom-if" if="{{!small}}">
+            <template is="dom-if" if="{{docsFor}}" >
+              <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+            </template>
             <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:50%;float:right" srcdoc="{{_src}}"></iframe>
           </template>
           <iron-accordion opened>
-            <paper-toolbar header><paper-icon-button icon="build"></paper-icon-button><div class="title">The HTML <template is="dom-if" if="{{small}}">/ Demo</template></div></paper-toolbar>
+            <paper-toolbar header><paper-icon-button icon="build"></paper-icon-button><div class="title">The HTML<template is="dom-if" if="{{small}}">/Demo/Docs</template></div></paper-toolbar>
             <paper-material>
               <template is="dom-if" if="{{_dependencylist.length}}">
                 <select style="float:right" value="{{docsFor::input}}">
@@ -88,8 +91,10 @@ All help is very much appreciated. I hope this project helps people get started 
                     <option>{{item}}</option>
                   </template>
                 </select>
-                <template is="dom-if" if="{{docsFor}}" >
-                  <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+                <template is="dom-if" if="{{small}}">
+                  <template is="dom-if" if="{{docsFor}}">
+                    <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+                  </template>
                 </template>
               </template>
               <input-save path="template" code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
