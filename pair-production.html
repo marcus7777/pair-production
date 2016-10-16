@@ -138,14 +138,14 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion opened="{{shareOpened}}">
-          <paper-toolbar header style="background:orange"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template>/code</paper-toolbar>
+          <paper-toolbar header style="background:orange"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download></paper-toolbar>
             <paper-material>
               Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
-                <zip-download name="{{elementData.name}}" files="{{files}}"></zip-download> <br />
+              <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
               <prism-highlighter></prism-highlighter>
-              <marked-element style="color:wheat;background:black;padding:1em" markdown="{{_markdown}}"></marked-element>
-              your Docs are going here:<br />
-              <a href="https://github.com/new">new</a>
+              <marked-element style="color:wheat;background:black;padding:1em;width:100%" markdown="{{_markdown}}"></marked-element>
+              <!-- Docs are going --> <br /> 
+              <a href="https://github.com/new">New Github Repo</a>
               your other localy save elements are going to be available for your demo and listed here:
               <input-save textarea value="{{elementData.moreHTML}}"></input-save>
             </paper-material>
