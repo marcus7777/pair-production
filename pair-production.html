@@ -59,7 +59,7 @@ All help is very much appreciated. I hope this project helps people get started 
       <iron-accordion opened="{{does}}">
         <paper-toolbar header style="background:purple"><paper-icon-button icon="description"></paper-icon-button><div class="title">What does it do?</div></paper-toolbar>
         <paper-material>
-          <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" label="About it (markdown)"></input-save>
+        <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text="{{elementData.desc}}" label="About it (# markdown)"></input-save>
         </paper-material>
       </iron-accordion>
       <iron-accordion opened="{{unnamed}}">
@@ -253,7 +253,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _demo: {computed: '_getCode(_head,_body)'},
       _head: {computed: '_getHead(elementData.name)'},
       _tests: {computed: '_getTests(elementData.name)'},
-      _bower: {computed: '_getBower(elementData.name, elementData.description, _dependencylist, _listOfElements, _gitList)'},
+      _bower: {computed: '_getBower(elementData.name, elementData.desc, _dependencylist, _listOfElements, _gitList)'},
       _gotName: {computed: 'getGotName(elementData.name, _listOfElements)'},
       _element: {computed: '_getElementCode(elementData,_dependencylist,_listOfElements,elementData.*)'},
       justLoad: {type:Boolean, value: false},
