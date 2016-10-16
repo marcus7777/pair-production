@@ -77,7 +77,7 @@ All help is very much appreciated. I hope this project helps people get started 
           <iron-media-query query="(max-width: 600px)" query-matches="{{small}}"></iron-media-query>
           <template is="dom-if" if="{{!small}}">
             <template is="dom-if" if="{{docsFor}}" >
-              <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+              <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0;width:50%;border:none;float:right" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
             </template>
             <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:50%;float:right" srcdoc="{{_src}}"></iframe>
           </template>
