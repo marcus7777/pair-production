@@ -59,13 +59,13 @@ All help is very much appreciated. I hope this project helps people get started 
       <iron-accordion opened="{{does}}">
         <paper-toolbar header style="background:purple"><paper-icon-button icon="description"></paper-icon-button><div class="title">What does it do?</div></paper-toolbar>
         <paper-material>
-        <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text="{{elementData.desc}}" label="About it (# markdown)"></input-save>
+        <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)`"></input-save>
         </paper-material>
       </iron-accordion>
       <iron-accordion opened="{{unnamed}}">
-        <paper-toolbar header style="background:#521B2F"><paper-icon-button icon="code"></paper-icon-button><div class="title">Name</div></paper-toolbar>
+      <paper-toolbar header style="background:#521B2F"><paper-icon-button icon="code"></paper-icon-button><div class="title">Name</div><div>[[elementData.name]]</div></paper-toolbar>
         <paper-material>
-          <input-save path="name" label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
+          <input-save label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate  error-message="Need's to have a '-' between lowercase letters "></input-save>
           <template is="dom-if" if="{{_gotName}}">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
           </template>
@@ -81,7 +81,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </template>
             <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:50%;float:right" srcdoc="{{_src}}"></iframe>
           </template>
-          <iron-accordion opened>
+          <iron-accordion>
             <paper-toolbar header><paper-icon-button icon="build"></paper-icon-button><div class="title">The HTML<template is="dom-if" if="{{small}}">/Demo/Docs</template></div></paper-toolbar>
             <paper-material>
               <template is="dom-if" if="{{_dependencylist.length}}">
