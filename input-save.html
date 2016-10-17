@@ -21,7 +21,7 @@
         <html-edit list-of-elements="{{listOfElements}}" label="{{label}}" value="{{value}}"></html-edit>
       </template>
       <template is="dom-if" if="{{markdown}}">
-        <markdown-edit label="{{label}}" value="{{value}}" text="{{text}}"></markdown-edit>
+        <markdown-edit label="{{label}}" value="{{value}}" text-value="{{textValue}}"></markdown-edit>
       </template>
       <template is="dom-if" if="{{!markdown}}">
         <template is="dom-if" if="{{!code}}">
@@ -63,7 +63,7 @@ var js_data = {}
       autoValidate: Boolean,
       errorMessage: String,
       value: {type:String,notify:true},
-      text: {type:String,notify:true},
+      textValue: {type:String,notify:true},
       invalid: {notify:true},
       data: {type:Object,notify:true,observer:"dataChanged"},
       asdf: {
