@@ -103,7 +103,7 @@ All help is very much appreciated. I hope this project helps people get started 
                 </select>
                 <template is="dom-if" if="{{small}}">
                   <template is="dom-if" if="{{docsFor}}">
-                    <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+                    <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;background: whitesmoke" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
                   </template>
                 </template>
               </template>
@@ -123,7 +123,7 @@ All help is very much appreciated. I hope this project helps people get started 
                 </paper-input>
               </template>
               <template is="dom-if" if="{{small}}">
-                <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%;border:none;" srcdoc="{{_src}}"></iframe>
+                <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%;border:none;background: whitesmoke;" srcdoc="{{_src}}"></iframe>
               </template>
             </paper-material>
           </iron-accordion>
