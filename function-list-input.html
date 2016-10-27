@@ -6,6 +6,11 @@
 
 <dom-module is="function-list-input">
   <template>
+    <style>
+      vellum-chip {
+        color:#000
+      }
+    </style>
     <template is="dom-repeat" items="{{asArray}}" restamp id="list">
       <vellum-chip elevation="1" title="Edit [[item]]" value="[[item]]" on-tap="edit" name="[[item]]">[[item]]</vellum-chip>
     </template><br />
