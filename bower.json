@@ -19,6 +19,7 @@
     "marked-element": "PolymerElements/marked-element#~1.1.3",
     "iron-accordions": "alijaya/iron-accordions#~1.0.0",
     "edit-in-jsbin": "marcus7777/edit-in-jsbin",
-    "toggle-icon": "fxedel/toggle-icon#~1.0.3"
+    "toggle-icon": "fxedel/toggle-icon#~1.0.3",
+    "dark-side": "marcus7777/dark-side"
   }
 }
