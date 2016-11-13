@@ -14,6 +14,7 @@
       vellum-chip {
         color:#000
       }
+      paper-dialog { color: #ffffff; background-color: #212121; font-family: 'Open Sans', sans-serif; font-weight: 400;}
     </style>
     <template is="dom-repeat" items="{{asArray}}" restamp id="list">
       <vellum-chip elevation="1" title="Load [[item]]" value="[[item]]" on-tap="edit" name="[[item]]">[[item]]</vellum-chip>
