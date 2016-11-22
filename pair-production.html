@@ -510,7 +510,7 @@ All help is very much appreciated. I hope this project helps people get started 
         }
         output.push(tabs(-1)+'</body>')
         if (elementData.moreHTML) {
-          output = output.concat(elementData.moreHTML.split('\n').map(function(line) { return tabs() + line })
+          output = output.concat(elementData.moreHTML.split('\n').map(function(line) { return tabs() + line }))
         }
         return output
       }
