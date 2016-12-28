@@ -83,6 +83,7 @@ All help is very much appreciated. I hope this project helps people get started 
           <template is="dom-if" if="{{_gotName}}">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
           </template>
+          <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
           <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
         </paper-material>
       </iron-accordion>
@@ -136,7 +137,7 @@ All help is very much appreciated. I hope this project helps people get started 
           <iron-accordion>
             <div>
               <paper-toolbar header style="background:green"><paper-icon-button icon="hardware:memory"></paper-icon-button><div class="title">Properties</div></paper-toolbar>
-           </div>
+            </div>
             <paper-material>
               <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
             </paper-material>
@@ -144,7 +145,7 @@ All help is very much appreciated. I hope this project helps people get started 
           <iron-accordion>
             <div>
               <paper-toolbar header style="background:black"><paper-icon-button icon="code"></paper-icon-button><div class="title">Functions/Methods</div></paper-toolbar>
-           </div>
+            </div>
             <paper-material>
               <function-list-input name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
             </paper-material>
@@ -291,7 +292,6 @@ All help is very much appreciated. I hope this project helps people get started 
       _hasContent: {computed: "_getHasContent(elementData.html)"},
       _functionList: {computed: '_getArray(elementData.functions)'},
       _dependencylist: {computed: '_getArray(elementData.dependencies, _domTemplateDependencies)'},
-      runMakeLocalData: {computed:"makeLocalData(elementData.name, elementData, localData, elementData.properties.*)"},
       _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
     },
@@ -308,7 +308,12 @@ All help is very much appreciated. I hope this project helps people get started 
     getLink: function(link) {
       return '#' + link
     },
-    makeLocalData: function (name, data, localData) {
+    makeLocalData: function () {
+     
+      var name = this.elementData.name
+      var data = this.elementData
+      var localData = this.localData
+      
       if (localData && localData.hasOwnProperty(name)) {
         if (JSON.stringify(localData[name]) !== JSON.stringify(data) ) {
           this.set("localData." + name, data)
