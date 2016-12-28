@@ -58,38 +58,36 @@ All help is very much appreciated. I hope this project helps people get started 
         color:#000
       }
     </style>
-    <template is="dom-if" if="{{!elementData.name}}">
-      <h2>Let me help you conjure a new element:</h2>
-    </template>
-    <iron-accordions>
-      <iron-accordion opened="{{does}}">
-        <paper-toolbar style="background:purple"><paper-icon-button icon="description"></paper-icon-button><div class="title">What does it do?</div></paper-toolbar>
-        <paper-material>
-          <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
-        </paper-material>
-      </iron-accordion>
-      <iron-accordion opened="{{unnamed}}">
-        <div>
+    <template is="dom-if" if="[[!demo]]">
+      <template is="dom-if" if="{{!elementData.name}}">
+        <h2>Let me help you conjure a new element:</h2>
+      </template>
+      <iron-accordions>
+        <iron-accordion opened="{{does}}">
+          <paper-toolbar style="background:purple"><paper-icon-button icon="description"></paper-icon-button><div class="title">What does it do?</div></paper-toolbar>
+          <paper-material>
+            <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
+          </paper-material>
+        </iron-accordion>
+        <iron-accordion opened="{{unnamed}}">
           <paper-toolbar style="background:#521B2F">
             <paper-icon-button icon="code"></paper-icon-button>
             <div class="title">Name</div>
             <div>[[elementData.name]]</div>
           </paper-toolbar>
-        </div>
-        <paper-material>
-          <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters"></paper-input>
-          <template is="dom-if" if="[[_gotName]]">
-            <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
-          </template>
-          <template is="dom-if" if="[[!invalidName]]">
-            <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
-          </template>
-          <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
+          <paper-material>
+            <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters"></paper-input>
+            <template is="dom-if" if="[[_gotName]]">
+              <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
+            </template>
+            <template is="dom-if" if="[[!invalidName]]">
+              <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
+            </template>
+            <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
         </paper-material>
       </iron-accordion>
       <template is="dom-if" if="{{elementData.name}}">
-        <template is="dom-if" if="{{!invalidName}}">  
-          <iron-media-query query="(max-width: 600px)" query-matches="{{small}}"></iron-media-query>
+        <template is="dom-if" if="{{!invalidName}}">
           <template is="dom-if" if="{{!small}}">
             <template is="dom-if" if="{{docsFor}}" >
               <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0;width:50%;border:none;float:right" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
@@ -135,24 +133,20 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion>
-            <div>
-              <paper-toolbar header style="background:green"><paper-icon-button icon="hardware:memory"></paper-icon-button><div class="title">Properties</div></paper-toolbar>
-            </div>
+            <paper-toolbar style="background:green"><paper-icon-button icon="hardware:memory"></paper-icon-button><div class="title">Properties</div></paper-toolbar>
             <paper-material>
               <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
             </paper-material>
           </iron-accordion>
           <iron-accordion>
-            <div>
-              <paper-toolbar header style="background:black"><paper-icon-button icon="code"></paper-icon-button><div class="title">Functions/Methods</div></paper-toolbar>
-            </div>
+            <paper-toolbar style="background:black"><paper-icon-button icon="code"></paper-icon-button><div class="title">Functions/Methods</div></paper-toolbar>
             <paper-material>
               <function-list-input name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
             </paper-material>
           </iron-accordion>
           <iron-accordion>
             <div>
-              <paper-toolbar header style="background:brown"><paper-icon-button icon="compare-arrows"></paper-icon-button><div class="title">Imports/Dependencies</div></paper-toolbar>
+              <paper-toolbar style="background:brown"><paper-icon-button icon="compare-arrows"></paper-icon-button><div class="title">Imports/Dependencies</div></paper-toolbar>
             </div>
             <paper-material>
               <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
@@ -187,7 +181,16 @@ All help is very much appreciated. I hope this project helps people get started 
           </iron-accordion>
         </template>
       </template>
-    </iron-accordions>
+      </iron-accordions>
+    </template> <!-- !demo -->
+    <template is="dom-if" if="[[demo]]">
+      <template is="dom-if" if="{{!small}}">
+        <iframe sandbox="allow-scripts allow-same-origin" height="100%" style="margin:0;width:100%" srcdoc="[[_src]]"></iframe>
+       </template>
+       <template is="dom-if" if="{{small}}">
+         <iframe sandbox="allow-scripts allow-same-origin" height="100%" style="margin:0;width:100%" srcdoc="[[_srcSmall]]"></iframe>
+       </template>
+    </template> <!-- !demo -->
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
     
@@ -201,6 +204,7 @@ All help is very much appreciated. I hope this project helps people get started 
     <template is="dom-if" if="{{elementData.name}}" restamp>
       <url-data string-from-data="{{stringFromElementData}}" compress debounce-data="{{elementData}}"></url-data>
     </template>
+    <iron-media-query query="(max-width: 600px)" query-matches="{{small}}"></iron-media-query>
   </template>
 </dom-module>
 <script>
