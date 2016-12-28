@@ -64,7 +64,7 @@ All help is very much appreciated. I hope this project helps people get started 
     <iron-accordions>
       <iron-accordion opened="{{does}}">
         <div>
-          <paper-toolbar header style="background:purple"><paper-icon-button icon="description"></paper-icon-button><div class="title">What does it do?</div></paper-toolbar>
+          <paper-toolbar style="background:purple"><paper-icon-button icon="description"></paper-icon-button><div class="title">What does it do?</div></paper-toolbar>
         </div>
         <paper-material>
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
@@ -72,7 +72,7 @@ All help is very much appreciated. I hope this project helps people get started 
       </iron-accordion>
       <iron-accordion opened="{{unnamed}}">
         <div>
-          <paper-toolbar header style="background:#521B2F">
+          <paper-toolbar style="background:#521B2F">
             <paper-icon-button icon="code"></paper-icon-button>
             <div class="title">Name</div>
             <div>[[elementData.name]]</div>
@@ -98,7 +98,7 @@ All help is very much appreciated. I hope this project helps people get started 
           </template>
           <iron-accordion>
             <div>
-              <paper-toolbar header><paper-icon-button icon="build"></paper-icon-button><div class="title">The HTML<template is="dom-if" if="{{small}}">/Demo/Docs</template></div></paper-toolbar>
+              <paper-toolbar><paper-icon-button icon="build"></paper-icon-button><div class="title">The HTML<template is="dom-if" if="{{small}}">/Demo/Docs</template></div></paper-toolbar>
             </div>
             <paper-material>
               <template is="dom-if" if="{{_dependencylist.length}}">
@@ -181,6 +181,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </div> 
             <paper-material>
               <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of demo" ></input-save>
+              <input-save type="number" value="{{settingsData.demoZoom}}" label="Zoom level of demo" ></input-save>
               <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
             </paper-material>
           </iron-accordion>
@@ -266,11 +267,11 @@ All help is very much appreciated. I hope this project helps people get started 
         value: {
           html: '<style>:host {display:inline-block;color:#505050}</style>\n<h2>Demo</h2>', 
         },
-        dependencies:"polymer"
+        dependencies: 'polymer'
       },
       settingsData: {
         value: {
-          base: '/bower_components/new/', demoHeight: 400,
+          base: '/bower_components/new/', demoHeight: 400, demoZoom: 1
         }
       },
       _src: {computed: '_getSrc(_codeiframe)'},
