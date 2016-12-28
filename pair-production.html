@@ -1,3 +1,4 @@
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
@@ -190,6 +191,7 @@ All help is very much appreciated. I hope this project helps people get started 
          <iframe sandbox="allow-scripts allow-same-origin" height="100%" style="margin:0;width:100%" srcdoc="[[_srcSmall]]"></iframe>
        </template>
     </template> <!-- justLoad -->
+    <paper-toggle-button checked="{{justLoad}}"></paper-toggle-button>
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
     
