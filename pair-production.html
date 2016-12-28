@@ -63,19 +63,21 @@ All help is very much appreciated. I hope this project helps people get started 
     </template>
     <iron-accordions>
       <iron-accordion opened="{{does}}">
-       <div>
-        <paper-toolbar header style="background:purple"><paper-icon-button icon="description"></paper-icon-button><div class="title">What does it do?</div></paper-toolbar>
-       </div>
+        <div>
+          <paper-toolbar header style="background:purple"><paper-icon-button icon="description"></paper-icon-button><div class="title">What does it do?</div></paper-toolbar>
+        </div>
         <paper-material>
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
         </paper-material>
       </iron-accordion>
       <iron-accordion opened="{{unnamed}}">
-        <paper-toolbar header style="background:#521B2F">
-          <paper-icon-button icon="code"></paper-icon-button>
-          <div class="title">Name</div>
-          <div>[[elementData.name]]</div>
-        </paper-toolbar>
+        <div>
+          <paper-toolbar header style="background:#521B2F">
+            <paper-icon-button icon="code"></paper-icon-button>
+            <div class="title">Name</div>
+            <div>[[elementData.name]]</div>
+          </paper-toolbar>
+        </div>
         <paper-material>
           <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters"></paper-input>
           <template is="dom-if" if="{{_gotName}}">
@@ -94,7 +96,9 @@ All help is very much appreciated. I hope this project helps people get started 
             <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:50%;float:right" srcdoc="{{_src}}"></iframe>
           </template>
           <iron-accordion>
-            <paper-toolbar header><paper-icon-button icon="build"></paper-icon-button><div class="title">The HTML<template is="dom-if" if="{{small}}">/Demo/Docs</template></div></paper-toolbar>
+            <div>
+              <paper-toolbar header><paper-icon-button icon="build"></paper-icon-button><div class="title">The HTML<template is="dom-if" if="{{small}}">/Demo/Docs</template></div></paper-toolbar>
+            </div>
             <paper-material>
               <template is="dom-if" if="{{_dependencylist.length}}">
                 <select style="float:right" value="{{docsFor::input}}">
@@ -130,19 +134,25 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion>
-            <paper-toolbar header style="background:green"><paper-icon-button icon="hardware:memory"></paper-icon-button><div class="title">Properties</div></paper-toolbar>
+            <div>
+              <paper-toolbar header style="background:green"><paper-icon-button icon="hardware:memory"></paper-icon-button><div class="title">Properties</div></paper-toolbar>
+           </div>
             <paper-material>
               <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
             </paper-material>
           </iron-accordion>
           <iron-accordion>
-            <paper-toolbar header style="background:black"><paper-icon-button icon="code"></paper-icon-button><div class="title">Functions/Methods</div></paper-toolbar>
+            <div>
+              <paper-toolbar header style="background:black"><paper-icon-button icon="code"></paper-icon-button><div class="title">Functions/Methods</div></paper-toolbar>
+           </div>
             <paper-material>
               <function-list-input name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
             </paper-material>
           </iron-accordion>
           <iron-accordion>
-            <paper-toolbar header style="background:brown"><paper-icon-button icon="compare-arrows"></paper-icon-button><div class="title">Imports/Dependencies</div></paper-toolbar>
+            <div>
+              <paper-toolbar header style="background:brown"><paper-icon-button icon="compare-arrows"></paper-icon-button><div class="title">Imports/Dependencies</div></paper-toolbar>
+            </div>
             <paper-material>
               <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
               <h4>Auto</h4>
@@ -150,12 +160,14 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion opened="{{shareOpened}}">
-          <paper-toolbar header style="background:orange"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download></paper-toolbar>
+            <div>
+              <paper-toolbar header style="background:orange"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download></paper-toolbar>
+            </div>  
             <paper-material>
-              Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
-              <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
-              <prism-highlighter></prism-highlighter>
-              <marked-element style="color:wheat;background:black;padding:1em;width:100%" markdown="{{_markdown}}"></marked-element>
+               Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
+               <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
+               <prism-highlighter></prism-highlighter>
+               <marked-element style="color:wheat;background:black;padding:1em;width:100%" markdown="{{_markdown}}"></marked-element>
               <!-- Docs are going --> <br /> 
               <a href="https://github.com/new" target="_blank">New Github Repo</a>
               your other localy save elements are going to be available for your demo and listed here:
@@ -163,7 +175,9 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion>
-          <paper-toolbar header> <paper-icon-button icon="settings"></paper-icon-button> <div class="title">Settings</div></paper-toolbar>
+            <div>
+              <paper-toolbar header> <paper-icon-button icon="settings"></paper-icon-button> <div class="title">Settings</div></paper-toolbar>
+            </div> 
             <paper-material>
               <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of demo" ></input-save>
               <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
