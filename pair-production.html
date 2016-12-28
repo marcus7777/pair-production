@@ -58,7 +58,7 @@ All help is very much appreciated. I hope this project helps people get started 
         color:#000
       }
     </style>
-    <template is="dom-if" if="[[!demo]]">
+    <template is="dom-if" if="[[!justLoad]]">
       <template is="dom-if" if="{{!elementData.name}}">
         <h2>Let me help you conjure a new element:</h2>
       </template>
@@ -182,15 +182,15 @@ All help is very much appreciated. I hope this project helps people get started 
         </template>
       </template>
       </iron-accordions>
-    </template> <!-- !demo -->
-    <template is="dom-if" if="[[demo]]">
+    </template> <!-- !justLoad -->
+    <template is="dom-if" if="[[justLoad]]">
       <template is="dom-if" if="{{!small}}">
         <iframe sandbox="allow-scripts allow-same-origin" height="100%" style="margin:0;width:100%" srcdoc="[[_src]]"></iframe>
        </template>
        <template is="dom-if" if="{{small}}">
          <iframe sandbox="allow-scripts allow-same-origin" height="100%" style="margin:0;width:100%" srcdoc="[[_srcSmall]]"></iframe>
        </template>
-    </template> <!-- !demo -->
+    </template> <!-- justLoad -->
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
     
