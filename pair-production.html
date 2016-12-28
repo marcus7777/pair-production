@@ -78,10 +78,12 @@ All help is very much appreciated. I hope this project helps people get started 
         </div>
         <paper-material>
           <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters"></paper-input>
-          <template is="dom-if" if="{{_gotName}}">
+          <template is="dom-if" if="[[_gotName]]">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
           </template>
-          <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
+          <template is="dom-if" if="[[!invalidName]]">
+            <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
+          </template>
           <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
         </paper-material>
       </iron-accordion>
