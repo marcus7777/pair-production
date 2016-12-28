@@ -181,7 +181,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </div> 
             <paper-material>
               <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of demo" ></input-save>
-              <input-save type="number" value="{{settingsData.demoZoom}}" label="Zoom level of demo" ></input-save>
+              <input-save type="number" value="{{settingsData.smallDemoZoom}}" label="Small Demo Zoom Level" ></input-save>
               <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
             </paper-material>
           </iron-accordion>
@@ -271,7 +271,7 @@ All help is very much appreciated. I hope this project helps people get started 
       },
       settingsData: {
         value: {
-          base: '/bower_components/new/', demoHeight: 400, demoZoom: 1
+          base: '/bower_components/new/', demoHeight: 400, smallDemoZoom: .7
         }
       },
       _src: {computed: '_getSrc(_codeiframe)'},
