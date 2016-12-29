@@ -52,11 +52,6 @@ All help is very much appreciated. I hope this project helps people get started 
 -->
 <dom-module id="pair-production">
   <template>
-    <style>
-      vellum-chip {
-        color:#000
-      }
-    </style>
     <template is="dom-if" if="[[!justLoad]]">
       <template is="dom-if" if="{{!elementData.name}}">
         <h2>Let me help you conjure a new element:</h2>
@@ -148,9 +143,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion>
-            <div>
-              <paper-toolbar style="background:brown"><paper-icon-button icon="compare-arrows"></paper-icon-button><div class="title">Imports/Dependencies</div></paper-toolbar>
-            </div>
+            <paper-toolbar style="background:brown"><paper-icon-button icon="compare-arrows"></paper-icon-button><div class="title">Imports/Dependencies</div></paper-toolbar>
             <paper-material>
               <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
               <h4>Auto</h4>
@@ -158,9 +151,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion opened="{{shareOpened}}">
-            <div>
-              <paper-toolbar header style="background:orange"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download></paper-toolbar>
-            </div>  
+            <paper-toolbar header style="background:orange"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download></paper-toolbar> 
             <paper-material>
                Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
                <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
@@ -173,9 +164,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion>
-            <div>
-              <paper-toolbar header> <paper-icon-button icon="settings"></paper-icon-button> <div class="title">Settings</div></paper-toolbar>
-            </div> 
+            <paper-toolbar> <paper-icon-button icon="settings"></paper-icon-button> <div class="title">Settings</div></paper-toolbar>
             <paper-material>
               <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of Demo" ></input-save>
               <input-save type="number" value="{{settingsData.demoSmallHeight}}" label="Height of Small Demo" ></input-save>
@@ -194,7 +183,7 @@ All help is very much appreciated. I hope this project helps people get started 
        <template is="dom-if" if="{{small}}">
          <iframe sandbox="allow-scripts allow-same-origin" height="100%" style="margin:0;width:100%" srcdoc="[[_srcSmall]]"></iframe>
        </template>
-      <paper-toggle-button checked="{{justLoad}}"></paper-toggle-button>
+      <paper-toggle-button title="Edit" label="Edit" checked="{{justLoad}}"></paper-toggle-button>
     </template> <!-- justLoad -->
     
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
