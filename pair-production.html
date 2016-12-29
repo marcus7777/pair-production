@@ -175,6 +175,7 @@ All help is very much appreciated. I hope this project helps people get started 
       </iron-accordions>
     </template> <!-- !justLoad -->
     <template is="dom-if" if="[[justLoad]]">
+      <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div></paper-toolbar>
       <template is="dom-if" if="{{!small}}">
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%" srcdoc="[[_src]]"></iframe>
        </template>
