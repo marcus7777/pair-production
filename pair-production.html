@@ -92,9 +92,7 @@ All help is very much appreciated. I hope this project helps people get started 
            </div>
           </template>
           <iron-accordion>
-            <div>
-              <paper-toolbar><paper-icon-button icon="build"></paper-icon-button><div class="title">The HTML<template is="dom-if" if="{{small}}">/Demo/Docs</template></div></paper-toolbar>
-            </div>
+            <paper-toolbar><paper-icon-button icon="build"></paper-icon-button><div class="title">The HTML<template is="dom-if" if="{{small}}">/Demo/Docs</template></div></paper-toolbar>
             <paper-material>
               <template is="dom-if" if="{{_dependencylist.length}}">
                 <select style="float:right" value="{{docsFor::input}}">
@@ -178,10 +176,10 @@ All help is very much appreciated. I hope this project helps people get started 
     </template> <!-- !justLoad -->
     <template is="dom-if" if="[[justLoad]]">
       <template is="dom-if" if="{{!small}}">
-        <iframe sandbox="allow-scripts allow-same-origin" height="100%" style="margin:0;width:100%" srcdoc="[[_src]]"></iframe>
+        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%" srcdoc="[[_src]]"></iframe>
        </template>
        <template is="dom-if" if="{{small}}">
-         <iframe sandbox="allow-scripts allow-same-origin" height="100%" style="margin:0;width:100%" srcdoc="[[_srcSmall]]"></iframe>
+         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" style="margin:0;width:100%" srcdoc="[[_srcSmall]]"></iframe>
        </template>
       <paper-toggle-button title="Edit" label="Edit" checked="{{justLoad}}"></paper-toggle-button>
     </template> <!-- justLoad -->
