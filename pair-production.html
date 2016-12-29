@@ -91,8 +91,10 @@ All help is very much appreciated. I hope this project helps people get started 
             <template is="dom-if" if="{{docsFor}}" >
               <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0;width:50%;border:none;float:right" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
             </template>
-            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:50%;float:right" srcdoc="{{_src}}"></iframe>
-            just demo<paper-toggle-button checked="{{justLoad}}"></paper-toggle-button>
+            <div style="margin:0;width:50%;float:right">
+              <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;" srcdoc="{{_src}}"></iframe>
+              <paper-toggle-button title="just demo" checked="{{justLoad}}"></paper-toggle-button>
+           </div>
           </template>
           <iron-accordion>
             <div>
