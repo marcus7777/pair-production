@@ -93,6 +93,7 @@ All help is very much appreciated. I hope this project helps people get started 
               <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0;width:50%;border:none;float:right" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
             </template>
             <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:50%;float:right" srcdoc="{{_src}}"></iframe>
+            just demo<paper-toggle-button checked="{{justLoad}}"></paper-toggle-button>
           </template>
           <iron-accordion>
             <div>
@@ -129,6 +130,7 @@ All help is very much appreciated. I hope this project helps people get started 
               </template>
               <template is="dom-if" if="{{small}}">
                 <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%;border:none;background: whitesmoke;" srcdoc="{{_srcSmall}}"></iframe>
+                just demo<paper-toggle-button checked="{{justLoad}}"></paper-toggle-button>
               </template>
             </paper-material>
           </iron-accordion>
@@ -190,8 +192,9 @@ All help is very much appreciated. I hope this project helps people get started 
        <template is="dom-if" if="{{small}}">
          <iframe sandbox="allow-scripts allow-same-origin" height="100%" style="margin:0;width:100%" srcdoc="[[_srcSmall]]"></iframe>
        </template>
+      <paper-toggle-button checked="{{justLoad}}"></paper-toggle-button>
     </template> <!-- justLoad -->
-    <paper-toggle-button checked="{{justLoad}}"></paper-toggle-button>
+    
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
     
