@@ -16,11 +16,10 @@
 <link rel="import" href="../icon-icons/iron-icons.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../url-data/url-data.html">
-
-<link rel="import" href="input-save.html">
-<link rel="import" href="variables-input.html">
-<link rel="import" href="load-element-list.html">
 <link rel="import" href="function-list-input.html">
+<link rel="import" href="load-element-list.html">
+<link rel="import" href="variables-input.html">
+<link rel="import" href="input-save.html">
 <!--
  `<pair-production>` I'm hoping this will be a good way to think about the way your code a element and then give you:
  * Template editor â
@@ -176,7 +175,8 @@ All help is very much appreciated. I hope this project helps people get started 
               <paper-toolbar header> <paper-icon-button icon="settings"></paper-icon-button> <div class="title">Settings</div></paper-toolbar>
             </div> 
             <paper-material>
-              <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of demo" ></input-save>
+              <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of Demo" ></input-save>
+              <input-save type="number" value="{{settingsData.demoSmallHeight}}" label="Height of Small Demo" ></input-save>
               <input-save type="number" value="{{settingsData.smallDemoZoom}}" label="Small Demo Zoom Level" ></input-save>
               <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
             </paper-material>
@@ -279,7 +279,7 @@ All help is very much appreciated. I hope this project helps people get started 
       },
       settingsData: {
         value: {
-          base: '/bower_components/new/', demoHeight: 400, smallDemoZoom: .7
+          base: '/bower_components/new/', demoHeight: 400, smallDemoZoom: .7, demoSmallHeight: 100
         }
       },
       _src: {computed: '_getSrc(_codeiframe)'},
