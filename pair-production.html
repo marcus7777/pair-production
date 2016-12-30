@@ -188,14 +188,14 @@ All help is very much appreciated. I hope this project helps people get started 
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
     
-    <template is="dom-if" if="{{!elementData.name}}">
-      <iron-location hash="{{stringifyData}}"></iron-location>    
-      <url-data string="{{stringifyData}}" data-from-string="{{elementData}}" loaded="{{justLoad}}"></url-data>
+    <template is="dom-if" if="[[!elementData.name]]">
+      <iron-location hash="{{stringifyData}}"></iron-location>
+      <url-data string="[[stringifyData]]" data-from-string="{{elementData}}" on-loaded="{{showDemo}}"></url-data>
     </template>
 
     <iron-localstorage on-iron-localstorage-load-empty="initializeDefaultlocal" name="saved-elements" value="{{localData}}"></iron-localstorage>
     
-    <template is="dom-if" if="{{elementData.name}}" restamp>
+    <template is="dom-if" if="[[elementData.name]]" restamp>
       <url-data string-from-data="{{stringFromElementData}}" compress debounce-data="{{elementData}}"></url-data>
     </template>
     <iron-media-query query="(max-width: 600px)" query-matches="{{small}}"></iron-media-query>
@@ -295,13 +295,16 @@ All help is very much appreciated. I hope this project helps people get started 
       _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
     },
+    showDemo: function(){
+      this.justLoad = true
+    },
     _getSrcSmall: function(html, zoom){
       return html.replace("<html>","<html style='zoom:" + zoom + "'>")
     },
     _getHasContent: function(html){
       return html.indexOf("</content>") !== -1
     },
-    getFiles: function(demo, testFiles, bower ,element, name) {
+    getFiles: function(demo, testFiles, bower, element, name) {
       var add = {}
       add[name+"/"+name+".html"] = element 
       add[name+"/bower.json"] = bower 
