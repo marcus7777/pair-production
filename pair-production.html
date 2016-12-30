@@ -1,4 +1,3 @@
-<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
@@ -88,7 +87,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </template>
             <div style="margin:0;width:50%;float:right">
               <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%" srcdoc="{{_src}}"></iframe>
-              <paper-toggle-button title="just demo" checked="{{justLoad}}"></paper-toggle-button>
+              <paper-button on-tap="showDemo">Show</paper-button>
            </div>
           </template>
           <iron-accordion>
@@ -124,7 +123,7 @@ All help is very much appreciated. I hope this project helps people get started 
               </template>
               <template is="dom-if" if="{{small}}">
                 <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%;border:none;background: whitesmoke;" srcdoc="{{_srcSmall}}"></iframe>
-                <paper-toggle-button title="just demo" label="just demo" checked="{{justLoad}}"></paper-toggle-button>
+                <paper-button on-tap="showDemo">Show</paper-button>
               </template>
             </paper-material>
           </iron-accordion>
@@ -149,7 +148,7 @@ All help is very much appreciated. I hope this project helps people get started 
             </paper-material>
           </iron-accordion>
           <iron-accordion opened="{{shareOpened}}">
-            <paper-toolbar header style="background:orange"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download></paper-toolbar> 
+            <paper-toolbar style="background:orange"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download></paper-toolbar> 
             <paper-material>
               Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
               <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
@@ -175,14 +174,13 @@ All help is very much appreciated. I hope this project helps people get started 
       </iron-accordions>
     </template> <!-- !justLoad -->
     <template is="dom-if" if="[[justLoad]]">
-      <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div></paper-toolbar>
+      <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-button on-tap="showEdit">Edit</paper-button></paper-toolbar>
       <template is="dom-if" if="{{!small}}">
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%" srcdoc="[[_src]]"></iframe>
        </template>
        <template is="dom-if" if="{{small}}">
          <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" style="margin:0;width:100%" srcdoc="[[_srcSmall]]"></iframe>
        </template>
-      <paper-toggle-button title="Edit" label="Edit" checked="{{justLoad}}"></paper-toggle-button>
     </template> <!-- justLoad -->
     
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
