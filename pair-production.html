@@ -190,7 +190,7 @@ All help is very much appreciated. I hope this project helps people get started 
     
     <template is="dom-if" if="[[!elementData.name]]">
       <iron-location hash="{{stringifyData}}"></iron-location>
-      <url-data string="[[stringifyData]]" data-from-string="{{elementData}}" on-loaded="{{showDemo}}"></url-data>
+      <url-data string="[[stringifyData]]" data-from-string="{{elementData}}"></url-data>
     </template>
 
     <iron-localstorage on-iron-localstorage-load-empty="initializeDefaultlocal" name="saved-elements" value="{{localData}}"></iron-localstorage>
@@ -296,7 +296,12 @@ All help is very much appreciated. I hope this project helps people get started 
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
     },
     showDemo: function(){
-      this.justLoad = true
+      if (this.elementData.name) {
+        this.justLoad = true
+      }
+    },
+    showEdit: function(){
+      this.justLoad = false
     },
     _getSrcSmall: function(html, zoom){
       return html.replace("<html>","<html style='zoom:" + zoom + "'>")
@@ -333,6 +338,9 @@ All help is very much appreciated. I hope this project helps people get started 
       this.set('localData', {})
     }, 
     getGotName: function (name, list) {
+      if (Performance.now() < 200) {
+        this.showDemo()
+      }
       if (-1 !== list.indexOf('bower_components/'+name+'/'+name+'.html')) {
         document.title = "Rewriting " + name
         return true
