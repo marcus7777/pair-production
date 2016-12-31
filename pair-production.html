@@ -51,6 +51,13 @@ All help is very much appreciated. I hope this project helps people get started 
 -->
 <dom-module id="pair-production">
   <template>
+    <style>
+      :host iframe {
+        margin:0;
+        width:100%;
+        border:none;
+      }
+    </style>
     <template is="dom-if" if="[[!justLoad]]">
       <template is="dom-if" if="{{!elementData.name}}">
         <h2>Let me help you conjure a new element:</h2>
@@ -83,10 +90,10 @@ All help is very much appreciated. I hope this project helps people get started 
         <template is="dom-if" if="{{!invalidName}}">
           <template is="dom-if" if="{{!small}}">
             <template is="dom-if" if="{{docsFor}}" >
-              <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0;width:50%;border:none;float:right" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+              <iframe sandbox="allow-scripts allow-same-origin" height="300" style="width:50%;float:right" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
             </template>
             <div style="margin:0;width:50%;float:right">
-              <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%" srcdoc="{{_src}}"></iframe>
+              <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="{{_src}}"></iframe>
               <paper-button on-tap="showDemo">Show</paper-button>
            </div>
           </template>
@@ -102,7 +109,7 @@ All help is very much appreciated. I hope this project helps people get started 
                 </select>
                 <template is="dom-if" if="{{small}}">
                   <template is="dom-if" if="{{docsFor}}">
-                    <iframe sandbox="allow-scripts allow-same-origin" height="300" style="margin:0; width:100%; border:none;background: whitesmoke" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+                    <iframe sandbox="allow-scripts allow-same-origin" height="300" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
                   </template>
                 </template>
               </template>
@@ -122,7 +129,7 @@ All help is very much appreciated. I hope this project helps people get started 
                 </paper-input>
               </template>
               <template is="dom-if" if="{{small}}">
-                <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%;border:none;background: whitesmoke;" srcdoc="{{_srcSmall}}"></iframe>
+                <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="{{_srcSmall}}"></iframe>
                 <paper-button on-tap="showDemo">Show</paper-button>
               </template>
             </paper-material>
@@ -176,10 +183,10 @@ All help is very much appreciated. I hope this project helps people get started 
     <template is="dom-if" if="[[justLoad]]">
       <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-button on-tap="showEdit">Edit</paper-button></paper-toolbar>
       <template is="dom-if" if="{{!small}}">
-        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" style="margin:0;width:100%" srcdoc="[[_src]]"></iframe>
+        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
        </template>
        <template is="dom-if" if="{{small}}">
-         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" style="margin:0;width:100%" srcdoc="[[_srcSmall]]"></iframe>
+         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
        </template>
     </template> <!-- justLoad -->
     
@@ -261,7 +268,7 @@ All help is very much appreciated. I hope this project helps people get started 
     properties: {
       elementData: {
         value: {
-          html: '<style>:host {display:inline-block;color:#505050}</style>\n<h2>Demo</h2>', 
+          html: '<style>:host {display:inline-block;color:#666}</style>\n<h2>Demo</h2>', 
         },
         dependencies: 'polymer'
       },
@@ -649,4 +656,3 @@ All help is very much appreciated. I hope this project helps people get started 
   })
 })()
 </script>
-
