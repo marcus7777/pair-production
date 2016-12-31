@@ -51,12 +51,15 @@ All help is very much appreciated. I hope this project helps people get started 
 -->
 <dom-module id="pair-production">
   <template>
-    <style>
+    <style  is="custom-style">
       :host iframe {
         margin:0;
         width:100%;
         border:none;
-      }
+      };
+      paper-toolbar {
+        --paper-toolbar-sm-height:36px;
+      };
     </style>
     <template is="dom-if" if="[[!justLoad]]">
       <template is="dom-if" if="{{!elementData.name}}">
@@ -181,7 +184,7 @@ All help is very much appreciated. I hope this project helps people get started 
       </iron-accordions>
     </template> <!-- !justLoad -->
     <template is="dom-if" if="[[justLoad]]">
-      <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-button on-tap="showEdit">Edit</paper-button></paper-toolbar>
+      <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-icon-button on-tap="showEdit" icon="more-vert"></paper-icon-button></paper-toolbar>
       <template is="dom-if" if="{{!small}}">
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
        </template>
