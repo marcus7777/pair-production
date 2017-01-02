@@ -134,10 +134,10 @@ All help is very much appreciated. I hope this project helps people get started 
           <paper-step label="Properties" icon="hardware:memory">
             <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>
           </paper-step>
-          <paper-step label="Functions/Methods" >
+          <paper-step label="Functions/Methods" icon="code">
             <function-list-input name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
           </paper-step>
-          <paper-step label="Imports/Dependencies">
+          <paper-step label="Imports/Dependencies" icon="compare-arrows">
             <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
             <h4>Auto</h4>
             <p>{{_domTemplateDependencies}} </p>
