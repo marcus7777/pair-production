@@ -83,7 +83,7 @@ All help is very much appreciated. I hope this project helps people get started 
            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
          </template>
       </template>
-      <paper-stepper id="stepper" has-back-button="true" on-paper-stepper-progressed="stepperReset">
+      <paper-stepper id="stepper" has-back-button="true" on-paper-stepper-progressed="stepperReset" >
         <paper-step label="What does it do?">
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
         </paper-step>
@@ -111,10 +111,8 @@ All help is very much appreciated. I hope this project helps people get started 
                   <option>{{item}}</option>
                 </template>
               </select>
-              <template is="dom-if" if="{{small}}">
-                <template is="dom-if" if="{{docsFor}}">
-                  <iframe sandbox="allow-scripts allow-same-origin" height="300" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
-                </template>
+              <template is="dom-if" if="{{docsFor}}">
+                <iframe sandbox="allow-scripts allow-same-origin" height="300" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
               </template>
             </template>
             <input-save path="template" code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
