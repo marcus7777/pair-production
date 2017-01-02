@@ -274,9 +274,21 @@ All help is very much appreciated. I hope this project helps people get started 
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
     },
     stepperReset: function(e, d){
-      this.$$("#stepper")._setSavedStepNumber(0);
+//      this.$$("#stepper").items.map(function(step, i) {
+//        step._setIndex(i + 1);
+//        step._set_stepper(this);
+//        step._setVertical(this.vertical);
+//        step._set_alternativeLabel(this.alternativeLabel);
+//        step._set_stepperData(data);
+//        // true for index 0
+//        step._set_previousSaved(!i);
+//        if (step.saved) {
+//          savedStepNumber++;
+//        }
+ //     }.bind(this.$$("#stepper")));
       for (var i = 0; i < this.$$("#stepper").items.length; ++i) {
         this.$$("#stepper").items[i].selectable = true
+        this.$$("#stepper").items[i].saved = false
       }
     },
     showDemo: function(){
