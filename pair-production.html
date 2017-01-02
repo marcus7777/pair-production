@@ -1,12 +1,13 @@
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
-<link rel="import" href="../iron-accordions/iron-accordions.html"> 
 <link rel="import" href="../prism-element/prism-highlighter.html">
 <link rel="import" href="../marked-element/marked-element.html">
 <link rel="import" href="../paper-material/paper-material.html">
 <link rel="import" href="../paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../iron-location/iron-location.html">
+<link rel="import" href="../paper-stepper/paper-stepper.html">
+<link rel="import" href="../paper-stepper/paper-step.html">
 <link rel="import" href="../zip-download/zip-download.html">
 <link rel="import" href="../iron-icons/hardware-icons.html">
 <link rel="import" href="../icon-icons/social-icons.html"> 
@@ -61,128 +62,6 @@ All help is very much appreciated. I hope this project helps people get started 
         --paper-toolbar-sm-height:36px;
       };
     </style>
-    <template is="dom-if" if="[[!justLoad]]">
-      <template is="dom-if" if="{{!elementData.name}}">
-        <h2>Let me help you conjure a new element:</h2>
-      </template>
-      <iron-accordions>
-        <iron-accordion opened="{{does}}">
-          <paper-toolbar style="background:purple"><paper-icon-button icon="description"></paper-icon-button><div class="title">What does it do?</div></paper-toolbar>
-          <paper-material>
-            <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
-          </paper-material>
-        </iron-accordion>
-        <iron-accordion opened="{{unnamed}}">
-          <paper-toolbar style="background:#521B2F">
-            <paper-icon-button icon="code"></paper-icon-button>
-            <div class="title">Name</div>
-            <div>[[elementData.name]]</div>
-          </paper-toolbar>
-          <paper-material>
-            <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters"></paper-input>
-            <template is="dom-if" if="[[_gotName]]">
-              <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
-            </template>
-            <template is="dom-if" if="[[!invalidName]]">
-              <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
-            </template>
-            <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
-        </paper-material>
-      </iron-accordion>
-      <template is="dom-if" if="{{elementData.name}}">
-        <template is="dom-if" if="{{!invalidName}}">
-          <template is="dom-if" if="{{!small}}">
-            <template is="dom-if" if="{{docsFor}}" >
-              <iframe sandbox="allow-scripts allow-same-origin" height="300" style="width:50%;float:right" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
-            </template>
-            <div style="margin:0;width:50%;float:right">
-              <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="{{_src}}"></iframe>
-              <paper-button on-tap="showDemo">Show</paper-button>
-           </div>
-          </template>
-          <iron-accordion>
-            <paper-toolbar><paper-icon-button icon="build"></paper-icon-button><div class="title">The HTML<template is="dom-if" if="{{small}}">/Demo/Docs</template></div></paper-toolbar>
-            <paper-material>
-              <template is="dom-if" if="{{_dependencylist.length}}">
-                <select style="float:right" value="{{docsFor::input}}">
-                  <option value="">show documentation</option>
-                  <template is="dom-repeat" items="{{_dependencylist}}" >
-                    <option>{{item}}</option>
-                  </template>
-                </select>
-                <template is="dom-if" if="{{small}}">
-                  <template is="dom-if" if="{{docsFor}}">
-                    <iframe sandbox="allow-scripts allow-same-origin" height="300" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
-                  </template>
-                </template>
-              </template>
-              <input-save path="template" code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
-              <template is="dom-if" if="{{_hasContent}}">
-                <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
-                  <div prefix>&lt;{{elementData.name}} &nbsp; </div>
-                  <div suffix>&gt;</div>
-                </paper-input>
-                <input-save path="template" code textarea value="{{elementData.content}}" list-of-elements="{{_listOfElements}}" label="inner HTML"></input-save>
-                <div>&lt;/{{elementData.name}}&gt;</div>
-              </template>  
-              <template is="dom-if" if="{{!_hasContent}}">
-                <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
-                  <div prefix>&lt;{{elementData.name}} &nbsp; </div>
-                  <div suffix> &gt;&lt;/{{elementData.name}}&gt;</div>
-                </paper-input>
-              </template>
-              <template is="dom-if" if="{{small}}">
-                <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="{{_srcSmall}}"></iframe>
-                <paper-button on-tap="showDemo">Show</paper-button>
-              </template>
-            </paper-material>
-          </iron-accordion>
-          <iron-accordion>
-            <paper-toolbar style="background:green"><paper-icon-button icon="hardware:memory"></paper-icon-button><div class="title">Properties</div></paper-toolbar>
-            <paper-material>
-              <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>   
-            </paper-material>
-          </iron-accordion>
-          <iron-accordion>
-            <paper-toolbar style="background:black"><paper-icon-button icon="code"></paper-icon-button><div class="title">Functions/Methods</div></paper-toolbar>
-            <paper-material>
-              <function-list-input name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
-            </paper-material>
-          </iron-accordion>
-          <iron-accordion>
-            <paper-toolbar style="background:brown"><paper-icon-button icon="compare-arrows"></paper-icon-button><div class="title">Imports/Dependencies</div></paper-toolbar>
-            <paper-material>
-              <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
-              <h4>Auto</h4>
-              <p>{{_domTemplateDependencies}} </p>
-            </paper-material>
-          </iron-accordion>
-          <iron-accordion opened="{{shareOpened}}">
-            <paper-toolbar style="background:orange"><paper-icon-button icon="social:share"></paper-icon-button><div class="title">Download/Share Your element</div><template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download></paper-toolbar> 
-            <paper-material>
-              Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
-              <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
-              <prism-highlighter></prism-highlighter>
-              <marked-element style="color:wheat;background:black;padding:1em;width:100%" markdown="{{_markdown}}"></marked-element>
-              <!-- Docs are going --> <br /> 
-              <a href="https://github.com/new" target="_blank">New Github Repo</a>
-              your other localy save elements are going to be available for your demo and listed here:
-              <input-save textarea value="{{elementData.moreHTML}}"></input-save>
-            </paper-material>
-          </iron-accordion>
-          <iron-accordion>
-            <paper-toolbar><paper-icon-button icon="settings"></paper-icon-button><div class="title">Settings</div></paper-toolbar>
-            <paper-material>
-              <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of Demo" ></input-save>
-              <input-save type="number" value="{{settingsData.demoSmallHeight}}" label="Height of Small Demo" ></input-save>
-              <input-save type="number" value="{{settingsData.smallDemoZoom}}" label="Small Demo Zoom Level" ></input-save>
-              <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
-            </paper-material>
-          </iron-accordion>
-        </template>
-      </template>
-      </iron-accordions>
-    </template> <!-- !justLoad -->
     <template is="dom-if" if="[[justLoad]]">
       <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-icon-button on-tap="showEdit" icon="more-vert"></paper-icon-button></paper-toolbar>
       <template is="dom-if" if="{{!small}}">
@@ -192,6 +71,99 @@ All help is very much appreciated. I hope this project helps people get started 
          <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
        </template>
     </template> <!-- justLoad -->
+    <template is="dom-if" if="[[!justLoad]]">
+      <template is="dom-if" if="{{!elementData.name}}">
+        <h2>Let me help you conjure a new element:</h2>
+      </template>
+      <template is="dom-if" if="[[!invalidName]]">
+        <template is="dom-if" if="{{!small}}">
+          <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
+         </template>
+         <template is="dom-if" if="{{small}}">
+           <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
+         </template>
+      </template>
+      <paper-stepper has-back-button="true">
+        <paper-step label="What does it do?">
+          <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
+        </paper-step>
+        <paper-step label="Name">
+          <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters"></paper-input>
+          <template is="dom-if" if="[[_gotName]]">
+            <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
+          </template>
+          <template is="dom-if" if="[[!invalidName]]">
+            <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
+          </template>
+          <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
+        </paper-step>
+        <template is="dom-if" if="{{elementData.name}}">
+          <template is="dom-if" if="{{!invalidName}}">
+            <template is="dom-if" if="{{docsFor}}" >
+              <iframe sandbox="allow-scripts allow-same-origin" height="300" style="width:50%;float:right" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+            </template>
+          </template>
+          <paper-step label="The HTML/Docs">
+            <template is="dom-if" if="{{_dependencylist.length}}">
+              <select style="float:right" value="{{docsFor::input}}">
+                <option value="">show documentation</option>
+                <template is="dom-repeat" items="{{_dependencylist}}" >
+                  <option>{{item}}</option>
+                </template>
+              </select>
+              <template is="dom-if" if="{{small}}">
+                <template is="dom-if" if="{{docsFor}}">
+                  <iframe sandbox="allow-scripts allow-same-origin" height="300" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+                </template>
+              </template>
+            </template>
+            <input-save path="template" code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
+            <template is="dom-if" if="{{_hasContent}}">
+              <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
+                <div prefix>&lt;{{elementData.name}} &nbsp; </div>
+                <div suffix>&gt;</div>
+              </paper-input>
+              <input-save path="template" code textarea value="{{elementData.content}}" list-of-elements="{{_listOfElements}}" label="inner HTML"></input-save>
+              <div>&lt;/{{elementData.name}}&gt;</div>
+            </template>  
+            <template is="dom-if" if="{{!_hasContent}}">
+              <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
+                <div prefix>&lt;{{elementData.name}} &nbsp; </div>
+                <div suffix> &gt;&lt;/{{elementData.name}}&gt;</div>
+              </paper-input>
+            </template>
+          </paper-step>
+          <paper-step label="Properties">
+            <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>
+          </paper-step>
+          <paper-step label="Functions/Methods">
+            <function-list-input name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
+          </paper-step>
+          <paper-step label="Imports/Dependencies">
+            <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
+            <h4>Auto</h4>
+            <p>{{_domTemplateDependencies}} </p>
+          </paper-step>
+          <paper-step label="Download/Share Your element">
+            <template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download> 
+            Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
+            <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
+            <prism-highlighter></prism-highlighter>
+            <marked-element style="color:wheat;background:black;padding:1em;width:100%" markdown="{{_markdown}}"></marked-element>
+            <!-- Docs are going --> <br /> 
+            <a href="https://github.com/new" target="_blank">New Github Repo</a>
+            your other localy save elements are going to be available for your demo and listed here:
+            <input-save textarea value="{{elementData.moreHTML}}"></input-save>
+          </paper-step>
+          <paper-step label="Settings">
+            <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of Demo" ></input-save>
+            <input-save type="number" value="{{settingsData.demoSmallHeight}}" label="Height of Small Demo" ></input-save>
+            <input-save type="number" value="{{settingsData.smallDemoZoom}}" label="Small Demo Zoom Level" ></input-save>
+            <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
+          </paper-step>
+        </template>
+      </paper-stepper>
+    </template>
     
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
     <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
