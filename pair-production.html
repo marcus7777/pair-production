@@ -321,9 +321,9 @@ All help is very much appreciated. I hope this project helps people get started 
       this.set('localData', {})
     }, 
     getGotName: function (name, list) {
-      if (performance.now() < 7000) {
-        this.showDemo()
-      }
+      //if (performance.now() < 7000) {
+        //this.showDemo()
+      //}
       if (-1 !== list.indexOf('bower_components/'+name+'/'+name+'.html')) {
         document.title = "Rewriting " + name
         return true
