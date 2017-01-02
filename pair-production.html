@@ -274,7 +274,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
     },
     stepperReset: function(e, d){
-      this.$$("#stepper").items[3].selectable = true
+      this.$$("#stepper")._setSavedStepNumber(0);
       for (var i = 0; i < this.$$("#stepper").items.length; ++i) {
         this.$$("#stepper").items[i].selectable = true
       }
