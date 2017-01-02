@@ -273,7 +273,8 @@ All help is very much appreciated. I hope this project helps people get started 
       _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
     },
-    stepperReset: function(){
+    stepperReset: function(e, d){
+      
       this.$$("#stepper").reset()
     },
     showDemo: function(){
