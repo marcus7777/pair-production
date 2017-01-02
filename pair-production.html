@@ -274,19 +274,10 @@ All help is very much appreciated. I hope this project helps people get started 
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
     },
     stepperReset: function(e, d){
-//      this.$$("#stepper").items.map(function(step, i) {
-//        step._setIndex(i + 1);
-//        step._set_stepper(this);
-//        step._setVertical(this.vertical);
-//        step._set_alternativeLabel(this.alternativeLabel);
-//        step._set_stepperData(data);
-//        // true for index 0
-//        step._set_previousSaved(!i);
-//        if (step.saved) {
-//          savedStepNumber++;
-//        }
- //     }.bind(this.$$("#stepper")));
-      this.$$("#stepper").select = null
+      this.$$("#stepper").items.map(function(step) {
+        step._setSaved(false);
+        step._set_previousSaved(false);
+      });
     },
     showDemo: function(){
       if (this.elementData.name) {
