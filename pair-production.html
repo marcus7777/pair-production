@@ -83,7 +83,7 @@ All help is very much appreciated. I hope this project helps people get started 
            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
          </template>
       </template>
-      <paper-stepper id="stepper" has-back-button="true" on-paper-stepper-progressed="stepperReset" >
+      <paper-stepper id="stepper" has-back-button="true" on-paper-stepper-progressed="stepperReset" continue-text="Done" back-text="<" skip-text=">">
         <paper-step label="What does it do?">
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
         </paper-step>
