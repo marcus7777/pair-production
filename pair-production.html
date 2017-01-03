@@ -6,8 +6,8 @@
 <link rel="import" href="../paper-material/paper-material.html">
 <link rel="import" href="../paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../iron-location/iron-location.html">
-<link rel="import" href="../paper-stepper/paper-stepper.html">
-<link rel="import" href="../paper-stepper/paper-step.html">
+<link rel="import" href="../paper-stepper/paper-icon-stepper.html">
+<link rel="import" href="../paper-stepper/paper-icon-step.html">
 <link rel="import" href="../zip-download/zip-download.html">
 <link rel="import" href="../iron-icons/hardware-icons.html">
 <link rel="import" href="../icon-icons/social-icons.html"> 
@@ -83,11 +83,11 @@ All help is very much appreciated. I hope this project helps people get started 
            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
          </template>
       </template>
-      <paper-stepper id="stepper" has-back-button="true" on-paper-stepper-progressed="stepperReset" back-text="<" continue-text=">">
-        <paper-step label="What does it do?" icon="description">
+      <iron-pages selected="[[selectedPages]]" selectable="paged-production">
+						  <paged-production label="What does it do?" icon="description">
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
-        </paper-step>
-        <paper-step label="Name" icon="code">
+        </paged-production>
+        <paged-production label="Name" icon="code">
           <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters"></paper-input>
           <template is="dom-if" if="[[_gotName]]">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
@@ -96,14 +96,9 @@ All help is very much appreciated. I hope this project helps people get started 
             <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
           </template>
           <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
-        </paper-step>
+        </paged-production>
         <template is="dom-if" if="{{elementData.name}}">
-          <template is="dom-if" if="{{!invalidName}}">
-            <template is="dom-if" if="{{docsFor}}" >
-              <iframe sandbox="allow-scripts allow-same-origin" height="300" style="width:50%;float:right" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
-            </template>
-          </template>
-          <paper-step label="The HTML/Docs" icon="build">
+          <paged-production label="The HTML/Docs" icon="build">
             <template is="dom-if" if="{{_dependencylist.length}}">
               <select style="float:right" value="{{docsFor::input}}">
                 <option value="">show documentation</option>
@@ -130,19 +125,19 @@ All help is very much appreciated. I hope this project helps people get started 
                 <div suffix> &gt;&lt;/{{elementData.name}}&gt;</div>
               </paper-input>
             </template>
-          </paper-step>
-          <paper-step label="Properties" icon="hardware:memory">
+          </paged-production>
+          <paged-production label="Properties" icon="hardware:memory">
             <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>
-          </paper-step>
-          <paper-step label="Functions/Methods" icon="code">
+          </paged-production>
+          <paged-production label="Functions/Methods" icon="code">
             <function-list-input name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
-          </paper-step>
-          <paper-step label="Imports/Dependencies" icon="compare-arrows">
+          </paged-production>
+          <paged-production label="Imports/Dependencies" icon="compare-arrows">
             <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
             <h4>Auto</h4>
             <p>{{_domTemplateDependencies}} </p>
-          </paper-step>
-          <paper-step label="Download/Share Your element" icon="social:share">
+          </paged-production>
+          <paged-production label="Download/Share Your element" icon="social:share">
             <template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download> 
             Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
             <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
@@ -152,15 +147,27 @@ All help is very much appreciated. I hope this project helps people get started 
             <a href="https://github.com/new" target="_blank">New Github Repo</a>
             your other localy save elements are going to be available for your demo and listed here:
             <input-save textarea value="{{elementData.moreHTML}}"></input-save>
-          </paper-step>
-          <paper-step label="Settings" icon="settings">
+          </paged-production>
+          <paged-production label="Settings" icon="settings">
             <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of Demo" ></input-save>
             <input-save type="number" value="{{settingsData.demoSmallHeight}}" label="Height of Small Demo" ></input-save>
             <input-save type="number" value="{{settingsData.smallDemoZoom}}" label="Small Demo Zoom Level" ></input-save>
             <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
-          </paper-step>
+          </paged-production>
         </template>
-      </paper-stepper>
+					 </iron-pages>
+      <paper-icon-stepper back-text="<" continue-text=">" selected="{{selectedPages}}">
+        <paper-icon-step label="What does it do?" icon="description"></paper-icon-step>
+        <paper-icon-step label="Name" icon="code"></paper-icon-step>
+        <template is="dom-if" if="[[!invalidName]]">
+          <paper-icon-step label="The HTML/Docs" icon="build"></paper-icon-step>
+          <paper-icon-step label="Properties" icon="hardware:memory"></paper-icon-step>
+          <paper-icon-step label="Functions/Methods" icon="code"></paper-icon-step>
+          <paper-icon-step label="Imports/Dependencies" icon="compare-arrows"></paper-icon-step>
+          <paper-icon-step label="Download/Share Your element" icon="social:share"></paper-icon-step>
+          <paper-icon-step label="Settings" icon="settings"></paper-icon-step>
+        </template>
+      </paper-icon-stepper>
     </template>
     
     <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
