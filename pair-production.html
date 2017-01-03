@@ -4,7 +4,6 @@
 <link rel="import" href="../prism-element/prism-highlighter.html">
 <link rel="import" href="../marked-element/marked-element.html">
 <link rel="import" href="../paper-material/paper-material.html">
-<link rel="import" href="../paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../iron-location/iron-location.html">
 <link rel="import" href="../paper-stepper/paper-stepper.html">
 <link rel="import" href="../paper-stepper/paper-step.html">
@@ -59,9 +58,16 @@ All help is very much appreciated. I hope this project helps people get started 
         width:100%;
         border:none;
       };
-      paper-toolbar {
-        --paper-toolbar-sm-height:36px;
-      };
+      :host {
+		      padding:10px;
+        padding-bottom:60px;	/* Height of the footer */
+	     };
+	     #footer {
+		      position:absolute;
+		      bottom:0;
+		      width:100%;
+		      height:60px;			/* Height of the footer */
+	     };
     </style>
     <template is="dom-if" if="[[justLoad]]">
       <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-icon-button on-tap="showEdit" icon="more-vert"></paper-icon-button></paper-toolbar>
@@ -157,7 +163,7 @@ All help is very much appreciated. I hope this project helps people get started 
           </paged-production>
         </template>
       </iron-pages>
-      <paper-stepper back-Label="" next-label="" selected="{{selectedPage}}">
+      <paper-stepper id="footer" back-Label="" next-label="" selected="{{selectedPage}}">
         <paper-step label="What does it do?" icon="description"></paper-step>
         <paper-step label="Name" icon="code"></paper-step>
         <template is="dom-if" if="[[!invalidName]]">
