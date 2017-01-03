@@ -84,8 +84,8 @@ All help is very much appreciated. I hope this project helps people get started 
            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
          </template>
       </template>
-      <iron-pages selected="[[selectedPages]]" selectable="paged-production">
-						  <paged-production label="What does it do?" icon="description">
+      <iron-pages selected="[[selectedPage]]" selectable="paged-production">
+        <paged-production label="What does it do?" icon="description">
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
         </paged-production>
         <paged-production label="Name" icon="code">
@@ -157,7 +157,7 @@ All help is very much appreciated. I hope this project helps people get started 
           </paged-production>
         </template>
 					 </iron-pages>
-      <paper-icon-stepper back-text="<" continue-text=">" selected="{{selectedPages}}">
+      <paper-icon-stepper back-text="<" continue-text=">" selected="{{selectedPage}}">
         <paper-icon-step label="What does it do?" icon="description"></paper-icon-step>
         <paper-icon-step label="Name" icon="code"></paper-icon-step>
         <template is="dom-if" if="[[!invalidName]]">
