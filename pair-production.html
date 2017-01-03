@@ -81,10 +81,10 @@ All help is very much appreciated. I hope this project helps people get started 
        </template>
     </template> <!-- justLoad -->
     <template is="dom-if" if="[[!justLoad]]">
-      <template is="dom-if" if="{{!elementData.name}}">
+      <template is="dom-if" if="[[!elementData.name]]">
         <h2>Let me help you conjure a new element:</h2>
       </template>
-      <template is="dom-if" if="[[!invalidName]]">
+      <template is="dom-if" if="[[elementData.name]]">
         <template is="dom-if" if="{{!small}}">
           <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
          </template>
