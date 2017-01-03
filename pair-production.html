@@ -276,7 +276,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _head: {computed: '_getHead(elementData.name)'},
       _tests: {computed: '_getTests(elementData.name)'},
       _bower: {computed: '_getBower(elementData.name, elementData.desc, _dependencylist, _listOfElements, _gitList)'},
-      _gotName: {computed: 'getGotName(elementData.name, _listOfElements)'},
+      _gotName: {computed: 'getGotName(elementData.name, _listOfElements, elementData)'},
       _element: {computed: '_getElementCode(elementData,_dependencylist,_listOfElements,elementData.*)'},
       justLoad: {type:Boolean, value: false},
       _markdown: {computed: '_getMarkdown(_demo,_element,elementData.name,_bower,_tests)'},
@@ -338,7 +338,26 @@ All help is very much appreciated. I hope this project helps people get started 
     initializeDefaultlocal: function () {
       this.set('localData', {})
     }, 
-    getGotName: function (name, list) {
+    getGotName: function (name, list, elementData) {
+      function pickColor(name) {
+        var colors = {
+          app: "ddc9e6",
+          iron: "81c784",
+          paper:"fff",
+          google:"64B5F6",
+          gold:"ffb74d",
+          neon:"a7ffeb",
+          platinum:"cfd8dc",
+          molecules:"ffab91",
+        }
+        var group = name.split("-")[0] 
+        if (colors.hasOwnProperty(group)) {
+          return colors[group]
+        }
+      }
+      if (!elementData.hasOwnProperty("color")) {
+        this.elementData.color = "#" + pickColor(name)
+      }
       //if (performance.now() < 7000) {
         //this.showDemo()
       //}
