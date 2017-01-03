@@ -84,13 +84,15 @@ All help is very much appreciated. I hope this project helps people get started 
       <template is="dom-if" if="[[!elementData.name]]">
         <h2>Let me help you conjure a new element:</h2>
       </template>
-      <template is="dom-if" if="[[elementData.name]]">
-        <template is="dom-if" if="{{!small}}">
-          <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
-         </template>
-         <template is="dom-if" if="{{small}}">
-           <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
-         </template>
+      <template is="dom-if" if="[[!invalidName]]">
+        <template is="dom-if" if="[[elementData.name]]">
+          <template is="dom-if" if="{{!small}}">
+            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
+          </template>
+          <template is="dom-if" if="{{small}}">
+            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
+          </template>
+        </template>
       </template>
       <iron-pages selected="[[selectedPage]]" selectable="paged-production">
         <paged-production label="What does it do?" icon="description">
@@ -121,7 +123,7 @@ All help is very much appreciated. I hope this project helps people get started 
               </template>
             </template>
             <input-save path="template" code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
-            <template is="dom-if" if="{{_hasContent}}">
+            <template is="dom-if" if="[[_hasContent]]">
               <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
                 <div prefix>&lt;{{elementData.name}} &nbsp; </div>
                 <div suffix>&gt;</div>
@@ -129,7 +131,7 @@ All help is very much appreciated. I hope this project helps people get started 
               <input-save path="template" code textarea value="{{elementData.content}}" list-of-elements="{{_listOfElements}}" label="inner HTML"></input-save>
               <div>&lt;/{{elementData.name}}&gt;</div>
             </template>  
-            <template is="dom-if" if="{{!_hasContent}}">
+            <template is="dom-if" if="[[!_hasContent]]">
               <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
                 <div prefix>&lt;{{elementData.name}} &nbsp; </div>
                 <div suffix> &gt;&lt;/{{elementData.name}}&gt;</div>
