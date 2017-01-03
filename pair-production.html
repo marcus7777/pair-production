@@ -341,7 +341,7 @@ All help is very much appreciated. I hope this project helps people get started 
       this.set('localData', {})
     }, 
     getGotName: function (name, list, elementData) {
-      function pickColor(name) {
+      function pickColor(name, description) {
         var colors = {
           app: "ddc9e6",
           iron: "81c784",
@@ -355,10 +355,16 @@ All help is very much appreciated. I hope this project helps people get started 
         var group = name.split("-")[0] 
         if (colors.hasOwnProperty(group)) {
           return colors[group]
+        } else {
+          if (description && description.indexOf("wrapper") > -1) {
+            return colors.molecules
+          } else {
+            return "CCC"
+          }
         }
       }
       if (!elementData.hasOwnProperty("color")) {
-        this.elementData.color = "#" + pickColor(name)
+        this.elementData.color = "#" + pickColor(name, elementData.description)
       }
       //if (performance.now() < 7000) {
         //this.showDemo()
