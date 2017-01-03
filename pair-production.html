@@ -1,3 +1,4 @@
+<link rel="import" href="../paper-swatch-picker/paper-swatch-picker.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
@@ -59,14 +60,14 @@ All help is very much appreciated. I hope this project helps people get started 
         border:none;
       };
       :host {
-		      padding:10px;
+	      padding:10px;
         padding-bottom:60px;	/* Height of the footer */
 	     };
 	     #footer {
-		      position:absolute;
-		      bottom:0;
-		      width:100%;
-		      height:60px;			/* Height of the footer */
+         position:absolute;
+         bottom:0;
+         width:100%;
+         height:60px;			/* Height of the footer */
 	     };
     </style>
     <template is="dom-if" if="[[justLoad]]">
@@ -102,10 +103,11 @@ All help is very much appreciated. I hope this project helps people get started 
           <template is="dom-if" if="[[!invalidName]]">
             <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
           </template>
+          <paper-swatch-picker color="{{elementData.color}}"></paper-swatch-picker>
           <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
         </paged-production>
         <template is="dom-if" if="[[!invalidName]]">
-          <paged-production label="The HTML/Docs" icon="build">
+          <paged-production label="The HTML/Docs" icon="build" color="[[elementData.color]]">
             <template is="dom-if" if="{{_dependencylist.length}}">
               <select style="float:right" value="{{docsFor::input}}">
                 <option value="">show documentation</option>
@@ -133,10 +135,10 @@ All help is very much appreciated. I hope this project helps people get started 
               </paper-input>
             </template>
           </paged-production>
-          <paged-production label="Properties" icon="hardware:memory">
+          <paged-production label="Properties" icon="hardware:memory" color="[[elementData.color]]">
             <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>
           </paged-production>
-          <paged-production label="Functions/Methods" icon="code">
+          <paged-production label="Functions/Methods" icon="code" color="[[elementData.color]]">
             <function-list-input name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
           </paged-production>
           <paged-production label="Imports/Dependencies" icon="compare-arrows">
@@ -144,7 +146,7 @@ All help is very much appreciated. I hope this project helps people get started 
             <h4>Auto</h4>
             <p>{{_domTemplateDependencies}} </p>
           </paged-production>
-          <paged-production label="Download/Share Your element" icon="social:share">
+          <paged-production label="Download/Share Your element" icon="social:share" color="[[elementData.color]]">
             <template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download> 
             Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
             <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
@@ -155,7 +157,7 @@ All help is very much appreciated. I hope this project helps people get started 
             your other localy save elements are going to be available for your demo and listed here:
             <input-save textarea value="{{elementData.moreHTML}}"></input-save>
           </paged-production>
-          <paged-production label="Settings" icon="settings">
+          <paged-production label="Settings" icon="settings" color="[[elementData.color]]">
             <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of Demo" ></input-save>
             <input-save type="number" value="{{settingsData.demoSmallHeight}}" label="Height of Small Demo" ></input-save>
             <input-save type="number" value="{{settingsData.smallDemoZoom}}" label="Small Demo Zoom Level" ></input-save>
