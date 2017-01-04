@@ -102,16 +102,16 @@ All help is very much appreciated. I hope this project helps people get started 
       </template>
       <template is="dom-if" if="{{!small}}">
         <paper-tabs selected="{{selectedPage}}">
-          <paper-tab icon="description">What does it do?</paper-tab>
-          <paper-tab icon="code">Name</paper-tab>
+          <paper-tab><iron-icon icon="description"></iron-icon>What does it do?</paper-tab>
+          <paper-tab><iron-icon icon="code"></iron-icon>Name</paper-tab>
           <template is="dom-if" if="[[!invalidName]]">
             <template is="dom-if" if="[[elementData.name]]">
-              <paper-tab icon="build">The HTML/Docs</paper-tab>
-              <paper-tab icon="hardware:memory">Properties</paper-tab>
-              <paper-tab icon="code">Functions/Methods</paper-tab>
-              <paper-tab icon="compare-arrows">Imports/Dependencies</paper-tab>
-              <paper-tab icon="social:share">Download/Share Your element</paper-tab>
-              <paper-tab icon="settings">Settings</paper-tab>
+              <paper-tab><iron-icon icon="build"></iron-icon>The HTML/Docs</paper-tab>
+              <paper-tab><iron-icon icon="hardware:memory"></iron-icon>Properties</paper-tab>
+              <paper-tab><iron-icon icon="code"></iron-icon>Functions/Methods</paper-tab>
+              <paper-tab><iron-icon icon="compare-arrows"></iron-icon>Imports/Dependencies</paper-tab>
+              <paper-tab><iron-icon icon="social:share"></iron-icon>Download/Share Your element</paper-tab>
+              <paper-tab><iron-icon icon="settings"></iron-icon>Settings</paper-tab>
             </template>
           </template>
         </paper-tabs>
