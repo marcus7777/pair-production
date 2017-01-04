@@ -69,9 +69,12 @@ All help is very much appreciated. I hope this project helps people get started 
         padding:10px;
         padding-bottom:60px;
       };
-      :host >div {
+      :host>div {
         display: table-row;
         height: 0;
+      };
+      :host>div.fill {
+        height: auto;
       };
       :host paper-tabs paper-tab.iron-selected {
         overflow: inherit;
@@ -88,7 +91,7 @@ All help is very much appreciated. I hope this project helps people get started 
        </template>
     </template> <!-- justLoad -->
     <template is="dom-if" if="[[!justLoad]]">
-      <div style="height:100%;overflow:auto;">
+      <div class="fill">
       <template is="dom-if" if="[[!elementData.name]]">
         <h2>Let me help you conjure a new element:</h2>
       </template>
