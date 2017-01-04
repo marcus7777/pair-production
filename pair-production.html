@@ -79,10 +79,10 @@ All help is very much appreciated. I hope this project helps people get started 
     </style>
     <template is="dom-if" if="[[justLoad]]">
       <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-icon-button on-tap="showEdit" icon="more-vert"></paper-icon-button></paper-toolbar>
-      <template is="dom-if" if="{{!small}}">
+      <template is="dom-if" if="{{!thin}}">
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
        </template>
-       <template is="dom-if" if="{{small}}">
+       <template is="dom-if" if="{{thin}}">
          <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
        </template>
     </template> <!-- justLoad -->
@@ -100,37 +100,39 @@ All help is very much appreciated. I hope this project helps people get started 
           </template>
         </template>
       </template>
-      <template is="dom-if" if="{{!small}}">
-        <paper-tabs selected="{{selectedPage}}">
-          <paper-tab><iron-icon icon="description"></iron-icon>What does it do?</paper-tab>
-          <paper-tab><iron-icon icon="code"></iron-icon>Name</paper-tab>
-          <template is="dom-if" if="[[!invalidName]]">
-            <template is="dom-if" if="[[elementData.name]]">
-              <paper-tab><iron-icon icon="build"></iron-icon>The HTML/Docs</paper-tab>
-              <paper-tab><iron-icon icon="hardware:memory"></iron-icon>Properties</paper-tab>
-              <paper-tab><iron-icon icon="code"></iron-icon>Functions/Methods</paper-tab>
-              <paper-tab><iron-icon icon="compare-arrows"></iron-icon>Imports/Dependencies</paper-tab>
-              <paper-tab><iron-icon icon="social:share"></iron-icon>Download/Share Your element</paper-tab>
-              <paper-tab><iron-icon icon="settings"></iron-icon>Settings</paper-tab>
+      <template is="dom-if" if="[[!short]]">
+        <template is="dom-if" if="{{!thin}}">
+          <paper-tabs selected="{{selectedPage}}">
+            <paper-tab><iron-icon icon="description"></iron-icon>What does it do?</paper-tab>
+            <paper-tab><iron-icon icon="code"></iron-icon>Name</paper-tab>
+            <template is="dom-if" if="[[!invalidName]]">
+              <template is="dom-if" if="[[elementData.name]]">
+                <paper-tab><iron-icon icon="build"></iron-icon>The HTML/Docs</paper-tab>
+                <paper-tab><iron-icon icon="hardware:memory"></iron-icon>Properties</paper-tab>
+                <paper-tab><iron-icon icon="code"></iron-icon>Functions/Methods</paper-tab>
+                <paper-tab><iron-icon icon="compare-arrows"></iron-icon>Imports/Dependencies</paper-tab>
+                <paper-tab><iron-icon icon="social:share"></iron-icon>Download/Share Your element</paper-tab>
+                <paper-tab><iron-icon icon="settings"></iron-icon>Settings</paper-tab>
+              </template>
             </template>
-          </template>
-        </paper-tabs>
-      </template>
-      <template is="dom-if" if="{{small}}">
-        <paper-tabs selected="{{selectedPage}}">
-          <paper-tab><iron-icon icon="description"></iron-icon></paper-tab>
-          <paper-tab><iron-icon icon="code"></iron-icon></paper-tab>
-          <template is="dom-if" if="[[!invalidName]]">
-            <template is="dom-if" if="[[elementData.name]]">
-              <paper-tab><iron-icon icon="build"></iron-icon></paper-tab>
-              <paper-tab><iron-icon icon="hardware:memory"></iron-icon></paper-tab>
-              <paper-tab><iron-icon icon="code"></iron-icon></paper-tab>
-              <paper-tab><iron-icon icon="compare-arrows"></iron-icon></paper-tab>
-              <paper-tab><iron-icon icon="social:share"></iron-icon></paper-tab>
-              <paper-tab><iron-icon icon="settings"></iron-icon></paper-tab>
-            </template>
-          </template> 
-        </paper-tabs>
+          </paper-tabs>
+        </template>
+        <template is="dom-if" if="{{small}}">
+          <paper-tabs selected="{{selectedPage}}">
+            <paper-tab><iron-icon icon="description"></iron-icon></paper-tab>
+            <paper-tab><iron-icon icon="code"></iron-icon></paper-tab>
+            <template is="dom-if" if="[[!invalidName]]">
+              <template is="dom-if" if="[[elementData.name]]">
+                <paper-tab><iron-icon icon="build"></iron-icon></paper-tab>
+                <paper-tab><iron-icon icon="hardware:memory"></iron-icon></paper-tab>
+                <paper-tab><iron-icon icon="code"></iron-icon></paper-tab>
+                <paper-tab><iron-icon icon="compare-arrows"></iron-icon></paper-tab>
+                <paper-tab><iron-icon icon="social:share"></iron-icon></paper-tab>
+                <paper-tab><iron-icon icon="settings"></iron-icon></paper-tab>
+              </template>
+            </template> 
+          </paper-tabs>
+        </template>
       </template>
       <iron-pages selected="[[selectedPage]]" selectable="paged-production">
         <paged-production label="What does it do?" icon="description">
@@ -235,7 +237,6 @@ All help is very much appreciated. I hope this project helps people get started 
     <template is="dom-if" if="[[elementData.name]]" restamp>
       <url-data string-from-data="{{stringFromElementData}}" compress debounce-data="{{elementData}}"></url-data>
     </template>
-    <iron-media-query query="(max-width: 600px)" query-matches="{{small}}"></iron-media-query>
   </template>
 </dom-module>
 <script>
@@ -333,11 +334,23 @@ All help is very much appreciated. I hope this project helps people get started 
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
     },
     behaviors: [ Polymer.IronResizableBehavior ],
-    listeners: { "iron-resize": "onWidthChange" },
-    onWidthChange: function() {
+    listeners: { "iron-resize": "onSizeChange" },
+    onSizeChange: function() {
       var w = this.offsetWidth
+      var h = this.offsetHeight
       if (w > 0) {
         console.log("width is now ", w)
+      
+        if (w > 599) {
+          this.thin = false
+        } else {
+          this.thin = true
+        }
+        if (h > 399) {
+          this.short = false
+        } else {
+          this.short = true
+        }
       }
     },
     stepperReset: function(e, d){
