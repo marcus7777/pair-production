@@ -63,11 +63,15 @@ All help is very much appreciated. I hope this project helps people get started 
         border:none;
       };
       :host {
-        display:block;
+        display:table;
         height:100%;
         position:relative;
         padding:10px;
         padding-bottom:60px;
+      };
+      :host >div {
+        display: table-row;
+        height: 0;
       };
       :host paper-tabs paper-tab.iron-selected {
         overflow: inherit;
