@@ -331,6 +331,9 @@ All help is very much appreciated. I hope this project helps people get started 
       _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
     },
+    attached: function() {
+      console.log(this.offsetWidth)
+    },
     stepperReset: function(e, d){
       this.$$("#stepper").items.map(function(step) {
         step._setSaved(false);
