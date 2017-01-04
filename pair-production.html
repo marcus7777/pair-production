@@ -1,3 +1,4 @@
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="../paper-swatch-picker/paper-swatch-picker.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
@@ -331,8 +332,13 @@ All help is very much appreciated. I hope this project helps people get started 
       _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
     },
-    attached: function() {
-      console.log(this.offsetWidth)
+    behaviors: [ Polymer.IronResizableBehavior ],
+    listeners: { "iron-resize": "onWidthChange" },
+    onWidthChange: function() {
+      var w = this.offsetWidth
+      if (w > 0) {
+        console.log("width is now ", w)
+      }
     },
     stepperReset: function(e, d){
       this.$$("#stepper").items.map(function(step) {
