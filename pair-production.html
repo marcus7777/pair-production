@@ -94,6 +94,18 @@ All help is very much appreciated. I hope this project helps people get started 
           </template>
         </template>
       </template>
+      <paper-tabs id="footer" back-Label="" next-label="" selected="{{selectedPage}}">
+        <paper-tab label="What does it do?" icon="description"></paper-tab>
+        <paper-tab label="Name" icon="code"></paper-tab>
+        <template is="dom-if" if="[[!invalidName]]">
+          <paper-tab label="The HTML/Docs" icon="build"></paper-tab>
+          <paper-tab label="Properties" icon="hardware:memory"></paper-tab>
+          <paper-tab label="Functions/Methods" icon="code"></paper-tab>
+          <paper-tab label="Imports/Dependencies" icon="compare-arrows"></paper-tab>
+          <paper-tab label="Download/Share Your element" icon="social:share"></paper-tab>
+          <paper-tab label="Settings" icon="settings"></paper-tab>
+        </template>
+      </paper-tabs>
       <iron-pages selected="[[selectedPage]]" selectable="paged-production">
         <paged-production label="What does it do?" icon="description">
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
