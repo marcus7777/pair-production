@@ -22,6 +22,7 @@
 <link rel="import" href="../url-data/url-data.html">
 <link rel="import" href="function-list-input.html">
 <link rel="import" href="load-element-list.html">
+<link rel="import" href="paged-production.html">
 <link rel="import" href="variables-input.html">
 <link rel="import" href="input-save.html">
 <!--
@@ -72,7 +73,7 @@ All help is very much appreciated. I hope this project helps people get started 
       };
       iron-pages {
         display: block;
-        min-height: 300px;
+        min-height: 200px;
       };
     </style>
     
@@ -99,6 +100,7 @@ All help is very much appreciated. I hope this project helps people get started 
           </template>
         </template>
       </template>
+     
       <template is="dom-if" if="{{!thin}}">
         <paper-tabs selected="{{selectedPage}}">
           <paper-tab><iron-icon icon="description"></iron-icon> What does it do?</paper-tab>
@@ -131,6 +133,7 @@ All help is very much appreciated. I hope this project helps people get started 
           </template> 
         </paper-tabs>
       </template>
+     
       <iron-pages selected="[[selectedPage]]" selectable="paged-production">
         <paged-production label="What does it do?" icon="description">
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
