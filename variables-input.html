@@ -1,8 +1,8 @@
 <link rel="import" href="../vellum-chip/vellum-chip.html">
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../paper-button/paper-button.html">
-<link rel="import" href="../paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../paper-dialog-scrollable/paper-dialog-scrollable.html">
 
 <!--
 `<variables-input>` 
@@ -31,7 +31,7 @@
         <paper-button dialog-confirm autofocus on-tap="save">Accept</paper-button>
       </div>
     </paper-dialog>
-    <paper-input value="{{addMe}}" pattern="[a-zA-Z_][0-9a-zA-Z_]*" auto-validate style="width:200px;display:inline-block"></paper-input> <paper-button on-tap="add">Add</paper-button>
+    <paper-input value="{{addMe}}" label="name the new variable" pattern="[a-zA-Z_][0-9a-zA-Z_]*" auto-validate style="width:200px;display:inline-block"><paper-button suffix on-tap="add">Add</paper-button></paper-input>
   </template>
 </dom-module> 
 <script>
