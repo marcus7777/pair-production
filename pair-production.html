@@ -162,6 +162,7 @@ All help is very much appreciated. I hope this project helps people get started 
         </paged-production>
         <template is="dom-if" if="[[!invalidName]]">
           <paged-production label="The HTML/Docs" icon="build" title-it="{{short}}" color="[[elementData.color]]">
+            <input-save path="template" code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
             <template is="dom-if" if="{{_dependencylist.length}}">
               <select style="float:right" value="{{docsFor::input}}">
                 <option value="">show documentation</option>
@@ -173,7 +174,6 @@ All help is very much appreciated. I hope this project helps people get started 
                 <iframe sandbox="allow-scripts allow-same-origin" height="300" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
               </template>
             </template>
-            <input-save path="template" code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}" label$="html of <{{elementData.name}} />"></input-save>
             <template is="dom-if" if="[[_hasContent]]">
               <paper-input label="attr1='value1' attr2='value2'  attr3='value3' " value="{{elementData.attrsForDemo}}">
                 <div prefix>&lt;{{elementData.name}} &nbsp; </div>
