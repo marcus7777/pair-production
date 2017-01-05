@@ -103,16 +103,16 @@ All help is very much appreciated. I hope this project helps people get started 
       <template is="dom-if" if="{{!short}}">
         <template is="dom-if" if="{{!thin}}">
           <paper-tabs selected="{{selectedPage}}">
-            <paper-tab><iron-icon icon="description"></iron-icon> What does it do?</paper-tab>
-            <paper-tab><iron-icon icon="code"></iron-icon> Name</paper-tab>
+            <paper-tab><paper-icon-item><iron-icon icon="description" item-icon></iron-icon> What does it do?</paper-icon-item></paper-tab>
+            <paper-tab><paper-icon-item><iron-icon icon="code" item-icon></iron-icon> Name</paper-icon-item></paper-tab>
             <template is="dom-if" if="[[!invalidName]]">
               <template is="dom-if" if="[[elementData.name]]">
-                <paper-tab><iron-icon icon="build"></iron-icon> The HTML/Docs</paper-tab>
-                <paper-tab><iron-icon icon="hardware:memory"></iron-icon> Properties</paper-tab>
-                <paper-tab><iron-icon icon="code"></iron-icon> Functions/Methods</paper-tab>
-                <paper-tab><iron-icon icon="compare-arrows"></iron-icon> Imports/Dependencies</paper-tab>
-                <paper-tab><iron-icon icon="social:share"></iron-icon> Download/Share Your element</paper-tab>
-                <paper-tab><iron-icon icon="settings"></iron-icon> Settings</paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="build" item-icon></iron-icon> The HTML/Docs</paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="hardware:memory" item-icon></iron-icon> Properties</paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="code" item-icon></iron-icon> Functions/Methods</paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="compare-arrows" item-icon></iron-icon> Imports/Dependencies</paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="social:share" item-icon></iron-icon> Download/Share Your element</paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="settings" item-icon></iron-icon> Settings</paper-icon-item></paper-tab>
               </template>
             </template>
           </paper-tabs>
