@@ -68,7 +68,17 @@ All help is very much appreciated. I hope this project helps people get started 
         width:100%;
         position:relative;
       };
+      :host paper-tabs paper-tab {
+        opacity: .5;
+      };
+      :host paper-tabs paper-tab paper-icon-item iron-icon {
+        display:none;
+      }
+      :host paper-tabs paper-tab.iron-selected paper-icon-item iron-icon {
+        display:inline-block;
+      }
       :host paper-tabs paper-tab.iron-selected {
+        opacity: 1;
         overflow: inherit;
       };
       iron-pages {
