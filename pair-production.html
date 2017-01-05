@@ -333,7 +333,6 @@ All help is very much appreciated. I hope this project helps people get started 
     listeners: { "iron-resize": "onSizeChange" },
     onSizeChange: function() {
       var w = this.offsetWidth
-      var h = this.offsetHeight
       if (w > 0) {
         console.log("width is now ", w)
       
@@ -341,11 +340,6 @@ All help is very much appreciated. I hope this project helps people get started 
           this.thin = false
         } else {
           this.thin = true
-        }
-        if (h > 399) {
-          this.short = false
-        } else {
-          this.short = true
         }
       }
     },
