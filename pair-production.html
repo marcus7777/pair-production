@@ -101,16 +101,16 @@ All help is very much appreciated. I hope this project helps people get started 
       </template>
       <template is="dom-if" if="{{!thin}}">
         <paper-tabs selected="{{selectedPage}}">
-          <paper-tab><iron-icon icon="description"></iron-icon>What does it do?</paper-tab>
-          <paper-tab><iron-icon icon="code"></iron-icon>Name</paper-tab>
+          <paper-tab><iron-icon icon="description"></iron-icon> What does it do?</paper-tab>
+          <paper-tab><iron-icon icon="code"></iron-icon> Name</paper-tab>
           <template is="dom-if" if="[[!invalidName]]">
             <template is="dom-if" if="[[elementData.name]]">
-              <paper-tab><iron-icon icon="build"></iron-icon>The HTML/Docs</paper-tab>
-              <paper-tab><iron-icon icon="hardware:memory"></iron-icon>Properties</paper-tab>
-              <paper-tab><iron-icon icon="code"></iron-icon>Functions/Methods</paper-tab>
-              <paper-tab><iron-icon icon="compare-arrows"></iron-icon>Imports/Dependencies</paper-tab>
-              <paper-tab><iron-icon icon="social:share"></iron-icon>Download/Share Your element</paper-tab>
-              <paper-tab><iron-icon icon="settings"></iron-icon>Settings</paper-tab>
+              <paper-tab><iron-icon icon="build"></iron-icon> The HTML/Docs</paper-tab>
+              <paper-tab><iron-icon icon="hardware:memory"></iron-icon> Properties</paper-tab>
+              <paper-tab><iron-icon icon="code"></iron-icon> Functions/Methods</paper-tab>
+              <paper-tab><iron-icon icon="compare-arrows"></iron-icon> Imports/Dependencies</paper-tab>
+              <paper-tab><iron-icon icon="social:share"></iron-icon> Download/Share Your element</paper-tab>
+              <paper-tab><iron-icon icon="settings"></iron-icon> Settings</paper-tab>
             </template>
           </template>
         </paper-tabs>
