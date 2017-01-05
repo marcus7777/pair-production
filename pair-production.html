@@ -71,10 +71,10 @@ All help is very much appreciated. I hope this project helps people get started 
       :host paper-tabs paper-tab {
         opacity: .5;
       };
-      :host paper-tabs paper-tab paper-icon-item iron-icon {
+      :host paper-tabs paper-tab paper-icon-item span {
         display:none;
       }
-      :host paper-tabs paper-tab.iron-selected paper-icon-item iron-icon {
+      :host paper-tabs paper-tab.iron-selected paper-icon-item span {
         display:inline-block;
       }
       :host paper-tabs paper-tab.iron-selected {
@@ -113,16 +113,16 @@ All help is very much appreciated. I hope this project helps people get started 
       <template is="dom-if" if="{{!short}}">
         <template is="dom-if" if="{{!thin}}">
           <paper-tabs selected="{{selectedPage}}">
-            <paper-tab><paper-icon-item><iron-icon icon="description" item-icon></iron-icon> What does it do?</paper-icon-item></paper-tab>
-            <paper-tab><paper-icon-item><iron-icon icon="code" item-icon></iron-icon> Name</paper-icon-item></paper-tab>
+            <paper-tab><paper-icon-item><iron-icon icon="description" item-icon></iron-icon> <span>What does it do?</span></paper-icon-item></paper-tab>
+            <paper-tab><paper-icon-item><iron-icon icon="code" item-icon></iron-icon> <span>Name</span></paper-icon-item></paper-tab>
             <template is="dom-if" if="[[!invalidName]]">
               <template is="dom-if" if="[[elementData.name]]">
-                <paper-tab><paper-icon-item><iron-icon icon="build" item-icon></iron-icon> The HTML/Docs</paper-icon-item></paper-tab>
-                <paper-tab><paper-icon-item><iron-icon icon="hardware:memory" item-icon></iron-icon> Properties</paper-icon-item></paper-tab>
-                <paper-tab><paper-icon-item><iron-icon icon="code" item-icon></iron-icon> Functions/Methods</paper-icon-item></paper-tab>
-                <paper-tab><paper-icon-item><iron-icon icon="compare-arrows" item-icon></iron-icon> Imports/Dependencies</paper-icon-item></paper-tab>
-                <paper-tab><paper-icon-item><iron-icon icon="social:share" item-icon></iron-icon> Download/Share Your element</paper-icon-item></paper-tab>
-                <paper-tab><paper-icon-item><iron-icon icon="settings" item-icon></iron-icon> Settings</paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="build" item-icon></iron-icon> <span>The HTML/Docs</span></paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="hardware:memory" item-icon></iron-icon> <span>Properties</span></paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="code" item-icon></iron-icon> <span>Functions/Methods</span></paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="compare-arrows" item-icon></iron-icon> <span>Imports/Dependencies</span></paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="social:share" item-icon></iron-icon> <span>Download/Share Your element</span></paper-icon-item></paper-tab>
+                <paper-tab><paper-icon-item><iron-icon icon="settings" item-icon></iron-icon> <span>Settings</span></paper-icon-item></paper-tab>
               </template>
             </template>
           </paper-tabs>
