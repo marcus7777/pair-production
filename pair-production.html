@@ -65,11 +65,12 @@ All help is very much appreciated. I hope this project helps people get started 
       :host {
         display:table;
         height:100%;
+        width:100%;
         position:relative;
         padding:10px;
         padding-bottom:60px;
       };
-      :host #footer {
+      :host paper-stepper {
         display: table-row;
         height: 0;
       };
@@ -214,7 +215,7 @@ All help is very much appreciated. I hope this project helps people get started 
         </template>
       </iron-pages>
       </div>
-      <paper-stepper id="footer" back-Label="" next-label="" selected="{{selectedPage}}">
+      <paper-stepper back-Label="" next-label="" selected="{{selectedPage}}">
         <paper-step label="What does it do?" icon="description"></paper-step>
         <paper-step label="Name" icon="code"></paper-step>
         <template is="dom-if" if="[[!invalidName]]">
