@@ -67,10 +67,6 @@ All help is very much appreciated. I hope this project helps people get started 
         width:100%;
         position:relative;
       };
-      :host paper-stepper {
-      };
-      :host>div {
-      };
       :host paper-tabs paper-tab.iron-selected {
         overflow: inherit;
       };
@@ -86,7 +82,6 @@ All help is very much appreciated. I hope this project helps people get started 
       </template>
     </template> <!-- justLoad -->
     <template is="dom-if" if="[[!justLoad]]">
-      <div class="fill">
       <template is="dom-if" if="[[!elementData.name]]">
         <h2>Let me help you conjure a new element:</h2>
       </template>
@@ -208,7 +203,6 @@ All help is very much appreciated. I hope this project helps people get started 
           </paged-production>
         </template>
       </iron-pages>
-      </div>
       <paper-stepper back-Label="" next-label="" selected="{{selectedPage}}">
         <paper-step label="What does it do?" icon="description"></paper-step>
         <paper-step label="Name" icon="code"></paper-step>
@@ -324,6 +318,8 @@ All help is very much appreciated. I hope this project helps people get started 
       _gotName: {computed: 'getGotName(elementData.name, _listOfElements, elementData)'},
       _element: {computed: '_getElementCode(elementData,_dependencylist,_listOfElements,elementData.*)'},
       justLoad: {type:Boolean, value: false},
+      short: {type:Boolean, value: true},
+      thin: {type:Boolean, value: true},
       _markdown: {computed: '_getMarkdown(_demo,_element,elementData.name,_bower,_tests)'},
       _iframeDemo: {computed: '_getCode(_iframeHead,_body)'},
       _iframeHead: {computed: '_getIframeHead(settingsData.base,elementData.name)'},
@@ -406,9 +402,9 @@ All help is very much appreciated. I hope this project helps people get started 
     getGotName: function (name, list, elementData) {
       function pickColor(name, description) {
         var colors = {
-          app: "ddc9e6",
-          iron: "81c784",
-          paper:"fff",
+          app:"ddc9e6",
+          iron:"81c784",
+          paper:"ffffff",
           google:"64B5F6",
           gold:"ffb74d",
           neon:"a7ffeb",
@@ -422,7 +418,7 @@ All help is very much appreciated. I hope this project helps people get started 
           if (description && description.indexOf("wrapper") > -1) {
             return colors.molecules
           } else {
-            return "CCC"
+            return "cccccc"
           }
         }
       }
