@@ -10,8 +10,9 @@
   "dependencies": {
     "iron-ajax": "PolymerElements/iron-ajax",
     "paper-input": "PolymerElements/paper-input",
+    "paper-item": "PolymerElements/paper-item",
     "html-edit": "marcus7777/html-edit",
-    "url-data":"marcus7777/url-data",
+    "url-data": "marcus7777/url-data",
     "markdown-edit": "marcus7777/markdown-edit",
     "iron-localstorage": "PolymerElements/iron-localstorage#~1.0.5",
     "app-globals": "marcus7777/app-globals",
