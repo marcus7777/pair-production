@@ -1,0 +1,35 @@
+<link rel="import" href="../paper-item/paper-icon-item.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../icon-icons/iron-icons.html">
+<!--
+  `<paged-production></paged-production>`  
+  @demo demo.html
+-->
+<dom-module id="paged-production">
+  <template>
+    <style>
+      :host {display:inline-block}
+    </style>
+    <template is="dom-if" if="{{titleIt}}">
+      <paper-icon-item>
+        <iron-icon icon="[[icon]]" item-icon></iron-icon> [[label]]
+      </paper-icon-item>
+    </template>
+    <content></content>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "paged-production",
+    properties:{
+      titleIt:{
+        type:Boolean,
+        value:false,
+      },
+    },
+    getTag: function(tab){
+      return this.tabs[tab]
+    },
+  })
+</script>
