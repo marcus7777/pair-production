@@ -100,45 +100,45 @@ All help is very much appreciated. I hope this project helps people get started 
           </template>
         </template>
       </template>
-     
-      <template is="dom-if" if="{{!thin}}">
-        <paper-tabs selected="{{selectedPage}}">
-          <paper-tab><iron-icon icon="description"></iron-icon> What does it do?</paper-tab>
-          <paper-tab><iron-icon icon="code"></iron-icon> Name</paper-tab>
-          <template is="dom-if" if="[[!invalidName]]">
-            <template is="dom-if" if="[[elementData.name]]">
-              <paper-tab><iron-icon icon="build"></iron-icon> The HTML/Docs</paper-tab>
-              <paper-tab><iron-icon icon="hardware:memory"></iron-icon> Properties</paper-tab>
-              <paper-tab><iron-icon icon="code"></iron-icon> Functions/Methods</paper-tab>
-              <paper-tab><iron-icon icon="compare-arrows"></iron-icon> Imports/Dependencies</paper-tab>
-              <paper-tab><iron-icon icon="social:share"></iron-icon> Download/Share Your element</paper-tab>
-              <paper-tab><iron-icon icon="settings"></iron-icon> Settings</paper-tab>
+      <template is="dom-if" if="{{!short}}">
+        <template is="dom-if" if="{{!thin}}">
+          <paper-tabs selected="{{selectedPage}}">
+            <paper-tab><iron-icon icon="description"></iron-icon> What does it do?</paper-tab>
+            <paper-tab><iron-icon icon="code"></iron-icon> Name</paper-tab>
+            <template is="dom-if" if="[[!invalidName]]">
+              <template is="dom-if" if="[[elementData.name]]">
+                <paper-tab><iron-icon icon="build"></iron-icon> The HTML/Docs</paper-tab>
+                <paper-tab><iron-icon icon="hardware:memory"></iron-icon> Properties</paper-tab>
+                <paper-tab><iron-icon icon="code"></iron-icon> Functions/Methods</paper-tab>
+                <paper-tab><iron-icon icon="compare-arrows"></iron-icon> Imports/Dependencies</paper-tab>
+                <paper-tab><iron-icon icon="social:share"></iron-icon> Download/Share Your element</paper-tab>
+                <paper-tab><iron-icon icon="settings"></iron-icon> Settings</paper-tab>
+              </template>
             </template>
-          </template>
-        </paper-tabs>
+          </paper-tabs>
+        </template>
+        <template is="dom-if" if="{{thin}}">
+          <paper-tabs selected="{{selectedPage}}">
+            <paper-tab><iron-icon icon="description"></iron-icon></paper-tab>
+            <paper-tab><iron-icon icon="code"></iron-icon></paper-tab>
+            <template is="dom-if" if="[[!invalidName]]">
+              <template is="dom-if" if="[[elementData.name]]">
+                <paper-tab><iron-icon icon="build"></iron-icon></paper-tab>
+                <paper-tab><iron-icon icon="hardware:memory"></iron-icon></paper-tab>
+                <paper-tab><iron-icon icon="code"></iron-icon></paper-tab>
+                <paper-tab><iron-icon icon="compare-arrows"></iron-icon></paper-tab>
+                <paper-tab><iron-icon icon="social:share"></iron-icon></paper-tab>
+                <paper-tab><iron-icon icon="settings"></iron-icon></paper-tab>
+              </template>
+            </template> 
+          </paper-tabs>
+        </template>
       </template>
-      <template is="dom-if" if="{{thin}}">
-        <paper-tabs selected="{{selectedPage}}">
-          <paper-tab><iron-icon icon="description"></iron-icon></paper-tab>
-          <paper-tab><iron-icon icon="code"></iron-icon></paper-tab>
-          <template is="dom-if" if="[[!invalidName]]">
-            <template is="dom-if" if="[[elementData.name]]">
-              <paper-tab><iron-icon icon="build"></iron-icon></paper-tab>
-              <paper-tab><iron-icon icon="hardware:memory"></iron-icon></paper-tab>
-              <paper-tab><iron-icon icon="code"></iron-icon></paper-tab>
-              <paper-tab><iron-icon icon="compare-arrows"></iron-icon></paper-tab>
-              <paper-tab><iron-icon icon="social:share"></iron-icon></paper-tab>
-              <paper-tab><iron-icon icon="settings"></iron-icon></paper-tab>
-            </template>
-          </template> 
-        </paper-tabs>
-      </template>
-     
       <iron-pages selected="[[selectedPage]]" selectable="paged-production">
-        <paged-production label="What does it do?" icon="description">
+        <paged-production label="What does it do?" icon="description" title-it="{{short}}" color="[[elementData.color]]">
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
         </paged-production>
-        <paged-production label="Name" icon="code">
+        <paged-production label="Name" icon="code" title-it="{{short}}" color="[[elementData.color]]">
           <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters">
             <template suffix is="dom-if" if="[[!invalidName]]">
               <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
@@ -151,7 +151,7 @@ All help is very much appreciated. I hope this project helps people get started 
           <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
         </paged-production>
         <template is="dom-if" if="[[!invalidName]]">
-          <paged-production label="The HTML/Docs" icon="build" color="[[elementData.color]]">
+          <paged-production label="The HTML/Docs" icon="build" title-it="{{short}}" color="[[elementData.color]]">
             <template is="dom-if" if="{{_dependencylist.length}}">
               <select style="float:right" value="{{docsFor::input}}">
                 <option value="">show documentation</option>
@@ -179,18 +179,18 @@ All help is very much appreciated. I hope this project helps people get started 
               </paper-input>
             </template>
           </paged-production>
-          <paged-production label="Properties" icon="hardware:memory" color="[[elementData.color]]">
+          <paged-production label="Properties" icon="hardware:memory" title-it="{{short}}" color="[[elementData.color]]">
             <variables-input functions="{{elementData.functions}}" value="{{elementData.properties}}" name="{{elementData.name}}"></variables-input>
           </paged-production>
-          <paged-production label="Functions/Methods" icon="code" color="[[elementData.color]]">
+          <paged-production label="Functions/Methods" icon="code" color="[[elementData.color]]" title-it="{{short}}">
             <function-list-input name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
           </paged-production>
-          <paged-production label="Imports/Dependencies" icon="compare-arrows">
+          <paged-production label="Imports/Dependencies" icon="compare-arrows" title-it="{{short}}" color="[[elementData.color]]">
             <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
             <h4>Auto</h4>
             <p>{{_domTemplateDependencies}} </p>
           </paged-production>
-          <paged-production label="Download/Share Your element" icon="social:share" color="[[elementData.color]]">
+          <paged-production label="Download/Share Your element" icon="social:share" title-it="{{short}}" color="[[elementData.color]]">
             <template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download> 
             Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
             <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
@@ -201,7 +201,7 @@ All help is very much appreciated. I hope this project helps people get started 
             your other localy save elements are going to be available for your demo and listed here:
             <input-save textarea value="{{elementData.moreHTML}}"></input-save>
           </paged-production>
-          <paged-production label="Settings" icon="settings" color="[[elementData.color]]">
+          <paged-production label="Settings" icon="settings" color="[[elementData.color]]" title-it="{{short}}">
             <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of Demo" ></input-save>
             <input-save type="number" value="{{settingsData.demoSmallHeight}}" label="Height of Small Demo" ></input-save>
             <input-save type="number" value="{{settingsData.smallDemoZoom}}" label="Small Demo Zoom Level" ></input-save>
