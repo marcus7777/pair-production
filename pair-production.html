@@ -136,13 +136,15 @@ All help is very much appreciated. I hope this project helps people get started 
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
         </paged-production>
         <paged-production label="Name" icon="code">
-          <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters"></paper-input>
+          <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters">
+            <template suffix is="dom-if" if="[[!invalidName]]">
+              <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
+            </template>
+          </paper-input>
           <template is="dom-if" if="[[_gotName]]">
             <p>this is in the open-elements catalog I'm working on loading it for you (not today)</p> 
           </template>
-          <template is="dom-if" if="[[!invalidName]]">
-            <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
-          </template>
+          
           <paper-swatch-picker color="{{elementData.color}}"></paper-swatch-picker>
           <load-elements-list style="color: black;" data="{{localData}}" to="{{elementData}}"></load-elements-list>
         </paged-production>
