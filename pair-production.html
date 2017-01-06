@@ -112,7 +112,7 @@ All help is very much appreciated. I hope this project helps people get started 
       </template>
       <template is="dom-if" if="{{!short}}">
         <template is="dom-if" if="{{!thin}}">
-          <paper-tabs selected="{{selectedPage}}">
+          <paper-tabs selected="{{selectedPage}}" style="background:[[elementData.color]]">
             <paper-tab><paper-icon-item><iron-icon icon="description" item-icon></iron-icon> <span>What does it do?</span></paper-icon-item></paper-tab>
             <paper-tab><paper-icon-item><iron-icon icon="code" item-icon></iron-icon> <span>Name</span></paper-icon-item></paper-tab>
             <template is="dom-if" if="[[!invalidName]]">
