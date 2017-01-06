@@ -435,9 +435,10 @@ All help is very much appreciated. I hope this project helps people get started 
       if (!elementData.hasOwnProperty("color")) {
         this.elementData.color = "#" + pickColor(name, elementData.description)
       }
-      //if (performance.now() < 7000) {
+      if (performance.now() < 7000) {
         //this.showDemo()
-      //}
+        this.selectedPage = 2 // html edit page
+      }
       if (-1 !== list.indexOf('bower_components/'+name+'/'+name+'.html')) {
         document.title = "Rewriting " + name
         return true
