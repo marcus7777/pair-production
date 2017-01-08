@@ -198,7 +198,8 @@ All help is very much appreciated. I hope this project helps people get started 
           <paged-production label="Imports/Dependencies" icon="compare-arrows" title-it="{{short}}" color="[[elementData.color]]">
             <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
             <h4>Auto</h4>
-            <p>{{_domTemplateDependencies}} </p>
+            <p>{{_domTemplateDependencies}}</p>
+            <input-save label="add code to demo" code textarea value="{{elementData.moreHTML}}"></input-save>
           </paged-production>
           <paged-production label="Download/Share Your element" icon="social:share" title-it="{{short}}" color="[[elementData.color]]">
             <template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download> 
@@ -208,8 +209,6 @@ All help is very much appreciated. I hope this project helps people get started 
             <marked-element style="color:wheat;background:black;padding:1em;width:100%" markdown="{{_markdown}}"></marked-element>
             <!-- Docs are going --> <br /> 
             <a href="https://github.com/new" target="_blank">New Github Repo</a>
-            your other localy save elements are going to be available for your demo and listed here:
-            <input-save textarea value="{{elementData.moreHTML}}"></input-save>
           </paged-production>
           <paged-production label="Settings" icon="settings" color="[[elementData.color]]" title-it="{{short}}">
             <input-save type="number" value="{{settingsData.demoHeight}}" label="Height of Demo" ></input-save>
