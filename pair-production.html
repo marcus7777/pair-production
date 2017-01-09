@@ -378,7 +378,9 @@ All help is very much appreciated. I hope this project helps people get started 
       return html.replace("<html>","<html style='zoom:" + zoom + "'>")
     },
     _getHasContent: function(html){
-      return html.indexOf("</content>") !== -1
+      if (html) {
+        return html.indexOf("</content>") !== -1
+      }
     },
     getFiles: function(demo, testFiles, bower, element, name) {
       var add = {}
