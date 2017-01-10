@@ -510,7 +510,11 @@ All help is very much appreciated. I hope this project helps people get started 
       } else if (s && typeof s == "object" && Array.isArray(a) ) {
         return Object.keys(s).concat(a)
       } else if (s && s !== '' && a === undefined) {
-        return s.split(',')  
+        if (s.indexOf('\n')) {
+          return s.split('\n')
+        } else {
+          return s.split(',')
+        } 
       } else if (s && s !== '' && Array.isArray(a)){
         return s.split(',').concat(a)
       } else if (Array.isArray(a)) {
