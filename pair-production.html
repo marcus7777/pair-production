@@ -237,6 +237,9 @@ All help is very much appreciated. I hope this project helps people get started 
           </template>
         </template>
       </paper-stepper>
+      <template is="dom-if" if="[[elementData.name]]" restamp>
+        <url-data string-from-data="{{stringFromElementData}}" compress debounce-data="{{elementData}}"></url-data>
+      </template>
     </template>
     <template is="dom-if" if="[[listOfElements]]">
       <clone-data from="[[listOfElements]]" to="{{_listOfElements}}"></clone-data>
@@ -254,11 +257,6 @@ All help is very much appreciated. I hope this project helps people get started 
       <iron-location hash="{{stringifyData}}"></iron-location>
       <url-data string="[[stringifyData]]" data-from-string="{{elementData}}"></url-data>
     </template>
-    
-    <template is="dom-if" if="[[elementData.name]]" restamp>
-      <url-data string-from-data="{{stringFromElementData}}" compress debounce-data="{{elementData}}"></url-data>
-    </template>
-   
   </template>
 </dom-module>
 <script>
