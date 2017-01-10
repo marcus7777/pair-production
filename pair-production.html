@@ -378,7 +378,7 @@ All help is very much appreciated. I hope this project helps people get started 
     listeners: { "iron-resize": "onSizeChange" },
     onSizeChange: function(n) {
       var w = this.offsetWidth
-      if (w > 0 && n > 34) { // n brack loop
+      if (w > 0) { // n brack loop
         console.log("width is now ", w)
         if (w > 599) {
           this.thin = false
@@ -387,7 +387,9 @@ All help is very much appreciated. I hope this project helps people get started 
         }
       } else {
         var that = this
-        setTimeout(that.onSizeChange(n++),300)
+        if (n < 34) {
+          setTimeout(that.onSizeChange(n++),500)
+        }
       }
     },
     stepperReset: function(e, d){
