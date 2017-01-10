@@ -96,6 +96,9 @@ All help is very much appreciated. I hope this project helps people get started 
       <template is="dom-if" if="{{thin}}">
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
       </template>
+      <template is="dom-if" if="{{editable}}">
+        <input-save path="template" small code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}"></input-save>
+      </template>
     </template> <!-- justLoad -->
     <template is="dom-if" if="[[!justLoad]]">
       <template is="dom-if" if="[[!elementData.name]]">
