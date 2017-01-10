@@ -346,6 +346,7 @@ All help is very much appreciated. I hope this project helps people get started 
       _element: {computed: '_getElementCode(elementData,_dependencylist,_listOfElements,elementData.*)'},
       justLoad: {type:Boolean, value: false},
       editable: {type:Boolean, value: false},
+      invalidName: {type:Boolean, value: false},
       short: {type:Boolean, value: false},
       thin: {type:Boolean, value: true},
       _markdown: {computed: '_getMarkdown(_demo,_element,elementData.name,_bower,_tests)'},
@@ -543,7 +544,7 @@ All help is very much appreciated. I hope this project helps people get started 
       return addLine(output)
     },
     _getHead: function (name) {
-      if (name !== '') return [
+      if (name) return [
         tabs(1) + '<head>',
         tabs() + '<title>' + name + ' demo</title>',
         tabs() + '<sc' + 'ript src="../webcomponentsjs/webcomponents-lite.js"></sc' + 'ript>',
@@ -552,7 +553,7 @@ All help is very much appreciated. I hope this project helps people get started 
       ]
     },
     _getIframeHead: function (base, name) {
-      if (name !== '') return [
+      if (name) return [
         tabs(1) +'<head>',
         tabs() + '<base href="' + base + '">',
         tabs() + '<title>' + name + ' demo</title>',
@@ -658,7 +659,7 @@ All help is very much appreciated. I hope this project helps people get started 
       }
     },
     _getBody: function (elementData, hasContent, invalidName) {
-      if (elementData.name !== '' && !invalidName) {
+      if (elementData.name && !invalidName) {
         if (!elementData.attrsForDemo) {
           elementData.attrsForDemo = ""
         }
