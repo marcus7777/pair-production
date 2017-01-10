@@ -373,16 +373,18 @@ All help is very much appreciated. I hope this project helps people get started 
     },
     behaviors: [ Polymer.IronResizableBehavior ],
     listeners: { "iron-resize": "onSizeChange" },
-    onSizeChange: function() {
+    onSizeChange: function(n) {
       var w = this.offsetWidth
-      if (w > 0) {
+      if (w > 0 && n > 34) { // n brack loop
         console.log("width is now ", w)
-      
         if (w > 599) {
           this.thin = false
         } else {
           this.thin = true
         }
+      } else {
+        var that = this
+        setTimeout(that.onSizeChange(n++),300)
       }
     },
     stepperReset: function(e, d){
@@ -418,7 +420,6 @@ All help is very much appreciated. I hope this project helps people get started 
       return '#' + link
     },
     makeLocalData: function () {
-     
       var name = this.elementData.name
       var data = this.elementData
       var localData = this.localData
