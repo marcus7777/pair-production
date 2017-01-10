@@ -346,6 +346,18 @@ All help is very much appreciated. I hope this project helps people get started 
       _dependencylist: {computed: '_getArray(elementData.dependencies, _domTemplateDependencies)'},
       _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
+      __addToElement:{computed:"addToElement(justLoad, elementData)"},
+    },
+    addToElement: function(justLoad, elementData) {
+      if (justLoad && !elementData.hasOwnProperty("name")) {
+        elementData.name = "de-mo"
+      }
+      if (justLoad && !elementData.hasOwnProperty("dependencies")) {
+        elementData.dependencies = "polymer"
+      }
+      if (justLoad && !elementData.hasOwnProperty("description")) {
+        elementData.description = "demo"
+      }
     },
     behaviors: [ Polymer.IronResizableBehavior ],
     listeners: { "iron-resize": "onSizeChange" },
