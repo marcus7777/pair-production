@@ -237,16 +237,22 @@ All help is very much appreciated. I hope this project helps people get started 
         </template>
       </paper-stepper>
     </template>
-    
-    <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
-    <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
-    
+    <template is="dom-if" if="[[listOfElements]]">
+      <clone-data from="[[listOfElements]]" to="{{_listOfElements}}"></clone-data>
+    </template>
+    <template is="dom-if" if="[[!listOfElements]]">
+      <iron-ajax auto url="/list-of-elements" handle-as="text" last-response="{{_listOfElements}}"></iron-ajax>
+    </template>
+    <template is="dom-if" if="[[gitList]]">
+      <clone-data from="[[gitList]]" to="{{_gitList}}"></clone-data>
+    </template>
+    <template is="dom-if" if="[[!gitList]]">
+      <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
+    </template>
     <template is="dom-if" if="[[!elementData.name]]">
       <iron-location hash="{{stringifyData}}"></iron-location>
       <url-data string="[[stringifyData]]" data-from-string="{{elementData}}"></url-data>
     </template>
-
-    <iron-localstorage on-iron-localstorage-load-empty="initializeDefaultlocal" name="saved-elements" value="{{localData}}"></iron-localstorage>
     
     <template is="dom-if" if="[[elementData.name]]" restamp>
       <url-data string-from-data="{{stringFromElementData}}" compress debounce-data="{{elementData}}"></url-data>
@@ -349,6 +355,8 @@ All help is very much appreciated. I hope this project helps people get started 
       _hasContent: {computed: "_getHasContent(elementData.html)"},
       _functionList: {computed: '_getArray(elementData.functions)'},
       _dependencylist: {computed: '_getArray(elementData.dependencies, _domTemplateDependencies)'},
+      listOfElements: {type: String,value:""},
+      _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
       __addToElement:{computed:"addToElement(justLoad, elementData)"},
