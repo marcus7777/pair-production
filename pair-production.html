@@ -90,7 +90,9 @@ All help is very much appreciated. I hope this project helps people get started 
     </style>
     
     <template is="dom-if" if="[[justLoad]]">
-      <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-icon-button on-tap="showEdit" icon="more-vert"></paper-icon-button></paper-toolbar>
+      <template is="dom-if" if="[[!short]]">
+        <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-icon-button on-tap="showEdit" icon="more-vert"></paper-icon-button></paper-toolbar>
+      </template>
       <template is="dom-if" if="[[!thin]]">
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
       </template>
