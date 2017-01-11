@@ -97,7 +97,7 @@ All help is very much appreciated. I hope this project helps people get started 
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
       </template>
       <template is="dom-if" if="[[thin]]">
-        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
+        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]" on-tap="makeEditable"></iframe>
       </template>
       <template is="dom-if" if="[[editable]]">
         <input-save path="template" small code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}"></input-save>
@@ -363,6 +363,9 @@ All help is very much appreciated. I hope this project helps people get started 
       _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
       __addToElement:{computed:"addToElement(justLoad, elementData)"},
+    },
+    makeEditable: function(){
+      this.editable = true
     },
     addToElement: function(justLoad, elementData) {
       if (justLoad) {
