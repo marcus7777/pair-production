@@ -376,7 +376,9 @@ All help is very much appreciated. I hope this project helps people get started 
         if (!elementData.hasOwnProperty("description")) {
           add.description = "demo"
         }
-        this.elementData = merge(elementData, add)
+        if (Object.keys(add).length) {
+          this.elementData = merge(elementData, add)
+        }
       }
     },
     behaviors: [ Polymer.IronResizableBehavior ],
