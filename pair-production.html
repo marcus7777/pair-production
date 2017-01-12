@@ -97,7 +97,7 @@ All help is very much appreciated. I hope this project helps people get started 
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
       </template>
       <template is="dom-if" if="[[thin]]">
-        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" src="[[settingsData.base]]" srcdoc="[[_srcSmall]]" on-tap="makeEditable"></iframe>
+        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]" on-tap="makeEditable"></iframe>
       </template>
       <template is="dom-if" if="[[editable]]">
         <input-save path="template" small code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}"></input-save>
@@ -567,7 +567,7 @@ All help is very much appreciated. I hope this project helps people get started 
     _getIframeHead: function (base, name) {
       if (name) return [
         tabs(1) +'<head>',
-        tabs() + '<base href="' + base + '">',
+        tabs() + '<base href="' + base + '" target="_blank">',
         tabs() + '<title>' + name + ' demo</title>',
         tabs() + '<sc'+'ript src="../webcomponentsjs/webcomponents-lite.js"></sc'+'ript>',
         tabs() + '<sc' + "ript>window.onerror = function (errorMsg, url, line) {document.write('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + line)}</sc" + 'ript>',
