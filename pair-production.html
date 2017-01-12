@@ -97,7 +97,7 @@ All help is very much appreciated. I hope this project helps people get started 
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
       </template>
       <template is="dom-if" if="[[thin]]">
-        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]" on-tap="makeEditable"></iframe>
+        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" src="[[settingsData.base]]" srcdoc="[[_srcSmall]]" on-tap="makeEditable"></iframe>
       </template>
       <template is="dom-if" if="[[editable]]">
         <input-save path="template" small code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}"></input-save>
