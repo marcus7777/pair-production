@@ -94,10 +94,10 @@ All help is very much appreciated. I hope this project helps people get started 
         <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-icon-button on-tap="showEdit" icon="more-vert"></paper-icon-button></paper-toolbar>
       </template>
       <template is="dom-if" if="[[!thin]]">
-        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
+        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"  onload="resizeIframe(this)"></iframe>
       </template>
       <template is="dom-if" if="[[thin]]">
-        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]" on-tap="makeEditable"></iframe>
+        <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]" on-tap="makeEditable"  onload="resizeIframe(this)"></iframe>
       </template>
       <template is="dom-if" if="[[editable]]">
         <input-save path="template" small code textarea value="{{elementData.html}}" list-of-elements="{{_listOfElements}}"></input-save>
@@ -110,10 +110,10 @@ All help is very much appreciated. I hope this project helps people get started 
       <template is="dom-if" if="[[!invalidName]]">
         <template is="dom-if" if="[[elementData.name]]">
           <template is="dom-if" if="{{!thin}}">
-            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"></iframe>
+            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"  onload="resizeIframe(this)"></iframe>
           </template>
           <template is="dom-if" if="{{thin}}">
-            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"></iframe>
+            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"  onload="resizeIframe(this)"></iframe>
           </template>
         </template>
       </template>
@@ -262,6 +262,9 @@ All help is very much appreciated. I hope this project helps people get started 
   </template>
 </dom-module>
 <script>
+function resizeIframe(obj) {
+  obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}
 ;(function () {
   // var dataVectors = ["url","localData","user"]
   
