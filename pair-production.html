@@ -345,7 +345,7 @@ function resizeIframe(obj) {
       _head: {computed: '_getHead(elementData.name)'},
       _tests: {computed: '_getTests(elementData.name)'},
       _bower: {computed: '_getBower(elementData.name, elementData.desc, _dependencylist, _listOfElements, _gitList)'},
-      _gotName: {computed: 'getGotName(elementData.name, _listOfElements, elementData)'},
+      _gotName: {computed: 'getGotName(elementData.name, _listOfElements, elementData, justLoad)'},
       _element: {computed: '_getElementCode(elementData,_dependencylist,_listOfElements,elementData.*)'},
       justLoad: {type:Boolean, value: false},
       editable: {type:Boolean, value: false},
@@ -454,7 +454,7 @@ function resizeIframe(obj) {
     initializeDefaultlocal: function () {
       this.set('localData', {})
     }, 
-    getGotName: function (name, list, elementData) {
+    getGotName: function (name, list, elementData, justLoad) {
       function pickColor(name, description) {
         var colors = {
           app:"ddc9e6",
@@ -484,12 +484,14 @@ function resizeIframe(obj) {
         //this.showDemo()
         this.selectedPage = 2 // html edit page
       }
-      if (-1 !== list.indexOf('bower_components/'+name+'/'+name+'.html')) {
-        document.title = "Rewriting " + name
-        return true
-      } else {
-        document.title = "Making " + name
-        return false
+      if (!justLoad) {
+        if (-1 !== list.indexOf('bower_components/'+name+'/'+name+'.html')) {
+          document.title = "Rewriting " + name
+          return true
+        } else {
+          document.title = "Making " + name
+          return false
+        }
       }
     },
     _getBower: function (name, description, dependencylist, listOfElements, gitList) { // TODO fix for paper-textarea ...
