@@ -23,7 +23,7 @@
       <paper-dialog-scrollable>
         <input-save value="{{_editing.rename}}" label="name" auto-validate pattern="[a-zA-Z_][0-9a-zA-Z_]*" error-message="is not a good name"></input-save>
         <input-save value="{{_editing.type}}" options-input ></input-save>
-        <input-save value="{{_editing.value}}" label$="default for {{_editing.name}}" pattern$="{{getRepType(_editing.type)}}" auto-validate error-message="needs to be a {{_editing.type}} so {{repType}}"></input-save>
+        <input-save textarea value="{{_editing.value}}" label$="default for {{_editing.name}}" pattern$="{{getRepType(_editing.type)}}" auto-validate error-message="needs to be a {{_editing.type}} so {{repType}}"></input-save>
         <input-save value="{{_editing.computed}}" label$="{{_editing.name}} is computed by" auto-validate pattern="{{reFunctionsAndVariables}}" error-message="needs to a function ({{functions}}) with input(s)"></input-save>
         <input-save value="{{_editing.observer}}" label="observer by" auto-validate pattern="{{reFunctions}}" error-message="needs to a function ( {{functions}} ) add to \'functions'\' if needed)"></input-save>
         <paper-toggle-button checked="{{_editing.notify}}">notify</paper-toggle-button>
