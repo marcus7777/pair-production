@@ -93,7 +93,7 @@ All help is very much appreciated. I hope this project helps people get started 
     </style>
     
     <template is="dom-if" if="[[justLoad]]">
-      <paper-toolbar><div class="title">[[elementData.title]]</div><a href="{{link}}"><paper-icon-button icon="open-in-new"></paper-icon-button></a></paper-toolbar>
+      <paper-toolbar><a target="_blank" href="/bower_components/pair-production/demo.html[[link]]"><paper-icon-button icon="open-in-new"></paper-icon-button></a><div class="title">[[elementData.title]]</div></paper-toolbar>
       <template is="dom-if" if="[[!thin]]">
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"  onload="resizeIframe(this)"></iframe>
       </template>
