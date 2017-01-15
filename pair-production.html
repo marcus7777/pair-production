@@ -110,10 +110,10 @@ All help is very much appreciated. I hope this project helps people get started 
       <template is="dom-if" if="[[!invalidName]]">
         <template is="dom-if" if="[[elementData.name]]">
           <template is="dom-if" if="{{!thin}}">
-            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"  onload="resizeIframe(this)"></iframe>
+            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]" onload="resizeIframe(this)"></iframe>
           </template>
           <template is="dom-if" if="{{thin}}">
-            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]"  onload="resizeIframe(this)"></iframe>
+            <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoSmallHeight}}" srcdoc="[[_srcSmall]]" onload="resizeIframe(this)"></iframe>
           </template>
         </template>
       </template>
@@ -178,7 +178,7 @@ All help is very much appreciated. I hope this project helps people get started 
                 </template>
               </select>
               <template is="dom-if" if="{{docsFor}}">
-                <iframe sandbox="allow-scripts allow-same-origin" height="300" src="{{_docsSrc(docsFor, _listOfElements)}}"></iframe>
+                <iframe sandbox="allow-scripts allow-same-origin" height="300" src="{{_docsSrc(docsFor, _listOfElements)}}" onload="resizeIframe(this)"></iframe>
               </template>
             </template>
             <template is="dom-if" if="[[_hasContent]]">
@@ -333,7 +333,7 @@ function resizeIframe(obj) {
       },
       settingsData: {
         value: {
-          base: '/bower_components/new/', demoHeight: 200, smallDemoZoom: .7, demoSmallHeight: 100
+          base: '/bower_components/new/', demoHeight: 200, smallDemoZoom: .7, demoSmallHeight: 70
         }
       },
       _src: {computed: '_getSrc(_codeiframe)'},
