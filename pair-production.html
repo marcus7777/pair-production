@@ -87,12 +87,13 @@ All help is very much appreciated. I hope this project helps people get started 
         display: block;
         min-height: 200px;
       };
+      paper-toolbar: {
+        --paper-toolbar-sm-height: 40px
+      }
     </style>
     
     <template is="dom-if" if="[[justLoad]]">
-      <template is="dom-if" if="[[!short]]">
-        <paper-toolbar><paper-icon-button icon="polymer"></paper-icon-button><div class="title">[[elementData.name]]</div><paper-icon-button on-tap="showEdit" icon="more-vert"></paper-icon-button></paper-toolbar>
-      </template>
+      <paper-toolbar><div class="title">[[elementData.title]]</div><a href="{{link}}"><paper-icon-button icon="open-in-new"></paper-icon-button></a></paper-toolbar>
       <template is="dom-if" if="[[!thin]]">
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"  onload="resizeIframe(this)"></iframe>
       </template>
@@ -255,10 +256,10 @@ All help is very much appreciated. I hope this project helps people get started 
     <template is="dom-if" if="[[!gitList]]">
       <iron-ajax auto url="/gitList" handle-as="text" last-response="{{_gitList}}"></iron-ajax>
     </template>
-    <template is="dom-if" if="[[!elementData.name]]">
-      <iron-location hash="{{stringifyData}}"></iron-location>
-      <url-data string="[[stringifyData]]" data-from-string="{{elementData}}"></url-data>
-    </template>
+  </template>
+  <template is="dom-if" if="[[!elementData.name]]">
+    <iron-location hash="{{stringifyData}}"></iron-location>
+    <url-data string="[[stringifyData]]" data-from-string="{{elementData}}"></url-data>
   </template>
 </dom-module>
 <script>
