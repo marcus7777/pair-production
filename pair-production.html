@@ -209,7 +209,7 @@ All help is very much appreciated. I hope this project helps people get started 
             <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
             <h4>Auto</h4>
             <p>{{_domTemplateDependencies}}</p>
-            <input-save label="add code to demo" code textarea value="{{elementData.moreHTML}}" list-of-elements="{{_listOfElements}}"></input-save>
+            <input-save code textarea value="{{elementData.moreHTML}}" list-of-elements="{{_listOfElements}}" label="add code to demo"></input-save>
           </paged-production>
           <paged-production label="Download/Share Your element" icon="social:share" title-it="{{short}}" color="[[elementData.color]]">
             <template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download> 
