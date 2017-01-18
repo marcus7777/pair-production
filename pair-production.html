@@ -161,7 +161,7 @@ All help is very much appreciated. I hope this project helps people get started 
         <paged-production label="Name" icon="code" title-it="{{short}}" color="[[elementData.color]]">
           <paper-input label="Name of the element - like pirate-ninja (include the '-')" invalid="{{invalidName}}" value="{{elementData.name}}" pattern="[a-z0-9]+-[a-z0-9\-]*[a-z0-9]+" auto-validate error-message="Need's to have a '-' between lowercase letters">
             <template suffix is="dom-if" if="[[!invalidName]]">
-              <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button>
+              <paper-button on-tap="makeLocalData" suffix raised > Save </paper-button><paper-button on-tap="deleteLocalData" suffix raised > Delete </paper-button>
             </template>
           </paper-input>
           <template is="dom-if" if="[[_gotName]]">
@@ -440,6 +440,9 @@ function resizeIframe(obj) {
     },
     getLink: function(link) {
       return '#' + link
+    },
+    deleteLocalData: function () {
+      delete(this.localData[this.elementData.name])
     },
     makeLocalData: function () {
       var name = this.elementData.name
