@@ -452,6 +452,9 @@ function resizeIframe(obj) {
         }       
       } else if (localData) {
         this.set("localData." + name, data)
+      } else {
+        this.localData, {})
+        this.set("localData." + name, data)
       }
       return // TODO debounce and check for versions
     },
