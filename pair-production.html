@@ -56,7 +56,7 @@ demo at [data](https://open-elements.org/bower_components/pair-production/demo.h
 
 All help is very much appreciated. I hope this project helps people get started with polymer. And it is also a big thank you to the polymer team for all the help.
 @demo demo.html run it 
-@hero hero.svg
+@next add _domTemplateDependenciesDemo to demo
 -->
 <dom-module id="pair-production">
   <template>
@@ -207,6 +207,7 @@ All help is very much appreciated. I hope this project helps people get started 
           </paged-production>
           <paged-production label="Imports/Dependencies" icon="compare-arrows" title-it="{{short}}" color="[[elementData.color]]">
             <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
+            <input-save label="what are the elements will your demo need" value="{{elementData.dependenciesDemo}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
             <h4>Auto</h4>
             <p>{{_domTemplateDependencies}}</p>
             <html-edit list-of-elements="[[_listOfElements]]" label="Add code to demo" value="{{elementData.moreHTML}}"></html-edit>
@@ -369,6 +370,7 @@ function resizeIframe(obj) {
       gitList: {type: String,value:""},
       _listOfElementsList:{computed: '_getArray(_listOfElements)'},
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
+      _domTemplateDependenciesDemo: {computed: '_getDomTemplateDependencies(elementData.content,elementData.dependenciesDemo)'},
       __addToElement:{computed:"addToElement(justLoad, elementData)"},
     },
     makeEditable: function(){
