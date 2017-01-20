@@ -12,6 +12,7 @@
     "iron-ajax": "PolymerElements/iron-ajax",
     "paper-input": "PolymerElements/paper-input",
     "paper-item": "PolymerElements/paper-item",
+    "paper-toolbar": "PolymerElements/paper-toolbar",
     "html-edit": "marcus7777/html-edit",
     "url-data": "marcus7777/url-data",
     "markdown-edit": "marcus7777/markdown-edit",
