@@ -95,7 +95,7 @@ All help is very much appreciated. I hope this project helps people get started 
     </style>
     
     <template is="dom-if" if="[[justLoad]]">
-      <paper-toolbar style="--paper-toolbar-background:[[elementData.color]];color:[[getFg(elementData.color)]]"><a target="_blank" href="/bower_components/pair-production/demo.html[[link]]"><iron-icon icon="open-in-new"></iron-icon></a><div class="title">[[elementData.title]]</div></paper-toolbar>
+      <paper-toolbar style="background:[[elementData.color]];color:[[getFg(elementData.color)]]"><a target="_blank" href="/bower_components/pair-production/demo.html[[link]]"><iron-icon icon="open-in-new"></iron-icon></a><div class="title">[[elementData.title]]</div></paper-toolbar>
       <template is="dom-if" if="[[!thin]]">
         <iframe sandbox="allow-scripts allow-same-origin" height="{{settingsData.demoHeight}}" srcdoc="[[_src]]"  onload="resizeIframe(this)"></iframe>
       </template>
