@@ -15,6 +15,7 @@
     "paper-toolbar": "PolymerElements/paper-toolbar",
     "html-edit": "marcus7777/html-edit",
     "url-data": "marcus7777/url-data",
+    "iron-location":"PolymerElements/iron-location",
     "markdown-edit": "marcus7777/markdown-edit",
     "iron-localstorage": "PolymerElements/iron-localstorage#~1.0.5",
     "app-globals": "marcus7777/app-globals",
