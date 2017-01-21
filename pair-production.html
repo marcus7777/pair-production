@@ -528,7 +528,7 @@ function resizeIframe(obj) {
         var path = getfile(dependencylist[n], listOfElements)
         if (path.length > 1) {
           var bowerName = path.split("/")[1]
-          var re_repo = new RegExp('([^/]*/'+bowerName+')(?:\.git)','gi')
+          var re_repo = new RegExp('([^/|:]*/'+bowerName+')(?:\.git)','gi')
           var re_ver =  new RegExp('(?:'+bowerName+'/\.bower\.json:"_release": ")([^"]*)','gi'); 
           var found_repo = re_repo.exec(gitList)
           var found_ver = re_ver.exec(gitList)
