@@ -24,5 +24,9 @@
     "iron-accordions": "alijaya/iron-accordions#~1.0.0",
     "toggle-icon": "fxedel/toggle-icon#~1.0.3",
     "paper-stepper": "Collaborne/paper-stepper#master"
+  },
+  "devDependencies": {
+    "iron-test-helpers": "*",
+    "web-component-tester": "^5.0.0"
   }
 }
