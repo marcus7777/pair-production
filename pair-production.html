@@ -679,22 +679,23 @@ function resizeIframe(obj) {
         ])
           
         var testStubTravisYml = addLine([
-          tabs() + 'language: node_js',
+          tabs()  + 'language: node_js',
           tabs() + 'sudo: required',
           tabs() + 'node_js: stable',
-          tabs() + 'addons:',
-          tabs() + '  apt:',
-          tabs() + '    sources:',
-          tabs() + '    - google-chrome',
-          tabs() + '    packages:',
-          tabs() + '    - google-chrome-stable',
-          tabs() + 'before_script:',
+          tabs() + 'dist: trusty'
+          tabs(1) + 'addons:',
+          tabs(1) + 'apt:',
+          tabs() + 'sources:',
+          tabs() + '- google-chrome',
+          tabs() + 'packages:',
+          tabs() + '- google-chrome-stable',
+          tabs(-2) + 'before_script:',
           tabs() + '- npm install web-component-tester',
           tabs() + '- npm install bower',
           tabs() + '- export PATH=$PWD/node_modules/.bin:$PATH',
-          tabs() + '- bower install',
+          tabs() + '- bower install -s',
           tabs() + 'script:',
-          tabs() + '- xvfb-run wct --skip-plugin sauce'
+          tabs() + '- xvfb-run wct --skip-plugin sauce --quiet'
         ])
         var wctConfJson = JSON.stringify({verbose: true, plugins: {local: { browsers: ["chrome"]}}}, null, '  ')
         this.testFiles = {}
