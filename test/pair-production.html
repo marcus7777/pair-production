@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <title>pair-production</title>
+    <script src="../../webcomponentsjs/webcomponents.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../test-fixture/test-fixture-mocha.js"></script>
+    <script src="../../iron-test-helpers/mock-interactions.js"></script>
+    <link rel="import" href="../../polymer/polymer.html">
+    <link rel="import" href="../../test-fixture/test-fixture.html">
+    <link rel="import" href="../pair-production.html">
+  </head>
+  <body>
+    <test-fixture id="pairProduction">
+      <template>
+        <pair-production></pair-production> //TODO add attributes
+      </template>
+    </test-fixture>
+    <script>
+      suite('<pair-production>', function () {
+        var pairProduction;
+        setup(function () {
+          pairProduction = fixture('pairProduction');
+        });
+        teardown(function () {
+          //...
+        });
+        suite("This test is just to show that tests are running", function () {
+          test("test is running", function(done) {
+            done()
+          })
+        })
+        suite('These test allow you to interact with the element', function () {
+          test('can be triggered with space', function(done) {
+            pairProduction.addEventListener('keydown', function() {
+              done()
+            })
+            MockInteractions.pressSpace(pairProduction)
+          })
+          test('can be clicked', function(done) {
+            pairProduction.addEventListener('click', function() {
+              done()
+            })
+            MockInteractions.tap(pairProduction)
+          })
+        })
+      })
+    </script>
+  </body>
+</html>
