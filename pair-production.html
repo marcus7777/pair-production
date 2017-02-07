@@ -522,7 +522,11 @@ function resizeIframe(obj) {
         description: description,
         main: name + '.html',
         keywords: ["polymer","web-components"],
-        dependencies: {}
+        dependencies: {},
+        devDependencies: {
+          "iron-test-helpers": "*",
+          "web-component-tester": "^5.0.0"
+        },
       }
       for (var n = 0; n < dependencylist.length; ++n) {
         var path = getfile(dependencylist[n], listOfElements)
@@ -669,16 +673,15 @@ function resizeIframe(obj) {
           
         var testStubTravisYml = addLine([
           tabs() + 'language: node_js',
-          tabs() + 'sudo: false',
+          tabs() + 'sudo: required',
           tabs() + 'node_js: stable',
-          tabs() +'addons:',
-          tabs() + 'chrome: latest',
-          tabs()+'apt:',
-          tabs() +'sources:',
-          tabs() + '- google-chrome',
-          tabs() + 'packages:',
-          tabs() + '- google-chrome-stable',
-          tabs()+'before_script:',
+          tabs() + 'addons:',
+          tabs() + '  apt:',
+          tabs() + '    sources:',
+          tabs() + '    - google-chrome',
+          tabs() + '    packages:',
+          tabs() + '    - google-chrome-stable',
+          tabs() + 'before_script:',
           tabs() + '- npm install web-component-tester',
           tabs() + '- npm install bower',
           tabs() + '- export PATH=$PWD/node_modules/.bin:$PATH',
