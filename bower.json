@@ -28,5 +28,8 @@
   "devDependencies": {
     "iron-test-helpers": "*",
     "web-component-tester": "^5.0.0"
+  },
+  "resolutions": {
+    "paper-input": "1.1.23"
   }
 }
