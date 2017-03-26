@@ -155,7 +155,7 @@ All help is very much appreciated. I hope this project helps people get started 
           </paper-tabs>
         </template>
       </template>
-      <lazy-pages selected="[[selectedPage]]" selectable="paged-production">
+      <iron-pages selected="[[selectedPage]]" selectable="paged-production">
         <paged-production label="What does it do?" icon="description" title-it="{{short}}" color="[[elementData.color]]">
           <input-save markdown pattern="^(?!\s*$).+" error-message="Tell me about it!" textarea value="{{elementData.description}}" text-value="{{elementData.desc}}" label="About it (# markdown)"></input-save>
         </paged-production>
@@ -231,7 +231,7 @@ All help is very much appreciated. I hope this project helps people get started 
             <input-save label="base url" pattern="^(?:https?://)?(?:[\w]+\.)(?:\.?[\w]{2,})+$" value="{{settingsData.base}}"></input-save>
           </paged-production>
         </template>
-      </lazy-pages>
+      </iron-pages>
       <paper-stepper back-Label="" next-label="" selected="{{selectedPage}}">
         <paper-step label="What does it do?" icon="description"></paper-step>
         <paper-step label="Name" icon="code"></paper-step>
