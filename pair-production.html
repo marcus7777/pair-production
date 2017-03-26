@@ -207,8 +207,8 @@ All help is very much appreciated. I hope this project helps people get started 
             <function-list-input name="{{item}}" value="{{elementData.functions}}"></function-list-input>   
           </paged-production>
           <paged-production label="Imports/Dependencies" icon="compare-arrows" title-it="{{short}}" color="[[elementData.color]]">
-            <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
-            <input-save label="what are the elements will your demo need" value="{{elementData.dependenciesDemo}}" pattern="[a-z0-9A-Z0-9\/-]*[a-z0-9A-Z0-9\/\,-]*[a-z0-9A-Z0-9\/-]+" auto-validate error-message="sorry a ',' separated list"></input-save>
+            <input-save label="what are the elements will your element need" value="{{elementData.dependencies}}" auto-validate error-message="sorry a ',' separated list"></input-save>
+            <input-save label="what are the elements will your demo need" value="{{elementData.dependenciesDemo}}" auto-validate error-message="sorry a ',' separated list"></input-save>
             <h4>Auto for Element</h4>
             <p>{{_domTemplateDependencies}}</p>
             <h4>Auto for Demo</h4>
