@@ -390,8 +390,9 @@ function resizeIframe(obj) {
       if (justLoad) {
         var add = {}
         if (elementData.hasOwnProperty("link")) {
-          this.stringifyData = elementData.link.split("#",2)[1]
-        } else if (!elementData.hasOwnProperty("name")) {
+          add = this.$$("url-data").decode(elementData.link.split("#",2)[1])
+        }
+        if (!elementData.hasOwnProperty("name")) {
           add.name = "de-mo"
         }
         if (!elementData.hasOwnProperty("dependencies")) {
