@@ -389,7 +389,7 @@ function resizeIframe(obj) {
     addToElement: function(justLoad, elementData) {
       if (justLoad) {
         var add = {}
-        if (!elementData.hasOwnProperty("link")) {
+        if (elementData.hasOwnProperty("link")) {
           this.stringifyData = elementData.link.split("#",2)[1]
         }
         if (!elementData.hasOwnProperty("name")) {
