@@ -815,7 +815,7 @@ function resizeIframe(obj) {
       var path = getfile(docsFor, listOfElements)
       if (path.length > 1) {
         var bowerName = path.split("/")[1]
-        return '/bower_components/' + bowerName + '/#' + docsFor;
+        return '/bower_components/' + bowerName + '/';
       }
     },
     _getDomTemplateDependencies: function (domTemplate, dependencies) {
