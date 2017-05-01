@@ -216,8 +216,9 @@ All help is very much appreciated. I hope this project helps people get started 
             <html-edit list-of-elements="[[_listOfElements]]" label="Add code to demo" value="{{elementData.moreHTML}}"></html-edit>
           </paged-production>
           <paged-production label="Download/Share Your element" icon="social:share" title-it="{{short}}" color="[[elementData.color]]">
-            <template is="dom-if" if="{{link}}" ><a href="{{link}}"><paper-icon-button icon="link" ></paper-icon-button></a></template> <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download> 
-            Link to Share <a href="{{link}}">link to {{elementData.name}}</a> <br />
+            <template is="dom-if" if="[[link]]" ><a href="[[link]]"><paper-icon-button icon="link" ></paper-icon-button></a></template>
+            <zip-download name="{{elementData.name}}" files="{{files}}"><paper-icon-button icon="file-download"></paper-icon-button></zip-download> 
+            <template is="dom-if" if="[[link]]" >Link to Share <a href="[[link]]">link to {{elementData.name}}</a> <br /></template>
             <zip-download name="{{elementData.name}}" files="{{files}}">Download</zip-download> <br />
             <prism-highlighter></prism-highlighter>
             <marked-element style="color:wheat;background:black;padding:1em;width:100%;display: block;" markdown="{{_markdown}}"></marked-element>
@@ -376,6 +377,12 @@ function resizeIframe(obj) {
       _domTemplateDependencies: {computed: '_getDomTemplateDependencies(elementData.html,elementData.dependencies)'},
       _domTemplateDependenciesDemo: {computed: '_getDomTemplateDependencies(elementData.content,elementData.dependenciesDemo)'},
       __addToElement:{computed:"addToElement(justLoad, elementData)"},
+      _fixLink: {computed:"fixLink(link)",},
+    },
+    fixLink: function(link) {
+      if (link === "underfined") {
+        this.link = ""
+      }
     },
     makeEditable: function(){
       this.editable = true
