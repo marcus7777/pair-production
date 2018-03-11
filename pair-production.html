@@ -234,16 +234,16 @@ All help is very much appreciated. I hope this project helps people get started 
         </template>
       </iron-pages>
       <paper-stepper back-Label="" next-label="" selected="{{selectedPage}}">
-        <paper-step label="What does it do?" icon="description"></paper-step>
-        <paper-step label="Name" icon="code"></paper-step>
+        <paper-step editable label="What does it do?" icon="description"></paper-step>
+        <paper-step editable label="Name" icon="code"></paper-step>
         <template is="dom-if" if="[[!invalidName]]">
           <template is="dom-if" if="[[elementData.name]]">
-            <paper-step label="The HTML/Docs" icon="build"></paper-step>
-            <paper-step label="Properties" icon="hardware:memory"></paper-step>
-            <paper-step label="Functions/Methods" ></paper-step>
-            <paper-step label="Imports/Dependencies" icon="compare-arrows"></paper-step>
-            <paper-step label="Download/Share Your element" icon="social:share"></paper-step>
-            <paper-step label="Settings" icon="settings"></paper-step>
+            <paper-step editable label="The HTML/Docs" icon="build"></paper-step>
+            <paper-step editable label="Properties" icon="hardware:memory"></paper-step>
+            <paper-step editable label="Functions/Methods" ></paper-step>
+            <paper-step editable label="Imports/Dependencies" icon="compare-arrows"></paper-step>
+            <paper-step editable label="Download/Share Your element" icon="social:share"></paper-step>
+            <paper-step editable label="Settings" icon="settings"></paper-step>
           </template>
         </template>
       </paper-stepper>
